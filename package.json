@@ -1,0 +1,22 @@
+{
+  "name": "steamchecker",
+  "version": "1.0.0",
+  "description": "steam checker 1.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sai darshan",
+  "license": "ISC",
+  "dependencies": {
+    "@popperjs/core": "^2.4.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "request-promise": "^4.2.5",
+    "steamid": "^1.1.3",
+    "web-api-steam": "^1.0.8",
+    "xml2js": "^0.4.23"
+  }
+}

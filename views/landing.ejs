@@ -1,0 +1,15 @@
+<%- include("partials/header.ejs"); %>
+
+<div class="home-container">
+  <div class="label ml-3">
+    <h5>Enter Steam Profile URL<h5>
+ </div>
+  <div class="controls">
+    <form action="/user" method="GET">
+      <input type="text" name="url" class="url-input" placeholder="Enter Steam Profile URL">
+      <button class="search-submit" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
+</div>
+
+<%- include("partials/footer.ejs"); %>

@@ -1,0 +1,403 @@
+/* CSS Variables */
+:root{
+  --primary:#5C66C2;
+  --secondary:#EAF1F7;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  background: #F1F5F8;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.fa-steam-symbol{
+  font-size: 2rem;
+  margin-right: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+.navbar-light .navbar-brand{
+  font-family: Rockwell;
+  font-size:2rem;
+  color: white;
+}
+.navbar-light .navbar-brand:hover{
+  color: white;
+}
+.main-nav{
+  background: linear-gradient(90deg, #161730 0%, #7683F9 100%);
+}
+.home-container{
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.search-submit{
+  outline: none;
+  position: absolute;
+  right: 0%;
+  top:1%;
+  padding:2rem;
+  padding-bottom: 1.8rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  font-size: 1.5rem;
+  border:none;
+  color: white;
+  background: #7683F9
+}
+.search-submit:hover{
+  background: rgba(45, 66, 255, 0.56);
+  outline: none;
+}
+.search-submit:active,.search-submit:focus{
+  outline: none;
+}
+
+.url-input{
+  outline: none;
+  padding:1.9rem;
+  font-size: 1.5rem;
+  width: 100%;
+  background: #FFFFFF;
+  mix-blend-mode: normal;
+  border: 1px solid  rgba(124, 124, 124, 0.31);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 1rem;
+}
+.url-input:focus{
+  outline: none;
+  border: 1px solid  rgba(118, 131, 249, 0.56);
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(118, 131, 249, 0.56);
+}
+.home-container .fa-search{
+  font-size: 2rem;
+}
+.controls{
+  position: relative;
+  min-width: 50%;
+  transition: all 0.5s ease-in-out;
+}
+.label{
+  display:flex;
+  justify-content:flex-start;
+  width:50%;
+  margin-bottom: 1rem;
+}
+
+/* User page styles */
+.navbar .url-input{
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding:0.5rem 1rem;
+  border-radius: 2rem;
+}
+.navbar .fa-search{
+  font-size: 1.5rem;
+}
+.navbar .search-submit:hover{
+  color:rgba(15, 25, 119, 0.795)
+}
+.navbar .search-submit{
+  padding: 0.05rem 1rem;
+  background: none;
+  color:rgba(92, 102, 194, 1);
+}
+.nav-with-search{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.profile-widget{
+ background: rgba(255, 255, 255, 0.76);
+ border: 1px solid #E5E5E5;
+ box-sizing: border-box;
+ border-radius: 0.5rem;
+ height: 100%;
+ width: 85%;
+}
+.profile-widget .title{
+  font-style: normal;
+  font-weight: 800;
+  font-size: 0.875rem;
+  line-height: 1.1rem;
+  color: #5C66C2; 
+  padding-top:1.8rem ;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 0;
+}
+
+.widget-optns{
+  list-style: none;
+  margin-top: 3rem;
+}
+.widget-optns li{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.8rem 2rem;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+.widget-optns li.active{
+  border-left:5px solid rgba(92, 102, 194, 1);
+}
+
+.widget-optns h5{
+  font-size: 1rem;
+  line-height: 2.5rem;
+}
+.friend-count,.games-owned-count{
+  text-align: center;
+  min-width: 	3rem;
+  background: rgba(92, 102, 194, 1);
+  color : white;
+  border: 1px solid rgba(92, 102, 194, 1);
+  padding: 0.1rem;
+  font-size: 0.75rem;
+  box-sizing: border-box;
+  border-radius: 1em;
+  margin-left:1rem
+}
+.count{
+  display: flex;
+  align-items: baseline;
+}
+.steam-info{
+  padding:1.6rem 2rem;
+  background: #EAF1F7;
+  border-radius: 1.1rem;
+}
+.steam-name{
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+.userpage-container{
+  width: 95%;
+  position: relative;
+  height: 80vh;
+  display:grid;
+  margin-top:5rem;
+  grid-template-columns: repeat(4,1fr);
+  grid-template-rows: repeat(4,1fr);
+  gap:1rem;
+}
+.profile-widget-wrapper{
+  grid-row:2/-1;
+}
+.steam-info-wrapper{
+  grid-row: 2/-1;
+  grid-column: 2/3;
+}
+.steam-info{
+  width: 100%;
+  height: 100%;
+}
+
+.steam-ids-wrapper{
+  width: 90%;
+  grid-column: 3/-1;
+  grid-row: 2/3;
+}
+.steamname-nameavatar-wrapper{
+  max-width: 86%;
+  grid-column: 2/-1;
+  display:grid;
+  grid-template-areas: 
+  "nameurl avatar";
+}
+.steam-name-container{
+  grid-area:"nameurl";
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.steam-avatar{
+  display: flex;
+  justify-content: center;
+  grid-area:"avatar"
+}
+
+.steam-level{
+  min-width: 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  padding: 0.7rem;
+  margin-left: 1rem;
+  background: #F1F5F8;
+  border: 3px solid #FEDF72;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.steam-profile-url{
+  font-weight: 600;
+}
+.steam-profile-url:hover{
+  text-decoration: none;
+}
+
+.steam-avatar .card{
+  width: 6.5rem;
+  padding: 0.3rem;
+  border:none;
+  background: none;
+}
+.steam-avatar img{
+  border-radius: 1rem;
+}
+
+.steam-info div{
+  margin-bottom: 1rem;
+}
+
+.steam-info .name-label{
+  min-width: 50%;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.steam-ids .name-label,.profile-privacy .name-label{
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.steam-ids div,.profile-privacy div{
+  display: grid;
+  grid-template-columns: 20% 80%;
+  margin-bottom: 1rem;
+}
+.copy{
+  cursor: pointer;
+  display: inline-block;
+  color:rgb(88, 88, 88);
+  margin-left: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.copy-animation{
+  transform:scale(1.5,1.5);
+}
+
+.steam-ids .data-label,.profile-privacy .data-label{
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.steam-info .data-label{
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.steam-info .separator{
+  margin-right:1rem;
+}
+.steam-ids .separator,.profile-privacy .separator{
+  margin-right:1rem
+}
+.profile-overview-isonline .data-label.offline{
+  font-size: 0.9rem;
+  color:#3a3a3aa2;
+}
+.profile-overview-isonline .data-label.online{
+  font-size: 0.9rem;
+  color:#38a338;
+}
+.section-title{
+  font-weight: 800;
+  font-size: 0.875rem;
+  line-height: 1.1rem;
+  color: #5C66C2;
+}
+.profile-privacy-wrapper{
+  width: 90%;
+  grid-column: 3/-1;
+}
+.steam-ids,.profile-privacy{
+  width: 100%;
+  height: 100%;
+  padding:1.6rem 2rem;
+  background: #EAF1F7;
+  border-radius: 17px;
+}
+.data-label .private{
+  font-weight: bold;
+  color: red;
+}
+.data-label.private{
+  font-weight: bold;
+  color: red;
+}
+.data-label .public{
+  font-weight: bold;
+  color:#38a338;;
+}
+.data-label .friends-only{
+  font-weight: 600;
+  color:orange;
+}
+.data-label .ban-none{
+  font-weight: bold;
+  color:#38a338;
+}
+.data-label .ban-true{
+  font-weight: bold;
+  color:red;
+}
+.data-label .since-ban{
+  color: red;
+  font-weight: bold;
+  font-size: 0.7rem;
+  margin-left: 0.5rem;
+}
+
+/* media queries */
+ @media (max-width:1200px){
+  .controls{
+    width: 90%;
+  }
+  .label{
+    width: 90%;
+  }
+}
+
+@media (max-width:768px){
+  .home-container{
+    height: 50vh;
+  }
+  .controls{
+    width: 80%;
+  }
+  .label{
+    width: 80%;
+  }
+  .label h5{
+    font-size: 1rem;
+  }
+  .url-input{
+    padding:1rem;
+    font-size: 0.8rem;
+  }
+  .search-submit{
+    padding:0.54rem;
+  }
+  .fa-search{
+    font-size: 1rem;
+  }
+} 
+
+@media (max-width:450px){
+  .controls{
+    width: 90%;
+  }
+}

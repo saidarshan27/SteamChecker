@@ -188,7 +188,7 @@ body{
 .userpage-container{
   width: 95%;
   position: relative;
-  height: 80vh;
+  height: 100vh;
   display:grid;
   margin-top:5rem;
   grid-template-columns: repeat(4,1fr);
@@ -196,10 +196,10 @@ body{
   gap:1rem;
 }
 .profile-widget-wrapper{
-  grid-row:2/-1;
+  grid-row:2/4;
 }
 .steam-info-wrapper{
-  grid-row: 2/-1;
+  grid-row: 2/4;
   grid-column: 2/3;
 }
 .steam-info{

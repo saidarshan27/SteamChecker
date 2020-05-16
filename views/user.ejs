@@ -26,7 +26,7 @@
     <div class="steam-name-container">
       <h5 class="steam-name"><%= dataObj.persondata.personaname %>
         <% if(dataObj.steamLvl) { %>
-          <span class="steam-level"><%= dataObj.steamLvl.level %></span>
+          <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
         <% }else{ %>
           <span class="steam-level">?</span>
         <% } %>
@@ -63,7 +63,7 @@
         <% if(dataObj.steamLvl) { %>
           <div class="profile-overview-level">
             <label class="name-label"><strong>STEAM LEVEL</strong></label><span class="separator">-</span>
-            <label  class="data-label"><%= dataObj.steamLvl.level %></label>
+            <label  class="data-label"><%= dataObj.steamLvl %></label>
           </div>
         <% } else { %>
           <div class="profile-overview-level">
@@ -226,21 +226,21 @@
   </section>
 </div>
 
+
+
 <script>
   let steamLevelColor;
   const dataObj = <%- JSON.stringify(dataObj) %>
   const banObj =  dataObj.banObj;
   const visibilityState = dataObj.persondata.communityvisibilitystate;
-  if(visibilityState === 3 && dataObj.steamLvl){
-    steamLevelColor = dataObj.steamLvl.color;
-    console.log(steamLevelColor);
-  }
   const navInput = document.querySelector("#url-input");
   const id = dataObj.persondata.steamid;
   navInput.value=`https://steamcommunity.com/profiles/${id}`
 </script>
+
 <script src="/scripts/updateBans.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
 <script src="/scripts/steamLevelColor.js"></script>
+
 
 <%- include("partials/footer.ejs"); %>

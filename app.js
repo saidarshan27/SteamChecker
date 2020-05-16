@@ -51,11 +51,7 @@ async function kyabre(steam64){
   const bans = await playerBans(steam64);
   if(persondata.communityvisibilitystate === 3){
     const level = await playerLevel(steam64);
-    const steamLvl={
-      level:level[0],
-      color:level[1]
-    }
-    dataObj.steamLvl = steamLvl;
+    dataObj.steamLvl =level;
   }
   const banObj = {
     tradeBan : bans.EconomyBan,
@@ -152,38 +148,13 @@ async function playerLevel(steam64){
   try {
     const steamLevel = await rp(options);
     const steamLevelNumber = steamLevel.response.player_level;
-    const modLevel = steamLevelNumber % 100;
-    const color = steamColor(modLevel);
-    const arr = [steamLevelNumber,color];
-    return arr;
+    return steamLevelNumber;
   }
   catch (err) {
     console.log(err);
   }
 }
-function steamColor(modLevel){
-  if(modLevel>=0 && modLevel<=9){
-    return "#9b9b9b";
-  }else if(modLevel >=10 && modLevel <=19){
-    return "#c02942";
-  }else if(modLevel >=20 && modLevel <=29){
-    return "#d95b43";
-  }else if(modLevel >=30 && modLevel <= 39){
-    return "#fecc23";
-  }else if(modLevel >= 40 && modLevel <= 49){
-    return "#467a3c"
-  }else if(modLevel >= 50 && modLevel <=59){
-    return "#4e8ddb";
-  }else if(modLevel >= 60 && modLevel <=69){
-    return "#7652c9";
-  }else if(modLevel >= 70 && modLevel<=79){
-    return "#c252c9";
-  }else if(modLevel >= 80 && modLevel<=89){
-    return "#542427";
-  }else if(modLevel >= 90 && modLevel <=99){
-    return "#997c52";
-  }
-}
+
 
 function playerGames(steam64){
   return new Promise((resolve,reject)=>{

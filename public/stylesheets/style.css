@@ -360,6 +360,9 @@ body{
   font-size: 0.7rem;
   margin-left: 0.5rem;
 }
+.friendPlayerLevel .friendPlayerLevelNum.number-color-black{
+  color:black
+}
 
 /* media queries */
  @media (max-width:1200px){

@@ -26,9 +26,9 @@ app.get("/user", (req, res) => {
       url = extractedUrl;
       if(response.response.success===1){
         url = response.response.steamid;
-        objSteamIds.customURL = `https://steamcommunity.com/id/${extractedUrl}`
+        objSteamIds.customURL = extractedUrl;
       }
-      objSteamIds.steam64 = `https://steamcommunity.com/profiles/${url}`;
+      objSteamIds.steam64 = url;
       kyabre(url).then(dataObj =>{
         objSteamIds.steam2id = dataObj.objSteamIds.steam2id;
         objSteamIds.steam3id = dataObj.objSteamIds.steam3id;
@@ -53,7 +53,7 @@ async function kyabre(steam64){
   const backgroundImgUrl = background.response.profile_background.image_large
   if(persondata.communityvisibilitystate === 3){
     const level = await playerLevel(steam64);
-    dataObj.steamLvl =level;
+    dataObj.steamLvl = level;
   }
   const banObj = {
     tradeBan : bans.EconomyBan,

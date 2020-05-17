@@ -1,161 +1,147 @@
 <%- include("partials/headerWithSearch.ejs"); %>
 
-<div class="userpage-container container-fluid">
+<div class="userpage-container container">
   <section class="profile-background-wrapper">
      <div class="profile-background"></div>
   </section>
-
- 
-
-
-
-
-
-  <!-- <section class="profile-widget-wrapper">
-    <div class="profile-widget">
-      <h5 class="title">PROFILE WIDGET</h5>
-      <ul class="widget-optns">
-         <li class="active">
-           <h5>PROFILE OVERVIEW</h5>
-         </li>
-         <li class="count">
-           <h5>FRIENDS</h5>
-           <span class="friend-count">383</span>
-          </li>
-         <li class="count">
-           <h5>GAMES OWNED</h5>
-           <span class="games-owned-count">10</span> 
-          </li>
-         <li>
-           <h5>STEAM QUICK LINKS</i></h5>
-          </li>
-      </ul>
-  </div>
+  <section class="name-level-wrapper">
+    <div class="name-level">
+      <img src="<%= dataObj.persondata.avatarfull %>" alt="avatar" class="avatar">
+      <h4><a href="<%= dataObj.persondata.profileurl %>"><%= dataObj.persondata.personaname %></a></h4>
+      <% if(dataObj.steamLvl){ %>
+        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
+      <% }else{ %>
+        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
+      <% } %>
+    </div>
+    <div class="realname-profileurl">
+       <p><%= dataObj.persondata.realname %></p>
+    </div>
   </section>
-  <section class="steamname-nameavatar-wrapper">
-    <div class="steam-name-container">
-      <h5 class="steam-name"><%= dataObj.persondata.personaname %>
-        <% if(dataObj.steamLvl) { %>
-          <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
-        <% }else{ %>
-          <span class="steam-level">?</span>
-        <% } %>
+  <section class="about-wrapper">
+    <div class="about">
+      <h5 class="section-title" style="margin-bottom: 3.5rem;">
+        ABOUT
       </h5>
-      <a href="<%= dataObj.persondata.profileurl %>" class="steam-profile-url" target="_blank" rel="noopener noreferrer">
-        <%= dataObj.persondata.profileurl %>
-      </a>
-    </div>
-    <div class="steam-avatar">
-      <div class="card">
-        <img class="card-img-top" src="<%= dataObj.persondata.avatarfull%>">
-      </div>
-    </div>
-    <hr style="grid-column: 1/-1;">
-  </section>
-  <section class="steam-info-wrapper">
-    <div class="steam-info">
-      <h5 class="mb-5 section-title">ACCOUNT INFORMATION</h5>
-        <div class="profile-overview-name">
-          <label class="name-label"><strong>STEAM NAME</strong></label>
+      <% if(dataObj.steamLvl) { %>
+        <div class="steam-level">
+          <label class="name-label"><strong>STEAM LEVEL</strong></label>
           <label class="data-label">
             <span class="separator">-</span>
-            <%= dataObj.persondata.personaname %>
+            <span class="data"><%= dataObj.steamLvl %></span>
           </label>
         </div>
-        <% if(dataObj.persondata.realname) { %>
-          <div class="profile-overview-realname">
-            <label class="name-label"><strong>REAL NAME</strong></label>
-            <label class="data-label">
-              <span class="separator">-</span>
-              <%= dataObj.persondata.realname %>
-            </label>
-          </div>
-        <% } else { %>
-          <div class="profile-overview-realname">
-            <label class="name-label"><strong>REAL NAME</strong></label>
-            <label class="data-label private">
-              <span class="separator">-</span>
-              PRIVATE
-            </label>
-          </div>
-        <% }%>
-        <% if(dataObj.steamLvl) { %>
-          <div class="profile-overview-level">
-            <label class="name-label"><strong>STEAM LEVEL</strong></label>
-            <label  class="data-label">
-              <span class="separator">-</span>
-              <%= dataObj.steamLvl %>
-            </label>
-          </div>
-        <% } else { %>
-          <div class="profile-overview-level">
-            <label class="name-label"><strong>STEAM LEVEL</strong></label>
-            <label  class="data-label private">
-              <span class="separator">-</span>
-              PRIVATE
-            </label>
-          </div>
-        <% } %>
-        <% if(dataObj.persondata.timecreated) { %>
-          <div class="profile-overview-date">
-            <label class="name-label"><strong>JOINED STEAM</strong></label>
-            <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-            <label class="data-label">
-              <span class="separator">-</span>
-              <%= humanDate %>
-            </label>
-          </div>
-        <% } else{ %>
-          <div class="profile-overview-date">
-            <label class="name-label"><strong>JOINED STEAM</strong></label>
-            <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-            <label class="data-label private">
-              <span class="separator">-</span>
-              PRIVATE
-            </label>
-          </div>
-        <% } %>
-        <div class="profile-overview-isonline">
-          <label class="name-label"><strong>STATUS</strong></label>
-          <label class="data-label" id="online-status">
+      <% }else{ %>
+        <div class="steam-level">
+          <label class="name-label"><strong>STEAM LEVEL</strong></label>
+          <label class="data-label">
+            <span class="separator">-</span>
+            <span class="data private">PRIVATE</span>
           </label>
-          <script>
-            const status = <%- JSON.stringify(dataObj.persondata.personastate) %>;
-            const dataLabel = document.getElementById("online-status");
-            switch(status){
-              case 0:{
-                dataLabel.innerHTML = 
-                `<span class="separator">-</span>
-                <strong>OFFLINE</strong>`;
-                dataLabel.classList.add("offline");
-                break;
-              }
-              case 1:{
-                dataLabel.innerHTML = 
-                `<span class="separator">-</span>
-                <strong>ONLINE</strong>`;
-                dataLabel.classList.add("online");
-                break;
-              }
-              case 2:{
-                dataLabel.innerHTML = 
-                `<span class="separator">-</span>
-                <strong>BUSY</strong>`;
-                dataLabel.classList.add("busy");
-                break;
-              }
-              case 3:{
-               dataLabel.innerHTML = 
-               `<span class="separator">-</span>
-               <strong>AWAY</strong>`;
-               dataLabel.classList.add("away");
-                break;
-              }
+        </div>
+      <% } %>
+      <div class="friendship">
+        <label class="name-label" style="width: 70%;">
+          <strong>FRIENDSHIP</strong>
+        </label>
+        <label class="data-label">
+          <span class="separator">-</span>
+          <span class="data warning">
+            <em>not friends with you</em>
+          </span>
+        </label>
+      </div>
+      <% if(dataObj.persondata.timecreated) { %>
+        <div class="joined-steam">
+          <label class="name-label"><strong>JOINED STEAM</strong></label>
+          <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
+          <label class="data-label">
+            <span class="separator">-</span>
+            <span class="data"><%= humanDate %></span>
+          </label>
+        </div>
+      <% } else{ %>
+        <div class="profile-overview-date">
+          <label class="name-label"><strong>JOINED STEAM</strong></label>
+          <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
+          <label class="data-label">
+            <span class="separator">-</span>
+            <span class="data private">PRIVATE</span>
+          </label>
+        </div>
+      <% } %>
+      <div class="isonline">
+        <label class="name-label"><strong>ONLINE STATUS</strong></label>
+        <label class="data-label" id="online-status">
+        </label>
+        <script>
+          const status = <%- JSON.stringify(dataObj.persondata.personastate) %>;
+          const dataLabel = document.getElementById("online-status");
+          switch(status){
+            case 0:{
+              dataLabel.innerHTML = 
+              `<span class="separator">-</span>
+              <strong>OFFLINE</strong>`;
+              dataLabel.classList.add("offline");
+              break;
             }
-          </script>
-        </div>
+            case 1:{
+              dataLabel.innerHTML = 
+              `<span class="separator">-</span>
+              <strong>ONLINE</strong>`;
+              dataLabel.classList.add("online");
+              break;
+            }
+            case 2:{
+              dataLabel.innerHTML = 
+              `<span class="separator">-</span>
+              <strong>BUSY</strong>`;
+              dataLabel.classList.add("busy");
+              break;
+            }
+            case 3:{
+             dataLabel.innerHTML = 
+             `<span class="separator">-</span>
+             <strong>AWAY</strong>`;
+             dataLabel.classList.add("away");
+              break;
+            }
+            case 4:{
+              dataLabel.innerHTML = 
+             `<span class="separator">-</span>
+             <strong>SNOOZE</strong>`;
+             dataLabel.classList.add("snooze");
+              break;
+            }
+            case 5:{
+              dataLabel.innerHTML = 
+             `<span class="separator">-</span>
+             <strong>LOOKING TO TRADE</strong>`;
+             dataLabel.classList.add("trade");
+              break;
+            }
+            case 6:{
+              dataLabel.innerHTML = 
+             `<span class="separator">-</span>
+             <strong>LOOKING TO PLAY</strong>`;
+             dataLabel.classList.add("trade");
+              break;
+            }
+          }
+        </script>
+      </div>
     </div>
   </section>
+<section class="nav-wrapper">
+  <div class="nav"> 
+     <ul class="nav-links">
+       <li class="nav-link active section-title">PROFILE OVERVIEW</li>
+       <li class="nav-link section-title">FRIENDS</li>
+       <li class="nav-link section-title">GAMES OWNED</li>
+     </ul>
+  </div>
+</section>
+<section class="wrapper">
   <section class="steam-ids-wrapper">
     <div class="steam-ids">
       <h5 class="mb-5 section-title">STEAM ID'S</h5>
@@ -189,39 +175,46 @@
       </div>
       <div class="profile-overview-steam64-id">
         <label class="name-label">
-          <strong>STEAMID64</strong>
+          <strong>STEAMID</strong>
         </label>
         <label class="data-label">
           <span class="separator">-</span>
           <span class="data">
-            <a href="<%= dataObj.objSteamIds.steam64 %>" target="_blank" rel="noopener noreferrer">
               <%= dataObj.objSteamIds.steam64 %>
-            </a>
           </span>
           <span class="steam64-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
             <i class="far fa-clone"></i>
           </span>
         </label>
-      </div>
-      <% if(dataObj.objSteamIds.customURL){ %>
-        <div class="profile-overview-customURL">
-          <label class="name-label">
-            <strong>CUSTOM URL</strong>
-          </label>
-          <label class="data-label">
-            <span class="separator">-</span>
-            <span class="data">
-              <a href="<%= dataObj.objSteamIds.customURL %>" target="_blank" rel="noopener noreferrer">
-                <%= dataObj.objSteamIds.customURL %>
-              </a>
-            </span>
-            <span class="customURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-              <i class="far fa-clone"></i>
-            </span>
-          </label>
-        </div>
-      <% } %>
     </div>
+    <% if(dataObj.objSteamIds.customURL){ %>
+      <div class="profile-overview-customURL">
+        <label class="name-label">
+          <strong>VANITY URL</strong>
+        </label>
+        <label class="data-label">
+          <span class="separator">-</span>
+          <span class="data">
+              <%= dataObj.objSteamIds.customURL %>
+          </span>
+          <span class="customURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+            <i class="far fa-clone"></i>
+          </span>
+        </label>
+      </div>
+    <% }else{ %>
+      <div class="profile-overview-customURL">
+        <label class="name-label">
+          <strong>VANITY URL</strong>
+        </label>
+        <label class="data-label">
+          <span class="separator">-</span>
+          <span class="data mute">
+           <em>not set</em>
+          </span>
+        </label>
+      </div>
+    <% } %>
   </section>
   <section class="profile-privacy-wrapper">
     <div class="profile-privacy">
@@ -263,30 +256,28 @@
           </label>
         </div>
     </div>
-  </section> -->
+  </section>
+</section>
 </div>
-
 
 <script>
   const background = document.querySelector(".profile-background");
   const dataObj = <%- JSON.stringify(dataObj) %>
-  if(dataObj.backgroundFull != undefined){
+  const banObj =  dataObj.banObj;
+  const visibilityState = dataObj.persondata.communityvisibilitystate;
+  if(dataObj.backgroundFull != undefined && dataObj.backgroundFull){
     background.style.backgroundImage = `url(${dataObj.backgroundFull})`
+  }else{
+    background.style.backgroundImage = "url(/images/cover-placeholder.jpg)";
   }
+ const navInput = document.querySelector("#url-input");
+ const id = dataObj.persondata.steamid;
+ navInput.value=`https://steamcommunity.com/profiles/${id}`
 </script>
-<!-- <script>
-  // let steamLevelColor;
-  // const dataObj = <%- JSON.stringify(dataObj) %>
-  // const banObj =  dataObj.banObj;
-  // const visibilityState = dataObj.persondata.communityvisibilitystate;
-  // const navInput = document.querySelector("#url-input");
-  // const id = dataObj.persondata.steamid;
-  // navInput.value=`https://steamcommunity.com/profiles/${id}`
-</script> -->
 
-<!-- <script src="/scripts/updateBans.js"></script>
+<script src="/scripts/updateBans.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
-<script src="/scripts/steamLevelColor.js"></script> -->
+<script src="/scripts/steamLevelColor.js"></script>
 
 
 <%- include("partials/footer.ejs"); %>

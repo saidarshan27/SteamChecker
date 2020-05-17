@@ -15,7 +15,8 @@ if(banObj.vacBan === false){
   const sinceBanned = document.createElement("span");
   sinceBanned.classList.add("since-ban");
   const days = banObj.DaysSinceLastBan;
-  sinceBanned.innerText = `${days} DAYS SINCE LAST BAN`;
+  sinceBanned.innerHTML = 
+  `${days} DAYS <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="right" data-original-title="${days} days since last ban"></i>`;
   vacBan.parentNode.appendChild(sinceBanned);
   vacBan.classList.add("ban-true");
   vacBan.innerText = "BANNED";

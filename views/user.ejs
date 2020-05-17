@@ -2,9 +2,7 @@
 
 <div class="userpage-container container-fluid">
   <section class="profile-background-wrapper">
-     <div class="profile-background">
-      
-     </div>
+     <div class="profile-background"></div>
   </section>
 
  
@@ -269,7 +267,13 @@
 </div>
 
 
-
+<script>
+  const background = document.querySelector(".profile-background");
+  const dataObj = <%- JSON.stringify(dataObj) %>
+  if(dataObj.backgroundFull != undefined){
+    background.style.backgroundImage = `url(${dataObj.backgroundFull})`
+  }
+</script>
 <!-- <script>
   // let steamLevelColor;
   // const dataObj = <%- JSON.stringify(dataObj) %>

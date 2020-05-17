@@ -49,6 +49,8 @@ async function kyabre(steam64){
   const persondata = await playerInfo(steam64);
   const steamids  = playerSteamIds(steam64);
   const bans = await playerBans(steam64);
+  const background = await playerBackground(steam64);
+  const backgroundImgUrl = background.response.profile_background.image_large
   if(persondata.communityvisibilitystate === 3){
     const level = await playerLevel(steam64);
     dataObj.steamLvl =level;
@@ -61,6 +63,10 @@ async function kyabre(steam64){
   if(bans.VACBanned === true){
      banObj.NumberOfVACBans = bans.NumberOfVACBans;
      banObj.DaysSinceLastBan = bans.DaysSinceLastBan;
+  }
+  if(backgroundImgUrl != undefined){
+    const backgroundFull = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/${backgroundImgUrl}`
+    dataObj.backgroundFull = backgroundFull;
   }
   const objSteamIds = {
     steam2id:steamids[0],
@@ -155,6 +161,23 @@ async function playerLevel(steam64){
   }
 }
 
+async function playerBackground(steam64){
+  const options =  {
+    uri:`https://api.steampowered.com/IPlayerService/GetProfileBackground/v1/`,
+    qs:{
+      key:"D295314B96B79961B1AB2A2457BA5B10",
+      steamid:steam64
+    },
+    json:true
+  }
+  try{
+    const background = await rp(options);
+    return background;
+  }
+  catch (err){
+    console.log(err);
+  }
+}
 
 function playerGames(steam64){
   return new Promise((resolve,reject)=>{

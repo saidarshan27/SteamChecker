@@ -1,7 +1,19 @@
 <%- include("partials/headerWithSearch.ejs"); %>
 
 <div class="userpage-container container-fluid">
-  <section class="profile-widget-wrapper">
+  <section class="profile-background-wrapper">
+     <div class="profile-background">
+      
+     </div>
+  </section>
+
+ 
+
+
+
+
+
+  <!-- <section class="profile-widget-wrapper">
     <div class="profile-widget">
       <h5 class="title">PROFILE WIDGET</h5>
       <ul class="widget-optns">
@@ -253,24 +265,24 @@
           </label>
         </div>
     </div>
-  </section>
+  </section> -->
 </div>
 
 
 
-<script>
-  let steamLevelColor;
-  const dataObj = <%- JSON.stringify(dataObj) %>
-  const banObj =  dataObj.banObj;
-  const visibilityState = dataObj.persondata.communityvisibilitystate;
-  const navInput = document.querySelector("#url-input");
-  const id = dataObj.persondata.steamid;
-  navInput.value=`https://steamcommunity.com/profiles/${id}`
-</script>
+<!-- <script>
+  // let steamLevelColor;
+  // const dataObj = <%- JSON.stringify(dataObj) %>
+  // const banObj =  dataObj.banObj;
+  // const visibilityState = dataObj.persondata.communityvisibilitystate;
+  // const navInput = document.querySelector("#url-input");
+  // const id = dataObj.persondata.steamid;
+  // navInput.value=`https://steamcommunity.com/profiles/${id}`
+</script> -->
 
-<script src="/scripts/updateBans.js"></script>
+<!-- <script src="/scripts/updateBans.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
-<script src="/scripts/steamLevelColor.js"></script>
+<script src="/scripts/steamLevelColor.js"></script> -->
 
 
 <%- include("partials/footer.ejs"); %>

@@ -117,48 +117,6 @@ body{
   justify-content: space-around;
 }
 
-
-.profile-widget{
- background: rgba(255, 255, 255, 0.76);
- border: 1px solid #E5E5E5;
- box-sizing: border-box;
- border-radius: 0.5rem;
- height: 100%;
- width: 85%;
-}
-.profile-widget .title{
-  font-style: normal;
-  font-weight: 800;
-  font-size: 0.875rem;
-  line-height: 1.1rem;
-  color: #5C66C2; 
-  padding-top:1.8rem ;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-bottom: 0;
-}
-
-.widget-optns{
-  list-style: none;
-  margin-top: 3rem;
-}
-.widget-optns li{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0.8rem 2rem;
-  transition: all 0.5s ease-in-out;
-  cursor: pointer;
-}
-.widget-optns li.active{
-  border-left:5px solid rgba(92, 102, 194, 1);
-}
-
-.widget-optns h5{
-  font-size: 1rem;
-  line-height: 2.5rem;
-}
 .friend-count,.games-owned-count{
   text-align: center;
   min-width: 	3rem;
@@ -190,18 +148,14 @@ body{
   font-weight: 600;
 }
 .userpage-container{
-  width: 95%;
-  position: relative;
-  height: 100vh;
-  display:grid;
-  margin-top:5rem;
-  grid-template-columns: repeat(4,1fr);
-  grid-template-rows: repeat(4,1fr);
-  gap:1rem;
+ height: 100vh;
+ padding: 0 9rem;
+ padding-top:5rem;
+ display:grid;
+ grid-template-columns: repeat(3,1fr);
+ grid-template-rows: 450px 350px;
 }
-.profile-widget-wrapper{
-  grid-row:2/4;
-}
+
 .steam-info-wrapper{
   grid-row: 2/4;
   grid-column: 2/3;
@@ -235,32 +189,12 @@ body{
   grid-area:"avatar"
 }
 
-.steam-level{
-  min-width: 3rem;
-  text-align: center;
-  font-size: 0.9rem;
-  padding: 0.7rem;
-  margin-left: 1rem;
-  background: #F1F5F8;
-  border: 3px solid #FEDF72;
-  box-sizing: border-box;
-  border-radius: 50%;
-}
+
 .steam-profile-url{
   font-weight: 600;
 }
 .steam-profile-url:hover{
   text-decoration: none;
-}
-
-.steam-avatar .card{
-  width: 6.5rem;
-  padding: 0.3rem;
-  border:none;
-  background: none;
-}
-.steam-avatar img{
-  border-radius: 1rem;
 }
 
 .steam-info div{

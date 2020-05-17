@@ -180,6 +180,10 @@ body{
   background: #EAF1F7;
   border-radius: 1.1rem;
 }
+.steam-info div{
+  display:grid;
+  grid-template-columns: 40% 60%;
+}
 .steam-name{
   display: flex;
   align-items: center;

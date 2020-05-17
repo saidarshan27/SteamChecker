@@ -46,68 +46,98 @@
     <div class="steam-info">
       <h5 class="mb-5 section-title">ACCOUNT INFORMATION</h5>
         <div class="profile-overview-name">
-          <label class="name-label"><strong>STEAM NAME</strong></label><span class="separator">-</span>
-          <label class="data-label"><%= dataObj.persondata.personaname %></label>
+          <label class="name-label"><strong>STEAM NAME</strong></label>
+          <label class="data-label">
+            <span class="separator">-</span>
+            <%= dataObj.persondata.personaname %>
+          </label>
         </div>
         <% if(dataObj.persondata.realname) { %>
           <div class="profile-overview-realname">
-            <label class="name-label"><strong>REAL NAME</strong></label><span class="separator">-</span>
-            <label class="data-label"><%= dataObj.persondata.realname %></label>
+            <label class="name-label"><strong>REAL NAME</strong></label>
+            <label class="data-label">
+              <span class="separator">-</span>
+              <%= dataObj.persondata.realname %>
+            </label>
           </div>
         <% } else { %>
           <div class="profile-overview-realname">
-            <label class="name-label"><strong>REAL NAME</strong></label><span class="separator">-</span>
-            <label class="data-label private">PRIVATE</label>
+            <label class="name-label"><strong>REAL NAME</strong></label>
+            <label class="data-label private">
+              <span class="separator">-</span>
+              PRIVATE
+            </label>
           </div>
         <% }%>
         <% if(dataObj.steamLvl) { %>
           <div class="profile-overview-level">
-            <label class="name-label"><strong>STEAM LEVEL</strong></label><span class="separator">-</span>
-            <label  class="data-label"><%= dataObj.steamLvl %></label>
+            <label class="name-label"><strong>STEAM LEVEL</strong></label>
+            <label  class="data-label">
+              <span class="separator">-</span>
+              <%= dataObj.steamLvl %>
+            </label>
           </div>
         <% } else { %>
           <div class="profile-overview-level">
-            <label class="name-label"><strong>STEAM LEVEL</strong></label><span class="separator">-</span>
-            <label  class="data-label private">PRIVATE</label>
+            <label class="name-label"><strong>STEAM LEVEL</strong></label>
+            <label  class="data-label private">
+              <span class="separator">-</span>
+              PRIVATE
+            </label>
           </div>
         <% } %>
         <% if(dataObj.persondata.timecreated) { %>
           <div class="profile-overview-date">
-            <label class="name-label"><strong>JOINED STEAM</strong></label><span class="separator">-</span>
+            <label class="name-label"><strong>JOINED STEAM</strong></label>
             <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-            <label class="data-label"><%= humanDate %></label>
+            <label class="data-label">
+              <span class="separator">-</span>
+              <%= humanDate %>
+            </label>
           </div>
         <% } else{ %>
           <div class="profile-overview-date">
-            <label class="name-label"><strong>JOINED STEAM</strong></label><span class="separator">-</span>
+            <label class="name-label"><strong>JOINED STEAM</strong></label>
             <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-            <label class="data-label private">PRIVATE</label>
+            <label class="data-label private">
+              <span class="separator">-</span>
+              PRIVATE
+            </label>
           </div>
         <% } %>
         <div class="profile-overview-isonline">
-          <label class="name-label"><strong>STATUS</strong></label><span class="separator">-</span>
-          <label class="data-label" id="online-status"></label>
+          <label class="name-label"><strong>STATUS</strong></label>
+          <label class="data-label" id="online-status">
+          </label>
           <script>
             const status = <%- JSON.stringify(dataObj.persondata.personastate) %>;
             const dataLabel = document.getElementById("online-status");
             switch(status){
               case 0:{
-                dataLabel.innerHTML = `<strong>OFFLINE</strong>`;
+                dataLabel.innerHTML = 
+                `<span class="separator">-</span>
+                <strong>OFFLINE</strong>`;
                 dataLabel.classList.add("offline");
                 break;
               }
               case 1:{
-                dataLabel.innerHTML = `<strong>ONLINE</strong>`;
+                dataLabel.innerHTML = 
+                `<span class="separator">-</span>
+                <strong>ONLINE</strong>`;
                 dataLabel.classList.add("online");
                 break;
               }
               case 2:{
-                dataLabel.innerHTML = `<strong>BUSY</strong>`;
+                dataLabel.innerHTML = 
+                `<span class="separator">-</span>
+                <strong>BUSY</strong>`;
                 dataLabel.classList.add("busy");
                 break;
               }
               case 3:{
-               dataLabel.innerHTML = `<strong>AWAY</strong>`;
+               dataLabel.innerHTML = 
+               `<span class="separator">-</span>
+               <strong>AWAY</strong>`;
                dataLabel.classList.add("away");
                 break;
               }

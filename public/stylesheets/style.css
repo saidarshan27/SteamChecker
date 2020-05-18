@@ -417,6 +417,129 @@ body{
 }
 
 /* media queries */
+@media (max-width:1679px){
+  .userpage-container{
+    max-width: 2000px;
+    padding: 2rem 8rem;
+  }
+}
+
+@media(max-width:1522px){
+  .userpage-container{
+    max-width: 2200px;
+    padding: 2rem 0;
+  }
+    .about div{
+      margin-bottom: 1rem;
+      display:grid;
+      grid-template-columns: 0.7fr;
+      grid-template-rows: 1fr;
+    }
+    .about .separator{
+      opacity: 0;
+      margin-left: -22px;
+    }
+}
+
+@media(max-width:1187px){
+  .steam-ids div,.profile-privacy div{
+    display: grid;
+    grid-template-columns: 0.6fr;
+    grid-template-rows: 1fr;
+    margin-bottom: 1rem;
+  }
+  .steam-ids .separator,.profile-privacy .separator{
+    opacity: 0;
+    margin-left: -22px;
+  }
+  .about-wrapper{
+    margin-bottom: -102px;
+  }
+  .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
+    font-size: 12px;
+    font-weight: 500;
+}
+.name-level {
+  margin-left: 3rem;
+}
+.realname-profileurl p {
+  margin-left:3rem;
+}
+}
+
+@media(max-width:1000px){
+  .nav-wrapper{
+    grid-column: 1/13;
+  }
+  .about-wrapper {
+      grid-column: 1/4;
+      grid-row: 7/11;
+  }
+  .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
+    font-size: 10px;
+    font-weight: 500;
+ }
+ .steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
+  font-size: 10px;
+  font-weight: 500;
+}
+}
+@media(max-width:930px){
+  .about-wrapper {
+    grid-column: 1/13;
+    grid-row: 7/11;
+  }
+  .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
+    font-size: 14px;
+    font-weight: 500;
+ }
+ .steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
+  font-size: 14px;
+  font-weight: 500;
+}
+.userpage-container{
+  height: 200vh;
+  grid-template-rows: repeat(20,1fr);
+  max-width: 1700px;
+  padding: 2rem 4rem;
+}
+.about div,.steam-ids div,.profile-privacy div{
+  grid-template-columns: 0.7fr 1fr
+}
+.about-wrapper {
+  grid-column: 1/13;
+  grid-row: 6/7;
+  margin-bottom: 0;
+}
+.nav-wrapper{
+  grid-row: 5/6;
+}
+.wrapper{
+  grid-column: 1/13;
+  grid-row: 7/10;
+  grid-template-areas: 
+  "steamid steamid"
+  "profile-privacy profile-privacy";
+}
+
+.name-level-wrapper{
+  grid-column: 1/13;
+ grid-row: 4/5;
+}
+.name-level {
+  margin-left: 3rem;
+}
+.realname-profileurl p {
+  margin-left:3rem;
+}
+.avatar{
+  width: 10rem;
+  height: 10rem;
+}
+}
+
+
+
  @media (max-width:1200px){
   .controls{
     width: 90%;
@@ -449,6 +572,51 @@ body{
   .fa-search{
     font-size: 1rem;
   }
+  .avatar {
+    width: 7rem;
+    height: 5rem;
+    left: 6%;
+    top: 8%;
+}
+.name-level h4{
+  font-size: 16px;
+}
+.realname-profileurl p{
+  font-size: 14px;
+}
+.steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
+  font-size: 10px;
+  font-weight: 500;
+}
+.steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
+font-size: 10px;
+font-weight: 500;
+}
+.navbar .url-input{
+  font-size: 8px;
+}
+.navbar .fa-search {
+  font-size: 1rem;
+}
+.search-submit{
+  top:-20%;
+}
+.userpage-container{
+  max-width: 2000px;
+  padding: 2rem 0rem;
+}
+.name-level{
+  margin-left: 4rem;
+}
+.name-level h4{
+  font-size: 12px;
+}
+.realname-profileurl{
+  margin-left: 1rem;
+}
+.realname-profileurl p{
+  font-size: 11px;
+}
 } 
 
 @media (max-width:450px){

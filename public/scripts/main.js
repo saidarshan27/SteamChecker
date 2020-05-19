@@ -1,7 +1,8 @@
 //Ready
- $(function () {
+$(function () {
   $('[data-toggle="tooltip"]').tooltip()
-})
+}) 
+
  
  // Event Listeners
 
@@ -14,6 +15,7 @@ $(".copy").click(function(event){
 	copyBtn.addClass("copy-animation");
 	setTimeout(function(){
 		copyBtn.removeClass("copy-animation");
+		$(this).tooltip("hide");
 	},150)
 })
 

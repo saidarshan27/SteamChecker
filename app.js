@@ -51,10 +51,8 @@ async function kyabre(steam64){
   const bans = await playerBans(steam64);
   const background = await playerBackground(steam64);
   const backgroundImgUrl = background.response.profile_background.image_large
-  if(persondata.communityvisibilitystate === 3){
-    const level = await playerLevel(steam64);
-    dataObj.steamLvl = level;
-  }
+  const level = await playerLevel(steam64);
+  dataObj.steamLvl = level;
   const banObj = {
     tradeBan : bans.EconomyBan,
     vacBan : bans.VACBanned,
@@ -153,6 +151,7 @@ async function playerLevel(steam64){
   };
   try {
     const steamLevel = await rp(options);
+    console.log(steamLevel);
     const steamLevelNumber = steamLevel.response.player_level;
     return steamLevelNumber;
   }

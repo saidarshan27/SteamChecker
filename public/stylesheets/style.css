@@ -21,8 +21,11 @@ body{
   font-size: 2rem;
   margin-right: 0.5rem;
   color: white;
+}
+.fa-steam-symbol:hover{
   cursor: pointer;
 }
+
 .navbar-light .navbar-brand{
   font-family: Rockwell;
   font-size:2rem;
@@ -67,6 +70,8 @@ body{
   margin-left: 0.5rem;
   font-size: 0.9rem;
   color: var(--mute);
+}
+.fa-info-circle:hover{
   cursor: pointer;
 }
 
@@ -104,22 +109,25 @@ body{
 }
 
 /* User page styles */
-.navbar .url-input{
+.nav-with-search .url-input{
   font-size: 0.8rem;
   font-weight: 600;
   padding:0.5rem 1rem;
   border-radius: 2rem;
 }
-.navbar .fa-search{
+.nav-with-search .fa-search{
   font-size: 1.5rem;
 }
-.navbar .search-submit:hover{
+.nav-with-search .search-submit:hover{
   color:rgba(15, 25, 119, 0.795)
 }
-.navbar .search-submit{
+.nav-with-search .search-submit{
   padding: 0.05rem 1rem;
   background: none;
   color:rgba(92, 102, 194, 1);
+}
+.nav-with-search .controls{
+  min-width: 30%;
 }
 .nav-with-search{
   display: flex;
@@ -347,11 +355,11 @@ body{
 
 /* copy button */
 .copy{
-  cursor: pointer;
   display: inline-block;
   color:rgb(88, 88, 88);
   margin-left: 1rem;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .copy-animation{
@@ -415,6 +423,10 @@ body{
 .friendPlayerLevel .friendPlayerLevelNum.number-color-black{
   color:black
 }
+/* number of days since ban info icon */
+.info-icon{
+  cursor: pointer;
+}
 
 /* media queries */
 @media (max-width:1679px){
@@ -427,7 +439,7 @@ body{
 @media(max-width:1522px){
   .userpage-container{
     max-width: 2200px;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
   }
     .about div{
       margin-bottom: 1rem;
@@ -439,9 +451,17 @@ body{
       opacity: 0;
       margin-left: -22px;
     }
+    .nav-with-search .controls{
+      width: 70%;
+    }
 }
 
 @media(max-width:1187px){
+  .userpage-container{
+    max-width: 2000px;
+    padding:2rem 1rem;
+  }
+
   .steam-ids div,.profile-privacy div{
     display: grid;
     grid-template-columns: 0.6fr;
@@ -468,6 +488,9 @@ body{
 }
 
 @media(max-width:1000px){
+  .about-wrapper{
+    margin-bottom: -55px;
+  }
   .nav-wrapper{
     grid-column: 1/13;
   }
@@ -538,8 +561,6 @@ body{
 }
 }
 
-
-
  @media (max-width:1200px){
   .controls{
     width: 90%;
@@ -592,20 +613,21 @@ body{
 font-size: 10px;
 font-weight: 500;
 }
-.navbar .url-input{
+.nav-with-search .url-input{
   font-size: 8px;
 }
-.navbar .fa-search {
+.nav-with-search .fa-search {
   font-size: 1rem;
 }
-.search-submit{
+.nav-with-search .search-submit{
   top:-20%;
 }
 .userpage-container{
   max-width: 2000px;
-  padding: 2rem 0rem;
+  padding: 2rem 1rem;
 }
 .name-level{
+  width: 100%;
   margin-left: 4rem;
 }
 .name-level h4{
@@ -620,7 +642,7 @@ font-weight: 500;
 } 
 
 @media (max-width:450px){
-  .controls{
+  .nav-with-search .controls{
     width: 90%;
   }
 }

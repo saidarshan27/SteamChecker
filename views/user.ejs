@@ -7,7 +7,11 @@
   <section class="name-level-wrapper">
     <div class="name-level">
       <img src="<%= dataObj.persondata.avatarfull %>" alt="avatar" class="avatar">
-      <h4><a href="<%= dataObj.persondata.profileurl %>"><%= dataObj.persondata.personaname %></a></h4>
+      <h4>
+        <a href="<%= dataObj.persondata.profileurl %>" target="_blank">
+        <%= dataObj.persondata.personaname %>
+      </a>
+    </h4>
       <% if(dataObj.steamLvl){ %>
         <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
       <% }else{ %>

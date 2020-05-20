@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "passport": "^0.4.1",
-    "passport-steam": "file:passport-steam",
+    "passport-steam": "^1.0.14",
     "request-promise": "^4.2.5",
     "steamid": "^1.1.3",
     "web-api-steam": "^1.0.8",

@@ -18,11 +18,45 @@
       <div class="logo">
         <i class="fab fa-steam-symbol"></i><a class="navbar-brand" href="/">SteamChecker</a>
       </div>
-      <div class="controls">
-        <form action="/user" method="GET">
-          <input type="text" name="url" class="url-input" id="url-input">
-          <button class="search-submit" type="submit"><i class="fas fa-search"></i></button>
-        </form>
-      </div>
+        <div class="controls">
+          <form action="/user" method="GET">
+            <input type="text" name="url" class="url-input" id="url-input">
+            <button class="search-submit" type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+        <div class="login">
+          <% const userKeys = Object.keys(user).length %>
+          <% if(userKeys === 0) { %>
+            <div class="login">
+              <a href="/auth/steam">
+                <img src="/images/steamloginbutton.jpg" alt="login-btn" >
+              </a>
+            </div>
+          <% }else{ %>
+            <% const url = user.profileurl %>
+            <% const queryURL = encodeURIComponent(url) %>
+            <% const queryString = `/user?url=${queryURL}` %>
+            <div class="login">
+              <a href="<%= queryString %>">
+                <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
+              </a>
+              <span class="view-more">
+                <i class="fas fa-chevron-down ml-2 view-more-btn"></i>
+              </span>
+              <ul class="view-more-links">
+                <a href="<%= queryString %>" class="view-more-btn">
+                <li class="view-more-link view-more-btn">
+                 MY PROFILE
+                </li>
+              </a>
+              <a href="/logout" class="view-more-btn">
+                <li class="view-more-link view-more-btn">
+                    LOGOUT
+                </li>
+              </a>
+              </ul>
+            </div>
+          <% } %>
+        </div>
     <!-- </div> -->
   </nav>

@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const SteamApi = require("web-api-steam");
 const rp = require('request-promise');
 const SteamID = require('steamid');
+const passport = require('passport')
+const session = require('express-session')
+const SteamStrategy = require('passport-steam').Strategy;
 
 
 
@@ -12,12 +15,73 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var jsonParser = bodyParser.json()
 app.use(express.static(__dirname + "/public"));
 
+// Passport setup
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(new SteamStrategy({
+  returnURL: 'http://localhost:3001/auth/steam/return',
+  realm: 'http://localhost:3001/',
+  apiKey: 'D295314B96B79961B1AB2A2457BA5B10'
+},
+function(identifier, profile, done) {
+  process.nextTick(function () {
+    profile.identifier = identifier;
+    console.log(profile);
+    return done(null, profile);
+  });
+}
+));
+app.use(session({
+  secret: 'csgo best game',
+  name: 'name of session id',
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Auth route
+app.get('/auth/steam',
+  passport.authenticate('steam', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect("/");
+  });
+  app.get('/auth/steam/return',
+  passport.authenticate('steam', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect(req.session.fullUrl);
+  });
+
+
 app.get("/", (req, res) => {
-  res.render("landing");
+  let user={};
+  const fullUrl = req.originalUrl;
+  req.session.fullUrl = fullUrl;
+  if(req.user != undefined){
+    user.loggedUserId = req.user.id,
+    user.avatar = req.user.photos[2].value,
+    user.profileurl = req.user._json.profileurl
+  }
+  res.render("landing",{user});
 })
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
 app.get("/user", (req, res) => {
+  const fullUrl = req.originalUrl;
+  req.session.fullUrl = fullUrl;
   let objSteamIds={};
+  let user={};
   const requrl = req.query.url;
   const extractedUrl = extractprofile(requrl);
     getVanity(extractedUrl).then(steam64=>{
@@ -34,7 +98,12 @@ app.get("/user", (req, res) => {
         objSteamIds.steam3id = dataObj.objSteamIds.steam3id;
         dataObj.objSteamIds = objSteamIds;
         console.log(dataObj);
-        res.render("user",{dataObj});
+        if(req.user != undefined){
+          user.loggedUserId = req.user.id,
+          user.avatar = req.user.photos[2].value,
+          user.profileurl = req.user._json.profileurl
+        }
+        res.render("user",{dataObj,user});
       })
       .catch(err=>{
         console.log(err);

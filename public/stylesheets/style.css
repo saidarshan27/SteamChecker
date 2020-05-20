@@ -367,6 +367,16 @@ body{
 }
 
 /* psuedo styles(online,offile,private etc) */
+
+.data.mute a{
+  color: var(--mute);
+  text-decoration: none;
+}     
+/* account ownership styles */
+.data.mute a:hover{
+  text-decoration: underline;
+}
+
  .isonline .data-label.offline{
   font-size: 14px;
   color: var(--mute);
@@ -389,7 +399,7 @@ body{
   font-weight: 600;
   color:orange;
 }
-.data-label .ban-none{
+.data-label .ban-none,.green{
   font-weight: bold;
   color: var(--green);
 }
@@ -426,6 +436,54 @@ body{
 /* number of days since ban info icon */
 .info-icon{
   cursor: pointer;
+}
+/* login mini avatar styles */
+.login{
+  position: relative;
+}
+.login a{
+  color:black;
+  text-decoration: none;
+}
+.login-avatar{
+  width: 3rem;
+  border-radius: 15%;
+}
+.fa-chevron-down{
+  color: white;
+  cursor: pointer;
+}
+.view-more-links{
+  display: none;
+  margin:0;
+  width: max-content;
+  position: absolute;
+  transform: translateY(20%);
+  left:-40%;
+  list-style: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5%;
+}
+
+.view-more-link{
+  border-radius: 5%;
+  padding:1rem 2rem;
+  font-weight: 600;
+  font-size: 0.7rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.view-more-link:hover{
+  color:white;
+  background-color: #5C66C2; 
+}
+.view-more-link:hover a{
+  color:white;
+}
+.view-more-links.active{
+  transform: translateY(20%);
+  visibility: visible; /* shows sub-menu */
 }
 
 /* media queries */

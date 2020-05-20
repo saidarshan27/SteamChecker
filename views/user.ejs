@@ -50,8 +50,8 @@
         </label>
         <label class="data-label">
           <span class="separator">-</span>
-          <span class="data warning">
-            <em>not friends with you</em>
+          <span class="data mute">
+            <em><a href="/auth/steam">Sign in to check</a></em>
           </span>
         </label>
       </div>
@@ -265,6 +265,12 @@
 </div>
 
 <script>
+  let loggedUserId;
+  const user = <%- JSON.stringify(user) %>
+  const userKeys = Object.keys(user).length;
+  if(userKeys != 0){
+    loggedUserId = user.loggedUserId;
+  }
   const background = document.querySelector(".profile-background");
   const dataObj = <%- JSON.stringify(dataObj) %>
   const banObj =  dataObj.banObj;
@@ -282,6 +288,7 @@
 <script src="/scripts/updateBans.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
 <script src="/scripts/steamLevelColor.js"></script>
+<script src="/scripts/checkFriendship.js"></script>
 
 
 <%- include("partials/footer.ejs"); %>

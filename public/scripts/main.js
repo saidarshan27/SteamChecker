@@ -1,6 +1,6 @@
 //Ready
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+	$('[data-toggle="tooltip"]').tooltip();
 }) 
 
  
@@ -18,6 +18,24 @@ $(".copy").click(function(event){
 		$(this).tooltip("hide");
 	},150)
 })
+
+$(".view-more").click(function(event){
+	$(this).siblings(".view-more-links").slideToggle("slow");
+})
+
+$(document).click(function(event){
+	const objEvent = $(event.target);
+	if(objEvent.hasClass("view-more-btn")){
+		return;
+	}else{
+		const dropDown = $(".view-more-links");
+		if(dropDown.is(":visible")){
+			dropDown.slideUp("slow");
+		}
+	}
+})
+
+
 
 function copyToClipboard(data) {
 	const el = document.createElement('textarea');

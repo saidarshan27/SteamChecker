@@ -12,4 +12,14 @@
   </div>
 </div>
 
+
+<script>
+  let loggedUserId;
+  const user = <%- JSON.stringify(user) %>
+  const userKeys = Object.keys(user).length;
+  if(userKeys != 0){
+    loggedUserId = user.loggedUserId;
+  }
+</script>
+
 <%- include("partials/footer.ejs"); %>

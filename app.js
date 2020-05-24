@@ -138,7 +138,7 @@ async function getVanity(extractedUrl) {
   const options = {
     uri:`https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/`,
     qs:{
-      key : process.env.KEY,
+      key : "D295314B96B79961B1AB2A2457BA5B10",
       vanityurl : extractedUrl,
       url_type : 1
     },
@@ -155,7 +155,7 @@ async function getVanity(extractedUrl) {
 
 function playerInfo(steam64) {
   return new Promise((resolve, reject) => {
-    SteamApi.getPlayerInfo(steam64, process.env.KEY, function (err, data) {
+    SteamApi.getPlayerInfo(steam64, "D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
       if (err) {
         console.log("error", err);
         reject(err);
@@ -181,7 +181,7 @@ function playerSteamIds(steam64){
 function playerBans(steam64){
   let banObj={}
   return new Promise((resolve,reject)=>{
-    SteamApi.getPlayerBans(steam64,process.env.KEY, function (err, data) {
+    SteamApi.getPlayerBans("D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
       if (err) {
         console.log("error", err);
         reject(err);
@@ -202,7 +202,7 @@ async function playerLevel(steam64){
   const options={
     uri:`https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/`,
     qs:{
-      key:process.env.KEY,
+      key:"D295314B96B79961B1AB2A2457BA5B10",
       steamid:steam64
     },
     json:true
@@ -221,7 +221,7 @@ async function playerBackground(steam64){
   const options =  {
     uri:`https://api.steampowered.com/IPlayerService/GetProfileBackground/v1/`,
     qs:{
-      key:process.env.KEY,
+      key:"D295314B96B79961B1AB2A2457BA5B10",
       steamid:steam64
     },
     json:true

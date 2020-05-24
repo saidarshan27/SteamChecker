@@ -589,6 +589,9 @@ font-size: 12px;
   display: flex;
   flex-direction: row;
 }
+.dont-show-again-checkbox{
+  -webkit-appearance: checkbox;
+}
 .dont-show-again label{
   font-size: 10px;
   margin-top: 10px;

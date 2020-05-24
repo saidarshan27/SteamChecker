@@ -588,6 +588,7 @@ font-size: 12px;
 .dont-show-again{
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 .dont-show-again-checkbox{
   -webkit-appearance: checkbox;

@@ -4,6 +4,7 @@
   "description": "steam checker 1.0",
   "main": "app.js",
   "scripts": {
+    "start":"node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "sai darshan",

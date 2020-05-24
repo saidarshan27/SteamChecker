@@ -6,7 +6,9 @@
   --green:#38a338;
   --red: red;
 }
-
+.tooltip{
+  font-size: 10px;
+}
 *{
   padding: 0;
   margin: 0;
@@ -36,6 +38,37 @@ body{
 }
 .main-nav{
   background: linear-gradient(90deg, #161730 0%, #7683F9 100%);
+}
+.navbar-collapse{
+  flex-grow: 0;
+}
+.navbar-light .navbar-toggler{
+  color: white;
+  border:none;
+  outline: none;
+}
+.mobile-login-wrapper ul{
+  list-style: none;
+}
+.mobile-login-wrapper li{
+  border-radius: 5%;
+  color:white;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  font-weight: 800;
+  font-size: 0.7rem;
+  transition: all 0.2s ease-in-out;
+}
+.mobile-login-wrapper a{
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mobile-login-wrapper .login-avatar{
+  width: 2rem;
+  height: 2rem;
+  margin-left:-20px;
 }
 .home-container{
   width: 100vw;
@@ -323,7 +356,7 @@ body{
 }
 .steam-ids div,.profile-privacy div{
   display: grid;
-  grid-template-columns: 0.6fr 1fr;
+  grid-template-columns: 100px 220px;
   margin-bottom: 1rem;
 }
 .steam-ids .separator,.profile-privacy .separator{
@@ -352,7 +385,14 @@ body{
   font-size: 14px;
   font-weight: 500;
 }
-
+.profile-overview-customURL .data{
+  display: inline-block;
+  margin-bottom: 0;
+  width: 100px;
+  height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+}
 /* copy button */
 .copy{
   display: inline-block;
@@ -367,7 +407,6 @@ body{
 }
 
 /* psuedo styles(online,offile,private etc) */
-
 .data.mute a{
   color: var(--mute);
   text-decoration: none;
@@ -438,6 +477,9 @@ body{
   cursor: pointer;
 }
 /* login mini avatar styles */
+.view-more{
+  transition: all 0.3s ease-in-out;
+}
 .login{
   position: relative;
 }
@@ -486,6 +528,73 @@ body{
   visibility: visible; /* shows sub-menu */
 }
 
+
+/* Add friend and send a message */
+.add-message{
+grid-row: 4/6;
+grid-column: 9/13;
+position: relative;
+justify-items: center;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.add-message a{
+  text-decoration: none;
+  color: white;
+}
+.add-friend-btn,.send-message-btn,.send-message-ok{
+padding: 10px 15px;
+border: none;
+outline: none;
+color: white;
+font-weight: 600;
+background-color: #5C66C2;
+border-radius: 20px;
+margin-bottom: 25px;
+margin-right: 15px;
+font-size: 12px;
+}
+/* modal styles */
+.modal-header{
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-bottom: none;
+}
+.modal-footer{
+  border-top: none;
+}
+.modal-body{
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.send-message-close{
+text-transform: uppercase;
+outline: none;
+border-radius: 20px;
+padding: 10px 15px;
+border: none;
+outline: none;
+color: black;
+font-weight: 600;
+margin-bottom: 25px;
+margin-right: 5px;
+font-size: 12px;
+}
+.modal-body{
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.dont-show-again{
+  display: flex;
+  flex-direction: row;
+}
+.dont-show-again label{
+  font-size: 10px;
+  margin-top: 10px;
+ margin-left: 10px;
+ font-weight: bold;
+}
 /* media queries */
 @media (max-width:1679px){
   .userpage-container{
@@ -515,6 +624,9 @@ body{
 }
 
 @media(max-width:1187px){
+  .profile-overview-customURL .data{
+    height: 13px;
+  }
   .userpage-container{
     max-width: 2000px;
     padding:2rem 1rem;
@@ -546,6 +658,9 @@ body{
 }
 
 @media(max-width:1000px){
+  .add-message{
+    display: none;
+  }
   .about-wrapper{
     margin-bottom: -55px;
   }
@@ -566,6 +681,12 @@ body{
 }
 }
 @media(max-width:930px){
+  .add-message {
+    grid-row: 4/5;
+  }
+  .profile-overview-customURL .data{
+    height: 16px;
+  }
   .about-wrapper {
     grid-column: 1/13;
     grid-row: 7/11;
@@ -627,8 +748,24 @@ body{
     width: 90%;
   }
 }
+@media(max-width:1235px){
+  .add-friend-btn,.send-message-btn{
+    font-size: 10px;
+  }
+}
+@media(max-width:1101px){
+  .add-friend-btn,.send-message-btn{
+    font-size: 8px;
+  }
+  .fa-comment-dots{
+    font-size: 13.5px;
+}
+}
 
 @media (max-width:768px){
+  .profile-overview-customURL .data{
+    height: 11px;
+  }
   .home-container{
     height: 50vh;
   }
@@ -648,7 +785,7 @@ body{
   .search-submit{
     padding:0.54rem;
   }
-  .fa-search{
+  .home-container .fa-search{
     font-size: 1rem;
   }
   .avatar {
@@ -702,5 +839,11 @@ font-weight: 500;
 @media (max-width:450px){
   .nav-with-search .controls{
     width: 90%;
+  }
+.navbar-light .navbar-brand{
+    font-size: 1.5rem;
+  }
+  .fa-steam-symbol{
+    font-size: 1.5rem;
   }
 }

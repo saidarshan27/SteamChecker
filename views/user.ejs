@@ -8,7 +8,7 @@
     <div class="name-level">
       <img src="<%= dataObj.persondata.avatarfull %>" alt="avatar" class="avatar">
       <h4>
-        <a href="<%= dataObj.persondata.profileurl %>" target="_blank">
+        <a href="<%= dataObj.persondata.profileurl %>" target="_blank" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>">
         <%= dataObj.persondata.personaname %>
       </a>
     </h4>
@@ -20,6 +20,22 @@
     </div>
     <div class="realname-profileurl">
        <p><%= dataObj.persondata.realname %></p>
+    </div>
+  </section>
+  <section class="add-message">
+    <div class="add-friend">
+      <a href="steam://friends/add/<%= dataObj.persondata.steamid %>" rel="no-follow">
+        <button class="add-friend-btn">
+          <i class="fas fa-user-plus mr-1"></i>
+          <span class="add-friend-txt">ADD AS A FRIEND </span>
+        </button>
+      </a>
+    </div> 
+    <div class="send-message">
+      <button class="send-message-btn">
+        <i class="far fa-comment-dots mr-1" style="font-size:15.5px;"></i>
+        <span class="send-message-txt">SEND A MESSAGE</span>
+      </button>
     </div>
   </section>
   <section class="about-wrapper">
@@ -155,7 +171,7 @@
         </label>
         <label class="data-label">
           <span class="separator">-</span>
-          <span class="data">
+          <span class="data" data-full-url="<%= dataObj.objSteamIds.steam3id %>">
             <%= dataObj.objSteamIds.steam3id %>
           </span>
           <span class="steam3-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
@@ -169,7 +185,7 @@
         </label>
         <label class="data-label">
           <span class="separator">-</span>
-          <span class="data">
+          <span class="data" data-full-url="<%= dataObj.objSteamIds.steam2id %>">
             <%= dataObj.objSteamIds.steam2id %>
           </span>
           <span class="steam32-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
@@ -183,10 +199,10 @@
         </label>
         <label class="data-label">
           <span class="separator">-</span>
-          <span class="data">
+          <span class="data" data-full-url="<%= dataObj.objSteamIds.steam64 %>">
               <%= dataObj.objSteamIds.steam64 %>
           </span>
-          <span class="steam64-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+          <span class="steam64-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy to Clipboard">
             <i class="far fa-clone"></i>
           </span>
         </label>
@@ -197,12 +213,17 @@
           <strong>VANITY URL</strong>
         </label>
         <label class="data-label">
-          <span class="separator">-</span>
-          <span class="data">
-              <%= dataObj.objSteamIds.customURL %>
-          </span>
-          <span class="customURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+          <span class="separator" style="display: inline-block;">-</span>
+          <span class="data" data-full-url = "https://steamcommunity.com/id/<%= dataObj.objSteamIds.customURL %>" ><%= dataObj.objSteamIds.customURL %></span>
+          <span class="customURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy full custom URL" style="display: inline-block;">
             <i class="far fa-clone"></i>
+          </span>
+          <span class="what-is-vanity ml-2" data-toggle="tooltip" data-placement="bottom" 
+          data-original-title=
+          "Vanity URL is a last part of a steam custom URL.
+          
+          For example https://steamcommunity.com/id/<%= dataObj.objSteamIds.customURL %>" style="display: inline-block;">
+            <i class="fas fa-question-circle"></i>
           </span>
         </label>
       </div>
@@ -264,7 +285,56 @@
 </section>
 </div>
 
+<!-- MODALS -->
+
+<div class="modal fade" id="send-message-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title section-title id="exampleModalLongTitle">NOTE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Send message only works for a friend of yours.
+        <div class="dont-show-again mt-3">
+          <input type="checkbox" name="dont-show-again-checkbox" class="dont-show-again-checkbox">
+          <label for="dont-show-again-checkbox">Don't show this again</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="send-message-close" data-dismiss="modal">Close</button>
+        <a href="steam://friends/message/<%= dataObj.persondata.steamid %>" rel="no-follow">
+        <button type="button" class="send-message-ok">OK</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add-friend-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title section-title id="exampleModalLongTitle">
+          REQUEST SENT
+        </h5>
+      </div>
+      <div class="modal-body">
+       Added to friends.
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <script>
+  const DoNotShowMessageAgainCheckBox = document.querySelector(".dont-show-again-checkbox");
+	DoNotShowMessageAgainCheckBox.checked = false;
   let loggedUserId;
   const user = <%- JSON.stringify(user) %>
   const userKeys = Object.keys(user).length;

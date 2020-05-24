@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -114,37 +115,18 @@ app.get("/user", (req, res) => {
 })
 
 async function kyabre(steam64){
-  let dataObj={}
   const persondata = await playerInfo(steam64);
-  const steamids  = playerSteamIds(steam64);
-  const bans = await playerBans(steam64);
-  const background = await playerBackground(steam64);
-  const backgroundImgUrl = background.response.profile_background.image_large
-  const level = await playerLevel(steam64);
-  dataObj.steamLvl = level;
-  const banObj = {
-    tradeBan : bans.EconomyBan,
-    vacBan : bans.VACBanned,
-    communityBan : bans.CommunityBanned 
-  }
-  if(bans.VACBanned === true){
-     banObj.NumberOfVACBans = bans.NumberOfVACBans;
-     banObj.DaysSinceLastBan = bans.DaysSinceLastBan;
-  }
-  if(backgroundImgUrl != undefined){
-    const backgroundFull = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/${backgroundImgUrl}`
-    dataObj.backgroundFull = backgroundFull;
-  }
-  const objSteamIds = {
-    steam2id:steamids[0],
-    steam3id:steamids[1]
-  }
-  dataObj = {...dataObj,persondata,objSteamIds,banObj};
+  const objSteamIds  = playerSteamIds(steam64);
+  const banObj = await playerBans(steam64);
+  const backgroundFull = await playerBackground(steam64);
+  const steamLvl = await playerLevel(steam64);
+  const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl};
   return dataObj;
 }
 
 function extractprofile(url) {
-  const regex = /.*(?:profiles|id)\/([a-z0-9]+)[\/?]?/i;
+  // Regex for extracting the words or numbers occuring after `/profiles` or `/id` in a steam64ID
+  const regex = /.*(?:profiles|id)\/([a-z0-9]+)[\/?]?/i; 
   const matches = regex.exec(url);
   const id = matches[1];
   const extractedUrl= id;
@@ -156,7 +138,7 @@ async function getVanity(extractedUrl) {
   const options = {
     uri:`https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/`,
     qs:{
-      key : "D295314B96B79961B1AB2A2457BA5B10",
+      key : process.env.KEY,
       vanityurl : extractedUrl,
       url_type : 1
     },
@@ -173,7 +155,7 @@ async function getVanity(extractedUrl) {
 
 function playerInfo(steam64) {
   return new Promise((resolve, reject) => {
-    SteamApi.getPlayerInfo(steam64, "D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
+    SteamApi.getPlayerInfo(steam64, process.env.KEY, function (err, data) {
       if (err) {
         console.log("error", err);
         reject(err);
@@ -186,24 +168,31 @@ function playerInfo(steam64) {
 
 function playerSteamIds(steam64){
   if(typeof steam64 !=undefined || typeof steam64 != null && typeof steam64 === "string"){
-    let idsArr=[];
     const sid = new SteamID(steam64);
-    const steam2id = sid.getSteam2RenderedID();
-    const steam3id = sid.getSteam3RenderedID()
-    idsArr.push(steam2id,steam3id);
-    return idsArr;
+    const objSteamIds = {
+      steam2id:sid.getSteam2RenderedID(true),
+      steam3id:sid.getSteam3RenderedID()
+    }
+    return objSteamIds;
   }else{
     console.log("Pass a steamid as string");
   }
 }
 function playerBans(steam64){
+  let banObj={}
   return new Promise((resolve,reject)=>{
-    SteamApi.getPlayerBans(steam64, "D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
+    SteamApi.getPlayerBans(steam64,process.env.KEY, function (err, data) {
       if (err) {
         console.log("error", err);
         reject(err);
       } else {
-        resolve(data);
+      if(data.VACBanned === true || data.CommunityBanned === true){
+        banObj.DaysSinceLastBan = data.DaysSinceLastBan;
+      }
+        banObj.tradeBan = data.EconomyBan;
+        banObj.vacBan = data.VACBanned;
+        banObj.communityBan = data.CommunityBanned; 
+        resolve(banObj);
       }
     })
   })
@@ -213,14 +202,13 @@ async function playerLevel(steam64){
   const options={
     uri:`https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/`,
     qs:{
-      key:"D295314B96B79961B1AB2A2457BA5B10",
+      key:process.env.KEY,
       steamid:steam64
     },
     json:true
   };
   try {
     const steamLevel = await rp(options);
-    console.log(steamLevel);
     const steamLevelNumber = steamLevel.response.player_level;
     return steamLevelNumber;
   }
@@ -233,14 +221,16 @@ async function playerBackground(steam64){
   const options =  {
     uri:`https://api.steampowered.com/IPlayerService/GetProfileBackground/v1/`,
     qs:{
-      key:"D295314B96B79961B1AB2A2457BA5B10",
+      key:process.env.KEY,
       steamid:steam64
     },
     json:true
   }
   try{
+    let backgroundImgUrl;
     const background = await rp(options);
-    return background;
+     backgroundImgUrl = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/${background.response.profile_background.image_large}`;
+    return backgroundImgUrl;
   }
   catch (err){
     console.log(err);

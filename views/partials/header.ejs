@@ -12,44 +12,76 @@
   <title>Steam Checker</title>
 </head>
 <body>
-  <nav class="navbar navbar-light bg-light main-nav">
+ 
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light main-nav">
     <div class="container">
       <div class="logo">
         <i class="fab fa-steam-symbol"></i><a class="navbar-brand" href="/">SteamChecker</a>
       </div>
-      <div class="login">
-        <% const userKeys = Object.keys(user).length %>
-        <% if(userKeys === 0) { %>
-          <div class="login">
-            <a href="/auth/steam">
-              <img src="/images/steamloginbutton.jpg" alt="login-btn" >
-            </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="mobile-login-wrapper d-xs-block d-lg-none text-center"> 
+            <% const mobileUserKeys = Object.keys(user).length %>
+            <% if(mobileUserKeys === 0){ %>
+              <div class="login nav-item">
+                <a href="/auth/steam">
+                  <img src="/images/steamloginbutton.jpg" alt="login-btn" >
+                </a>
+              </div>
+            <% }else{ %>
+              <% const mobileUrl = user.profileurl %>
+              <% const mobileQueryURL = encodeURIComponent(mobileUrl) %>
+              <% const mobileQueryString = `/user?url=${mobileQueryURL}` %>
+              <div class="login">
+                <ul class="mobile-myprofile">
+                  <a href="<%= mobileQueryString %>">
+                    <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
+                    <li>MY PROFILE</li>
+                  </a>
+                  <a href="/logout">
+                    <li>LOGOUT</li>
+                  </a>
+                </ul>
+              </div>
+            <% } %>
+            </div>
+          <div class="login-wrapper d-none d-lg-block">
+            <% const userKeys = Object.keys(user).length %>
+            <% if(userKeys === 0) { %>
+              <div class="login nav-item">
+                <a href="/auth/steam">
+                  <img src="/images/steamloginbutton.jpg" alt="login-btn" >
+                </a>
+              </div>
+            <% }else{ %>
+              <% const url = user.profileurl %>
+              <% const queryURL = encodeURIComponent(url) %>
+              <% const queryString = `/user?url=${queryURL}` %>
+              <div class="login">
+                <a href="<%= queryString %>">
+                  <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
+                </a>
+                <span class="view-more">
+                  <i class="fas fa-chevron-down ml-2 view-more-btn"></i>
+                </span>
+                <ul class="view-more-links">
+                  <a href="<%= queryString %>" class="view-more-btn">
+                  <li class="view-more-link view-more-btn">
+                   MY PROFILE
+                  </li>
+                </a>
+                <a href="/logout" class="view-more-btn">
+                  <li class="view-more-link view-more-btn">
+                      LOGOUT
+                  </li>
+                </a>
+                </ul>
+              </div>
+            <% } %>
           </div>
-        <% }else{ %>
-          <% const url = user.profileurl %>
-          <% const queryURL = encodeURIComponent(url) %>
-          <% const queryString = `/user?url=${queryURL}` %>
-          <div class="login">
-            <a href="<%= queryString %>">
-              <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
-            </a>
-            <span class="view-more">
-              <i class="fas fa-chevron-down ml-2 view-more-btn"></i>
-            </span>
-            <ul class="view-more-links">
-              <a href="<%= queryString %>" class="view-more-btn">
-              <li class="view-more-link view-more-btn">
-               MY PROFILE
-              </li>
-            </a>
-            <a href="/logout" class="view-more-btn">
-              <li class="view-more-link view-more-btn">
-                  LOGOUT
-              </li>
-            </a>
-            </ul>
-          </div>
-        <% } %>
       </div>
     </div>
   </nav>

@@ -13,18 +13,46 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-light bg-light main-nav nav-with-search">
-    <!-- <div class="container"> -->
+  <nav class="navbar navbar-light bg-light main-nav nav-with-search navbar-expand-lg">
       <div class="logo">
         <i class="fab fa-steam-symbol"></i><a class="navbar-brand" href="/">SteamChecker</a>
       </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
         <div class="controls">
           <form action="/user" method="GET">
             <input type="text" name="url" class="url-input" id="url-input">
             <button class="search-submit" type="submit"><i class="fas fa-search"></i></button>
           </form>
         </div>
-        <div class="login">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="mobile-login-wrapper d-xs-block d-lg-none text-center mt-3"> 
+              <% const mobileUserKeys = Object.keys(user).length %>
+              <% if(mobileUserKeys === 0){ %>
+                <div class="login nav-item">
+                  <a href="/auth/steam">
+                    <img src="/images/steamloginbutton.jpg" alt="login-btn" >
+                  </a>
+                </div>
+              <% }else{ %>
+                <% const mobileUrl = user.profileurl %>
+                <% const mobileQueryURL = encodeURIComponent(mobileUrl) %>
+                <% const mobileQueryString = `/user?url=${mobileQueryURL}` %>
+                <div class="login">
+                  <ul class="mobile-myprofile">
+                    <a href="<%= mobileQueryString %>">
+                      <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
+                      <li>MY PROFILE</li>
+                    </a>
+                    <a href="/logout">
+                      <li>LOGOUT</li>
+                    </a>
+                  </ul>
+                </div>
+              <% } %>
+              </div>
+        <div class="login-wrapper d-none d-lg-block">
           <% const userKeys = Object.keys(user).length %>
           <% if(userKeys === 0) { %>
             <div class="login">
@@ -58,5 +86,5 @@
             </div>
           <% } %>
         </div>
-    <!-- </div> -->
+        </div>
   </nav>

@@ -27,7 +27,7 @@ passport.deserializeUser(function(obj, done) {
 
 passport.use(new SteamStrategy({
   returnURL: 'https://mighty-citadel-31453.herokuapp.com/auth/steam/return',
-  realm: 'http://mighty-citadel-31453.herokuapp.com/',
+  realm: 'https://mighty-citadel-31453.herokuapp.com/',
   apiKey: 'D295314B96B79961B1AB2A2457BA5B10'
 },
 function(identifier, profile, done) {

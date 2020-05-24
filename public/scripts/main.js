@@ -34,7 +34,7 @@ $(".copy").click(function(event){
 
 $(".view-more").click(function(event){
 	const viewMoreBtn = $(this);
-  viewMoreBtn.siblings(".view-more-links").slideToggle("slow");
+  viewMoreBtn.siblings(".view-more-links").show("slow");
 })
 
 

@@ -181,7 +181,7 @@ function playerSteamIds(steam64){
 function playerBans(steam64){
   let banObj={}
   return new Promise((resolve,reject)=>{
-    SteamApi.getPlayerBans("D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
+    SteamApi.getPlayerBans(steam64,"D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
       if (err) {
         console.log("error", err);
         reject(err);

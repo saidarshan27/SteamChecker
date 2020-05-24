@@ -353,12 +353,18 @@
  const navInput = document.querySelector("#url-input");
  const id = dataObj.persondata.steamid;
  navInput.value=`https://steamcommunity.com/profiles/${id}`
+ const friendship = document.querySelector(".friendship .data");
+
+if(loggedUserId === dataObj.persondata.steamid){
+   friendship.classList.remove("mute");
+   friendship.classList.add("green");
+   friendship.innerHTML=`YOUR PROFILE`;
+}
 </script>
 
 <script src="/scripts/updateBans.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
 <script src="/scripts/steamLevelColor.js"></script>
-<script src="/scripts/checkFriendship.js"></script>
 
 
 <%- include("partials/footer.ejs"); %>

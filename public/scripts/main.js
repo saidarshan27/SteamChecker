@@ -79,7 +79,7 @@ $(document).click(function(event){
 	}else{
 		const dropDown = $(".view-more-links");
 		if(dropDown.is(":visible")){
-			dropDown.slideUp("slow");
+			dropDown.hide();
 		}
 	}
 })

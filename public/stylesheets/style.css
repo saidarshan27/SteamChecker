@@ -600,6 +600,8 @@ font-size: 12px;
  font-weight: bold;
 }
 /* media queries */
+
+
 @media (max-width:1679px){
   .userpage-container{
     max-width: 2000px;
@@ -704,7 +706,7 @@ font-size: 12px;
   font-weight: 500;
 }
 .userpage-container{
-  height: 200vh;
+  height: 300vh;
   grid-template-rows: repeat(20,1fr);
   max-width: 1700px;
   padding: 2rem 4rem;

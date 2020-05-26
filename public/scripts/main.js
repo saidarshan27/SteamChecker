@@ -84,6 +84,11 @@ $(document).click(function(event){
 	}
 })
 
+// steam id info button
+$(".input-info").click(function(event){
+	$("#input-types-supported-modal").modal("show");
+})
+
 
 
 function copyToClipboard(data) {

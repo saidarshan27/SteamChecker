@@ -2,13 +2,99 @@
 
 <div class="home-container">
   <div class="label ml-3">
-    <h5>Enter Steam Profile URL<h5>
+    <h5>
+      Enter a SteamID64, SteamID2, SteamID3, vanity URL, custom URL or full URL
+      <span class="ml-2 input-info" style="cursor: pointer;">
+        <i class="fas fa-question-circle"></i>
+      </span>
+    <h5>
  </div>
   <div class="controls">
     <form action="/user" method="GET">
-      <input type="text" name="url" class="url-input" placeholder="Enter Steam Profile URL">
+      <input type="text" name="url" class="url-input" placeholder="Enter or Paste Here">
       <button class="search-submit" type="submit"><i class="fas fa-search"></i></button>
     </form>
+  </div>
+</div>
+
+<div class="modal fade" id="input-types-supported-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title section-title id="exampleModalLongTitle">
+          TYPES OF STEAM ID'S SUPPORTED
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <ul class="input-types-supported">
+         <li>
+           <span class="name-label">
+             <strong>
+              STEAM ID64
+             </strong>
+           </span>
+           <span class="data">  
+            76561198364464404
+           </span>
+         </li>
+         <li>
+          <span class="name-label">
+            <strong>
+              STEAM ID2
+            </strong>
+           </span>
+           <span class="data">
+            STEAM_1:0:202099338
+           </span>
+         </li>
+         <li>
+          <span class="name-label">
+            <strong>
+              STEAM ID3
+            </strong>
+           </span>
+           <span class="data">
+            [U:1:404198676]
+           </span>
+         </li>
+         <li>
+          <span class="name-label">
+            <strong>
+              VANITY URL
+            </strong>
+           </span>
+           <span class="data">
+            EaGL3_
+           </span>
+         </li>
+         <li>
+          <span class="name-label">
+            <strong>
+              CUSTOM URL
+            </strong>
+           </span>
+           <span class="data">
+            https://steamcommunity.com/id/EaGL3_
+           </span>
+         </li>
+         <li>
+          <span class="name-label">
+            <strong>
+              FULL URL
+            </strong>
+           </span>
+           <span class="data">
+            https://steamcommunity.com/profiles/76561198364464404/
+          </span>
+         </li>
+       </ul>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
   </div>
 </div>
 

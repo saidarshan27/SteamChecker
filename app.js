@@ -79,25 +79,34 @@ app.get('/logout', function(req, res){
 });
 
 app.get("/user", (req, res) => {
+  let isInputValid = false;
   const fullUrl = req.originalUrl;
   req.session.fullUrl = fullUrl;
-  let objSteamIds={};
   let user={};
   const requrl = req.query.url;
-  const extractedUrl = extractprofile(requrl);
-    getVanity(extractedUrl).then(steam64=>{
-      let url;
-      const response = steam64;
-      url = extractedUrl;
-      if(response.response.success===1){
-        url = response.response.steamid;
-        objSteamIds.customURL = extractedUrl;
-      }
-      objSteamIds.steam64 = url;
-      kyabre(url).then(dataObj =>{
-        objSteamIds.steam2id = dataObj.objSteamIds.steam2id;
-        objSteamIds.steam3id = dataObj.objSteamIds.steam3id;
-        dataObj.objSteamIds = objSteamIds;
+if(requrl != ""){
+//check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
+const checkValidInput = requrl.match(/(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi);
+if(checkValidInput != null){
+  isInputValid = true;
+}else{
+  try{
+    const sid = new SteamID(requrl);
+    isInputValid = sid.isValid();
+  }
+  catch(err){
+    res.redirect("/");
+  }
+}
+if(isInputValid){
+    extractprofile(requrl).then(steam64 =>{
+      kyabre(steam64).then(dataObj =>{
+        if(dataObj.persondata.profileurl.includes("/id")){
+          const url = dataObj.persondata.profileurl;
+          const found=url.match(/.*(?:id)\/([a-z0-9_]+)[\/?]?/i);
+          const vanity = found[1];
+          dataObj.objSteamIds.customURL = vanity;
+        }
         console.log(dataObj);
         if(req.user != undefined){
           user.loggedUserId = req.user.id,
@@ -106,31 +115,58 @@ app.get("/user", (req, res) => {
         }
         res.render("user",{dataObj,user});
       })
-      .catch(err=>{
-        console.log(err);
+      .catch(err =>{
+        res.redirect("/");
       })
-    }).catch(err=>{
-      console.log(err);
-    })
+    });
+}
+  }else{
+    res.redirect("/");
+  }
 })
 
 async function kyabre(steam64){
   const persondata = await playerInfo(steam64);
+  if(persondata === undefined){
+    throw new Error ("steam id not found");
+  }else{
   const objSteamIds  = playerSteamIds(steam64);
   const banObj = await playerBans(steam64);
   const backgroundFull = await playerBackground(steam64);
   const steamLvl = await playerLevel(steam64);
   const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl};
   return dataObj;
+  }
 }
 
-function extractprofile(url) {
+async function extractprofile(url) {
   // Regex for extracting the words or numbers occuring after `/profiles` or `/id` in a steam64ID
-  const regex = /.*(?:profiles|id)\/([a-z0-9]+)[\/?]?/i; 
-  const matches = regex.exec(url);
-  const id = matches[1];
-  const extractedUrl= id;
-  return extractedUrl;
+    if(url.includes("/id") || url.includes("/profiles")){
+      const found=url.match(/.*(?:profiles|id)\/([a-z0-9]+)[\/?]?/i);
+      const vanityOrSteamid = found[1];
+      const vanity = await getVanity(vanityOrSteamid);
+       if(vanity.response.success===1){
+          const steam64 = vanity.response.steamid;
+          return steam64;
+        }else{
+          const steam64 = vanityOrSteamid;
+          return steam64;
+        }
+    }else if(url.includes("STEAM_") || url.includes("[U:") || url.includes("U:")){
+        var sid = new SteamID(url);
+        const steam64 = sid.getSteamID64();
+        return steam64;
+    }else {
+    const check = url.match(/^[0-9]*$/);
+    if(check != null){
+      const steam64 = url;
+      return steam64;
+    }else{
+        const vanity = await getVanity(url);
+        const ResolvedSteam64 = vanity.response.steamid;
+        return ResolvedSteam64;
+    }
+    }
 }
 
 
@@ -171,7 +207,8 @@ function playerSteamIds(steam64){
     const sid = new SteamID(steam64);
     const objSteamIds = {
       steam2id:sid.getSteam2RenderedID(true),
-      steam3id:sid.getSteam3RenderedID()
+      steam3id:sid.getSteam3RenderedID(),
+      steam64:steam64
     }
     return objSteamIds;
   }else{

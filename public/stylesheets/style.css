@@ -18,6 +18,11 @@ body{
   background: #F1F5F8;
   font-family: 'Montserrat', sans-serif;
 }
+/* home page styles */
+.home-container h5{
+  font-size: 1rem;
+  word-spacing: 0.4rem;
+}
 
 .fa-steam-symbol{
   font-size: 2rem;
@@ -29,7 +34,7 @@ body{
 }
 
 .navbar-light .navbar-brand{
-  font-family: Rockwell;
+  font-family: 'Rockwell',Montserrat;
   font-size:2rem;
   color: white;
 }
@@ -119,6 +124,8 @@ body{
   box-sizing: border-box;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .url-input:focus{
   outline: none;
@@ -140,7 +147,31 @@ body{
   width:50%;
   margin-bottom: 1rem;
 }
-
+/* input types supported modal styles */
+#input-types-supported-modal .modal-header{
+  padding-top: 1.5rem;
+  padding-bottom:1.5rem;
+}
+#input-types-supported-modal .modal-dialog {
+  max-width: 700px;
+}
+.input-types-supported{
+  list-style: none;
+}
+.input-types-supported li{
+  margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+.input-types-supported span{
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+.input-types-supported .data{
+  width: max-content;
+  background-color: #F1F5F8;
+}
 /* User page styles */
 .nav-with-search .url-input{
   font-size: 0.8rem;
@@ -388,8 +419,8 @@ body{
 .profile-overview-customURL .data{
   display: inline-block;
   margin-bottom: 0;
-  width: 100px;
-  height: 16px;
+  width: 130px;
+  height: 18px;
   overflow: hidden;
   text-overflow: ellipsis;  
 }
@@ -600,6 +631,11 @@ font-size: 12px;
  font-weight: bold;
 }
 /* media queries */
+@media (max-width:1404px){
+  .home-container h5{
+    font-size: 0.8rem;
+  }
+}
 
 
 @media (max-width:1679px){
@@ -774,7 +810,8 @@ grid-column: 1/13;
     width: 80%;
   }
   .label h5{
-    font-size: 1rem;
+    font-size: 0.8rem;
+    line-height: 1.4rem;
   }
   .url-input{
     padding:1rem;
@@ -782,6 +819,8 @@ grid-column: 1/13;
   }
   .search-submit{
     padding:0.54rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .home-container .fa-search{
     font-size: 1rem;
@@ -834,6 +873,26 @@ font-weight: 500;
 }
 } 
 
+@media (max-width:645px){
+  .input-types-supported li{
+    font-size: 0.8rem;
+  }
+  #input-types-supported-modal .section-title{
+    font-size: 0.8rem;
+  }
+}
+@media(max-width:578px){
+  .input-types-supported li{
+    font-size: 0.6rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  #input-types-supported-modal .section-title{
+    font-size: 0.6rem;
+  }
+
+}
+
 @media (max-width:450px){
   .nav-with-search .controls{
     width: 90%;
@@ -844,4 +903,8 @@ font-weight: 500;
   .fa-steam-symbol{
     font-size: 1.5rem;
   }
+  .label h5{
+    font-size: 0.6rem;
+  }
+
 }

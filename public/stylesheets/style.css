@@ -224,10 +224,9 @@ body{
 
 /* user page container */
 .userpage-container{
- max-width: 1700px;
+ max-width: 1200px;
  height: 100vh;
- padding: 0 14rem;
-padding-top: 0.5rem;
+ padding-top: 4rem;
  display:grid;
  grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
  grid-template-rows: repeat(12,65px);
@@ -267,7 +266,8 @@ padding-top: 0.5rem;
 }
 /* name and level */
 .name-level{
-  grid-column: 4/10;
+  margin-left: -4rem;
+  grid-column: 5/10;
   grid-row: 1/2;
   padding: 1rem;
   padding-left: 0;
@@ -285,7 +285,8 @@ padding-top: 0.5rem;
   text-decoration: underline;
 }
 .realname-profileurl{
-  grid-column: 4/10;
+  margin-left: -4rem;
+  grid-column: 5/10;
   grid-row: 2/3;
 }
 .realname-profileurl p{
@@ -294,7 +295,7 @@ padding-top: 0.5rem;
 }
 /* player about section */
 .about-wrapper{
-  grid-column: 1/4;
+  grid-column: 1/5;
   grid-row: 7/12;
 }
 .about{
@@ -325,7 +326,7 @@ padding-top: 0.5rem;
 }
 /* nav bar */
 .nav-wrapper{
-  grid-column: 4/13;
+  grid-column: 5/13;
   grid-row:7/8;
 }
 .nav{
@@ -359,14 +360,15 @@ padding-top: 0.5rem;
 
 /* wrapper around steam ids and profile privacy */
 .wrapper{
-  grid-column: 4/13;
+  grid-column: 5/13;
   grid-row: 8/12;
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  grid-template-rows: 1fr;
+  grid-template-rows: repeat(2,1fr);
   gap:0.8rem;
   grid-template-areas: 
-  "steamid profile-privacy";
+  "steamid steamid"
+  "profile-privacy profile-privacy";
 }
 
 /* player steam ids section */
@@ -388,7 +390,7 @@ padding-top: 0.5rem;
 }
 .steam-ids div,.profile-privacy div{
   display: grid;
-  grid-template-columns: 100px 220px;
+  grid-template-columns: 0.3fr 1fr;
   margin-bottom: 1rem;
 }
 .steam-ids .separator,.profile-privacy .separator{

@@ -22,7 +22,7 @@
        <p><%= dataObj.persondata.realname %></p>
     </div>
   </section>
-  <section class="add-message">
+  <!-- <section class="add-message">
     <div class="add-friend">
       <a href="steam://friends/add/<%= dataObj.persondata.steamid %>" rel="no-follow">
         <button class="add-friend-btn">
@@ -37,7 +37,7 @@
         <span class="send-message-txt">SEND A MESSAGE</span>
       </button>
     </div>
-  </section>
+  </section> -->
  <section class="about-wrapper">
     <div class="about">
       <h5 class="section-title" style="margin-bottom: 3.5rem;">
@@ -47,7 +47,6 @@
         <div class="steam-level">
           <label class="name-label"><strong>STEAM LEVEL</strong></label>
           <label class="data-label">
-            <span class="separator">-</span>
             <span class="data"><%= dataObj.steamLvl %></span>
           </label>
         </div>
@@ -55,7 +54,6 @@
         <div class="steam-level">
           <label class="name-label"><strong>STEAM LEVEL</strong></label>
           <label class="data-label">
-            <span class="separator">-</span>
             <span class="data private">PRIVATE</span>
           </label>
         </div>
@@ -65,7 +63,6 @@
           <strong>FRIENDSHIP</strong>
         </label>
         <label class="data-label">
-          <span class="separator">-</span>
           <span class="data mute">
             <em><a href="/auth/steam">Sign in to check</a></em>
           </span>
@@ -76,7 +73,6 @@
           <label class="name-label"><strong>JOINED STEAM</strong></label>
           <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
           <label class="data-label">
-            <span class="separator">-</span>
             <span class="data"><%= humanDate %></span>
           </label>
         </div>
@@ -85,7 +81,6 @@
           <label class="name-label"><strong>JOINED STEAM</strong></label>
           <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
           <label class="data-label">
-            <span class="separator">-</span>
             <span class="data private">PRIVATE</span>
           </label>
         </div>
@@ -100,50 +95,43 @@
           switch(status){
             case 0:{
               dataLabel.innerHTML = 
-              `<span class="separator">-</span>
-              <strong>OFFLINE</strong>`;
+              `<strong>OFFLINE</strong>`;
               dataLabel.classList.add("offline");
               break;
             }
             case 1:{
               dataLabel.innerHTML = 
-              `<span class="separator">-</span>
-              <strong>ONLINE</strong>`;
+              `<strong>ONLINE</strong>`;
               dataLabel.classList.add("online");
               break;
             }
             case 2:{
               dataLabel.innerHTML = 
-              `<span class="separator">-</span>
-              <strong>BUSY</strong>`;
+              `<strong>BUSY</strong>`;
               dataLabel.classList.add("busy");
               break;
             }
             case 3:{
              dataLabel.innerHTML = 
-             `<span class="separator">-</span>
-             <strong>AWAY</strong>`;
+             `<strong>AWAY</strong>`;
              dataLabel.classList.add("away");
               break;
             }
             case 4:{
               dataLabel.innerHTML = 
-             `<span class="separator">-</span>
-             <strong>SNOOZE</strong>`;
+             `<strong>SNOOZE</strong>`;
              dataLabel.classList.add("snooze");
               break;
             }
             case 5:{
               dataLabel.innerHTML = 
-             `<span class="separator">-</span>
-             <strong>LOOKING TO TRADE</strong>`;
+             `<strong>LOOKING TO TRADE</strong>`;
              dataLabel.classList.add("trade");
               break;
             }
             case 6:{
               dataLabel.innerHTML = 
-             `<span class="separator">-</span>
-             <strong>LOOKING TO PLAY</strong>`;
+             `<strong>LOOKING TO PLAY</strong>`;
              dataLabel.classList.add("trade");
               break;
             }
@@ -170,7 +158,6 @@
           <strong>STEAMID3</strong>
         </label>
         <label class="data-label">
-          <span class="separator">-</span>
           <span class="data" data-full-url="<%= dataObj.objSteamIds.steam3id %>">
             <%= dataObj.objSteamIds.steam3id %>
           </span>
@@ -184,7 +171,6 @@
           <strong>STEAMID2</strong>
         </label>
         <label class="data-label">
-          <span class="separator">-</span>
           <span class="data" data-full-url="<%= dataObj.objSteamIds.steam2id %>">
             <%= dataObj.objSteamIds.steam2id %>
           </span>
@@ -198,7 +184,6 @@
           <strong>STEAMID64</strong>
         </label>
         <label class="data-label">
-          <span class="separator">-</span>
           <span class="data" data-full-url="<%= dataObj.objSteamIds.steam64 %>">
               <%= dataObj.objSteamIds.steam64 %>
           </span>
@@ -213,7 +198,6 @@
           <strong>VANITY URL</strong>
         </label>
         <label class="data-label">
-          <span class="separator" style="display: inline-block;">-</span>
           <span class="data" data-full-url = "<%= dataObj.persondata.profileurl %>" title="<%= dataObj.objSteamIds.customURL %>"><%= dataObj.objSteamIds.customURL %></span>
           <span class="customURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy full custom URL" style="display: inline-block;">
             <i class="far fa-clone"></i>
@@ -233,7 +217,6 @@
           <strong>VANITY URL</strong>
         </label>
         <label class="data-label">
-          <span class="separator">-</span>
           <span class="data mute">
            <em>not set</em>
           </span>
@@ -249,7 +232,6 @@
           <strong>PRIVACY STATE</strong>
         </label>
         <label class="data-label">
-          <span class="separator">-</span>
           <span id="privacy-state"></span>
         </label>
       </div>
@@ -258,7 +240,7 @@
           <strong>TRADE BAN</strong>
         </label>
         <label class="data-label" >
-          <span class="separator">-</span>
+
           <span id="trade-ban"></span>
         </label>
       </div>
@@ -267,7 +249,6 @@
           <strong>VAC BAN</strong>
         </label>
         <label class="data-label">
-          <span class="separator">-</span>
           <span id="vac-ban"></span>
         </label>
       </div>
@@ -276,7 +257,6 @@
             <strong>COMMUNITY BAN</strong>
           </label>
           <label class="data-label">
-            <span class="separator">-</span>
             <span  id="community-ban"></span>
           </label>
         </div>

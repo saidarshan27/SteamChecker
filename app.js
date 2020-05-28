@@ -84,7 +84,6 @@ app.get("/user", (req, res) => {
   req.session.fullUrl = fullUrl;
   let user={};
   const requrl = req.query.url;
-if(requrl != ""){
 //check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
 const checkValidInput = requrl.match(/(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi);
 if(checkValidInput != null){
@@ -120,9 +119,6 @@ if(isInputValid){
       })
     });
 }
-  }else{
-    res.redirect("/");
-  }
 })
 
 async function kyabre(steam64){

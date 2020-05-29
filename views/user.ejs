@@ -1,9 +1,10 @@
 <%- include("partials/headerWithSearch.ejs"); %>
 
+<div class="profile-background">
 <div class="userpage-container container">
-  <section class="profile-background-wrapper">
+  <!-- <section class="profile-background-wrapper">
      <div class="profile-background"></div>
-  </section>
+  </section> -->
   <section class="name-level-wrapper">
     <div class="name-level">
       <img src="<%= dataObj.persondata.avatarfull %>" alt="avatar" class="avatar">
@@ -211,6 +212,19 @@
           </span>
         </label>
       </div>
+      <div class="profile-overview-custom-full-URL">
+        <label class="name-label">
+          <strong>CUSTOM URL</strong>
+        </label>
+        <label class="data-label">
+          <span class="data">
+           <%= dataObj.persondata.profileurl %>
+          </span>
+          <span class="custom-full-URL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy custom URL" style="display: inline-block;">
+            <i class="far fa-clone"></i>
+          </span>
+        </label>
+      </div>
     <% }else{ %>
       <div class="profile-overview-customURL">
         <label class="name-label">
@@ -240,7 +254,6 @@
           <strong>TRADE BAN</strong>
         </label>
         <label class="data-label" >
-
           <span id="trade-ban"></span>
         </label>
       </div>
@@ -263,6 +276,39 @@
     </div>
   </section>
 </section>
+<section class="steam-quick-links-wrapper">
+  <div class="steam-quick-links">
+    <h5 class="mb-5 section-title">STEAM QUICK LINKS</h5>
+    <ul class="steam-quick-links-list">
+      <li class="steam-quick-link">
+        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/inventory" target="_blank" rel="no-follow">
+          Inventory
+        </a>
+      </li>
+      <li class="steam-quick-link">
+        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/allcomments" target="_blank" rel="no-follow">
+          Profile Comments
+        </a>
+      </li>
+      <li class="steam-quick-link">
+        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/friends/common" target="_blank" rel="no-follow">
+          Common Friends
+        </a>
+      </li>
+      <li class="steam-quick-link">
+        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/namehistory" target="_blank" rel="no-follow"> 
+         Name History
+        </a>
+      </li>
+      <li class="steam-quick-link">
+        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/groups" target="_blank" rel="no-follow"> 
+         Groups
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+</div>
 </div>
 
 <!-- MODALS -->

@@ -407,7 +407,7 @@ background: linear-gradient(0.15deg, #F1F5F8 0.17%, rgba(255, 255, 255, 0.72) 99
 }
 .steam-ids div,.profile-privacy div{
   display: grid;
-  grid-template-columns: 0.3fr 1fr;
+  grid-template-columns: 100px 550px;
   margin-bottom: 1rem;
 }
 .steam-ids .separator,.profile-privacy .separator{

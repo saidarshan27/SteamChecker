@@ -778,7 +778,7 @@ font-size: 12px;
 grid-column: 3/7;
 }
 .about div,.steam-ids div,.profile-privacy div{
-  grid-template-columns: 0.7fr 1.5fr
+  grid-template-columns: 0.7fr 1fr;
 }
 .about-wrapper {
   grid-column: 1/13;
@@ -946,9 +946,9 @@ font-weight: 500;
 }
 
 @media (max-width:450px){
-.about div, .steam-ids div, .profile-privacy div {
+/* .about div, .steam-ids div, .profile-privacy div {
     grid-template-columns: 1fr 2fr;
-}
+} */
   .nav-with-search .controls{
     width: 100%;
   }

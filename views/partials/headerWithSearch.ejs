@@ -36,15 +36,38 @@
                   </a>
                 </div>
               <% }else{ %>
-                <% const mobileUrl = user.profileurl %>
-                <% const mobileQueryURL = encodeURIComponent(mobileUrl) %>
-                <% const mobileQueryString = `/user?url=${mobileQueryURL}` %>
+                <% const url = user.loggedUserId %>
+                <% const queryURL = encodeURIComponent(url) %>
+                <% const queryString = `/user?url=${queryURL}` %>
                 <div class="login">
                   <ul class="mobile-myprofile">
-                    <a href="<%= mobileQueryString %>">
+                    <a href="<%= queryString %>" class="level-one-li">
                       <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
                       <li>MY PROFILE</li>
                     </a>
+                    <li class="level-one-li">
+                      STEAM QUICK LINKS 
+                      <span class="steam-links-view-more">
+                        <i class="fas fa-chevron-right ml-2 view-more-btn"></i>
+                      </span>
+                      <ul class="steam-quick-links-nav">
+                        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/inventory" target="_blank" rel="no-follow">
+                          <li>INVENYORY</li>
+                        </a>
+                        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/namehistory" target="_blank" rel="no-follow">
+                          <li>NAME HISTORY</li>
+                        </a>
+                        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/friends/common" target="_blank" rel="no-follow">
+                          <li>MUTUAL FRIENDS</li>
+                        </a>
+                        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/allcomments" target="_blank" rel="no-follow">
+                          <li>PROFILE COMMENTS</li>
+                        </a>
+                        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/groups" target="_blank" rel="no-follow">
+                          <li>GROUPS</li>
+                        </a>
+                      </ul>
+                    </li>
                     <a href="/logout">
                       <li>LOGOUT</li>
                     </a>
@@ -61,7 +84,7 @@
               </a>
             </div>
           <% }else{ %>
-            <% const url = user.profileurl %>
+            <% const url = user.loggedUserId %>
             <% const queryURL = encodeURIComponent(url) %>
             <% const queryString = `/user?url=${queryURL}` %>
             <div class="login">

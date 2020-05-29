@@ -199,8 +199,8 @@
           <strong>VANITY URL</strong>
         </label>
         <label class="data-label">
-          <span class="data" data-full-url = "<%= dataObj.persondata.profileurl %>" title="<%= dataObj.objSteamIds.customURL %>"><%= dataObj.objSteamIds.customURL %></span>
-          <span class="customURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy full custom URL" style="display: inline-block;">
+          <span class="data" data-full-url = "<%= dataObj.objSteamIds.customURL %>" title="<%= dataObj.objSteamIds.customURL %>"><%= dataObj.objSteamIds.customURL %></span>
+          <span class="customURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy vanity URL" style="display: inline-block;">
             <i class="far fa-clone"></i>
           </span>
           <span class="what-is-vanity ml-2" data-toggle="tooltip" data-placement="bottom" 
@@ -217,7 +217,7 @@
           <strong>CUSTOM URL</strong>
         </label>
         <label class="data-label">
-          <span class="data">
+          <span class="data" title="<%= dataObj.persondata.profileurl %>" data-full-url="<%= dataObj.persondata.profileurl %>">
            <%= dataObj.persondata.profileurl %>
           </span>
           <span class="custom-full-URL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy custom URL" style="display: inline-block;">

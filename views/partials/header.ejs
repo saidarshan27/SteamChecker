@@ -24,20 +24,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="mobile-login-wrapper d-xs-block d-lg-none text-center"> 
-            <% const mobileUserKeys = Object.keys(user).length %>
-            <% if(mobileUserKeys === 0){ %>
+            <% const userKeys = Object.keys(user).length %>
+            <% if(userKeys === 0){ %>
               <div class="login nav-item">
                 <a href="/auth/steam">
                   <img src="/images/steamloginbutton.jpg" alt="login-btn" >
                 </a>
               </div>
             <% }else{ %>
-              <% const mobileUrl = user.profileurl %>
-              <% const mobileQueryURL = encodeURIComponent(mobileUrl) %>
-              <% const mobileQueryString = `/user?url=${mobileQueryURL}` %>
+              <% const url = user.loggedUserId %>
+              <% const queryURL = encodeURIComponent(url) %>
+              <% const queryString = `/user?url=${queryURL}` %>
               <div class="login">
                 <ul class="mobile-myprofile">
-                  <a href="<%= mobileQueryString %>">
+                  <a href="<%= queryString %>"  class="level-one-li">
                     <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
                     <li>MY PROFILE</li>
                   </a>
@@ -49,7 +49,6 @@
             <% } %>
             </div>
           <div class="login-wrapper d-none d-lg-block">
-            <% const userKeys = Object.keys(user).length %>
             <% if(userKeys === 0) { %>
               <div class="login nav-item">
                 <a href="/auth/steam">
@@ -57,7 +56,7 @@
                 </a>
               </div>
             <% }else{ %>
-              <% const url = user.profileurl %>
+              <% const url = user.loggedUserId %>
               <% const queryURL = encodeURIComponent(url) %>
               <% const queryString = `/user?url=${queryURL}` %>
               <div class="login">

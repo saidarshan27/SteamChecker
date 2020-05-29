@@ -55,8 +55,8 @@ body{
 .mobile-login-wrapper ul{
   list-style: none;
 }
+
 .mobile-login-wrapper li{
-  border-radius: 5%;
   color:white;
   cursor: pointer;
   padding: 1rem 2rem;
@@ -64,11 +64,18 @@ body{
   font-size: 0.7rem;
   transition: all 0.2s ease-in-out;
 }
+.mobile-login-wrapper .level-one-li{
+  border-bottom: 1px solid white;
+}
 .mobile-login-wrapper a{
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+/* steam quick links in nav styles */
+.steam-quick-links-nav{
+  display: none;
 }
 .mobile-login-wrapper .login-avatar{
   width: 2rem;
@@ -407,7 +414,7 @@ background: linear-gradient(0.15deg, #F1F5F8 0.17%, rgba(255, 255, 255, 0.72) 99
 }
 .steam-ids div,.profile-privacy div{
   display: grid;
-  grid-template-columns: 100px 550px;
+  grid-template-columns: 0.5fr 1fr;
   margin-bottom: 1rem;
 }
 .steam-ids .separator,.profile-privacy .separator{
@@ -704,11 +711,11 @@ font-size: 12px;
   .profile-overview-customURL .data{
     height: 16px;
   }
-  .steam-ids div,.profile-privacy div{
+  /* .steam-ids div,.profile-privacy div{
     display: grid;
     grid-template-columns: 0.6fr 1fr;
     margin-bottom: 1rem;
-  }
+  } */
   .steam-ids .separator,.profile-privacy .separator{
     opacity: 0;
     margin-left: -22px;
@@ -777,9 +784,9 @@ font-size: 12px;
 .realname-profileurl{
 grid-column: 3/7;
 }
-.about div,.steam-ids div,.profile-privacy div{
+/* .about div,.steam-ids div,.profile-privacy div{
   grid-template-columns: 0.7fr 1fr;
-}
+} */
 .about-wrapper {
   grid-column: 1/13;
   margin-bottom: 0;
@@ -945,10 +952,16 @@ font-weight: 500;
   }
 }
 
+@media(max-width:473px){
+  .profile-overview-custom-full-URL .data{
+    width: 100px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 @media (max-width:450px){
-/* .about div, .steam-ids div, .profile-privacy div {
-    grid-template-columns: 1fr 2fr;
-} */
   .nav-with-search .controls{
     width: 100%;
   }

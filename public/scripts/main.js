@@ -71,6 +71,17 @@ $(".add-friend").click(function(){
 	},1000)
 })
 
+$(".steam-links-view-more").click(function(event){
+	if(event.target.parentElement.classList.contains("open")){
+		$(this).html(`<i class="fas fa-chevron-right ml-2 view-more-btn"></i>`);
+		$(this).removeClass("open");
+		$(this).siblings(".steam-quick-links-nav").slideUp();
+	}else{
+		$(this).addClass("open");
+		$(this).html(`<i class="fas fa-chevron-down ml-2 view-more-btn"></i>`);
+		$(this).siblings(".steam-quick-links-nav").slideDown();
+	}
+})
 
 $(document).click(function(event){
 	const objEvent = $(event.target);

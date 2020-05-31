@@ -32,12 +32,9 @@
                 </a>
               </div>
             <% }else{ %>
-              <% const url = user.loggedUserId %>
-              <% const queryURL = encodeURIComponent(url) %>
-              <% const queryString = `/user?url=${queryURL}` %>
               <div class="login">
                 <ul class="mobile-myprofile">
-                  <a href="<%= queryString %>"  class="level-one-li">
+                  <a href="/user?url=<%= user.myProfileQueryString %>"  class="level-one-li">
                     <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
                     <li>MY PROFILE</li>
                   </a>
@@ -56,18 +53,15 @@
                 </a>
               </div>
             <% }else{ %>
-              <% const url = user.loggedUserId %>
-              <% const queryURL = encodeURIComponent(url) %>
-              <% const queryString = `/user?url=${queryURL}` %>
               <div class="login">
-                <a href="<%= queryString %>">
+                <a href="/user?url=<%= user.myProfileQueryString %>">
                   <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
                 </a>
                 <span class="view-more">
                   <i class="fas fa-chevron-down ml-2 view-more-btn"></i>
                 </span>
                 <ul class="view-more-links">
-                  <a href="<%= queryString %>" class="view-more-btn">
+                  <a href="/user?url=<%= user.myProfileQueryString %>" class="view-more-btn">
                   <li class="view-more-link view-more-btn">
                    MY PROFILE
                   </li>

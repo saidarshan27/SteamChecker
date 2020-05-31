@@ -57,18 +57,18 @@ app.get('/auth/steam',
   app.get('/auth/steam/return',
   passport.authenticate('steam', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect(req.session.fullUrl);
+    res.redirect(req.session.redirectUrl);
   });
 
 
 app.get("/", (req, res) => {
   let user={};
-  const fullUrl = req.originalUrl;
-  req.session.fullUrl = fullUrl;
+  req.session.redirectUrl = req.originalUrl;
   if(req.user != undefined){
     user.loggedUserId = req.user.id,
     user.avatar = req.user.photos[2].value,
-    user.profileurl = req.user._json.profileurl
+    user.profileurl = req.user._json.profileurl,
+    user.myProfileQueryString = encodeURIComponent(req.user.id);
   }
   res.render("landing",{user});
 })
@@ -80,8 +80,7 @@ app.get('/logout', function(req, res){
 
 app.get("/user", (req, res) => {
   let isInputValid = false;
-  const fullUrl = req.originalUrl;
-  req.session.fullUrl = fullUrl;
+  req.session.redirectUrl = req.originalUrl;
   let user={};
   const requrl = req.query.url;
 //check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
@@ -110,7 +109,8 @@ if(isInputValid){
         if(req.user != undefined){
           user.loggedUserId = req.user.id,
           user.avatar = req.user.photos[2].value,
-          user.profileurl = req.user._json.profileurl
+          user.profileurl = req.user._json.profileurl,
+          user.myProfileQueryString = encodeURIComponent(req.user.id);
         }
         res.render("user",{dataObj,user});
       })

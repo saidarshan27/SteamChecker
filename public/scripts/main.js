@@ -19,8 +19,8 @@ $(function () {
 // Event Listeners
 
 $(".copy").click(function(event){
-	const data = event.target.parentElement.closest(".data-label").childNodes[3];
-	console.log(data);
+	// const data = event.target.parentElement.closest(".data-label").childNodes[3];
+  const data = event.target.parentElement.closest(".data-label").childNodes[1];
 	const copyBtn = $(this).parents(".data-label").children(".copy");
   copyToClipboard(data);
   $(this).attr('data-original-title', 'Copied!').tooltip('show');
@@ -103,6 +103,7 @@ $(".input-info").click(function(event){
 
 
 function copyToClipboard(data) {
+	console.log(data);
 	const el = document.createElement('textarea');
 	el.value = data.getAttribute("data-full-url");
 	document.body.appendChild(el);

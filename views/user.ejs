@@ -2,9 +2,6 @@
 
 <div class="profile-background">
 <div class="userpage-container container">
-  <!-- <section class="profile-background-wrapper">
-     <div class="profile-background"></div>
-  </section> -->
   <section class="name-level-wrapper">
     <div class="name-level">
       <img src="<%= dataObj.persondata.avatarfull %>" alt="avatar" class="avatar">
@@ -23,22 +20,6 @@
        <p><%= dataObj.persondata.realname %></p>
     </div>
   </section>
-  <!-- <section class="add-message">
-    <div class="add-friend">
-      <a href="steam://friends/add/<%= dataObj.persondata.steamid %>" rel="no-follow">
-        <button class="add-friend-btn">
-          <i class="fas fa-user-plus mr-1"></i>
-          <span class="add-friend-txt">ADD AS A FRIEND </span>
-        </button>
-      </a>
-    </div> 
-    <div class="send-message">
-      <button class="send-message-btn">
-        <i class="far fa-comment-dots mr-1" style="font-size:15.5px;"></i>
-        <span class="send-message-txt">SEND A MESSAGE</span>
-      </button>
-    </div>
-  </section> -->
  <section class="about-wrapper">
     <div class="about">
       <h5 class="section-title" style="margin-bottom: 3.5rem;">
@@ -154,126 +135,150 @@
   <section class="steam-ids-wrapper">
     <div class="steam-ids">
       <h5 class="mb-5 section-title">STEAM ID'S</h5>
-      <div class="profile-overview-steam3-id">
-        <label class="name-label">
-          <strong>STEAMID3</strong>
-        </label>
-        <label class="data-label">
-          <span class="data" data-full-url="<%= dataObj.objSteamIds.steam3id %>">
-            <%= dataObj.objSteamIds.steam3id %>
-          </span>
-          <span class="steam3-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-            <i class="far fa-clone"></i>
-          </span>
-        </label>
-      </div>
-      <div class="profile-overview-steam32-id">
-        <label class="name-label">
-          <strong>STEAMID2</strong>
-        </label>
-        <label class="data-label">
-          <span class="data" data-full-url="<%= dataObj.objSteamIds.steam2id %>">
-            <%= dataObj.objSteamIds.steam2id %>
-          </span>
-          <span class="steam32-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-            <i class="far fa-clone"></i>
-          </span>
-        </label>
-      </div>
-      <div class="profile-overview-steam64-id">
-        <label class="name-label">
-          <strong>STEAMID64</strong>
-        </label>
-        <label class="data-label">
-          <span class="data" data-full-url="<%= dataObj.objSteamIds.steam64 %>">
-              <%= dataObj.objSteamIds.steam64 %>
-          </span>
-          <span class="steam64-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy to Clipboard">
-            <i class="far fa-clone"></i>
-          </span>
-        </label>
-    </div>
-    <% if(dataObj.objSteamIds.customURL){ %>
-      <div class="profile-overview-customURL">
-        <label class="name-label">
-          <strong>VANITY URL</strong>
-        </label>
-        <label class="data-label">
-          <span class="data" data-full-url = "<%= dataObj.objSteamIds.customURL %>" title="<%= dataObj.objSteamIds.customURL %>"><%= dataObj.objSteamIds.customURL %></span>
-          <span class="customURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy vanity URL" style="display: inline-block;">
-            <i class="far fa-clone"></i>
-          </span>
-          <span class="what-is-vanity ml-2" data-toggle="tooltip" data-placement="bottom" 
-          data-original-title=
-          "Vanity URL is a last part of a steam custom URL.
-          
-          For example https://steamcommunity.com/id/<%= dataObj.objSteamIds.customURL %>" style="display: inline-block;">
-            <i class="fas fa-question-circle"></i>
-          </span>
-        </label>
-      </div>
-      <div class="profile-overview-custom-full-URL">
-        <label class="name-label">
-          <strong>CUSTOM URL</strong>
-        </label>
-        <label class="data-label">
-          <span class="data" title="<%= dataObj.persondata.profileurl %>" data-full-url="<%= dataObj.persondata.profileurl %>">
-           <%= dataObj.persondata.profileurl %>
-          </span>
-          <span class="custom-full-URL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy custom URL" style="display: inline-block;">
-            <i class="far fa-clone"></i>
-          </span>
-        </label>
-      </div>
-    <% }else{ %>
-      <div class="profile-overview-customURL">
-        <label class="name-label">
-          <strong>VANITY URL</strong>
-        </label>
-        <label class="data-label">
-          <span class="data mute">
-           <em>not set</em>
-          </span>
-        </label>
-      </div>
-    <% } %>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="name-label">
+                <strong>STEAMID3</strong>
+              </td>
+              <td class="data-label">
+                <span class="data" data-full-url="<%= dataObj.objSteamIds.steam3id %>">
+                  <%= dataObj.objSteamIds.steam3id %>
+                </span>
+                <span class="steam3id-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                  <i class="far fa-clone"></i>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                <strong>STEAMID2</strong>
+              </td>
+              <td class="data-label"  data-full-url="<%= dataObj.objSteamIds.steam2id %>">
+                <span class="data">
+                  <%= dataObj.objSteamIds.steam2id %>
+                </span>
+                <span class="steamid2-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                  <i class="far fa-clone"></i>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                <strong>STEAMID64</strong>
+              </td>
+              <td class=" data-label">
+                <span class="data" data-full-url="<%= dataObj.objSteamIds.steam64 %>">
+                  <%= dataObj.objSteamIds.steam64 %>
+                </span>
+                <span class="steamid64-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                  <i class="far fa-clone"></i>
+                </span>
+              </td>
+            </tr>
+            <% if(dataObj.objSteamIds.customURL){ %>
+            <tr>
+              <td class="name-label">
+                <strong>VANITY URL</strong>
+              </td>
+              <td class="data-label">
+                <span class="data" data-full-url="<%= dataObj.objSteamIds.customURL %>">
+                  <%= dataObj.objSteamIds.customURL %>
+                </span>
+                <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                  <i class="far fa-clone"></i>
+                </span>
+              </td>
+            </tr>
+          <% }else{ %>
+            <tr>
+              <td class="name-label">
+                <strong>VANITY URL</strong>
+              </td>
+              <td class="data-label">
+                <span class="data mute">
+                <em>not set</em>
+                </span>
+              </td>
+            </tr>
+          <% } %>
+          </tbody>
+        </table>
+        </div>
   </section>
   <section class="profile-privacy-wrapper">
     <div class="profile-privacy">
       <h5 class="mb-5 section-title">PROFILE PRIVACY</h5>
-      <div class="profile-overview-privacy-state">
-        <label class="name-label">
-          <strong>PRIVACY STATE</strong>
-        </label>
-        <label class="data-label">
-          <span id="privacy-state"></span>
-        </label>
-      </div>
-      <div class="profile-overview-tradeban">
-        <label class="name-label">
-          <strong>TRADE BAN</strong>
-        </label>
-        <label class="data-label" >
-          <span id="trade-ban"></span>
-        </label>
-      </div>
-      <div class="profile-overview-vacban">
-        <label class="name-label">
-          <strong>VAC BAN</strong>
-        </label>
-        <label class="data-label">
-          <span id="vac-ban"></span>
-        </label>
-      </div>
-        <div class="profile-overview-communityban">
-          <label class="name-label">
-            <strong>COMMUNITY BAN</strong>
-          </label>
-          <label class="data-label">
-            <span  id="community-ban"></span>
-          </label>
-        </div>
-    </div>
+      <!-- <table class="table">
+        <tr>
+          <td class="name-label">
+            <strong>PRIVACY STATE</strong>
+          </td>
+          <td class="data-label">
+            <span id="privacy-state" class="data"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="name-label">
+            <strong>TRADE BAN</strong>
+          </td>
+          <td class="data-label">
+            <span class="data" id="trade-ban"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="name-label">
+            <strong>VAC BAN</strong>
+          </td>
+          <td class="data-label">
+            <span class="data" id="vac-ban"></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="name-label">
+            <strong>COMMUNNITY BAN</strong>
+          </td>
+          <td class="data-label">
+            <span class="data" id="community-ban"></span>
+          </td>
+        </tr>
+      </table> -->
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="name-label">
+              <strong>PRIVACY STATE</strong>
+            </td>
+            <td class="data-label">
+              <span id="privacy-state" class="data"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              <strong>TRADE BAN</strong>
+            </td>
+            <td class="data-label">
+              <span class="data" id="trade-ban"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              <strong>VAC BAN</strong>
+            </td>
+            <td class="data-label">
+              <span class="data" id="vac-ban"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              <strong>COMMUNITY BAN</strong>
+            </td>
+            <td class="data-label">
+              <span class="data" id="community-ban"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
   </section>
 </section>
 <section class="steam-quick-links-wrapper">
@@ -310,6 +315,10 @@
 </section>
 </div>
 </div>
+
+
+
+
 
 <!-- MODALS -->
 

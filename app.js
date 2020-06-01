@@ -26,8 +26,8 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new SteamStrategy({
-  returnURL: 'http://localhost:3001/auth/steam/return',
-  realm: 'http://localhost:3001/',
+  returnURL: 'https://mighty-citadel-31453.herokuapp.com/auth/steam/return',
+  realm: 'https://mighty-citadel-31453.herokuapp.com/',
   apiKey: 'D295314B96B79961B1AB2A2457BA5B10'
 },
 function(identifier, profile, done) {

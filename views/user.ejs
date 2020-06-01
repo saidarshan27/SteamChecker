@@ -25,7 +25,76 @@
       <h5 class="section-title" style="margin-bottom: 3.5rem;">
         ABOUT
       </h5>
-      <% if(dataObj.steamLvl) { %>
+      <table class="table">
+        <% if(dataObj.steamLvl) { %>
+        <tr>
+          <td class="name-label">
+            <strong>STEAM LEVEL</strong>
+          </td>
+          <td class="data-label">
+            <span class="data">
+              <%= dataObj.steamLvl %>
+            </span>
+          </td>
+        </tr>
+        <% }else{ %>
+          <tr>
+            <td class="name-label">
+              <strong>STEAM LEVEL</strong>
+            </td>
+            <td class="data-label">
+              <span class="data private">
+                PRIVATE
+              </span>
+            </td>
+          </tr>
+        <% } %>
+        <tr class="friendship">
+          <td class="name-label">
+            <strong>FRIENDSHIP</strong>
+          </td>
+          <td class="data-label">
+            <span class="data mute">
+              <em><a href="/auth/steam">Sign in to check</a></em>
+            </span>
+          </td>
+        </tr>
+        <% if(dataObj.persondata.timecreated) { %>
+        <tr>
+          <td class="name-label">
+            <strong>JOINED STEAM</strong>
+          </td>
+          <td class="data-label">
+            <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
+            <span class="data">
+              <%= humanDate %>
+            </span>
+          </td>
+        </tr>
+        <% } else{ %>
+          <tr>
+            <td class="name-label">
+              <strong>JOINED STEAM</strong>
+            </td>
+            <td class="data-label">
+              <span class="data private">
+                PRIVATE
+              </span>
+            </td>
+          </tr>
+        <% } %>
+        <tr class="isonline">
+          <td class="name-label">
+            <strong>ONLINE STATUS</strong>
+          </td>
+          <td class="data-label">
+            <span class="data" id="online-status"></span>
+          </td>
+        </tr>
+      </table>
+
+
+      <!-- <% if(dataObj.steamLvl) { %>
         <div class="steam-level">
           <label class="name-label"><strong>STEAM LEVEL</strong></label>
           <label class="data-label">
@@ -71,55 +140,7 @@
         <label class="name-label"><strong>ONLINE STATUS</strong></label>
         <label class="data-label" id="online-status">
         </label>
-        <script>
-          const status = <%- JSON.stringify(dataObj.persondata.personastate) %>;
-          const dataLabel = document.getElementById("online-status");
-          switch(status){
-            case 0:{
-              dataLabel.innerHTML = 
-              `<strong>OFFLINE</strong>`;
-              dataLabel.classList.add("offline");
-              break;
-            }
-            case 1:{
-              dataLabel.innerHTML = 
-              `<strong>ONLINE</strong>`;
-              dataLabel.classList.add("online");
-              break;
-            }
-            case 2:{
-              dataLabel.innerHTML = 
-              `<strong>BUSY</strong>`;
-              dataLabel.classList.add("busy");
-              break;
-            }
-            case 3:{
-             dataLabel.innerHTML = 
-             `<strong>AWAY</strong>`;
-             dataLabel.classList.add("away");
-              break;
-            }
-            case 4:{
-              dataLabel.innerHTML = 
-             `<strong>SNOOZE</strong>`;
-             dataLabel.classList.add("snooze");
-              break;
-            }
-            case 5:{
-              dataLabel.innerHTML = 
-             `<strong>LOOKING TO TRADE</strong>`;
-             dataLabel.classList.add("trade");
-              break;
-            }
-            case 6:{
-              dataLabel.innerHTML = 
-             `<strong>LOOKING TO PLAY</strong>`;
-             dataLabel.classList.add("trade");
-              break;
-            }
-          }
-        </script>
-      </div>
+      </div> -->
     </div>
   </section>
 <section class="nav-wrapper">
@@ -209,7 +230,7 @@
   <section class="profile-privacy-wrapper">
     <div class="profile-privacy">
       <h5 class="mb-5 section-title">PROFILE PRIVACY</h5>
-      <table class="table">
+       <table class="table">
         <tbody>
           <tr>
             <td class="name-label">
@@ -360,6 +381,7 @@
 <script src="/scripts/checkOwnerShip.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
 <script src="/scripts/steamLevelColor.js"></script>
+<script src="/scripts/updateOnlineStatus.js"></script>
 
 
 <%- include("partials/footer.ejs"); %>

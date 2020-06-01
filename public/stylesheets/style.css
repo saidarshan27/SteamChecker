@@ -291,8 +291,8 @@ body{
   top: 0%;
   width: 12rem;
   height: 9.1rem;
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 /* name and level */
 .name-level{
@@ -337,12 +337,8 @@ body{
   border-radius: 1rem;
 }
 
-.about div{
-  margin-bottom: 2rem;
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-}
 .about .name-label{
+  padding-bottom: 1.2rem;
   font-size: 13px;
   font-weight: 500;
 }
@@ -351,9 +347,6 @@ body{
   font-weight: 500;
 }
 
-.about .separator{
-  margin-right:1rem;
-}
 /* nav bar */
 .nav-wrapper{
   grid-column: 5/13;
@@ -396,8 +389,8 @@ body{
   grid-template-rows: repeat(2,308px);
   gap:0.8rem;
   grid-template-areas: 
-  "steamid steamid"
-  "profile-privacy profile-privacy";
+  "steamid"
+  "profile-privacy";
 }
 
 /* player steam ids section */
@@ -421,26 +414,22 @@ body{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.steam-ids div,.profile-privacy div{
-  margin-bottom: 1rem;
-}
 
 /* player profile privacy section */
-.profile-privacy .name-label{
+.profile-privacy .name-label,.about .name-label{
   padding-left: 0;
+}
+.profile-privacy .name-label{
+  width: 35%;
 }
 .profile-privacy-wrapper{
   grid-area: profile-privacy;
 }
-.profile-privacy .name-label{
-  width: 210px;
-}
 .profile-privacy{
   padding: 1.5rem 2rem;
-  grid-area: profile-privacy;
   width: 100%;
   height: 100%;
-  background-color: var(--section-transperant-background);
+  background-color:  var(--section-transperant-background);
   border-radius: 1rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -514,10 +503,10 @@ body{
   text-decoration: underline;
 }
 
- .isonline .data-label.offline{
+ .isonline .data.offline{
   color: var(--mute);
 }
-.isonline .data-label.online{
+.isonline .data.online{
   color: var(--green)
 }
 
@@ -726,11 +715,7 @@ font-size: 12px;
   .profile-overview-customURL .data{
     height: 16px;
   }
-  /* .steam-ids div,.profile-privacy div{
-    display: grid;
-    grid-template-columns: 0.6fr 1fr;
-    margin-bottom: 1rem;
-  } */
+
   .steam-ids .separator,.profile-privacy .separator{
     opacity: 0;
     margin-left: -22px;
@@ -798,9 +783,7 @@ font-size: 12px;
 .realname-profileurl{
 grid-column: 3/7;
 }
-/* .about div,.steam-ids div,.profile-privacy div{
-  grid-template-columns: 0.7fr 1fr;
-} */
+
 .about-wrapper {
   grid-column: 1/13;
   margin-bottom: 0;
@@ -810,8 +793,8 @@ grid-column: 3/7;
   grid-column: 1/13;
   grid-row: 8/17;
   grid-template-areas:
-      "steamid steamid"
-      "profile-privacy profile-privacy";
+      "steamid"
+      "profile-privacy";
 }
 
 .name-level-wrapper{
@@ -856,6 +839,13 @@ grid-column: 1/13;
 }
 
 @media (max-width:768px){
+  .data-label .since-ban{
+    font-size: 0.4rem;
+  }
+  .fa-info-circle{
+    font-size: 0.5rem;
+  }
+
   .dekstop-h5{
     display:none;
   }

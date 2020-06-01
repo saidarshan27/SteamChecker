@@ -755,6 +755,9 @@ font-size: 12px;
 }
 }
 @media(max-width:930px){
+  .about .name-label{
+    padding-bottom: .75rem;
+  }
   .steam-quick-links-wrapper{
     display: none;
   }

@@ -92,55 +92,6 @@
           </td>
         </tr>
       </table>
-
-
-      <!-- <% if(dataObj.steamLvl) { %>
-        <div class="steam-level">
-          <label class="name-label"><strong>STEAM LEVEL</strong></label>
-          <label class="data-label">
-            <span class="data"><%= dataObj.steamLvl %></span>
-          </label>
-        </div>
-      <% }else{ %>
-        <div class="steam-level">
-          <label class="name-label"><strong>STEAM LEVEL</strong></label>
-          <label class="data-label">
-            <span class="data private">PRIVATE</span>
-          </label>
-        </div>
-      <% } %>
-      <div class="friendship">
-        <label class="name-label" style="width: 70%;">
-          <strong>FRIENDSHIP</strong>
-        </label>
-        <label class="data-label">
-          <span class="data mute">
-            <em><a href="/auth/steam">Sign in to check</a></em>
-          </span>
-        </label>
-      </div>
-      <% if(dataObj.persondata.timecreated) { %>
-        <div class="joined-steam">
-          <label class="name-label"><strong>JOINED STEAM</strong></label>
-          <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-          <label class="data-label">
-            <span class="data"><%= humanDate %></span>
-          </label>
-        </div>
-      <% } else{ %>
-        <div class="profile-overview-date">
-          <label class="name-label"><strong>JOINED STEAM</strong></label>
-          <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-          <label class="data-label">
-            <span class="data private">PRIVATE</span>
-          </label>
-        </div>
-      <% } %>
-      <div class="isonline">
-        <label class="name-label"><strong>ONLINE STATUS</strong></label>
-        <label class="data-label" id="online-status">
-        </label>
-      </div> -->
     </div>
   </section>
 <section class="nav-wrapper">
@@ -302,6 +253,7 @@
 </section>
 </div>
 </div>
+
 
 
 

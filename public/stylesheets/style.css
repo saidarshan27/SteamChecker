@@ -249,11 +249,11 @@ body{
 /* user page container */
 .userpage-container{
  max-width: 1000px;
- height: 100vh;
+ height: max-content;
  padding-top: 2rem;
  display:grid;
  grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
- grid-template-rows: repeat(12,65px);
+ grid-auto-rows:65px; 
  gap:1rem;
 /* background: linear-gradient(0.15deg, #F1F5F8 0.17%, rgba(255, 255, 255, 0.72) 99.86%); */
 }
@@ -266,8 +266,11 @@ body{
 }
 /* profile background image */
 .profile-background{
+  background:no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: 100% 100%;
-  height: 100vh;
 }
 .name-level-wrapper{
   position: relative;
@@ -322,7 +325,6 @@ body{
 }
 /* player about section */
 .about-wrapper{
-  margin-bottom: -2.1rem;
   grid-column: 1/5;
   grid-row: 3/8;;
 }
@@ -389,10 +391,9 @@ body{
 /* wrapper around steam ids and profile privacy */
 .wrapper{
   grid-column: 5/13;
-  grid-row: 4/8;
+  grid-row: 4/12;
   display: grid;
-  grid-template-columns: repeat(2,1fr);
-  grid-template-rows: 345px 290px;
+  grid-template-rows: repeat(2,1fr);
   gap:0.8rem;
   grid-template-areas: 
   "steamid steamid"
@@ -447,8 +448,6 @@ body{
 
 /* steam quick link section */
 .steam-quick-links-wrapper{
-  margin-bottom: -1rem;
-  margin-top: 2rem;
   grid-column: 1/5;
   grid-row: 8/12;
 }
@@ -789,13 +788,9 @@ font-size: 12px;
   font-weight: 500;
 }
 .userpage-container{
-  height: 135vh;
-  grid-auto-rows: minmax(100px,auto);
+  height: max-content;
   max-width: 1700px;
   padding: 2rem 4rem;
-}
-.profile-background {
-  height: 135vh;
 }
 .about div{
   margin-bottom: 1rem;
@@ -813,7 +808,7 @@ grid-column: 3/7;
 
 .wrapper {
   grid-column: 1/13;
-  grid-row: 8/9;
+  grid-row: 8/17;
   grid-template-areas:
       "steamid steamid"
       "profile-privacy profile-privacy";

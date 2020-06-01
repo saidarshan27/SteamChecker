@@ -420,7 +420,7 @@ body{
   padding-left: 0;
 }
 .profile-privacy .name-label{
-  width: 35%;
+  width: 40%;
 }
 .profile-privacy-wrapper{
   grid-area: profile-privacy;

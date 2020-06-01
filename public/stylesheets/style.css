@@ -393,7 +393,7 @@ body{
   grid-column: 5/13;
   grid-row: 4/12;
   display: grid;
-  grid-template-rows: repeat(2,1fr);
+  grid-template-rows: repeat(2,308px);
   gap:0.8rem;
   grid-template-areas: 
   "steamid steamid"

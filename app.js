@@ -83,8 +83,8 @@ app.get("/user", (req, res) => {
   req.session.redirectUrl = req.originalUrl;
   let user={};
   const requrl = req.query.url;
-//check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
-const checkValidInput = requrl.match(/(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi);
+ //check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
+ const checkValidInput = requrl.match(/(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi);
 if(checkValidInput != null){
   isInputValid = true;
 }else{
@@ -96,9 +96,9 @@ if(checkValidInput != null){
     res.redirect("/");
   }
 }
-if(isInputValid){
+if(isInputValid === true){
     extractprofile(requrl).then(steam64 =>{
-      kyabre(steam64).then(dataObj =>{
+      main(steam64).then(dataObj =>{
         if(dataObj.persondata.profileurl.includes("/id")){
           const url = dataObj.persondata.profileurl;
           const found=url.match(/.*(?:id)\/([a-z0-9_]+)[\/?]?/i);
@@ -118,10 +118,12 @@ if(isInputValid){
         res.redirect("/");
       })
     });
+}else{
+  res.redirect("/");
 }
 })
 
-async function kyabre(steam64){
+async function main(steam64){
   const persondata = await playerInfo(steam64);
   if(persondata === undefined){
     throw new Error ("steam id not found");
@@ -136,8 +138,8 @@ async function kyabre(steam64){
 }
 
 async function extractprofile(url) {
-  // Regex for extracting the words or numbers occuring after `/profiles` or `/id` in a steam64ID
     if(url.includes("/id") || url.includes("/profiles")){
+      // Regex for extracting the words or numbers occuring after `/profiles` or `/id` in a steam64ID
       const found=url.match(/.*(?:profiles|id)\/([a-z0-9]+)[\/?]?/i);
       const vanityOrSteamid = found[1];
       const vanity = await getVanity(vanityOrSteamid);
@@ -148,7 +150,7 @@ async function extractprofile(url) {
           const steam64 = vanityOrSteamid;
           return steam64;
         }
-    }else if(url.includes("STEAM_") || url.includes("[U:") || url.includes("U:")){
+    }else if(url.includes("STEAM_") || url.includes("[U:")){
         var sid = new SteamID(url);
         const steam64 = sid.getSteamID64();
         return steam64;

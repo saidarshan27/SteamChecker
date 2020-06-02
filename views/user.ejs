@@ -3,8 +3,8 @@
 <div class="profile-background">
 <div class="userpage-container container">
   <section class="name-level-wrapper">
+    <img src="<%= dataObj.persondata.avatarfull %>" alt="avatar" class="avatar">
     <div class="name-level">
-      <img src="<%= dataObj.persondata.avatarfull %>" alt="avatar" class="avatar">
       <h4>
         <a href="<%= dataObj.persondata.profileurl %>" target="_blank" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>">
         <%= dataObj.persondata.personaname %>
@@ -159,6 +159,13 @@
                 </span>
                 <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
                   <i class="far fa-clone"></i>
+                </span>
+                <span class="what-is-vanity ml-2" data-toggle="tooltip" data-placement="bottom" 
+                data-original-title=
+                "Vanity URL is a last part of a steam custom URL.
+                
+                For example https://steamcommunity.com/id/<%= dataObj.objSteamIds.customURL %>" style="display: inline-block;">
+                  <i class="fas fa-question-circle"></i>
                 </span>
               </td>
             </tr>

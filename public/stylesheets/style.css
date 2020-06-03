@@ -1,3 +1,17 @@
+/* Change autocomplete styles in WebKit */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color:black;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* CSS Variables */
 :root{
   --primary:#5C66C2;
@@ -8,8 +22,13 @@
   --red: red;
   --background:#F1F5F8;
 }
+
+/* tooltip and defualt styles */
 .tooltip{
   font-size: 10px;
+}
+i{
+  pointer-events: none;
 }
 *{
   padding: 0;
@@ -95,7 +114,12 @@ body{
   align-items: center;
 }
 .search-submit{
+  position: relative;
+  overflow: hidden;
   outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding:2rem;
   padding-bottom: 1.8rem;
   border-top-right-radius: 1rem;
@@ -126,6 +150,7 @@ body{
   cursor: pointer;
 }
 
+
 .url-input{
   outline: none;
   padding:1.9rem;
@@ -134,29 +159,59 @@ body{
   background: #FFFFFF;
   mix-blend-mode: normal;
   border: 1px solid  rgba(124, 124, 124, 0.31);
+  border-right: none;
+  border-right: none;
   box-sizing: border-box;
   border-radius: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .home-container .url-input{
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.url-input:focus{
+
+
+/* clear input */
+.clear-input{
+  padding: 1rem;
   outline: none;
-  border: 1px solid  rgba(118, 131, 249, 0.56);
-  box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(118, 131, 249, 0.56);
+  background: white;
+  display: flex;
+  cursor: pointer;
+  border: 1px solid  rgba(124, 124, 124, 0.31);
+  border-left: none;
+  display: none;
 }
+.clear-input-background{
+  position: relative;
+  padding: .5rem .7rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.clear-input-background:hover{
+  background-color:rgb(243, 243, 243);
+}
+.clear-input .fa-times{
+  color: rgb(87, 87, 87);
+}
+
+.clear-input:active,.clear-input:focus{
+  outline: none;
+}
+
+
+
 .home-container .fa-search{
   font-size: 2rem;
 }
 .controls{
   min-width: 50%;
-  transition: all 0.5s ease-in-out;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 1rem;
 }
 .home-container .controls form{
@@ -390,6 +445,15 @@ body{
 }
 
 /* player steam ids section */
+
+
+.steam-ids .table .data-label{
+  padding: .4rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
 .steam-ids .name-label{
   padding-left: 0;
 }
@@ -478,12 +542,73 @@ body{
 
 /* copy button */
 .copy{
+  position: relative;
   display: inline-block;
-  color:rgb(88, 88, 88);
+  overflow: hidden;
+  color:black;
   margin-left: 1rem;
+  padding: .3rem .5rem;
+  border-radius: 50%;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
+
+@media (min-width:320px) and (max-width:768px){ 
+  .copy:active{
+    background:rgb(181, 186, 189);
+  }
+  /* ripple effect */
+.ripple{
+  position: absolute;
+  background:rgb(181, 186, 189);
+  transform:translate(-50%,-50%);
+  pointer-events: none;
+  border-radius: 50%;
+  animation: animate 1s linear infinite;
+}
+@keyframes animate 
+{
+  0%{
+    width: 0px;
+    height: 0px;
+    opacity: 0.5;
+  }
+  100%{
+    width:500px;
+    height: 500px;
+    opacity: 0;
+  }
+}
+ }
+
+  .copy:hover{
+    background:rgb(181, 186, 189);
+  }
+  /* ripple effect */
+.ripple{
+  position: absolute;
+  background:rgb(219, 219, 219);
+  transform:translate(-50%,-50%);
+  pointer-events: none;
+  border-radius: 50%;
+  animation: animate 1s linear infinite;
+}
+@keyframes animate 
+{
+  0%{
+    width: 0px;
+    height: 0px;
+    opacity: 0.5;
+  }
+  100%{
+    width:500px;
+    height: 500px;
+    opacity: 0;
+  }
+}
+
+
+
 
 .copy-animation{
   transform:scale(1.5,1.5);
@@ -707,6 +832,23 @@ font-size: 12px;
     }
 }
 
+@media(max-width:1440px){
+  .controls{
+    width: 60%;
+  }
+  .label{
+    width: 60%;
+  }
+}
+@media(max-width:1024px){
+  .controls{
+    width:80%;
+  }
+  .label{
+    width: 80%;
+  }
+}
+
 @media(max-width:1187px){
   .profile-overview-customURL .data{
     height: 16px;
@@ -796,11 +938,6 @@ grid-column: 1/13;
 }
 }
 
- @media (max-width:1200px){
-  .label{
-    width: 50%;
-  }
-}
 @media (max-width:991px){
   .controls{
     width: 90%;
@@ -861,6 +998,13 @@ grid-column: 1/13;
     padding:0.54rem;
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  .clear-input{
+    font-size: .5rem;
+    padding:0.5rem;
+  }
+  .clear-input-background{
+    padding:0.3rem;
   }
   .home-container .fa-search{
     font-size: 1rem;

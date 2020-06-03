@@ -30,7 +30,7 @@ $(".copy").click(function(event){
 	setTimeout(function(){
 		copyBtn.removeClass("copy-animation");
 		$(this).tooltip("hide");
-	},200)
+	},150)
 	// let x = event.clientX - event.target.offsetLeft;
 	// let y = event.clientY - event.target.offsetTop;
 	// const element = $(this);
@@ -106,9 +106,9 @@ $(".url-input").focusout(function(event){
 $(".url-input").on("keydown input cut",function(event){
 	setTimeout(function(){
 		if($(event.target).val() != ""){
-		 $(".clear-input").show();
+		 $(".clear-input").children(".clear-input-background").css("visibility","visible");
 		}else{
-		 $(".clear-input").hide();
+		 $(".clear-input").children(".clear-input-background").css("visibility","hidden");
 		}
 	},100)
 })
@@ -116,7 +116,7 @@ $(".url-input").on("keydown input cut",function(event){
 // clears the input on click 
 $(".clear-input").click(function(event){
 	$(this).siblings(".url-input").val("");
-	$(this).hide();
+	$(this).children(".clear-input-background").css("visibility","hidden");
 })
 
 

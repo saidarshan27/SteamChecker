@@ -176,14 +176,14 @@ body{
 
 /* clear input */
  .clear-input{
- padding: 1rem;
+  padding: 1rem;
   outline: none;
   background: white;
   display: flex;
+  align-items: center;
   cursor: pointer;
   border: 1px solid  rgba(124, 124, 124, 0.31);
   border-left: none;
-  display: none;
 }
 .clear-input-background{
   position: relative;
@@ -193,6 +193,7 @@ body{
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  visibility: hidden;
 }
 .clear-input-background:hover{
   background-color:rgb(243, 243, 243);
@@ -1007,7 +1008,7 @@ font-weight: 500;
 
 @media (max-width:645px){
   .tooltip{
-    font-size: 5px;
+    font-size: 8px;
   }
   .input-types-supported li{
     font-size: 0.8rem;

@@ -175,8 +175,8 @@ body{
 
 
 /* clear input */
-.clear-input{
-  padding: 1rem;
+ .clear-input{
+ padding: 1rem;
   outline: none;
   background: white;
   display: flex;
@@ -549,12 +549,12 @@ body{
   margin-left: 1rem;
   padding: .5rem .7rem;
   border-radius: 50%;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
   cursor: pointer;
 }
-/* .copy:active{
-  background:rgb(255, 255, 255);
-} */
+.copy:hover{
+  background:rgb(204, 204, 204);
+}
 
 .copy-animation{
   transform:scale(1.5,1.5);
@@ -995,6 +995,12 @@ font-weight: 500;
 }
 .realname-profileurl p{
   font-size: 11px;
+}
+.copy:hover{
+  background: none;
+}
+.copy:active{
+  background-color:rgb(204, 204, 204);
 }
 } 
 

@@ -132,7 +132,7 @@ body{
 .nav-with-search .search-submit{
   position: absolute;
   right: 0%;
-  top:1%;
+  top:15%;
 }
 .search-submit:hover{
   background: rgba(45, 66, 255, 0.56);
@@ -547,68 +547,14 @@ body{
   overflow: hidden;
   color:black;
   margin-left: 1rem;
-  padding: .3rem .5rem;
+  padding: .5rem .7rem;
   border-radius: 50%;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-
-@media (min-width:320px) and (max-width:768px){ 
-  .copy:active{
-    background:rgb(181, 186, 189);
-  }
-  /* ripple effect */
-.ripple{
-  position: absolute;
-  background:rgb(181, 186, 189);
-  transform:translate(-50%,-50%);
-  pointer-events: none;
-  border-radius: 50%;
-  animation: animate 1s linear infinite;
-}
-@keyframes animate 
-{
-  0%{
-    width: 0px;
-    height: 0px;
-    opacity: 0.5;
-  }
-  100%{
-    width:500px;
-    height: 500px;
-    opacity: 0;
-  }
-}
- }
-
-  .copy:hover{
-    background:rgb(181, 186, 189);
-  }
-  /* ripple effect */
-.ripple{
-  position: absolute;
-  background:rgb(219, 219, 219);
-  transform:translate(-50%,-50%);
-  pointer-events: none;
-  border-radius: 50%;
-  animation: animate 1s linear infinite;
-}
-@keyframes animate 
-{
-  0%{
-    width: 0px;
-    height: 0px;
-    opacity: 0.5;
-  }
-  100%{
-    width:500px;
-    height: 500px;
-    opacity: 0;
-  }
-}
-
-
-
+/* .copy:active{
+  background:rgb(255, 255, 255);
+} */
 
 .copy-animation{
   transform:scale(1.5,1.5);
@@ -1035,7 +981,7 @@ font-weight: 500;
   font-size: 1rem;
 }
 .nav-with-search .search-submit{
-  top:-20%;
+  top:15%;
 }
 .userpage-container{
   max-width: 2000px;

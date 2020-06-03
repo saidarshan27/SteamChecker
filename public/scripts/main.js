@@ -26,15 +26,15 @@ $(".copy").click(function(event){
   copyToClipboard(data);
   $(this).attr('data-original-title', 'Copied!').tooltip('show');
 	$(this).delay(800).attr("data-original-title","Copy to Clipboard");
-	// copyBtn.addClass("copy-animation");
-	// setTimeout(function(){
-	// 	copyBtn.removeClass("copy-animation");
-	// 	$(this).tooltip("hide");
-	// },150)
-	let x = event.clientX - event.target.offsetLeft;
-	let y = event.clientY - event.target.offsetTop;
-	const element = $(this);
-	rippleEffect(element,x,y);
+	copyBtn.addClass("copy-animation");
+	setTimeout(function(){
+		copyBtn.removeClass("copy-animation");
+		$(this).tooltip("hide");
+	},200)
+	// let x = event.clientX - event.target.offsetLeft;
+	// let y = event.clientY - event.target.offsetTop;
+	// const element = $(this);
+	// rippleEffect(element,x,y);
 })
 
 // My profile view-more button
@@ -158,13 +158,13 @@ function localStorageAvailable(){
 	}
 }
 
-function rippleEffect(element,x,y){
-	let ripples = document.createElement("span");
-	ripples.style.left = x + "px";
-	ripples.style.top = y + "px";
-	ripples.classList.add("ripple");
-	element.append(ripples);
-	setTimeout(()=>{
-    ripples.remove();
-	},1000);
-}
+// function rippleEffect(element,x,y){
+// 	let ripples = document.createElement("span");
+// 	ripples.style.left = x + "px";
+// 	ripples.style.top = y + "px";
+// 	ripples.classList.add("ripple");
+// 	element.append(ripples);
+// 	setTimeout(()=>{
+//     ripples.remove();
+// 	},1000);
+// }

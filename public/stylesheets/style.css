@@ -129,11 +129,7 @@ body{
   color: white;
   background: #7683F9
 }
-.nav-with-search .search-submit{
-  position: absolute;
-  right: 0%;
-  top:15%;
-}
+
 .search-submit:hover{
   background: rgba(45, 66, 255, 0.56);
   outline: none;
@@ -184,6 +180,9 @@ body{
   cursor: pointer;
   border: 1px solid  rgba(124, 124, 124, 0.31);
   border-left: none;
+}
+.nav-with-search .clear-input{
+  padding: 0;
 }
 .clear-input-background{
   position: relative;
@@ -254,10 +253,12 @@ body{
 }
 /* User page styles */
 .nav-with-search .url-input{
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
   padding:0.5rem 1rem;
   border-radius: 2rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .nav-with-search .fa-search{
   font-size: 1.5rem;
@@ -266,9 +267,12 @@ body{
   color:rgba(15, 25, 119, 0.795)
 }
 .nav-with-search .search-submit{
+  display: flex;
+  align-items: center;
   padding: 0.05rem 1rem;
-  background: none;
-  color:rgba(92, 102, 194, 1);
+  background: white;
+  color: rgba(92, 102, 194, 1);
+  border: 1px solid rgba(124, 124, 124, 0.31);
 }
 .nav-with-search .controls{
   min-width: 30%;
@@ -631,6 +635,7 @@ body{
 }
 /* login mini avatar styles */
 .view-more{
+  cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 .login{
@@ -646,7 +651,6 @@ body{
 }
 .fa-chevron-down{
   color: white;
-  cursor: pointer;
 }
 .view-more-links{
   display: none;
@@ -735,6 +739,7 @@ margin-right: 5px;
 font-size: 12px;
 }
 .modal-body{
+  overflow: overlay;
   padding-left: 2rem;
   padding-right: 2rem;
 }
@@ -1002,6 +1007,12 @@ font-weight: 500;
 }
 .copy:active{
   background-color:rgb(170, 170, 170);
+}
+.clear-input-background:hover{
+  background: none;
+}
+.clear-input-background:active{
+  background-color: rgb(243, 243, 243);
 }
 } 
 

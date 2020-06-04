@@ -311,7 +311,7 @@
   </div>
 </div>
 
-
+<%- include("partials/footer.ejs"); %>
 
 <script>
   const DoNotShowMessageAgainCheckBox = document.querySelector(".dont-show-again-checkbox");
@@ -326,14 +326,6 @@
   const dataObj = <%- JSON.stringify(dataObj) %>
   const banObj =  dataObj.banObj;
   const visibilityState = dataObj.persondata.communityvisibilitystate;
-  if(dataObj.backgroundFull != undefined && dataObj.backgroundFull && dataObj.backgroundFull != "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/undefined"){
-    background.style.backgroundImage = `url(${dataObj.backgroundFull})`
-  }else{
-    background.style.backgroundImage = "url(/images/cover-placeholder.jpg)";
-  }
- const navInput = document.querySelector("#url-input");
- const id = dataObj.persondata.steamid;
- navInput.value=`https://steamcommunity.com/profiles/${id}`
 </script>
 
 <script src="/scripts/updateBans.js"></script>
@@ -341,6 +333,5 @@
 <script src="/scripts/updatePrivacy.js"></script>
 <script src="/scripts/steamLevelColor.js"></script>
 <script src="/scripts/updateOnlineStatus.js"></script>
-
-
-<%- include("partials/footer.ejs"); %>
+<script src="/scripts/updateNavInputField.js"></script>
+<script src="/scripts/updateBackground.js"></script>

@@ -14,9 +14,6 @@ $(function () {
 		}
 	}
 }) 
-
-
-
 // Event Listeners
 
 // copy to clipboard button
@@ -39,8 +36,8 @@ $(".copy").click(function(event){
 
 // My profile view-more button
 $(".view-more").click(function(event){
-	const viewMoreBtn = $(this);
-  viewMoreBtn.siblings(".view-more-links").toggle();
+	$(this).siblings(".view-more-links").toggle();
+	event.stopPropagation();
 })
 
 // dont show again local storage 
@@ -104,8 +101,9 @@ $(".url-input").focusout(function(event){
 
 // check field for any characters.If present show the clear-input button
 $(".url-input").on("keydown input cut",function(event){
+	const inputField = $(this);
 	setTimeout(function(){
-		if($(event.target).val() != ""){
+		if(inputField.val() != ""){
 		 $(".clear-input").children(".clear-input-background").css("visibility","visible");
 		}else{
 		 $(".clear-input").children(".clear-input-background").css("visibility","hidden");

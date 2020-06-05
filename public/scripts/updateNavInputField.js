@@ -1,5 +1,5 @@
 const inputField = document.querySelector(".nav-with-search .url-input");
-const clearInputBtn = document.querySelector(".nav-with-search .clear-input-background");
+const clearInputBtn = document.querySelector(".nav-with-search .clear-input");
 
 inputField.value = `https://steamcommunity.com/profiles/${dataObj.persondata.steamid}`;
 

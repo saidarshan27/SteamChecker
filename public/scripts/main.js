@@ -104,9 +104,9 @@ $(".url-input").on("keydown input cut",function(event){
 	const inputField = $(this);
 	setTimeout(function(){
 		if(inputField.val() != ""){
-		 $(".clear-input").children(".clear-input-background").css("visibility","visible");
+		 $(".clear-input").css("visibility","visible");
 		}else{
-		 $(".clear-input").children(".clear-input-background").css("visibility","hidden");
+		 $(".clear-input").css("visibility","hidden");
 		}
 	},100)
 })
@@ -114,7 +114,7 @@ $(".url-input").on("keydown input cut",function(event){
 // clears the input on click 
 $(".clear-input").click(function(event){
 	$(this).siblings(".url-input").val("");
-	$(this).children(".clear-input-background").css("visibility","hidden");
+	$(this).css("visibility","hidden");
 })
 
 

@@ -154,12 +154,11 @@ body{
   width: 100%;
   background: #FFFFFF;
   mix-blend-mode: normal;
-  border: 1px solid  rgba(124, 124, 124, 0.31);
-  border-right: none;
   box-sizing: border-box;
   border-radius: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  border:none;
 }
 
 .home-container .url-input{
@@ -171,28 +170,24 @@ body{
 
 /* clear input */
  .clear-input{
+  visibility: hidden;
   padding: 1rem;
   outline: none;
   background: white;
   display: flex;
   align-items: center;
   cursor: pointer;
-  border: 1px solid  rgba(124, 124, 124, 0.31);
-  border-left: none;
-  border-right: none;
+  border:none;
 }
 .nav-with-search .clear-input{
   padding: 0;
 }
 .clear-input-background{
-  position: relative;
   padding: .5rem .7rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  visibility: hidden;
   border:none;
 }
 .clear-input-background:hover{
@@ -206,14 +201,14 @@ body{
   outline: none;
 }
 
-
-
 .home-container .fa-search{
   font-size: 2rem;
 }
 .controls{
   min-width: 50%;
   border-radius: 1rem;
+  border: 1px solid  rgba(124, 124, 124, 0.31);
+  background: white;
 }
 .home-container .controls form{
   display: flex;
@@ -273,8 +268,7 @@ body{
   padding: 0.05rem 1rem;
   background: white;
   color: rgba(92, 102, 194, 1);
-  border: 1px solid rgba(124, 124, 124, 0.31);
-  border-left: none;
+  border: none;
 }
 .nav-with-search .controls{
   min-width: 30%;

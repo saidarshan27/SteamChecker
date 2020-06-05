@@ -156,7 +156,6 @@ body{
   mix-blend-mode: normal;
   border: 1px solid  rgba(124, 124, 124, 0.31);
   border-right: none;
-  border-right: none;
   box-sizing: border-box;
   border-radius: 1rem;
   overflow: hidden;
@@ -180,6 +179,7 @@ body{
   cursor: pointer;
   border: 1px solid  rgba(124, 124, 124, 0.31);
   border-left: none;
+  border-right: none;
 }
 .nav-with-search .clear-input{
   padding: 0;
@@ -193,6 +193,7 @@ body{
   align-items: center;
   overflow: hidden;
   visibility: hidden;
+  border:none;
 }
 .clear-input-background:hover{
   background-color:rgb(243, 243, 243);
@@ -273,6 +274,7 @@ body{
   background: white;
   color: rgba(92, 102, 194, 1);
   border: 1px solid rgba(124, 124, 124, 0.31);
+  border-left: none;
 }
 .nav-with-search .controls{
   min-width: 30%;

@@ -288,6 +288,7 @@ async function getSteamRep(steam64){
    const steamRepReputationObj = {
     steamrepurl:json.steamrep.steamrepurl[0],
     reputation : json.steamrep.reputation[0].summary[0],
+    fullReputation : json.steamrep.reputation[0].full[0],
     NumberOfBannedFriends : json.steamrep.stats[0].bannedfriends[0]
   }
   return steamRepReputationObj;

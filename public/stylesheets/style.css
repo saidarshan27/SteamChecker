@@ -347,7 +347,7 @@ body{
 }
 /* name and level */
 .name-level{
-  margin-left: 1.5rem;
+  margin-left: 1rem;
   grid-column: 2/9;
   grid-row: 1/2;
   padding: 1rem;
@@ -362,11 +362,16 @@ body{
   color: black;
 }
 .name-level a:hover{
-  color: rgb(76, 153, 179);
+  color: #007bff;
   text-decoration: underline;
 }
+.name-level i{
+  font-size: 1.1rem;
+  color: #007bff;
+}
+
 .realname-profileurl{
-  margin-left: 1.5rem;
+  margin-left: 2.7rem;
   grid-column: 2/9;
   grid-row: 2/3;
 }

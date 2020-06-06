@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const SteamApi = require("web-api-steam");
 const rp = require('request-promise');
+const  xml2js = require('xml2js');
 const SteamID = require('steamid');
 const passport = require('passport')
 const session = require('express-session')
@@ -132,7 +133,8 @@ async function main(steam64){
   const banObj = await playerBans(steam64);
   const backgroundFull = await playerBackground(steam64);
   const steamLvl = await playerLevel(steam64);
-  const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl};
+  const steamrepReputation = await getSteamRep(steam64);
+  const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl,steamrepReputation};
   return dataObj;
   }
 }
@@ -271,6 +273,31 @@ async function playerBackground(steam64){
     console.log(err);
   }
 }
+
+
+async function getSteamRep(steam64){
+  const options={
+    uri:`https://steamrep.com/api/beta4/reputation/${steam64}`,
+    qs:{
+      extended:1
+    }
+  }
+  try{
+   const xml = await rp(options);
+   const json = await xml2js.parseStringPromise(xml);
+   const steamRepReputationObj = {
+    steamrepurl:json.steamrep.steamrepurl[0],
+    reputation : json.steamrep.reputation[0].summary[0],
+    NumberOfBannedFriends : json.steamrep.stats[0].bannedfriends[0]
+  }
+  return steamRepReputationObj;
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+
+
 
 function playerGames(steam64){
   return new Promise((resolve,reject)=>{

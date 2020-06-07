@@ -402,6 +402,10 @@ body{
   width: 100%;
   padding-top: 0;
 }
+.reputation{
+  display: flex;
+  flex-direction: column;
+}
 .reputation-wrapper h5 button{
   background: none;
   outline: none;

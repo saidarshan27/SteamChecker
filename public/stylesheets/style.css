@@ -31,7 +31,7 @@ select:-webkit-autofill:focus {
 }
 
 .tooltip{
-  font-size: 11px;
+  font-size: .6rem;
 }
 i{
   pointer-events: none;
@@ -109,7 +109,7 @@ body{
 .mobile-login-wrapper .login-avatar{
   width: 2rem;
   height: 2rem;
-  margin-left:-20px;
+  margin-left:-1.25rem;
 }
 .home-container{
   width: 100vw;
@@ -234,7 +234,7 @@ body{
   padding-bottom:1.5rem;
 }
 #input-types-supported-modal .modal-dialog {
-  max-width: 700px;
+  max-width: 44rem;
 }
 .input-types-supported{
   list-style: none;
@@ -315,7 +315,7 @@ body{
  padding-top: 2rem;
  display:grid;
  grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
- grid-auto-rows:65px; 
+ grid-auto-rows:1fr; 
  gap:1rem;
 /* background: linear-gradient(0.15deg, #F1F5F8 0.17%, rgba(255, 255, 255, 0.72) 99.86%); */
 }
@@ -452,11 +452,11 @@ body{
 
 .about .name-label{
   padding-bottom: .9rem;
-  font-size: 13px;
+  font-size: .8rem;
   font-weight: 500;
 }
 .about .data-label{
-  font-size: 12px;
+  font-size: .75rem;
   font-weight: 500;
 }
 
@@ -499,7 +499,7 @@ body{
   grid-column: 5/13;
   grid-row: 4/12;
   display: grid;
-  grid-template-rows: repeat(2,308px);
+  grid-template-rows: repeat(2,1fr);
   gap:0.8rem;
   grid-template-areas: 
   "steamid"
@@ -578,7 +578,7 @@ body{
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .steam-quick-links ul{
-  font-size: 12px;
+  font-size: .75rem;
   list-style: none;
 }
 .steam-quick-links li{
@@ -594,19 +594,19 @@ body{
 }
 
 .steam-ids .name-label,.profile-privacy .name-label{
-  font-size: 13px;
+  font-size: .8rem;
   font-weight: 500;
 }
 
 .steam-ids .data-label,.profile-privacy .data-label{
-  font-size: 12px;
+  font-size: .75rem;
   font-weight: 500;
 }
 .profile-overview-customURL .data{
   display: inline-block;
   margin-bottom: 0;
   width:min-content;
-  height: 18px;
+  height: 1.1rem;
   overflow: hidden;
   text-overflow: ellipsis;  
 }
@@ -837,10 +837,6 @@ font-size: 12px;
       display:grid;
       grid-template-columns: 1fr 1fr;
     }
-    .about .separator{
-      opacity: 0;
-      margin-left: -22px;
-    }
     .nav-with-search .controls .url-input{
       overflow: hidden;
       text-overflow: ellipsis;
@@ -872,15 +868,10 @@ font-size: 12px;
 
 @media(max-width:1187px){
   .profile-overview-customURL .data{
-    height: 16px;
-  }
-
-  .steam-ids .separator,.profile-privacy .separator{
-    opacity: 0;
-    margin-left: -22px;
+    height: 1rem;
   }
   .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
-    font-size: 12px;
+    font-size: .75rem;
     font-weight: 500;
 }
 }
@@ -908,15 +899,15 @@ font-size: 12px;
   margin-bottom: .7rem;
 }
 .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
-    font-size: 10px;
+    font-size: .6rem;
     font-weight: 500;
  }
  .reputation-wrapper .data{
-  font-size: 10px;
+  font-size: .6rem;
   font-weight: 500;
  }
  .steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
-  font-size: 10px;
+  font-size: .6rem;
   font-weight: 500;
 }
 }
@@ -932,18 +923,18 @@ font-size: 12px;
     grid-row: 4/5;
   }
   .profile-overview-customURL .data{
-    height: 18px;
+    height: 1.1rem;
   }
   .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
-    font-size: 14px;
+    font-size: .87rem;
     font-weight: 500;
  }
  .steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
-  font-size: 14px;
+  font-size: .87rem;
   font-weight: 500;
 }
 .reputation-wrapper .data{
-  font-size: 14px;
+  font-size: .87rem;
   font-weight: 500;
  }
 .userpage-container{
@@ -979,7 +970,7 @@ grid-column: 1/13;
 
 @media(max-width:1235px){
   .add-friend-btn,.send-message-btn{
-    font-size: 10px;
+    font-size: .6rem;
   }
   .nav-with-search .controls{
     width: 50%;
@@ -997,14 +988,6 @@ grid-column: 1/13;
   }
 }
 
-@media(max-width:1101px){
-  .add-friend-btn,.send-message-btn{
-    font-size: 8px;
-  }
-  .fa-comment-dots{
-    font-size: 13.5px;
-}
-}
 
 @media (max-width:768px){
   .data-label .since-ban{
@@ -1024,7 +1007,7 @@ grid-column: 1/13;
     line-height: 1.4rem;
   }
   .profile-overview-customURL .data{
-    height: 13px;
+    height: .8rem;
   }
   .home-container{
     height: 50vh;
@@ -1061,28 +1044,28 @@ grid-column: 1/13;
     top: 0%;
 }
 .name-level h4{
-  font-size: 16px;
+  font-size: 1rem;
 }
 .realname-profileurl p{
-  font-size: 14px;
+  font-size: .87rem;
 }
 .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
-  font-size: 10px;
+  font-size: .6rem;
   font-weight: 500;
 }
 .steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
-font-size: 10px;
+font-size: .6rem;
 font-weight: 500;
 }
 .reputation-wrapper{
   margin-top: 1rem;
 }
 .reputation-wrapper .data{
-  font-size: 10px;
+  font-size: .6rem;
   font-weight: 500;
  }
 .nav-with-search .url-input{
-  font-size: 8px;
+  font-size: .5rem;
 }
 .nav-with-search .fa-search {
   font-size: 1rem;
@@ -1098,13 +1081,13 @@ font-weight: 500;
   width: 100%;
 }
 .name-level h4{
-  font-size: 12px;
+  font-size: .75rem;
 }
 .name-level-wrapper .fa-link{
-  font-size: 12px;
+  font-size: .75rem;
 }
 .realname-profileurl p{
-  font-size: 11px;
+  font-size: .68rem;
 }
 .copy:hover{
   background: none;
@@ -1123,7 +1106,7 @@ font-weight: 500;
 
 @media (max-width:645px){
   .tooltip{
-    font-size: 8px;
+    font-size: .5rem;
   }
   .input-types-supported li{
     font-size: 0.8rem;
@@ -1176,10 +1159,10 @@ font-weight: 500;
 }
 @media (max-width:360px){
   .steam-ids .name-label{
-    font-size: 10px;
+    font-size: .6rem;
   }
   .steam-ids .data-label{
-    font-size: 9px;
+    font-size: .56rem;
   }
   .section-title{
     font-size: 0.6rem;

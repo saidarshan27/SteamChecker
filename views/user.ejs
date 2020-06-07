@@ -30,7 +30,7 @@
     <div class="steam-rep">
       <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %> " target="_blank" rel="no-follow">
         <i class="fas fa-link mr-1"></i> 
-        <img src="/images/steamrep-logo.png" alt="steamrep">
+        <img src="/images/steamrep-logo.png" alt="steamrep" class="steamrep-logo">
       </a>
     </div>
   </section>
@@ -111,26 +111,21 @@
     <div class="reputation-wrapper">
       <h5 class="section-title" style="margin-bottom: 1.5rem;">
         REPUTATION          
-        <button class="rep-status" data-html="true" data-placement="right" data-toggle="tooltip" data-toggle="tooltip" data-html="true" title="Reputation by SteamRep.<a href='<%= dataObj.steamrepReputation.steamrepurl %>' target='_blank' rel='no-follow'>Click here</a> or the SteamRep icon above to know more">
+        <button class="rep-status" data-html="true" data-placement="right" data-toggle="tooltip" data-toggle="tooltip" data-html="true" title="<a href='<%= dataObj.steamrepReputation.steamrepurl %>' target='_blank' rel='no-follow'>Click here</a> or the SteamRep icon above to know more about user's reputation">
           <i class="fas fa-question-circle"></i>
         </button>
       </h5>
-      <% if(dataObj.steamrepReputation.fullReputation != ""){ %>
-        <div class="reputation">
-          <span class="data"></span>
-        </div>
-      <% }else{ %>
         <div class="reputation">
           <span class="data" style="color: #7A7D7F;">
-            <svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
-              <path opacity="0.49" d="M24.6115 3.07002C24.5942 3.07208 24.5739 3.07414 24.5565 3.07414C24.5536 3.06179 24.5507 3.04945 24.5449 3.03711C24.5652 3.04739 24.5884 3.05974 24.6115 3.07002Z" fill="white"/>
-              <path opacity="0.49" d="M0.454964 3.03711C0.452065 3.04945 0.446269 3.06179 0.443371 3.07414C0.425982 3.07208 0.405695 3.07208 0.388306 3.07002C0.411491 3.05974 0.434676 3.04739 0.454964 3.03711Z" fill="white"/>
-              <path d="M25 6.16634C25 12.3039 19.8789 17.5923 12.5 20C5.12404 17.5943 0 12.3039 0 6.16634C0 5.10743 0.153605 4.0732 0.443427 3.07392C0.970902 3.11504 1.50997 3.13766 2.05194 3.13766C5.8457 3.13766 9.30037 2.10754 11.8885 0.421507C12.0971 0.285802 12.3 0.145985 12.4971 0C12.6942 0.143929 12.8971 0.283746 13.1057 0.421507C15.6967 2.10754 19.1485 3.13766 22.9423 3.13766C23.4871 3.13766 24.0233 3.1171 24.5508 3.07392C24.8464 4.07114 25 5.10538 25 6.16634Z" fill="#7A7D7F"/>
-            </svg>                            
-            no special reputation
+          <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
+            <use href="#empty-shield"></use>
+          </svg>                           
+            <%= dataObj.steamrepReputation.fullReputation %>
+          </span>
+          <span class="by-steamrep" style="font-size: .6rem;">
+             By <a href="https://steamrep.com" style="color:inherit" target="_blank" rel="no-follow">SteamRep.com</a>
           </span>
         </div>
-      <% } %>
     </div>
   </section>
 <section class="nav-wrapper">
@@ -301,7 +296,10 @@
 </div>
 
 
-
+<!-- SVGS -->
+<%- include("partials/svgs/empty-shield.ejs"); %>
+<%- include("partials/svgs/tick-shield.ejs"); %>
+<%- include("partials/svgs/wrong-shield.ejs"); %>
 
 
 
@@ -349,8 +347,8 @@
     </div>
   </div>
 </div>
-
 <%- include("partials/footer.ejs"); %>
+
 
 <script>
   const DoNotShowMessageAgainCheckBox = document.querySelector(".dont-show-again-checkbox");

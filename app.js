@@ -285,10 +285,22 @@ async function getSteamRep(steam64){
   try{
    const xml = await rp(options);
    const json = await xml2js.parseStringPromise(xml);
+   const steamrepurl=json.steamrep.steamrepurl[0];
+   let  fullReputation;
+
+   if(json.steamrep.reputation[0].full[0] === ""){
+      fullReputation = "no special reputation";
+   }else if(json.steamrep.reputation[0].full[0] != "" && json.steamrep.reputation[0].full[0].includes("SR ADMIN")){
+     fullReputation = "SteamRep Admin";
+   }else if(json.steamrep.reputation[0].full[0] != "" && json.steamrep.reputation[0].full[0].includes("VALVE ADMIN")){
+     fullReputation = "VALVE EMPLOYEE"
+   }else if(json.steamrep.reputation[0].full[0] != "" && json.steamrep.reputation[0].full[0].includes("SCAMMER")){
+    fullReputation = "SCAMMER"
+   }
+
    const steamRepReputationObj = {
-    steamrepurl:json.steamrep.steamrepurl[0],
-    reputation : json.steamrep.reputation[0].summary[0],
-    fullReputation : json.steamrep.reputation[0].full[0],
+    steamrepurl,
+    fullReputation,
     NumberOfBannedFriends : json.steamrep.stats[0].bannedfriends[0]
   }
   return steamRepReputationObj;

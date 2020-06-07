@@ -442,7 +442,7 @@ body{
 
 
 .about .name-label{
-  padding-bottom: 1.2rem;
+  padding-bottom: .9rem;
   font-size: 13px;
   font-weight: 500;
 }
@@ -968,19 +968,26 @@ grid-column: 1/13;
 }
 }
 
-@media (max-width:991px){
-  .controls{
-    width: 90%;
-  }
-  .label{
-    width: 90%;
-  }
-}
 @media(max-width:1235px){
   .add-friend-btn,.send-message-btn{
     font-size: 10px;
   }
+  .nav-with-search .controls{
+    width: 50%;
+  }
 }
+@media (max-width:991px){
+  .home-container .controls{
+    width: 90%;
+  }
+  .home-container .label{
+    width: 90%;
+  }
+  .nav-with-search .controls{
+    width: 90%;
+  }
+}
+
 @media(max-width:1101px){
   .add-friend-btn,.send-message-btn{
     font-size: 8px;

@@ -25,14 +25,25 @@
         <hr>
         <table class="table">
           <tbody>
-            <tr>
-              <td class="name-label">Steam Level</td>
-              <td class="data-label">
-                <span class="data">
-                  <%= dataObj.steamLvl %>
-                </span>
-              </td>
-            </tr>
+            <% if(dataObj.steamLvl){ %>
+              <tr>
+                <td class="name-label">Steam Level</td>
+                <td class="data-label">
+                  <span class="data">
+                    <%= dataObj.steamLvl %>
+                  </span>
+                </td>
+              </tr>
+            <% }else{ %>
+              <tr>
+                <td class="name-label">Steam Level</td>
+                <td class="data-label">
+                  <span class="data private">
+                    private
+                  </span>
+                </td>
+              </tr>
+            <% } %>
             <tr>
               <td class="name-label">Friendship</td>
               <td class="data-label">
@@ -43,15 +54,26 @@
                 </span>
               </td>
             </tr>
-            <tr>
-              <td class="name-label">Joined Steam</td>
-              <td class="data-label">
-                <span class="data">
-                  <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-                  <%= humanDate %>
-                </span>
-              </td>
-            </tr>
+            <% if(dataObj.persondata.timecreated){ %>
+              <tr>
+                <td class="name-label">Joined Steam</td>
+                <td class="data-label">
+                  <span class="data">
+                    <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
+                    <%= humanDate %>
+                  </span>
+                </td>
+              </tr>
+            <% }else{ %>
+              <tr>
+                <td class="name-label">Joined Steam</td>
+                <td class="data-label">
+                  <span class="data private">
+                    private
+                  </span>
+                </td>
+              </tr>
+            <% } %>
             <tr>
               <td class="name-label">
                 Online Status
@@ -63,11 +85,95 @@
           </tbody>
         </table>
         <hr style="margin-top: 0;"> 
+        <p class="reputation-title section-title">
+          REPUTATION
+        </p>
         <div class="reputation">
-          <p class="section-title">
-            REPUTATION
-          </p>
+          <span class="data" style="color: #7A7D7F;">
+          <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
+            <use href="#empty-shield"></use>
+            </svg>                           
+              <%= dataObj.steamrepReputation.fullReputation %>
+            </span>
+            <span class="by-steamrep" style="font-size: .6rem;text-align: end;">
+               By <a href="https://steamrep.com" style="color:inherit;" target="_blank" rel="no-follow">SteamRep.com</a>
+            </span>
         </div>
+        
+      </div>
+    </section>
+    <section class="steam-ids-wrapper">
+      <div class="steam-ids">
+         <p class="section-title">STEAM ID'S</p>
+         <hr>
+         <table class="table">
+           <tbody>
+             <tr>
+               <td class="name-label">
+                 SteamID64
+               </td>
+               <td class="data-label">
+                  <span class="data">
+                    <%= dataObj.objSteamIds.steam64 %>
+                  </span>
+               </td>
+             </tr>
+             <tr>
+              <td class="name-label">
+                SteamID2
+              </td>
+              <td class="data-label">
+                 <span class="data">
+                   <%= dataObj.objSteamIds.steam2id %>
+                 </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                SteamID3
+              </td>
+              <td class="data-label">
+                 <span class="data">
+                   <%= dataObj.objSteamIds.steam3id %>
+                 </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">FiveMID</td>
+              <td class="data-label">
+                <%= dataObj.objSteamIds.fiveMID %>
+              </td>
+            </tr>
+            <% if(dataObj.objSteamIds.customURL){ %>
+              <tr>
+                <td class="name-label">
+                  Vanity URL 
+                </td>
+                <td class="data-label">
+                   <span class="data">
+                     <%= dataObj.objSteamIds.customURL %>
+                   </span>
+                </td>
+              </tr>
+            <% }else{ %>
+              <tr>
+                <td class="name-label">
+                  Vanity URL 
+                </td>
+                <td class="data-label">
+                   <span class="data mute">
+                     Not Set
+                   </span>
+                </td>
+              </tr>
+            <% } %>
+           </tbody>
+         </table>
+         <!-- <div class="steam-profile-badge">
+           <p class="section-title">PROFILE BADGE</p>
+          <a href="https://steamprofile.com/sig/76561198364464404/">
+           <img style="width: 100%;" src="https://badges.steamprofile.com/profile/default/steam/<%= dataObj.objSteamIds.steam64 %>.png" alt="Steam Profile badge for <%= dataObj.persondata.personaname %>: Get your our own Steam Signature at SteamProfile.com" title="Steam Profile badge for ✪EaGLE✪: Get your our own Steam Signature at SteamProfile.com"/></a>
+         </div> -->
       </div>
     </section>
   </div>

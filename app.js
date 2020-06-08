@@ -7,7 +7,8 @@ const rp = require('request-promise');
 const  xml2js = require('xml2js');
 const SteamID = require('steamid');
 const passport = require('passport')
-const session = require('express-session')
+const session = require('express-session');
+const fiveMConverter = require("fivemid-converter");
 const SteamStrategy = require('passport-steam').Strategy;
 
 
@@ -205,10 +206,12 @@ function playerInfo(steam64) {
 function playerSteamIds(steam64){
   if(typeof steam64 !=undefined || typeof steam64 != null && typeof steam64 === "string"){
     const sid = new SteamID(steam64);
+    const fiveMID = fiveMConverter.fiveMIDbyID64(steam64);
     const objSteamIds = {
       steam2id:sid.getSteam2RenderedID(true),
       steam3id:sid.getSteam3RenderedID(),
-      steam64:steam64
+      steam64:steam64,
+      fiveMID
     }
     return objSteamIds;
   }else{

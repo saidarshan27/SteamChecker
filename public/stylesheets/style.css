@@ -353,16 +353,31 @@ body{
 .about-wrapper{
   grid-column: 1/6;
   grid-row: 3/8;
+}
+.about-wrapper,.steam-ids-wrapper,.profile-privacy-wrapper{
   background: var(--section-background);
 }
-.about{
+.steam-ids-wrapper{
+  grid-column: 6/13;
+  grid-row: 3/8;
+}
+.about,.steam-ids,.profile-privacy{
   padding: 1rem 1.5rem;
+}
+.steam-ids .data-label{
+  letter-spacing: 1px;
+  font-weight: 450;
+}
+.steam-ids td{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .section-title{
   font-size: .875rem;
   color: var(--primary);
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 1rem;
+  text-transform: capitalize;
 }
 .table td{
   border-top: none;
@@ -376,6 +391,21 @@ body{
 .data-label{
   font-size: .75rem;
   font-weight: normal;
+}
+.data.private{
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #d30000;
+}
+.data.mute{
+  font-style: italic;
+  color: #636363;
+}
+.reputation{
+  font-size: .7rem;
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
 }
 
 

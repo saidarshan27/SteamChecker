@@ -186,11 +186,93 @@
             <% } %>
            </tbody>
          </table>
-         <!-- <div class="steam-profile-badge">
-           <p class="section-title">PROFILE BADGE</p>
-          <a href="https://steamprofile.com/sig/76561198364464404/">
-           <img style="width: 100%;" src="https://badges.steamprofile.com/profile/default/steam/<%= dataObj.objSteamIds.steam64 %>.png" alt="Steam Profile badge for <%= dataObj.persondata.personaname %>: Get your our own Steam Signature at SteamProfile.com" title="Steam Profile badge for ✪EaGLE✪: Get your our own Steam Signature at SteamProfile.com"/></a>
-         </div> -->
+      </div>
+    </section>
+    <section class="profile-privacy-wrapper">
+      <div class="profile-privacy">
+        <p class="section-title">PROFILE PRIVACY</p>
+        <hr>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="name-label">
+                Privacy State
+              </td>
+              <td class="data-label">
+                <span class="data" id="privacy-state"></span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                VAC Ban
+              </td>
+              <td class="data-label">
+                <span class="data" id="vac-ban"></span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                Game Ban
+              </td>
+              <td class="data-label">
+                <span class="data" id="game-ban"></span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                Trade Ban
+              </td>
+              <td class="data-label">
+                <span class="data" id="trade-ban"></span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                Community Ban
+              </td>
+              <td class="data-label">
+                <span class="data" id="community-ban"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="steam-quick-links-wrapper">
+      <div class="steam-quick-links">
+        <p class="section-title">
+          STEAM QUICK LINK'S
+        </p>
+        <hr>
+        <table class="table">
+          <tbody>
+            <tr >
+              <td class="name-label">
+                Inventory
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                Profile Comments
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                Common Friends
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                Name History
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                Groups
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </div>
@@ -264,10 +346,14 @@
 
 <script>
   const dataObj = <%- JSON.stringify(dataObj) %>
+  const visibilityState = dataObj.persondata.communityvisibilitystate;
+  const banObj =  dataObj.banObj;
 </script>
 
 <script src="/scripts/steamLevelColor.js"></script>
 <script src="/scripts/updateOnlineStatus.js"></script>
+<script src="/scripts/updatePrivacy.js"></script>
+<script src="/scripts/updateBans.js"></script>
 
 
 
@@ -281,13 +367,11 @@
     loggedUserId = user.loggedUserId;
   }
   const background = document.querySelector(".profile-background");
-  const banObj =  dataObj.banObj;
-  const visibilityState = dataObj.persondata.communityvisibilitystate;
 </script>
 
-<script src="/scripts/updateBans.js"></script>
+
 <script src="/scripts/checkOwnerShip.js"></script>
-<script src="/scripts/updatePrivacy.js"></script>
+
 
 <script src="/scripts/updateNavInputField.js"></script>
 <script src="/scripts/updateBackground.js"></script>

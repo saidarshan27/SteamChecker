@@ -222,12 +222,16 @@ function playerBans(steam64){
   let banObj={}
   return new Promise((resolve,reject)=>{
     SteamApi.getPlayerBans(steam64,"D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
+      console.log(data);
       if (err) {
         console.log("error", err);
         reject(err);
       } else {
       if(data.VACBanned === true || data.CommunityBanned === true){
         banObj.DaysSinceLastBan = data.DaysSinceLastBan;
+      }
+      if(data.NumberOfGameBans){
+        banObj.gameBan = data.NumberOfGameBans;
       }
         banObj.tradeBan = data.EconomyBan;
         banObj.vacBan = data.VACBanned;

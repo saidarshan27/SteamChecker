@@ -1,6 +1,7 @@
 const tradeBan = document.querySelector("#trade-ban");
 const vacBan = document.querySelector("#vac-ban");
 const communityBan = document.querySelector("#community-ban");
+const gameBan = document.querySelector("#game-ban");
 if(banObj.tradeBan === "none"){
   tradeBan.classList.add("ban-none");
   tradeBan.innerText = "NONE";
@@ -23,6 +24,14 @@ if(banObj.communityBan === false){
   sinceBanned(banObj,communityBan);
   communityBan.classList.add("ban-true");
   communityBan.innerText="BANNED";
+}
+if(!banObj.gameBan){
+  gameBan.classList.add("ban-none");
+  gameBan.innerText="NONE";
+}else{
+  sinceBanned(banObj,gameBan);
+  gameBan.classList.add("ban-true");
+  gameBan.innerText="BANNED";
 }
 
 function sinceBanned(banObj,banElement){

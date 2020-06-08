@@ -370,7 +370,7 @@ body{
 }
 .name-label{
   font-size: .75rem;
-  font-weight: bold;
+  font-weight: 600;
   color: #636363;
 }
 .data-label{

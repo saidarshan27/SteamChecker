@@ -26,7 +26,7 @@
         <table class="table">
           <tbody>
             <tr>
-              <td class="name-label">STEAM LEVEL</td>
+              <td class="name-label">Steam Level</td>
               <td class="data-label">
                 <span class="data">
                   <%= dataObj.steamLvl %>
@@ -34,7 +34,7 @@
               </td>
             </tr>
             <tr>
-              <td class="name-label">FRIENDSHIP</td>
+              <td class="name-label">Friendship</td>
               <td class="data-label">
                 <span class="data">
                   <em>
@@ -44,15 +44,30 @@
               </td>
             </tr>
             <tr>
-              <td class="name-label">JOINED STEAM</td>
+              <td class="name-label">Joined Steam</td>
               <td class="data-label">
                 <span class="data">
-                  <% const humanDate = dataObj.persondata.timcreated.toL
+                  <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
+                  <%= humanDate %>
                 </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">
+                Online Status
+              </td>
+              <td class="data-label">
+                <span class="data" id="online-status"></span>
               </td>
             </tr>
           </tbody>
         </table>
+        <hr style="margin-top: 0;"> 
+        <div class="reputation">
+          <p class="section-title">
+            REPUTATION
+          </p>
+        </div>
       </div>
     </section>
   </div>
@@ -123,7 +138,14 @@
   </div>
 </div>
 <%- include("partials/footer.ejs"); %>
+
+<script>
+  const dataObj = <%- JSON.stringify(dataObj) %>
+</script>
+
 <script src="/scripts/steamLevelColor.js"></script>
+<script src="/scripts/updateOnlineStatus.js"></script>
+
 
 
 <!-- <script>
@@ -136,7 +158,6 @@
     loggedUserId = user.loggedUserId;
   }
   const background = document.querySelector(".profile-background");
-  const dataObj = <%- JSON.stringify(dataObj) %>
   const banObj =  dataObj.banObj;
   const visibilityState = dataObj.persondata.communityvisibilitystate;
 </script>
@@ -144,7 +165,7 @@
 <script src="/scripts/updateBans.js"></script>
 <script src="/scripts/checkOwnerShip.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
-<script src="/scripts/updateOnlineStatus.js"></script>
+
 <script src="/scripts/updateNavInputField.js"></script>
 <script src="/scripts/updateBackground.js"></script>
 <script src="/scripts/updateReputation.js"></script> -->

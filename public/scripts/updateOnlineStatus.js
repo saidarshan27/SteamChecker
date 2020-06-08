@@ -3,44 +3,44 @@ const dataSpan = document.getElementById("online-status");
 switch(status){
   case 0:{
     dataSpan.innerHTML = 
-    `<strong>OFFLINE</strong>`;
+    `OFFLINE`;
     dataSpan.classList.add("offline");
     break;
   }
   case 1:{
     dataSpan.innerHTML = 
-    `<strong>ONLINE</strong>`;
+    `ONLINE`;
     dataSpan.classList.add("online");
     break;
   }
   case 2:{
     dataSpan.innerHTML = 
-    `<strong>BUSY</strong>`;
+    `BUSY`;
     dataSpan.classList.add("busy");
     break;
   }
   case 3:{
    dataSpan.innerHTML = 
-   `<strong>AWAY</strong>`;
+   `AWAY`;
    dataSpan.classList.add("away");
     break;
   }
   case 4:{
     dataSpan.innerHTML = 
-   `<strong>SNOOZE</strong>`;
+   `SNOOZE`;
    dataSpan.classList.add("snooze");
     break;
   }
   case 5:{
     dataSpan.innerHTML = 
-   `<strong>LOOKING TO TRADE</strong>`;
+   `LOOKING TO TRADE`;
    dataSpan.classList.add("trade");
     break;
   }
   case 6:{
     dataSpan.innerHTML = 
-   `<strong>LOOKING TO PLAY</strong>`;
-   dataSpan.classList.add("trade");
+   `LOOKING TO PLAY`;
+   dataSpan.classList.add("play");
     break;
   }
 }

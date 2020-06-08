@@ -1,6 +1,5 @@
 <%- include("partials/headerWithSearch.ejs"); %>
 
-<div class="profile-background">
   <div class="container userpage-container"> 
    <section class="name-level-wrapper">
     <img src="<%= dataObj.persondata.avatarfull %>" class="avatar" alt="avatar"/>
@@ -8,10 +7,55 @@
       <h5>
         <%= dataObj.persondata.personaname %>
       </h5>
+      <% if(dataObj.steamLvl){ %>
+        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
+      <% }else{ %>
+        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
+      <% } %>
+    </div>
+    <div class="icon-links">
+        <a href="">
+          <img src="/images/steamrep-logo.png" alt="steamrep-logo">
+        </a>
      </div>
-   </section>
+    </section>
+    <section class="about-wrapper">
+      <div class="about">
+        <p class="section-title">ABOUT</p>
+        <hr>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="name-label">STEAM LEVEL</td>
+              <td class="data-label">
+                <span class="data">
+                  <%= dataObj.steamLvl %>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">FRIENDSHIP</td>
+              <td class="data-label">
+                <span class="data">
+                  <em>
+                    Sign In to check 
+                  </em>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="name-label">JOINED STEAM</td>
+              <td class="data-label">
+                <span class="data">
+                  <% const humanDate = dataObj.persondata.timcreated.toL
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
-</div>
 
 
 
@@ -79,6 +123,7 @@
   </div>
 </div>
 <%- include("partials/footer.ejs"); %>
+<script src="/scripts/steamLevelColor.js"></script>
 
 
 <!-- <script>
@@ -99,7 +144,6 @@
 <script src="/scripts/updateBans.js"></script>
 <script src="/scripts/checkOwnerShip.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
-<script src="/scripts/steamLevelColor.js"></script>
 <script src="/scripts/updateOnlineStatus.js"></script>
 <script src="/scripts/updateNavInputField.js"></script>
 <script src="/scripts/updateBackground.js"></script>

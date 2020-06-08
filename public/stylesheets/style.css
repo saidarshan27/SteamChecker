@@ -309,11 +309,12 @@ body{
 
 /* user page container */
 .userpage-container{
-  max-width: 710px;
+  max-width: 910px;
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(12,1fr);
   grid-auto-rows: 65px;
+  gap: 1rem;
 }
 .name-level-wrapper{
   grid-row: 1/3;
@@ -336,8 +337,46 @@ body{
   margin-left: 1rem;
   display: flex;
   align-items: center;
+  grid-column: 2/13;
 }
-
+.icon-links{
+  padding-left: 1rem;
+  margin-left: 1rem;
+}
+.icon-links img{
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.friendPlayerLevel .friendPlayerLevelNum.number-color-black{
+  color: black;
+}
+.about-wrapper{
+  grid-column: 1/6;
+  grid-row: 3/8;
+  background: var(--section-background);
+}
+.about{
+  padding: 1rem 1.5rem;
+}
+.section-title{
+  font-size: .875rem;
+  color: var(--primary);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.table td{
+  border-top: none;
+  padding-left: 0;
+}
+.name-label{
+  font-size: .75rem;
+  font-weight: bold;
+  color: #636363;
+}
+.data-label{
+  font-size: .75rem;
+  font-weight: normal;
+}
 
 
 /* modal styles */

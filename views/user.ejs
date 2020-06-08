@@ -1,299 +1,30 @@
 <%- include("partials/headerWithSearch.ejs"); %>
 
 <div class="profile-background">
-<div class="userpage-container container">
-  <section class="name-level-wrapper">
-    <img src="<%= dataObj.persondata.avatarfull %>" alt="avatar" class="avatar">
-    <div class="name-level">
-      <h4>
-        <a href="<%= dataObj.persondata.profileurl %>" target="_blank" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>">
-          <i class="fas fa-link mr-1"></i>        
-          <%= dataObj.persondata.personaname %>
-      </a>
-    </h4>
-      <% if(dataObj.steamLvl){ %>
-        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
-      <% }else{ %>
-        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
-      <% } %>
-    </div>
-    <% if(dataObj.persondata.realname){ %> 
-      <div class="realname-profileurl">
-        <p><%= dataObj.persondata.realname %></p>
+  <div class="container userpage-container"> 
+   <section class="name-level-wrapper">
+    <img src="<%= dataObj.persondata.avatarfull %>" class="avatar" alt="avatar"/>
+     <div class="name-level"> 
+      <h5>
+        <%= dataObj.persondata.personaname %>
+      </h5>
      </div>
-    <% }else{ %>
-      <script>
-      const wrapper = document.querySelector(".name-level-wrapper");
-      wrapper.style.gridTemplateRows = "repeat(2,1fr)";
-      </script> 
-    <% } %>
-    <div class="steam-rep">
-      <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %> " target="_blank" rel="no-follow">
-        <i class="fas fa-link mr-1"></i> 
-        <img src="/images/steamrep-logo.png" alt="steamrep" class="steamrep-logo">
-      </a>
-    </div>
-  </section>
- <section class="about-wrapper">
-    <div class="about">
-      <h5 class="section-title" style="margin-bottom: 3rem;">
-        ABOUT
-      </h5>
-      <table class="table">
-        <% if(dataObj.steamLvl) { %>
-        <tr>
-          <td class="name-label">
-            <strong>STEAM LEVEL</strong>
-          </td>
-          <td class="data-label">
-            <span class="data">
-              <%= dataObj.steamLvl %>
-            </span>
-          </td>
-        </tr>
-        <% }else{ %>
-          <tr>
-            <td class="name-label">
-              <strong>STEAM LEVEL</strong>
-            </td>
-            <td class="data-label">
-              <span class="data private">
-                PRIVATE
-              </span>
-            </td>
-          </tr>
-        <% } %>
-        <tr class="friendship">
-          <td class="name-label">
-            <strong>FRIENDSHIP</strong>
-          </td>
-          <td class="data-label">
-            <span class="data mute">
-              <em><a href="/auth/steam">Sign in to check</a></em>
-            </span>
-          </td>
-        </tr>
-        <% if(dataObj.persondata.timecreated) { %>
-        <tr>
-          <td class="name-label">
-            <strong>JOINED STEAM</strong>
-          </td>
-          <td class="data-label">
-            <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-            <span class="data">
-              <%= humanDate %>
-            </span>
-          </td>
-        </tr>
-        <% } else{ %>
-          <tr>
-            <td class="name-label">
-              <strong>JOINED STEAM</strong>
-            </td>
-            <td class="data-label">
-              <span class="data private">
-                PRIVATE
-              </span>
-            </td>
-          </tr>
-        <% } %>
-        <tr class="isonline">
-          <td class="name-label">
-            <strong>ONLINE STATUS</strong>
-          </td>
-          <td class="data-label">
-            <span class="data" id="online-status"></span>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <hr style="margin-top: 0;">
-    <div class="reputation-wrapper">
-      <h5 class="section-title" style="margin-bottom: 1.5rem;">
-        REPUTATION          
-        <button class="rep-status" data-html="true" data-placement="right" data-toggle="tooltip" data-toggle="tooltip" data-html="true" title="<a href='<%= dataObj.steamrepReputation.steamrepurl %>' target='_blank' rel='no-follow'>Click here</a> or the SteamRep icon above to know more about user's reputation">
-          <i class="fas fa-question-circle"></i>
-        </button>
-      </h5>
-        <div class="reputation">
-          <span class="data" style="color: #7A7D7F;">
-          <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
-            <use href="#empty-shield"></use>
-          </svg>                           
-            <%= dataObj.steamrepReputation.fullReputation %>
-          </span>
-          <span class="by-steamrep" style="font-size: .6rem;text-align: end;">
-             By <a href="https://steamrep.com" style="color:inherit;" target="_blank" rel="no-follow">SteamRep.com</a>
-          </span>
-        </div>
-    </div>
-  </section>
-<section class="nav-wrapper">
-  <div class="nav"> 
-     <ul class="nav-links">
-       <li class="nav-link active section-title">PROFILE OVERVIEW</li>
-       <li class="nav-link section-title">FRIENDS</li>
-       <li class="nav-link section-title">GAMES OWNED</li>
-     </ul>
+   </section>
   </div>
-</section>
-<section class="wrapper">
-  <section class="steam-ids-wrapper">
-    <div class="steam-ids">
-      <h5 class="section-title">STEAM ID'S</h5>
-        <table class="table">
-          <tbody>
-            <tr>
-              <td class="name-label">
-                <strong>STEAMID3</strong>
-              </td>
-              <td class="data-label">
-                <span class="data" data-full-url="<%= dataObj.objSteamIds.steam3id %>">
-                  <%= dataObj.objSteamIds.steam3id %>
-                </span>
-                <span class="steam3id-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-                  <i class="far fa-clone"></i>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                <strong>STEAMID2</strong>
-              </td>
-              <td class="data-label"  data-full-url="<%= dataObj.objSteamIds.steam2id %>">
-                <span class="data">
-                  <%= dataObj.objSteamIds.steam2id %>
-                </span>
-                <span class="steamid2-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-                  <i class="far fa-clone"></i>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                <strong>STEAMID64</strong>
-              </td>
-              <td class=" data-label">
-                <span class="data" data-full-url="<%= dataObj.objSteamIds.steam64 %>">
-                  <%= dataObj.objSteamIds.steam64 %>
-                </span>
-                <span class="steamid64-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-                  <i class="far fa-clone"></i>
-                </span>
-              </td>
-            </tr>
-            <% if(dataObj.objSteamIds.customURL){ %>
-            <tr>
-              <td class="name-label">
-                <strong>VANITY URL</strong>
-              </td>
-              <td class="data-label">
-                <span class="data" data-full-url="<%= dataObj.objSteamIds.customURL %>" style="display:inline-block">
-                  <%= dataObj.objSteamIds.customURL %>
-                </span>
-                <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-                  <i class="far fa-clone"></i>
-                </span>
-                <span class="what-is-vanity ml-2" data-toggle="tooltip" data-placement="bottom" 
-                data-original-title=
-                "Vanity URL is a last part of a steam custom URL.
-                
-                For example https://steamcommunity.com/id/<%= dataObj.objSteamIds.customURL %>" style="display: inline-block;">
-                  <i class="fas fa-question-circle"></i>
-                </span>
-              </td>
-            </tr>
-          <% }else{ %>
-            <tr>
-              <td class="name-label">
-                <strong>VANITY URL</strong>
-              </td>
-              <td class="data-label">
-                <span class="data mute">
-                <em>not set</em>
-                </span>
-              </td>
-            </tr>
-          <% } %>
-          </tbody>
-        </table>
-        </div>
-  </section>
-  <section class="profile-privacy-wrapper">
-    <div class="profile-privacy">
-      <h5 class="section-title">PROFILE PRIVACY</h5>
-       <table class="table">
-        <tbody>
-          <tr>
-            <td class="name-label">
-              <strong>PRIVACY STATE</strong>
-            </td>
-            <td class="data-label">
-              <span id="privacy-state" class="data"></span>
-            </td>
-          </tr>
-          <tr>
-            <td class="name-label">
-              <strong>TRADE BAN</strong>
-            </td>
-            <td class="data-label">
-              <span class="data" id="trade-ban"></span>
-            </td>
-          </tr>
-          <tr>
-            <td class="name-label">
-              <strong>VAC BAN</strong>
-            </td>
-            <td class="data-label">
-              <span class="data" id="vac-ban"></span>
-            </td>
-          </tr>
-          <tr>
-            <td class="name-label">
-              <strong>COMMUNITY BAN</strong>
-            </td>
-            <td class="data-label">
-              <span class="data" id="community-ban"></span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  </section>
-</section>
-<section class="steam-quick-links-wrapper">
-  <div class="steam-quick-links">
-    <h5 class=" section-title">STEAM QUICK LINKS</h5>
-    <ul class="steam-quick-links-list">
-      <li class="steam-quick-link">
-        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/inventory" target="_blank" rel="no-follow">
-          Inventory
-        </a>
-      </li>
-      <li class="steam-quick-link">
-        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/allcomments" target="_blank" rel="no-follow">
-          Profile Comments
-        </a>
-      </li>
-      <li class="steam-quick-link">
-        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/friends/common" target="_blank" rel="no-follow">
-          Common Friends
-        </a>
-      </li>
-      <li class="steam-quick-link">
-        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/namehistory" target="_blank" rel="no-follow"> 
-         Name History
-        </a>
-      </li>
-      <li class="steam-quick-link">
-        <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/groups" target="_blank" rel="no-follow"> 
-         Groups
-        </a>
-      </li>
-    </ul>
-  </div>
-</section>
 </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- SVGS -->
@@ -350,7 +81,7 @@
 <%- include("partials/footer.ejs"); %>
 
 
-<script>
+<!-- <script>
   const DoNotShowMessageAgainCheckBox = document.querySelector(".dont-show-again-checkbox");
 	DoNotShowMessageAgainCheckBox.checked = false;
   let loggedUserId;
@@ -372,4 +103,4 @@
 <script src="/scripts/updateOnlineStatus.js"></script>
 <script src="/scripts/updateNavInputField.js"></script>
 <script src="/scripts/updateBackground.js"></script>
-<script src="/scripts/updateReputation.js"></script>
+<script src="/scripts/updateReputation.js"></script> -->

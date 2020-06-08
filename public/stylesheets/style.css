@@ -368,6 +368,10 @@ body{
   letter-spacing: 1px;
   font-weight: 450;
 }
+.steam-ids .data{
+  display: inline-block;
+  width: 80%;
+}
 .steam-ids td{
   padding-top: 1rem;
   padding-bottom: 1rem;

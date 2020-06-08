@@ -113,8 +113,11 @@
                  SteamID64
                </td>
                <td class="data-label">
-                  <span class="data">
+                  <span class="data" data-full-URL = "<%= dataObj.objSteamIds.steam64 %>">
                     <%= dataObj.objSteamIds.steam64 %>
+                  </span>
+                  <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                    <i class="far fa-clone"></i>
                   </span>
                </td>
              </tr>
@@ -123,9 +126,12 @@
                 SteamID2
               </td>
               <td class="data-label">
-                 <span class="data">
+                 <span class="data" data-full-URL="<%= dataObj.objSteamIds.steam2id %>">
                    <%= dataObj.objSteamIds.steam2id %>
                  </span>
+                 <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                  <i class="far fa-clone"></i>
+                </span>
               </td>
             </tr>
             <tr>
@@ -133,15 +139,23 @@
                 SteamID3
               </td>
               <td class="data-label">
-                 <span class="data">
+                 <span class="data" data-full-URL="<%= dataObj.objSteamIds.steam3id %>">
                    <%= dataObj.objSteamIds.steam3id %>
                  </span>
+                 <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                  <i class="far fa-clone"></i>
+                </span>
               </td>
             </tr>
             <tr>
               <td class="name-label">FiveMID</td>
               <td class="data-label">
-                <%= dataObj.objSteamIds.fiveMID %>
+                <span class="data" data-full-URL="<%= dataObj.objSteamIds.fiveMID %>">
+                  <%= dataObj.objSteamIds.fiveMID %>
+                </span>
+                <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                  <i class="far fa-clone"></i>
+                </span>
               </td>
             </tr>
             <% if(dataObj.objSteamIds.customURL){ %>
@@ -150,9 +164,12 @@
                   Vanity URL 
                 </td>
                 <td class="data-label">
-                   <span class="data">
+                   <span class="data" data-full-URL="<%= dataObj.objSteamIds.customURL %>">
                      <%= dataObj.objSteamIds.customURL %>
                    </span>
+                   <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                    <i class="far fa-clone"></i>
+                  </span>
                 </td>
               </tr>
             <% }else{ %>

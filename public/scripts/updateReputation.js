@@ -1,10 +1,6 @@
 const reputation = document.querySelector(".reputation .data");
 const svg = $(".reputation .data .parent-svg").children("use");
 const name = document.querySelector(".name-level-wrapper .name-level a");
-const steamrepIcon = document.querySelector(".steamrep-logo");
-const steamrepATitle = document.querySelector(".steamrep-logo").parentElement;
-
-console.log(svg);
 
 if(reputation.innerText.includes("VALVE EMPLOYEE")){
     reputation.style.color = "var(--valve-employee)";

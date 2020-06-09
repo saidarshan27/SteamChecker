@@ -1,23 +1,26 @@
 <%- include("partials/headerWithSearch.ejs"); %>
-
   <div class="container userpage-container"> 
    <section class="name-level-wrapper">
-    <img src="<%= dataObj.persondata.avatarfull %>" class="avatar" alt="avatar"/>
-     <div class="name-level"> 
-      <h5>
-        <%= dataObj.persondata.personaname %>
-      </h5>
-      <% if(dataObj.steamLvl){ %>
-        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
-      <% }else{ %>
-        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
-      <% } %>
+    <div class="image">
+       <img src="<%= dataObj.persondata.avatarfull %>" class="avatar" alt="avatar"/>
     </div>
-    <div class="icon-links">
-        <a href="">
-          <img src="/images/steamrep-logo.png" alt="steamrep-logo">
-        </a>
-     </div>
+    <div class="name-flex-wrapper">
+      <div class="name-level"> 
+        <h5>
+          <%= dataObj.persondata.personaname %>
+        </h5>
+        <% if(dataObj.steamLvl){ %>
+          <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
+        <% }else{ %>
+          <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
+        <% } %>
+      </div>
+      <div class="icon-links">
+          <a href="">
+            <img src="/images/steamrep-logo.png" alt="steamrep-logo">
+          </a>
+       </div>
+    </div>
     </section>
     <section class="about-wrapper">
       <div class="about">
@@ -46,10 +49,10 @@
             <% } %>
             <tr>
               <td class="name-label">Friendship</td>
-              <td class="data-label">
-                <span class="data">
+              <td class="data-label friendship">
+                <span class="data mute">
                   <em>
-                    Sign In to check 
+                    <a href="/auth/steam" style="color: inherit;">Sign In to check </a>
                   </em>
                 </span>
               </td>
@@ -89,7 +92,7 @@
           REPUTATION
         </p>
         <div class="reputation">
-          <span class="data" style="color: #7A7D7F;">
+          <span class="data" style="color: #7A7D7F;font-weight: 650;">
           <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
             <use href="#empty-shield"></use>
             </svg>                           
@@ -98,8 +101,7 @@
             <span class="by-steamrep" style="font-size: .6rem;text-align: end;">
                By <a href="https://steamrep.com" style="color:inherit;" target="_blank" rel="no-follow">SteamRep.com</a>
             </span>
-        </div>
-        
+        </div> 
       </div>
     </section>
     <section class="steam-ids-wrapper">
@@ -207,7 +209,9 @@
                 VAC Ban
               </td>
               <td class="data-label">
-                <span class="data" id="vac-ban"></span>
+                <span class="data" id="vac-ban">
+                  <%= dataObj.banObj.vacBan %>
+                </span>
               </td>
             </tr>
             <tr>
@@ -215,7 +219,9 @@
                 Game Ban
               </td>
               <td class="data-label">
-                <span class="data" id="game-ban"></span>
+                <span class="data" id="game-ban">
+                  <%= dataObj.banObj.gameBan %>
+                </span>
               </td>
             </tr>
             <tr>
@@ -223,7 +229,9 @@
                 Trade Ban
               </td>
               <td class="data-label">
-                <span class="data" id="trade-ban"></span>
+                <span class="data">
+                  <%= dataObj.banObj.tradeBan %>
+                </span>
               </td>
             </tr>
             <tr>
@@ -231,7 +239,9 @@
                 Community Ban
               </td>
               <td class="data-label">
-                <span class="data" id="community-ban"></span>
+                <span class="data" id="community-ban">
+                  <%= dataObj.banObj.communityBan %>
+                </span>
               </td>
             </tr>
           </tbody>
@@ -348,31 +358,30 @@
   const dataObj = <%- JSON.stringify(dataObj) %>
   const visibilityState = dataObj.persondata.communityvisibilitystate;
   const banObj =  dataObj.banObj;
-</script>
-
-<script src="/scripts/steamLevelColor.js"></script>
-<script src="/scripts/updateOnlineStatus.js"></script>
-<script src="/scripts/updatePrivacy.js"></script>
-<script src="/scripts/updateBans.js"></script>
-
-
-
-<!-- <script>
-  const DoNotShowMessageAgainCheckBox = document.querySelector(".dont-show-again-checkbox");
-	DoNotShowMessageAgainCheckBox.checked = false;
   let loggedUserId;
   const user = <%- JSON.stringify(user) %>
   const userKeys = Object.keys(user).length;
   if(userKeys != 0){
     loggedUserId = user.loggedUserId;
   }
-  const background = document.querySelector(".profile-background");
 </script>
 
-
+<script src="/scripts/steamLevelColor.js"></script>
+<script src="/scripts/updateOnlineStatus.js"></script>
+<script src="/scripts/updatePrivacy.js"></script>
+<script src="/scripts/updateBans.js"></script>
+<script src="/scripts/updateNavInputField.js"></script>
+<script src="/scripts/updateReputation.js"></script>
+<script src="/scripts/updateBackground.js"></script>
 <script src="/scripts/checkOwnerShip.js"></script>
 
 
-<script src="/scripts/updateNavInputField.js"></script>
-<script src="/scripts/updateBackground.js"></script>
-<script src="/scripts/updateReputation.js"></script> -->
+
+<!-- <script>
+  const DoNotShowMessageAgainCheckBox = document.querySelector(".dont-show-again-checkbox");
+	DoNotShowMessageAgainCheckBox.checked = false;
+</script>
+
+
+
+ -->

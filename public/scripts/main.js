@@ -114,6 +114,7 @@ $(".url-input").on("keydown input cut",function(event){
 // clears the input on click 
 $(".clear-input").click(function(event){
 	$(this).siblings(".url-input").val("");
+	$(this).siblings(".url-input").focus();
 	$(this).css("visibility","hidden");
 })
 

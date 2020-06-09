@@ -28,8 +28,8 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new SteamStrategy({
-  returnURL: 'https://mighty-citadel-31453.herokuapp.com/auth/steam/return',
-  realm: 'https://mighty-citadel-31453.herokuapp.com/',
+  returnURL: 'http://localhost:3001/auth/steam/return',
+  realm: 'http://localhost:3001/',
   apiKey: 'D295314B96B79961B1AB2A2457BA5B10'
 },
 function(identifier, profile, done) {
@@ -145,6 +145,7 @@ async function extractprofile(url) {
       // Regex for extracting the words or numbers occuring after `/profiles` or `/id` in a steam64ID
       const found=url.match(/.*(?:profiles|id)\/([a-z0-9]+)[\/?]?/i);
       const vanityOrSteamid = found[1];
+      console.log(vanityOrSteamid);
       const vanity = await getVanity(vanityOrSteamid);
        if(vanity.response.success===1){
           const steam64 = vanity.response.steamid;
@@ -219,7 +220,12 @@ function playerSteamIds(steam64){
   }
 }
 function playerBans(steam64){
-  let banObj={}
+  let banObj={
+    communityBan:"None",
+    vacBan:"None",
+    tradeBan:"None",
+    gameBan:"None"
+  }
   return new Promise((resolve,reject)=>{
     SteamApi.getPlayerBans(steam64,"D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
       console.log(data);
@@ -227,16 +233,33 @@ function playerBans(steam64){
         console.log("error", err);
         reject(err);
       } else {
-      if(data.VACBanned === true || data.CommunityBanned === true){
-        banObj.DaysSinceLastBan = data.DaysSinceLastBan;
-      }
-      if(data.NumberOfGameBans){
-        banObj.gameBan = data.NumberOfGameBans;
-      }
-        banObj.tradeBan = data.EconomyBan;
-        banObj.vacBan = data.VACBanned;
-        banObj.communityBan = data.CommunityBanned; 
-        resolve(banObj);
+       for(const prop in data){
+         switch(prop){
+           case "CommunityBanned":
+            if(data[prop] != false){
+              banObj.communityBan = "BANNED";
+              banObj.DaysSinceLastBan = data.DaysSinceLastBan;
+            }
+            break;
+           case "VACBanned":
+             if(data[prop] != false){
+               banObj.vacBan = "BANNED";
+               banObj.DaysSinceLastBan = data.DaysSinceLastBan;
+             }
+            break;
+           case "EconomyBan":
+             if(data[prop] != "none"){
+               banObj.tradeBan = "BANNED";
+             }
+            break;
+           case "NumberOfGameBans":
+            if(data[prop] != 0){
+              banObj.gameBan = "BANNED";
+              banObj.DaysSinceLastBan = data.DaysSinceLastBan;
+            }
+         }
+       }
+       resolve(banObj);
       }
     })
   })

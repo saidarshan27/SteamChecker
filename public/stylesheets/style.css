@@ -16,7 +16,7 @@ select:-webkit-autofill:focus {
 :root{
   --primary:#404BB8;
   --section-background:#EAF1F6;
-  /* --section-transperant-background:#eaf1f6e3; */
+  --section-transperant-background:#e5ecf2f0;
   --mute : #3a3a3aa2;
   --green:#007705;
   --red: red;
@@ -300,35 +300,61 @@ body{
   display: flex;
   align-items: baseline;
 }
-/* title */
-.section-title{
-  font-weight: 800;
-  font-size: 0.875rem;
-  color: var(--primary);
+
+.sub-nav li{
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
+.sub-nav li a{
+  padding: 16px;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+  color: var(--primary);
+  border-bottom: 3px solid var(--primary);
+}
+
 
 /* user page container */
 .userpage-container{
-  max-width: 910px;
-  height: 100vh;
+  max-width: 57rem;
+  min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(12,1fr);
-  grid-template-rows: repeat(12,1fr);
+  grid-auto-rows: minmax(60px,auto);
+  padding-top: 1rem;
   gap: 1rem;
 }
 .name-level-wrapper{
   grid-row: 1/3;
   grid-column: 1/13;
+  background: var(--section-transperant-background);
   background: var(--section-background);
-  display: grid;
-  grid-template-columns: repeat(12,1fr);
-  grid-template-rows: repeat(3,1fr);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.name-flex-wrapper{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.image{
+  position: relative;
+  height: 100%;
+  position: relative;
+  width: 20%;
 }
 .avatar{
-  grid-column: 1/2;
-  grid-row: 1/4;
+  position: absolute;
+  width: 100%;
   height: 100%;
-  width: 12rem;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
 }
@@ -351,22 +377,25 @@ body{
   color: black;
 }
 .about-wrapper{
-  grid-column: 1/6;
+  grid-column: 1/5;
   grid-row: 3/8;
 }
 .about-wrapper,.steam-ids-wrapper,.profile-privacy-wrapper,.steam-quick-links-wrapper{
+  background: var(--section-transperant-background);
   background: var(--section-background);
+  border-radius: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .steam-ids-wrapper{
-  grid-column: 6/13;
+  grid-column: 5/13;
   grid-row: 3/8;
 }
 .profile-privacy-wrapper{
-  grid-column: 6/13;
+  grid-column: 5/13;
   grid-row: 8/12;
 }
 .steam-quick-links-wrapper{
-  grid-column: 1/6;
+  grid-column: 1/5;
   grid-row: 8/12;
 }
 .about,.steam-ids,.profile-privacy,.steam-quick-links{
@@ -387,6 +416,16 @@ body{
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+.profile-privacy .name-label{
+  width: 40%;
+}
+.profile-privacy .data{
+  font-weight: 600;
+  color: #1b7709;
+}
+.profile-background{
+  background-size: 100% 100%;
+}
 .section-title{
   font-size: .875rem;
   color: var(--primary);
@@ -399,12 +438,12 @@ body{
   padding-left: 0;
 }
 .name-label{
-  font-size: .75rem;
+  font-size: .8rem;
   font-weight: 600;
   color: #636363;
 }
 .data-label{
-  font-size: .75rem;
+  font-size: .8rem;
   font-weight: normal;
 }
 .data.private{
@@ -412,9 +451,36 @@ body{
   font-weight: 600;
   color: #d30000;
 }
+.data.offline{
+  font-weight: 600;
+  color: #9c9c9c;
+}
+.data.online,.data.public{
+  font-weight: 600;
+  color: #1b7709;
+}
+.data.banned{
+  font-weight: 700;
+  color: #d30000;
+}
+.since-ban{
+  font-weight: 600;
+  color: #d30000;
+  font-size: .6rem;
+  margin-left: .2rem;
+}
+.since-ban .fa-info-circle{
+  font-size: .6rem;
+}
+.since-ban .info-icon{
+  cursor: pointer;
+}
+
+
 .data.mute{
   font-style: italic;
-  color: #636363;
+  color: #9c9c9c;
+  font-weight: 600;
 }
 .reputation{
   font-size: .7rem;
@@ -524,106 +590,39 @@ font-size: 12px;
   }
 }
 
-@media(max-width:1187px){
-  .profile-overview-customURL .data{
-    height: 1rem;
-  }
-  .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
-    font-size: .75rem;
-    font-weight: 500;
-}
-}
+
 
 @media(max-width:1000px){
   .add-message{
     display: none;
   }
-  .nav-wrapper{
-    grid-column: 1/13;
-    margin-bottom: -.5rem;
-  }
-  .about-wrapper {
-    grid-column: 1/5;
-    grid-row: 4/9;
 }
-.steam-quick-links-wrapper{
-  grid-column: 1/5;
-  grid-row: 9/12;
-}
-.steam-quick-links .section-title{
-  margin-bottom: 1.5rem;
-}
-.steam-quick-links li{
-  margin-bottom: .7rem;
-}
-.steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
-    font-size: .6rem;
-    font-weight: 500;
+@media(max-width:876px){
+ .steam-quick-links-wrapper{
+  display: none;
  }
- .reputation-wrapper .data{
-  font-size: .6rem;
-  font-weight: 500;
- }
- .steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
-  font-size: .6rem;
-  font-weight: 500;
+ .about-wrapper {
+  grid-column: 1/-1;
+  grid-row: 3/8;
 }
+.steam-ids-wrapper {
+  grid-column: 1/13;
+  grid-row: 8/12;
 }
-@media(max-width:930px){
-  .about .name-label{
-    width: 40%;
-    padding-bottom: .75rem;
-  }
-  .steam-quick-links-wrapper{
-    display: none;
-  }
-  .add-message {
-    grid-row: 4/5;
-  }
-  .profile-overview-customURL .data{
-    height: 1.1rem;
-  }
-  .steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
-    font-size: .87rem;
-    font-weight: 500;
- }
- .steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
-  font-size: .87rem;
-  font-weight: 500;
+.profile-privacy-wrapper {
+  grid-column: 1/13;
+  grid-row: 12/12;
 }
-.reputation-wrapper .data{
-  font-size: .87rem;
-  font-weight: 500;
- }
 .userpage-container{
-  height: max-content;
-  max-width: 1700px;
-  padding: 2rem 4rem;
+  padding: 0 5rem;
 }
-.about div{
-  margin-bottom: 1rem;
+.name-level{
+  margin-left: .5rem;
 }
-
-
-.about-wrapper {
-  grid-column: 1/13;
-  margin-bottom: 0;
+.icon-links{
+  margin-left: .5rem;
 }
 
-.wrapper {
-  grid-column: 1/13;
-  grid-row: 9/17;
-  grid-template-areas:
-      "steamid"
-      "profile-privacy";
-}
-
-.name-level-wrapper{
-grid-column: 1/13;
-}
-.avatar{
-  width: 11rem;
-}
 }
 
 @media(max-width:1235px){
@@ -648,13 +647,9 @@ grid-column: 1/13;
 
 
 @media (max-width:768px){
-  .data-label .since-ban{
-    font-size: 0.4rem;
-  }
   .fa-info-circle{
     font-size: 0.5rem;
   }
-
   .dekstop-h5{
     display:none;
   }
@@ -663,9 +658,6 @@ grid-column: 1/13;
     word-spacing: 0.1rem;
     font-size: 0.8rem;
     line-height: 1.4rem;
-  }
-  .profile-overview-customURL .data{
-    height: .8rem;
   }
   .home-container{
     height: 50vh;
@@ -696,32 +688,6 @@ grid-column: 1/13;
   .home-container .fa-search{
     font-size: 1rem;
   }
-  .avatar {
-    width: 11rem;
-    left: 0%;
-    top: 0%;
-}
-.name-level h4{
-  font-size: 1rem;
-}
-.realname-profileurl p{
-  font-size: .87rem;
-}
-.steam-ids .data-label, .profile-privacy .data-label,.about .data-label{
-  font-size: .6rem;
-  font-weight: 500;
-}
-.steam-ids .name-label,.profile-privacy .name-label,.about .name-label{
-font-size: .6rem;
-font-weight: 500;
-}
-.reputation-wrapper{
-  margin-top: 1rem;
-}
-.reputation-wrapper .data{
-  font-size: .6rem;
-  font-weight: 500;
- }
 .nav-with-search .url-input{
   font-size: .5rem;
 }
@@ -731,25 +697,13 @@ font-weight: 500;
 .nav-with-search .search-submit{
   top:15%;
 }
-.userpage-container{
-  max-width: 2000px;
-  padding: 2rem 1rem;
-}
 .name-level{
   width: 100%;
 }
-.name-level h4{
-  font-size: .75rem;
+.image{
+  width: 30%;
 }
-.name-level-wrapper .fa-link{
-  font-size: .75rem;
-}
-.realname-profileurl p{
-  font-size: .68rem;
-}
-.copy:hover{
-  background: none;
-}
+
 .copy:active{
   background-color:rgb(170, 170, 170);
 }
@@ -784,22 +738,11 @@ font-weight: 500;
   }
 
 }
-@media(max-width:530px){
-  .avatar{
-    width:8rem;
+@media(max-width:550px){
+  .userpage-container{
+    padding: 1rem 2rem;
   }
 }
-
-@media(max-width:473px){
-  .profile-overview-custom-full-URL .data{
-    width: 100px;
-    height: 13px;
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
 @media (max-width:450px){
   .nav-with-search .controls{
     width: 100%;
@@ -813,28 +756,23 @@ font-weight: 500;
   .label h5{
     font-size: 0.6rem;
   }
-
+  .name-label{
+    font-size: .75rem;
+  }
+  .data-label{
+    font-size: .75rem;
+  }
+}
+@media(max-width:430px){
+  .userpage-container{
+    padding: .5rem 1rem;
+  }
 }
 @media (max-width:360px){
-  .steam-ids .name-label{
+  .name-label{
     font-size: .6rem;
   }
-  .steam-ids .data-label{
-    font-size: .56rem;
-  }
-  .section-title{
-    font-size: 0.6rem;
-  }
-  .copy{
-    margin-left: 0.5rem;
-  }
-  .name-level{
-    margin-left: .6rem;
-  }
-  .steam-rep{
-    margin-left: .6rem;
-  }
-  .realname-profileurl{
-    margin-left: .6rem;
+  .data-label{
+    font-size: .6rem;
   }
 }

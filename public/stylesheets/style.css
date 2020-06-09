@@ -44,6 +44,7 @@ i{
 body{
   background: var(--background);
   font-family: 'Montserrat', sans-serif;
+  position: relative;
 }
 /* home page styles */
 .home-container .dekstop-h5{
@@ -61,7 +62,7 @@ body{
 .fa-steam-symbol:hover{
   cursor: pointer;
 }
-
+/* nav styles */
 .navbar-light .navbar-brand{
   font-family: 'Rockwell',Montserrat;
   font-size:2rem;
@@ -81,6 +82,23 @@ body{
   border:none;
   outline: none;
 }
+
+.overlay{
+  position: fixed;
+    z-index: 1;
+    top: 0%;
+    left: 0%;
+    background: #000000c7;
+    width: 100%;
+    height: 100%;
+}
+.mobile-sidebar{
+  width: 80%;
+  height: 100%;
+  position: static;
+  background: linear-gradient(90deg, #161730 0%, #7683F9 100%);;
+}
+
 .mobile-login-wrapper ul{
   list-style: none;
 }
@@ -111,6 +129,7 @@ body{
   height: 2rem;
   margin-left:-1.25rem;
 }
+
 .home-container{
   width: 100vw;
   height: 80vh;
@@ -262,6 +281,8 @@ body{
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+/* userpage nav */
 .nav-with-search .fa-search{
   font-size: 1.5rem;
 }
@@ -283,24 +304,7 @@ body{
   display: flex;
   justify-content: space-around;
 }
-
-.friend-count,.games-owned-count{
-  text-align: center;
-  min-width: 	3rem;
-  background: rgba(92, 102, 194, 1);
-  color : white;
-  border: 1px solid rgba(92, 102, 194, 1);
-  padding: 0.1rem;
-  font-size: 0.75rem;
-  box-sizing: border-box;
-  border-radius: 1em;
-  margin-left:1rem
-}
-.count{
-  display: flex;
-  align-items: baseline;
-}
-
+/* secondary nav styles */
 .sub-nav li{
   padding: 0;
   display: flex;
@@ -315,6 +319,14 @@ body{
   border-bottom: 3px solid var(--primary);
 }
 
+/* title */
+.section-title{
+  font-size: .875rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
 
 /* user page container */
 .userpage-container{
@@ -326,6 +338,8 @@ body{
   padding-top: 1rem;
   gap: 1rem;
 }
+
+/* .name-level-wrapper styles */
 .name-level-wrapper{
   grid-row: 1/3;
   grid-column: 1/13;
@@ -376,30 +390,53 @@ body{
 .friendPlayerLevel .friendPlayerLevelNum.number-color-black{
   color: black;
 }
+
+/* about wrapper styles */
 .about-wrapper{
   grid-column: 1/5;
   grid-row: 3/8;
 }
+/* reputation inside about section */
+.reputation{
+  font-size: .7rem;
+  display: flex;
+  flex-direction: column;
+  text-transform: capitalize;
+}
+/* collective style for all userpage containers */
 .about-wrapper,.steam-ids-wrapper,.profile-privacy-wrapper,.steam-quick-links-wrapper{
   background: var(--section-transperant-background);
   background: var(--section-background);
   border-radius: 1rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+.about,.steam-ids,.profile-privacy,.steam-quick-links{
+  padding: 1rem 1.5rem;
+}
+/* steam-ids wrapper */
 .steam-ids-wrapper{
   grid-column: 5/13;
   grid-row: 3/8;
 }
+/* profile privacy wrapper */
 .profile-privacy-wrapper{
   grid-column: 5/13;
   grid-row: 8/12;
 }
+/* steam-quick-link wrapper */
 .steam-quick-links-wrapper{
   grid-column: 1/5;
   grid-row: 8/12;
 }
-.about,.steam-ids,.profile-privacy,.steam-quick-links{
-  padding: 1rem 1.5rem;
+/* label styles */
+.name-label{
+  font-size: .8rem;
+  font-weight: 600;
+  color: #636363;
+}
+.data-label{
+  font-size: .8rem;
+  font-weight: normal;
 }
 .steam-ids .data-label,.about .data-label,.profile-privacy .data-label{
   font-weight: 450;
@@ -419,6 +456,7 @@ body{
 .profile-privacy .name-label{
   width: 40%;
 }
+/* green for all td in profile privacy */
 .profile-privacy .data{
   font-weight: 600;
   color: #1b7709;
@@ -426,26 +464,13 @@ body{
 .profile-background{
   background-size: 100% 100%;
 }
-.section-title{
-  font-size: .875rem;
-  color: var(--primary);
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-transform: capitalize;
-}
+
 .table td{
   border-top: none;
   padding-left: 0;
 }
-.name-label{
-  font-size: .8rem;
-  font-weight: 600;
-  color: #636363;
-}
-.data-label{
-  font-size: .8rem;
-  font-weight: normal;
-}
+
+/* psuedo styles private,offline,banned,sincebanned,mute */
 .data.private{
   text-transform: capitalize;
   font-weight: 600;
@@ -476,18 +501,63 @@ body{
   cursor: pointer;
 }
 
-
 .data.mute{
   font-style: italic;
   color: #9c9c9c;
   font-weight: 600;
 }
-.reputation{
-  font-size: .7rem;
-  display: flex;
-  flex-direction: column;
-  text-transform: capitalize;
+
+
+/* My profile styles */
+.view-more{
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
+.login{
+  position: relative;
+}
+.login a{
+  color:black;
+  text-decoration: none;
+}
+.login-avatar{
+  width: 3rem;
+  border-radius: 15%;
+}
+.fa-chevron-down{
+  color: white;
+}
+.view-more-links{
+  display: none;
+  margin:0;
+  width: max-content;
+  position: absolute;
+  transform: translateY(20%);
+  left:-40%;
+  list-style: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.view-more-link{
+  padding:1rem 2rem;
+  font-weight: 600;
+  font-size: 0.7rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.view-more-link:hover{
+  color:white;
+  background-color: #5C66C2; 
+}
+.view-more-link:hover a{
+  color:white;
+}
+.view-more-links.active{
+  transform: translateY(20%);
+  visibility: visible; /* shows sub-menu */
+}
+
 
 
 /* copy */
@@ -552,6 +622,7 @@ font-size: 12px;
  margin-left: 10px;
  font-weight: bold;
 }
+
 /* media queries */
 @media (max-width:1404px){
   .home-container h5{
@@ -591,12 +662,6 @@ font-size: 12px;
 }
 
 
-
-@media(max-width:1000px){
-  .add-message{
-    display: none;
-  }
-}
 @media(max-width:876px){
  .steam-quick-links-wrapper{
   display: none;
@@ -614,7 +679,7 @@ font-size: 12px;
   grid-row: 12/12;
 }
 .userpage-container{
-  padding: 0 5rem;
+  padding: 1rem 5rem;
 }
 .name-level{
   margin-left: .5rem;
@@ -622,17 +687,8 @@ font-size: 12px;
 .icon-links{
   margin-left: .5rem;
 }
-
 }
 
-@media(max-width:1235px){
-  .add-friend-btn,.send-message-btn{
-    font-size: .6rem;
-  }
-  .nav-with-search .controls{
-    width: 50%;
-  }
-}
 @media (max-width:991px){
   .home-container .controls{
     width: 90%;
@@ -642,6 +698,9 @@ font-size: 12px;
   }
   .nav-with-search .controls{
     width: 90%;
+  }
+  .nav-with-search{
+    justify-content: unset;
   }
 }
 

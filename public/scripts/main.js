@@ -83,10 +83,12 @@ $(".steam-links-view-more").click(function(event){
 		$(this).html(`<i class="fas fa-chevron-right ml-2 view-more-btn"></i>`);
 		$(this).removeClass("open");
 		$(this).siblings(".steam-quick-links-nav").slideUp();
+		event.stopPropagation();
 	}else{
 		$(this).addClass("open");
 		$(this).html(`<i class="fas fa-chevron-down ml-2 view-more-btn"></i>`);
 		$(this).siblings(".steam-quick-links-nav").slideDown();
+		event.stopPropagation();
 	}
 })
 

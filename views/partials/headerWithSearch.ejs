@@ -15,17 +15,21 @@
 
 <body>
   <nav class="navbar navbar-light bg-light main-nav nav-with-search navbar-expand-lg">
-    <div class="logo-container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
       <a class="navbar-brand" href="/" title = "SteamChecker Home">
         <div style="display: flex;align-items: center;">
           <img src="/logo/logo.svg" alt="logo" class="logo">
-            SteamChecker 
+          <span class="logo-text">SteamChecker</span>
         </div>
       </a>
-    </div>
+      <div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-search" style="font-size: 1.1rem;"></i>
+        </button>
+        <button class="navbar-toggler mobile-navbar-toggler" type="button">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="collapse-controls collapse navbar-collapse" id="navbarSupportedContent">
         <div class="controls">
           <form action="/user" method="GET" style="display: flex;">
             <input type="text" name="url" class="url-input user-url-input" id="url-input">
@@ -37,6 +41,7 @@
             <button class="search-submit" type="submit"><i class="fas fa-search"></i></button>
           </form>
         </div>
+      </div>
         <div class="login-wrapper d-none d-lg-block">
           <% const userKeys = Object.keys(user).length %>
           <% if(userKeys === 0) { %>
@@ -72,7 +77,7 @@
           <% } %>
         </div>
   </nav>
-  <nav class="navbar sticky-top navbar-light bg-light navbar-expand-lg py-0 sub-nav d-none d-md-block" style="position: relative;z-index: -2;">
+  <nav class="navbar sticky-top navbar-light bg-light navbar-expand-lg py-0 sub-nav d-none d-lg-block" style="position: relative;z-index: -2;">
     <div class="container">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="width: 100%;justify-content: space-around;">
         <li class="nav-item section-title" style="margin-bottom: 0;">
@@ -100,20 +105,54 @@
 
 
 
+  <nav class="mobile-nav d-block d-lg-none">     
+    <ul class="mobile-navlinks">
+        <li class="signin-btn">
+          <a href="/auth/steam">
+            <img src="/images/steamloginbutton.jpg" alt="login-btn" >
+          </a>
+        </li>
+      <li>
+        Home
+      </li>
+        <li class="myprofile-btn" style="display:none;">
+          <a href="<%= user.myProfileQueryString %>">
+            My Profile
+          </a>
+        </li>
+      <li class="mobile-nav-active">
+        Profile Overview
+      </li>
+      <li>
+        Friends
+      </li>
+      <li>
+        Games Owned
+      </li>
+      <li class="nav-steam-quick-links">
+        Steam Quick Links
+      </li>
+      <li class="logout-btn">
+        <a href="/logout">
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-
- <div class="overlay d-block d-lg-none">
-  <div class="mobile-sidebar">
-    <div class="logo-container d-flex">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <a class="navbar-brand" href="/" title = "SteamChecker Home">
-        <div style="display: flex;align-items: center;">
-          <img src="/logo/logo.svg" alt="logo" class="logo">
-            SteamChecker 
-        </div>
-      </a>
-    </div>
-  </div>
- </div>
+  <script>
+    const navUser = <%- JSON.stringify(user) %>
+    const NavUserKeys = Object.keys(navUser);
+    const myProfileBtn = document.querySelector(".myprofile-btn");
+    const siginBtn =  document.querySelector(".signin-btn");
+    const logoutBtn = document.querySelector(".logout-btn");
+   if(!NavUserKeys){
+     myProfileBtn.style.display = "none";
+     logoutBtn.style.display = "none";
+     siginBtn.style.visibility = "visibile";
+   }else{
+    myProfileBtn.style.display = "flex";
+    logoutBtn.style.display = "flex";
+    siginBtn.style.visibility = "hidden";
+   }
+  </script>

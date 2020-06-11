@@ -83,45 +83,60 @@ body{
   outline: none;
 }
 
-.overlay{
+.mobile-nav{
   position: fixed;
-    z-index: 1;
-    top: 0%;
-    left: 0%;
-    background: #000000c7;
-    width: 100%;
-    height: 100%;
-}
-.mobile-sidebar{
-  width: 80%;
+  width: 70%;
   height: 100%;
-  position: static;
-  background: linear-gradient(90deg, #161730 0%, #7683F9 100%);;
+  background: linear-gradient(90deg, #161730 0%, #7683F9 100%);
+  right: 0%;
+  transform: translateX(100%);
+  transition: transform ease-in-out .3s;
+  z-index: 1;
 }
 
-.mobile-login-wrapper ul{
+.mobile-nav-active{
+  transform: translateX(0%);
+}
+
+.mobile-navlinks{
   list-style: none;
 }
 
-.mobile-login-wrapper li{
-  color:white;
+.mobile-navlinks li{
+  color:rgb(175, 175, 175);
   cursor: pointer;
   padding: 1rem 2rem;
-  font-weight: 800;
-  font-size: 0.7rem;
+  font-weight: 600;
+  font-size: 1rem;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  margin-bottom: .3rem;
 }
+.mobile-navlinks li .sigin-btn{
+  justify-content: flex-end;
+}
+.mobile-navlinks li a{
+  text-decoration: none;
+  align-items: center;
+  color: inherit;
+}
+
+.mobile-navlinks li:hover:not(.sigin-btn){
+  color: white;
+  background: #00000012;
+}
+.mobile-navlinks .mobile-nav-active{
+  color: white;
+  font-weight: 800;
+}
+
 .mobile-login-wrapper .level-one-li{
   border-bottom: 1px solid white;
 }
-.mobile-login-wrapper a{
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 /* steam quick links in nav styles */
-.steam-quick-links-nav{
+.nav-steam-quick-links{
   display: none;
 }
 .mobile-login-wrapper .login-avatar{
@@ -297,8 +312,11 @@ body{
   color: rgba(92, 102, 194, 1);
   border: none;
 }
-.nav-with-search .controls{
-  min-width: 30%;
+.collapse-controls .controls{
+  width: 100%;
+}
+.nav-with-search .collapse-controls{
+  min-width: 40%;
 }
 .nav-with-search{
   display: flex;
@@ -624,6 +642,24 @@ font-size: 12px;
 }
 
 /* media queries */
+@media(max-width:350px){
+  .logo-text{
+    display: none;
+  }
+}
+@media (max-width:1200px){
+  .collapse-controls{
+    width: 45%;
+  }
+}
+@media(max-width:1079px){ 
+  .collapse-controls{
+    width: 50%;
+  }
+}
+
+
+
 @media (max-width:1404px){
   .home-container h5{
     font-size: 0.8rem;
@@ -643,7 +679,7 @@ font-size: 12px;
 
 @media(max-width:1440px){
   .controls{
-    width: 60%;
+    width: 40%;
   }
   .label{
     width: 60%;
@@ -653,7 +689,7 @@ font-size: 12px;
   .controls{
     width:80%;
   }
-  .nav-with-search .controls{
+  .nav-with-search .collapse-controls{
     width: 50%;
   }
   .label{
@@ -662,7 +698,10 @@ font-size: 12px;
 }
 
 
-@media(max-width:876px){
+@media(max-width:991px){
+  body{
+    overflow-x: hidden;
+  }
  .steam-quick-links-wrapper{
   display: none;
  }
@@ -679,7 +718,7 @@ font-size: 12px;
   grid-row: 12/12;
 }
 .userpage-container{
-  padding: 1rem 5rem;
+  padding: 1rem 4rem;
 }
 .name-level{
   margin-left: .5rem;
@@ -696,11 +735,8 @@ font-size: 12px;
   .home-container .label{
     width: 90%;
   }
-  .nav-with-search .controls{
+  .nav-with-search .collapse-controls{
     width: 90%;
-  }
-  .nav-with-search{
-    justify-content: unset;
   }
 }
 
@@ -803,7 +839,7 @@ font-size: 12px;
   }
 }
 @media (max-width:450px){
-  .nav-with-search .controls{
+  .nav-with-search .collapse-controls{
     width: 100%;
   }
 .navbar-light .navbar-brand{

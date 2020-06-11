@@ -13,8 +13,13 @@ $(function () {
 			`)
 		}
 	}
+	checkWidth();
 }) 
 // Event Listeners
+
+$(window).resize(function(){
+	checkWidth();
+});
 
 // copy to clipboard button
 $(".copy").click(function(event){
@@ -63,6 +68,8 @@ $(".dont-show-again-checkbox").change(function(event){
 		}
 	}
 })
+
+
 
 // hiding message modal after send message ok 
 $(".send-message-ok").click(function(){
@@ -139,6 +146,11 @@ $(".input-info").click(function(event){
 	$("#input-types-supported-modal").modal("show");
 })
 
+// mobile nav slide in 
+$(".mobile-navbar-toggler").click(function(event){
+	$(".mobile-nav").toggleClass("mobile-nav-active");
+})
+
 
 
 function copyToClipboard(data) {
@@ -156,6 +168,16 @@ function localStorageAvailable(){
 		return true
 	}else{
 		return false;
+	}
+}
+
+function checkWidth(){
+	const width = document.body.clientWidth;
+	console.log(width);
+	if(width < 991){
+		$(".main-nav").addClass("sticky-top");
+	}else{
+		$(".main-nav").removeClass("sticky-top");
 	}
 }
 

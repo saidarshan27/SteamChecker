@@ -184,6 +184,7 @@ async function getVanity(extractedUrl) {
   };
  try {
     const vanity = await rp(options);
+    console.log("vanity")
       return vanity;
   }
   catch (err) {

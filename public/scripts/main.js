@@ -180,6 +180,8 @@ $(".steam-quicklinks-viewmore").click(function(event){
 
 
 
+
+
 function copyToClipboard(data) {
 	console.log(data);
 	const el = document.createElement('textarea');

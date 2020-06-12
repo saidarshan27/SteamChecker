@@ -25,7 +25,9 @@
       </a>
       <div>
         <button class="navbar-toggler mobile-navbar-toggler" type="button">
-          <i class="fas fa-bars"></i>
+          <div class="custom-burger line1"></div>
+          <div class="custom-burger line2"></div>
+          <div class="custom-burger line3"></div>
         </button>
           <div class="login-wrapper d-none d-lg-block">
             <% const userKeys = Object.keys(user).length %>
@@ -75,11 +77,11 @@
             My Profile
           </a>
         </li>
+        <a href="/logout">
       <li class="logout-btn">
-        <a href="/logout" class="stretched-link">
           Logout
-        </a>
       </li>
+    </a>
     </ul>
   </nav>
 

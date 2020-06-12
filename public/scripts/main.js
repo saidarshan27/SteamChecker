@@ -135,7 +135,7 @@ $(document).click(function(event){
 	  if(!$(event.target).hasClass("mobile-navbar-toggler") && !$(event.target).hasClass("nav-searchbar-toggler")){
 			$(".mobile-nav").removeClass("mobile-nav-active");
 			$(".mobile-navbar-toggler").removeClass("toggle");
-		}		
+		}
 })
 
 dropDown.click(function(e){
@@ -163,15 +163,15 @@ $(".navbar-toggler").click(function(event){
 
 
 
-$(".mobile-navlinks li").click(function(event){
+$(".mobile-navlinks .nav-link").click(function(event){
 	$(this).siblings(".nav-link-active").removeClass("nav-link-active");
 	$(this).addClass("nav-link-active");
 })
 
 $(".steam-quicklinks-viewmore").click(function(event){
-	$(this).toggleClass("view-more-active");
+	$(this).toggleClass("active");
 	$(this).parent().siblings().slideToggle();
-	if(!$(this).hasClass("view-more-active")){
+	if(!$(this).hasClass("active")){
 		$(".profile-overview").addClass("nav-link-active");
 		$(this).parents(".nav-steam-quick-links").removeClass("nav-link-active");
 		event.stopPropagation();

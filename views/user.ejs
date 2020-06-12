@@ -91,6 +91,7 @@
         <p class="reputation-title section-title">
           REPUTATION
         </p>
+        
       </div>
     </section>
     <section class="steam-ids-wrapper">
@@ -247,27 +248,37 @@
           <tbody>
             <tr >
               <td class="name-label">
-                Inventory
+                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/inventory" target="_blank" rel="no-follow">
+                  Inventory
+                </a>
               </td>
             </tr>
             <tr>
               <td class="name-label">
-                Profile Comments
+                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/allcomments" target="_blank" rel="no-follow">
+                  Profile Comments
+                </a>
               </td>
             </tr>
             <tr>
               <td class="name-label">
-                Common Friends
+                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/friends/common" target="_blank" rel="no-follow">
+                  Common Friends
+                </a>
               </td>
             </tr>
             <tr>
               <td class="name-label">
-                Name History
+                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/namehistory" target="_blank" rel="no-follow">
+                  Name History
+                </a>
               </td>
             </tr>
             <tr>
               <td class="name-label">
-                Groups
+                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/groups" target="_blank" rel="no-follow">
+                  Groups
+                </a>
               </td>
             </tr>
           </tbody>

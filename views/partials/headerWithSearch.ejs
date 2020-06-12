@@ -107,32 +107,34 @@
 
 
 
-  <nav class="mobile-nav d-block d-lg-none">     
+  <nav class="mobile-nav d-block d-lg-none" style="overflow-y: scroll;">     
     <ul class="mobile-navlinks">
         <li class="signin-btn">
           <a href="/auth/steam">
             <img src="/images/steamloginbutton.jpg" alt="login-btn" >
           </a>
         </li>
-      <li>
-        Home
+      <li class="nav-link">
+        <a href="/">
+          Home
+        </a>
       </li>
-        <li class="myprofile-btn" style="display:none;position: relative;">
+        <li class="myprofile-btn" style="display:none;position: relative;" class="nav-link">
           <img src="<%= user.avatar %>" alt="avatar" class="mobile-nav-avatar">
           <a href="/user?url=<%= user.myProfileQueryString %>" class="stretched-link">
             My Profile
           </a>
         </li>
-      <li class="nav-link-active profile-overview">
+      <li class="nav-link-active profile-overview" class="nav-link">
         Profile Overview
       </li>
-      <li>
+      <li class="nav-link">
         Friends
       </li>
-      <li>
+      <li class="nav-link">
         Games Owned
       </li>
-      <li class="nav-steam-quick-links d-flex flex-column align-items-center">
+      <li class="nav-steam-quick-links d-flex flex-column align-items-center nav-link" style="margin-bottom: 2rem;">
         <div class="mb-3">
           Steam Quick Links
           <button class="steam-quicklinks-viewmore">
@@ -141,18 +143,37 @@
         </div>
         <div style="display: none;">
           <ul class="mobile-steamquick-links">
-            <li class="mobile-steamquick-link">Inventory</li>
-            <li class="mobile-steamquick-link">Profile Comments</li>
-            <li class="mobile-steamquick-link">Common Friends</li>
-            <li class="mobile-steamquick-link">Name History</li>
-            <li class="mobile-steamquick-link">Groups</li>
+            <li class="mobile-steamquick-link">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/inventory" target="_blank" rel="no-follow">
+                Inventory
+              </a>
+            </li>
+            <li class="mobile-steamquick-link">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/allcomments" target="_blank" rel="no-follow">
+                Profile Comments
+              </a>
+            </li>
+            <li class="mobile-steamquick-link">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/friends/common" target="_blank" rel="no-follow">
+                Common Friends
+              </a>
+            </li>
+            <li class="mobile-steamquick-link">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/namehistory" target="_blank" rel="no-follow">
+                Name History
+              </a>
+            </li>
+            <li class="mobile-steamquick-link">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/groups" target="_blank" rel="no-follow">
+              </a>
+              Groups
+            </li>
           </ul>
         </div>  
       </li>
-      <li class="logout-btn">
-        <a href="/logout" class="stretched-link">
+      <li class="logout-btn nav-link">
+        <a href="/logout" class="stretched-link"></a>
           Logout
-        </a>
       </li>
     </ul>
   </nav>

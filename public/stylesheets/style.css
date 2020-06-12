@@ -178,7 +178,7 @@ body{
 .steam-quicklinks-viewmore:focus{
   outline: none;
 }
-.steam-quicklinks-viewmore.view-more-active{
+.steam-quicklinks-viewmore.active{
   transform: rotate(180deg);
 }
 .steam-quicklinks-viewmore>i{
@@ -187,6 +187,7 @@ body{
 
 .mobile-navlinks .mobile-steamquick-link{
   padding: .5rem;
+  margin-bottom: .5rem;
   font-size: 90%;
 }
 .mobile-navlinks .mobile-steamquick-link:hover{
@@ -503,6 +504,9 @@ body{
 .steam-quick-links-wrapper{
   grid-column: 1/5;
   grid-row: 8/12;
+}
+.steam-quick-links a{
+  color:inherit;
 }
 /* label styles */
 .name-label{
@@ -852,6 +856,9 @@ font-size: 12px;
 }
 .name-level{
   width: 100%;
+}
+.name-level h5{
+  font-size: 1rem;
 }
 .image{
   width: 30%;

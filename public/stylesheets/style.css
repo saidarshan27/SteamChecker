@@ -764,6 +764,9 @@ font-size: 12px;
   body{
     overflow-x: hidden;
   }
+  .mobile-nav{
+    overflow-y: scroll;
+  }
  .steam-quick-links-wrapper{
   display: none;
  }
@@ -806,6 +809,9 @@ font-size: 12px;
 @media (max-width:768px){
   .fa-info-circle{
     font-size: 0.5rem;
+  }
+  .mobile-nav-links li {
+    padding: 1rem 1rem;
   }
   .dekstop-h5{
     display:none;

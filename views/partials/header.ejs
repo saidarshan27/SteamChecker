@@ -17,17 +17,16 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light main-nav">
     <div class="container">
-      <div class="logo-container d-flex">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="/" title = "SteamChecker Home">
+        <div style="display: flex;align-items: center;">
+          <img src="/logo/logo.svg" alt="logo" class="logo">
+          <span class="logo-text">SteamChecker</span>
+        </div>
+      </a>
+      <div>
+        <button class="navbar-toggler mobile-navbar-toggler" type="button">
           <i class="fas fa-bars"></i>
         </button>
-        <a class="navbar-brand" href="/" title = "SteamChecker Home">
-          <div style="display: flex;align-items: center;">
-            <img src="/logo/logo.svg" alt="logo" class="logo">
-              SteamChecker 
-          </div>
-        </a>
-      </div>
           <div class="login-wrapper d-none d-lg-block">
             <% const userKeys = Object.keys(user).length %>
             <% if(userKeys === 0) { %>
@@ -63,6 +62,43 @@
   </nav>
 
 
+  <nav class="mobile-nav d-block d-lg-none">     
+    <ul class="mobile-navlinks">
+        <li class="signin-btn">
+          <a href="/auth/steam">
+            <img src="/images/steamloginbutton.jpg" alt="login-btn" >
+          </a>
+        </li>
+        <li class="myprofile-btn" style="display:none;position: relative;">
+          <img src="<%= user.avatar %>" alt="avatar" class="mobile-nav-avatar">
+          <a href="/user?url=<%= user.myProfileQueryString %>" class="stretched-link">
+            My Profile
+          </a>
+        </li>
+      <li class="logout-btn">
+        <a href="/logout" class="stretched-link">
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav>
 
 
 
+
+  <script>
+    const navUser = <%- JSON.stringify(user) %>
+    const NavUserKeys = Object.keys(navUser).length;
+    const myProfileBtn = document.querySelector(".myprofile-btn");
+    const siginBtn =  document.querySelector(".signin-btn");
+    const logoutBtn = document.querySelector(".logout-btn");
+   if(!NavUserKeys){
+     myProfileBtn.style.display = "none";
+     logoutBtn.style.display = "none";
+     siginBtn.style.visibility = "visibile";
+   }else{
+    myProfileBtn.style.display = "flex";
+    logoutBtn.style.display = "flex";
+    siginBtn.style.visibility = "hidden";
+   }
+  </script>

@@ -129,16 +129,20 @@ $(".clear-input").click(function(event){
 
 
 // close the my profile view more dropdown when clicked else where on the document
+const dropDown = $(".view-more-links")
 $(document).click(function(event){
-	const objEvent = $(event.target);
-	if(objEvent.hasClass("view-more-btn")){
-		return;
-	}else{
-		const dropDown = $(".view-more-links");
-		if(dropDown.is(":visible")){
-			dropDown.hide();
-		}
-	}
+		dropDown.hide();
+	  if(!$(event.target).hasClass("mobile-navbar-toggler") && !$(event.target).hasClass("nav-searchbar-toggler")){
+			$(".mobile-nav").removeClass("mobile-nav-active");
+			$(".mobile-navbar-toggler").removeClass("toggle");
+		}		
+})
+
+dropDown.click(function(e){
+   e.stopPropagation();
+})
+$(".mobile-nav").click(function(e){
+	e.stopPropagation();
 })
 
 // steam id info button
@@ -149,6 +153,29 @@ $(".input-info").click(function(event){
 // mobile nav slide in 
 $(".mobile-navbar-toggler").click(function(event){
 	$(".mobile-nav").toggleClass("mobile-nav-active");
+	$(this).toggleClass("toggle");
+})
+
+// add active color to nav-togglers
+$(".navbar-toggler").click(function(event){
+	$(this).toggleClass("navbar-toggler-active");
+})
+
+
+
+$(".mobile-navlinks li").click(function(event){
+	$(this).siblings(".nav-link-active").removeClass("nav-link-active");
+	$(this).addClass("nav-link-active");
+})
+
+$(".steam-quicklinks-viewmore").click(function(event){
+	$(this).toggleClass("view-more-active");
+	$(this).parent().siblings().slideToggle();
+	if(!$(this).hasClass("view-more-active")){
+		$(".profile-overview").addClass("nav-link-active");
+		$(this).parents(".nav-steam-quick-links").removeClass("nav-link-active");
+		event.stopPropagation();
+	}
 })
 
 

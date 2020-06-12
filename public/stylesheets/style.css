@@ -100,13 +100,13 @@ body{
   transition: all .3s ease;
 }
 .toggle .line1{
-  transform: rotate(-45deg) translate(-10px,3px);
+  transform: rotate(-45deg) translate(-.6rem,.25rem);
 }
 .toggle .line2{
   opacity: 0;
 }
 .toggle .line3{
-  transform: rotate(45deg) translate(-5px,1px);
+  transform: rotate(45deg) translate(-.24rem,.06rem);
 }
 
 .mobile-nav{

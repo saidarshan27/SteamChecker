@@ -134,8 +134,8 @@ async function main(steam64){
   const banObj = await playerBans(steam64);
   const backgroundFull = await playerBackground(steam64);
   const steamLvl = await playerLevel(steam64);
-  // const steamrepReputation = await getSteamRep(steam64);
-  const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl};
+  const steamrepReputation = await getSteamRep(steam64);
+  const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl,steamrepReputation};
   return dataObj;
   }
 }

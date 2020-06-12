@@ -810,8 +810,8 @@ font-size: 12px;
   .fa-info-circle{
     font-size: 0.5rem;
   }
-  .mobile-nav-links li {
-    padding: 1rem 1rem;
+  .mobile-navlinks li {
+    padding: .75rem .75rem;
   }
   .dekstop-h5{
     display:none;

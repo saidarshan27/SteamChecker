@@ -59,9 +59,7 @@ body{
   margin-right: 0.5rem;
   color: white;
 }
-.fa-steam-symbol:hover{
-  cursor: pointer;
-}
+
 /* nav styles */
 .navbar-light .navbar-brand{
   font-family: 'Rockwell',Montserrat;
@@ -82,12 +80,7 @@ body{
   border:none;
   outline: none;
 }
-.navbar-light .navbar-toggler:hover{
-  color: white;
-}
-.navbar-light .navbar-toggler.mobile-navbar-toggler:hover > div{
-  background-color: white;
-}
+
 .navbar-light .navbar-toggler-active{
   color: white;
 }
@@ -155,13 +148,6 @@ body{
   color: inherit;
 }
 
-.mobile-navlinks li:hover:not(.signin-btn):not(.mobile-steamquick-link){
-  color: white;
-  background: #00000012;
-}
-.mobile-navlinks .myprofile-btn:hover > .mobile-nav-avatar{
-  opacity: 1;
-}
 .mobile-navlinks .nav-link-active{
   color: white;
   font-weight: 800;
@@ -190,9 +176,7 @@ body{
   margin-bottom: .5rem;
   font-size: 90%;
 }
-.mobile-navlinks .mobile-steamquick-link:hover{
-  color: white;
-}
+
 
 
 .mobile-nav-steam-quick-links{
@@ -229,10 +213,7 @@ body{
   background: #7683F9
 }
 
-.search-submit:hover{
-  background: rgba(45, 66, 255, 0.56);
-  outline: none;
-}
+
 .search-submit:active,.search-submit:focus{
   outline: none;
 }
@@ -360,9 +341,7 @@ body{
 .nav-with-search .fa-search{
   font-size: 1.5rem;
 }
-.nav-with-search .search-submit:hover{
-  color:rgba(15, 25, 119, 0.795)
-}
+
 .nav-with-search .search-submit{
   display: flex;
   align-items: center;
@@ -456,6 +435,10 @@ body{
   align-items: center;
   grid-column: 2/13;
 }
+.name-level a{
+  color: black;
+}
+
 .icon-links{
   padding-left: 1rem;
   margin-left: 1rem;
@@ -479,6 +462,12 @@ body{
   display: flex;
   flex-direction: column;
   text-transform: capitalize;
+}
+.steamrep-steam{
+  color: black;
+}
+.steamrep-rep{
+  color: red;
 }
 /* collective style for all userpage containers */
 .about-wrapper,.steam-ids-wrapper,.profile-privacy-wrapper,.steam-quick-links-wrapper{
@@ -626,13 +615,6 @@ body{
   transition: all 0.2s ease-in-out;
 }
 
-.view-more-link:hover{
-  color:white;
-  background-color: #5C66C2; 
-}
-.view-more-link:hover a{
-  color:white;
-}
 .view-more-links.active{
   transform: translateY(20%);
   visibility: visible; /* shows sub-menu */
@@ -965,5 +947,48 @@ font-size: 12px;
   }
   .data-label{
     font-size: .6rem;
+  }
+}
+
+.mobile-navlinks li:active:not(.signin-btn):not(.mobile-steamquick-link){
+  background: #00000012;
+}
+
+@media(hover: hover) and (pointer: fine) {
+  .fa-steam-symbol:hover{
+    cursor: pointer;
+  }
+  .view-more-link:hover{
+    color:white;
+    background-color: #5C66C2; 
+  }
+  .view-more-link:hover a{
+    color:white;
+  }
+  .name-level a:hover{
+    color: #007bff;
+  }
+  .nav-with-search .search-submit:hover{
+    color:rgba(15, 25, 119, 0.795)
+  }
+  .search-submit:hover{
+    background: rgba(45, 66, 255, 0.56);
+    outline: none;
+  }
+  .mobile-navlinks .mobile-steamquick-link:hover{
+    color: white;
+  }
+  .mobile-navlinks li:hover:not(.signin-btn):not(.mobile-steamquick-link){
+    color: white;
+    background: #00000012;
+  }
+  .mobile-navlinks .myprofile-btn:hover > .mobile-nav-avatar{
+    opacity: 1;
+  }
+  .navbar-light .navbar-toggler:hover{
+    color: white;
+  }
+  .navbar-light .navbar-toggler.mobile-navbar-toggler:hover > div{
+    background-color: white;
   }
 }

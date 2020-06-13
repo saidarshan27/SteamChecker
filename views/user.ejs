@@ -5,10 +5,12 @@
        <img src="<%= dataObj.persondata.avatarfull %>" class="avatar" alt="avatar"/>
     </div>
     <div class="name-flex-wrapper">
-      <div class="name-level"> 
-        <h5>
-          <%= dataObj.persondata.personaname %>
-        </h5>
+      <div class="name-level">
+        <a href="<%= dataObj.persondata.profileurl %>" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>">
+          <h5>
+            <%= dataObj.persondata.personaname %>
+          </h5>
+        </a>
         <% if(dataObj.steamLvl){ %>
           <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
         <% }else{ %>
@@ -16,7 +18,7 @@
         <% } %>
       </div>
       <div class="icon-links">
-          <a href="">
+          <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>">
             <img src="/images/steamrep-logo.png" alt="steamrep-logo">
           </a>
        </div>

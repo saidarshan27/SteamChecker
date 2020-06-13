@@ -956,6 +956,9 @@ font-size: 12px;
 .navbar-light .navbar-toggler.mobile-navbar-toggler:active > div{
   background-color: white;
 }
+.name-level a:active{
+  color: #007bff;
+}
 
 @media(hover: hover) and (pointer: fine) {
   .fa-steam-symbol:hover{

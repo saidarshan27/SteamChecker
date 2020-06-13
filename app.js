@@ -135,6 +135,7 @@ async function main(steam64){
   const backgroundFull = await playerBackground(steam64);
   const steamLvl = await playerLevel(steam64);
   const steamrepReputation = await getSteamRep(steam64);
+  getPlayerFaceitInfo(steam64);
   const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl,steamrepReputation};
   return dataObj;
   }
@@ -221,6 +222,7 @@ function playerSteamIds(steam64){
   }
 }
 function playerBans(steam64){
+
   let banObj={
     communityBan:"None",
     vacBan:"None",
@@ -284,6 +286,23 @@ async function playerLevel(steam64){
     console.log(err);
   }
 }
+
+async function getPlayerFaceitInfo(steam64){
+  const options ={
+    uri:`https://open.faceit.com/data/v4/players`,
+    qs:{
+      game:'csgo',
+      game_player_id:steam64
+    },
+    headers:{
+      'Authorization':'Bearer'+'6e687cc3-223a-4f96-8d11-8ab39a1ed1e4'
+    },
+    json:true
+  }
+  const faceitInfo = await rp(options);
+  console.log(faceitInfo);
+}
+
 
 async function playerBackground(steam64){
   const options =  {

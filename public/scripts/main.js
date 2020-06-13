@@ -166,11 +166,16 @@ $(".navbar-toggler").click(function(event){
 $(".mobile-navlinks .nav-link").click(function(event){
 	$(this).siblings(".nav-link-active").removeClass("nav-link-active");
 	$(this).addClass("nav-link-active");
+	if($(this).hasClass("nav-steam-quick-links")){
+		$(this).children().children(".steam-quicklinks-viewmore").toggleClass("active");
+		$(this).children(".mobile-steamquick-links-container").slideToggle();
+	}
 })
 
 $(".steam-quicklinks-viewmore").click(function(event){
 	$(this).toggleClass("active");
 	$(this).parent().siblings().slideToggle();
+	event.stopPropagation();
 	if(!$(this).hasClass("active")){
 		$(".profile-overview").addClass("nav-link-active");
 		$(this).parents(".nav-steam-quick-links").removeClass("nav-link-active");

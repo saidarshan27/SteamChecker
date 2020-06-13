@@ -18,7 +18,7 @@
         <% } %>
       </div>
       <div class="icon-links">
-          <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>">
+          <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>" target="_blank" rel="no-follow">
             <img src="/images/steamrep-logo.png" alt="steamrep-logo">
           </a>
        </div>
@@ -54,7 +54,7 @@
               <td class="data-label friendship">
                 <span class="data mute">
                   <em>
-                    <a href="/auth/steam" style="color: inherit;">Sign In to check </a>
+                    <a href="/auth/steam">Sign In to check </a>
                   </em>
                 </span>
               </td>
@@ -253,7 +253,8 @@
     <section class="steam-quick-links-wrapper">
       <div class="steam-quick-links">
         <p class="section-title">
-          STEAM QUICK LINK'S
+          STEAM QUICK LINK'S 
+          <span style="color: #989898;margin-left:.2rem"><i class="fas fa-link"></i></span>
         </p>
         <hr>
         <table class="table">

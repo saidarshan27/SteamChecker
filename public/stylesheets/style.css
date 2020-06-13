@@ -456,6 +456,13 @@ body{
   grid-column: 1/5;
   grid-row: 3/8;
 }
+.about-wrapper .about a{
+  color: inherit;
+  text-decoration: underline;
+}
+.about-wrapper .about a:active{
+  color: #5f5f5f;
+}
 /* reputation inside about section */
 .reputation{
   font-size: .7rem;
@@ -496,6 +503,9 @@ body{
 }
 .steam-quick-links a{
   color:inherit;
+}
+.steam-quick-links a:active{
+  color: #3a3a3a;
 }
 /* label styles */
 .name-label{
@@ -950,6 +960,8 @@ font-size: 12px;
   }
 }
 
+
+/* active style substitutes for non-hoverable devices */
 .mobile-navlinks li:active:not(.signin-btn):not(.mobile-steamquick-link){
   background: #00000012;
 }
@@ -960,7 +972,14 @@ font-size: 12px;
   color: #007bff;
 }
 
-@media(hover: hover) and (pointer: fine) {
+/* all hover styles works only in hoverable devices */
+@media(hover: hover) and (pointer: fine){
+  .steam-quick-links a:hover{
+    color: #000000
+  }
+  .about-wrapper .about a:hover{
+    color: #5f5f5f;
+  }
   .fa-steam-symbol:hover{
     cursor: pointer;
   }
@@ -977,7 +996,7 @@ font-size: 12px;
   .nav-with-search .search-submit:hover{
     color:rgba(15, 25, 119, 0.795)
   }
-  .search-submit:hover{
+  .home-container .search-submit:hover{
     background: rgba(45, 66, 255, 0.56);
     outline: none;
   }

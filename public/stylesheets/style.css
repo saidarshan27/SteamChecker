@@ -953,6 +953,9 @@ font-size: 12px;
 .mobile-navlinks li:active:not(.signin-btn):not(.mobile-steamquick-link){
   background: #00000012;
 }
+.navbar-light .navbar-toggler.mobile-navbar-toggler:active > div{
+  background-color: white;
+}
 
 @media(hover: hover) and (pointer: fine) {
   .fa-steam-symbol:hover{

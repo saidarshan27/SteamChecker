@@ -4,7 +4,7 @@
     <div class="image">
        <img src="<%= dataObj.persondata.avatarfull %>" class="avatar" alt="avatar"/>
     </div>
-    <div class="name-flex-wrapper">
+    <div class="name-flex-wrapper" style="width: 100%;">
       <div class="name-level">
         <a href="<%= dataObj.persondata.profileurl %>" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" target="_blank" rel="no-follow">
           <h5>
@@ -16,12 +16,26 @@
         <% }else{ %>
           <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
         <% } %>
+    </div>
+    <% if(dataObj.faceitInfo){ %>
+    <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
+      <div class="faceit-level">
+        <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.skillLevel}.svg`) %>
       </div>
-      <div class="icon-links">
-          <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>" target="_blank" rel="no-follow">
-            <img src="/images/steamrep-logo.png" alt="steamrep-logo">
-          </a>
-       </div>
+      <div>
+        <span style="font-weight:800;font-size:10px;color: #9A9A9A;margin-left: .5rem;">SKILL LEVEL</span>
+      </div>
+    </div>
+    <% }else{ %>
+      <div class="alert alert-danger" role="alert">
+        This is profile not found in <a href="https://www.faceit.com/en" target="_blank" rel="no_follow">FACEIT</a>
+      </div>
+    <% }%>
+  <!-- <div class="icon-links">
+    <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>" target="_blank" rel="no-follow">
+      <img src="/images/steamrep-logo.png" alt="steamrep-logo">
+    </a>
+ </div> -->
     </div>
     </section>
     <section class="about-wrapper">

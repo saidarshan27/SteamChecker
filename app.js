@@ -135,8 +135,9 @@ async function main(steam64){
   const backgroundFull = await playerBackground(steam64);
   const steamLvl = await playerLevel(steam64);
   const steamrepReputation = await getSteamRep(steam64);
-  getPlayerFaceitInfo(steam64);
-  const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl,steamrepReputation};
+  const faceitInfo = await getPlayerFaceitInfo(steam64);
+  console.log("faceitInfo from main",faceitInfo);
+  const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl,steamrepReputation,faceitInfo};
   return dataObj;
   }
 }
@@ -288,19 +289,33 @@ async function playerLevel(steam64){
 }
 
 async function getPlayerFaceitInfo(steam64){
-  const options ={
-    uri:`https://open.faceit.com/data/v4/players`,
-    qs:{
-      game:'csgo',
-      game_player_id:steam64
-    },
-    headers:{
-      'Authorization':'Bearer'+'6e687cc3-223a-4f96-8d11-8ab39a1ed1e4'
-    },
-    json:true
+  try{
+    const options ={
+      uri:`https://open.faceit.com/data/v4/players`,
+      qs:{
+        game:'csgo',
+        game_player_id:steam64
+      },
+      headers:{
+        'Authorization':`Bearer 6e687cc3-223a-4f96-8d11-8ab39a1ed1e4`
+      },
+      json:true
+    }
+    const response = await rp(options);
+    const faceitInfo={
+        skillLevel:response.games.csgo.skill_level,
+        nickname:response.nickname,
+        faceitURL:response.faceit_url,
+        elo:response.games.csgo.faceit_elo
+      }
+      // regex for extracting the '{lang}' in faceit profile url 
+      const regex = /{lang}/gi;
+      faceitInfo.faceitURL = faceitInfo.faceitURL.replace(regex,'en');
+      return faceitInfo
   }
-  const faceitInfo = await rp(options);
-  console.log(faceitInfo);
+  catch(err){
+    return false
+  }
 }
 
 

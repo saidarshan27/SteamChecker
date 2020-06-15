@@ -44,7 +44,6 @@ i{
 body{
   background: var(--background);
   font-family: 'Montserrat', sans-serif;
-  position: relative;
 }
 /* home page styles */
 .home-container .dekstop-h5{
@@ -390,7 +389,7 @@ body{
   min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(12,1fr);
-  grid-auto-rows: minmax(65px,auto);
+  grid-auto-rows: minmax(55px,auto);
   padding-top: 1rem;
   gap: 1rem;
 }
@@ -401,14 +400,26 @@ body{
   grid-column: 1/13;
   background: var(--section-transperant-background);
   background: var(--section-background);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  border-top-right-radius: 1rem;
   display: flex;
   align-items: center;
   height: 100%;
   position: relative;
+}
+.mobile-profilepic-wrapper{
+  grid-column: 1/-1;
+  grid-row: 1/3;
+  background: #e0e6ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -1rem;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  display: none;
 }
 .name-flex-wrapper{
   display: flex;
@@ -420,8 +431,32 @@ body{
 .image{
   position: relative;
   height: 100%;
+  width: 20%;
+}
+.ripple{
+  position: absolute;
+  background: rgba(19, 17, 17, 0.103);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+  border-radius: 50%;
+  animation:animate 1s linear infinite;
+}
+@keyframes animate{
+  0%{
+    width: 0px;
+    height: 0px;
+    opacity: .3s;
+  }
+  100%{
+    width: 500px;
+    height: 500px;
+    opacity: 0;
+  }
+}
+.mobile-image{
   position: relative;
-  width: 25%;
+  height: 80%;
+  width: 45%;
 }
 .avatar{
   position: absolute;
@@ -429,6 +464,12 @@ body{
   height: 100%;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
+}
+.mobile-avatar{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 30%;
 }
 .name-level{
   display: flex;
@@ -439,6 +480,71 @@ body{
 .name-level h5{
   margin-bottom: 0;
 }
+.more-btn{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, #4D51B6 3.91%, #7481F4 100%); 
+  border-radius: .5rem;
+  padding: .6rem 2rem;
+  font-weight: bold;
+  font-size: 12px;
+  outline: none;
+  color: #cecece;
+  border: none;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  transition: transform .3s ease-in-out;
+}
+.more-btn i{
+  color: #cecece;
+}
+
+.more-btn:active{
+  transform: scale(.7);
+}
+
+.more-btn:focus{
+  outline: none;
+} 
+.more-links-wrapper{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+.more-links-wrapper .more-links{
+  display: none;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  position: absolute;
+  left: 0px;
+  top: 90px;
+  z-index: 1;
+  width: 220px;
+  font-size: .75rem;
+  font-weight: 600;
+  list-style: none;
+  background: var(--section-background);
+  margin-bottom: 0;
+  border: 1px solid #dce1e4;
+}
+.more-links-wrapper .more-links .more-link{
+  display: flex;
+  padding: 1rem 1rem;
+  color: grey;
+  align-items: center;
+}
+.more-links-wrapper .more-links .more-link svg{
+  width: 8%;
+  height: 100%;
+  margin-right: .3rem;
+  filter: grayscale(100%);
+}
+
+.more-links-wrapper .more-links a{
+  text-decoration: none;
+}
+
 .alert{
   font-size: .7rem;
   padding: .4rem .4rem;
@@ -498,7 +604,7 @@ body{
   background: var(--section-transperant-background);
   background: var(--section-background);
   border-radius: 1rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
 .about,.steam-ids,.profile-privacy,.steam-quick-links{
   padding: 1rem 1.5rem;
@@ -717,6 +823,10 @@ font-size: 12px;
   .logo-text{
     display: none;
   }
+  .more-btn{
+    font-size: 10px;
+    padding: .5rem 1.5rem;
+  }
 }
 @media (max-width:1200px){
   .collapse-controls{
@@ -794,19 +904,27 @@ font-size: 12px;
 .userpage-container{
   padding: 2rem 4rem;
 }
+.home-container .controls{
+  width: 90%;
+}
+.home-container .label{
+  width: 90%;
+}
+.nav-with-search .collapse-controls{
+  width: 90%;
+}
+.more-links-wrapper .more-links{
+  width: 200px;
+}
 }
 
-@media (max-width:991px){
-  .home-container .controls{
-    width: 90%;
-  }
-  .home-container .label{
-    width: 90%;
-  }
-  .nav-with-search .collapse-controls{
-    width: 90%;
+@media (max-width:850px){
+  .more-links-wrapper .more-links{
+    width: 180px;
+    font-size: .6rem;
   }
 }
+
 
 
 @media (max-width:768px){
@@ -889,7 +1007,33 @@ font-size: 12px;
 .navbar-light .navbar-toggler:active{
   color: white;
 }
-
+/* grid rearrangement */
+.name-level-wrapper{
+  grid-row: 3/4;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.about-wrapper{
+  grid-row: 4/7;
+}
+.steam-ids-wrapper{
+  grid-row: 7/10;
+}
+.profile-privacy-wrapper{
+  grid-row: 10/13;
+}
+.image{
+  display: none;
+}
+.name-flex-wrapper{
+  padding: 1.5rem 1.5rem;
+}
+.mobile-profilepic-wrapper{
+  display: flex;
+}
+.mobile-image{
+  width: 25%;
+}
 } 
 
 
@@ -937,6 +1081,10 @@ font-size: 12px;
   .mobile-nav-avatar{
     left:15%
   }
+  .more-links-wrapper .more-links{
+    font-size: .5rem;
+    width: 140px;
+  }
 }
 @media (max-width:450px){
   .nav-with-search .collapse-controls{
@@ -963,15 +1111,27 @@ font-size: 12px;
   .mobile-navlinks li{
     font-size: .75rem;
   }
+  .mobile-image{
+    width: 45%;
+  }
 }
 @media(max-width:430px){
   .userpage-container{
     padding: 2rem 1rem;
   }
+  .more-links-wrapper .more-links .more-link svg{
+    width: 20%;
+  }
 }
 @media (max-width:360px){
   .name-label{
     font-size: .6rem;
+  }
+  .more-links-wrapper .more-links{
+    font-size: .5rem;
+    width: 130px;
+    left: -20px;
+    top:80px;
   }
   .mobile-navlinks li{
     font-size: .6rem;
@@ -995,9 +1155,33 @@ font-size: 12px;
 .name-level a:active{
   color: #007bff;
 }
+.more-btn:active{
+  color:white;
+}
+.more-btn:active > i{
+  color: white;
+}
+.more-links-wrapper .more-links .more-link:active{
+  color:#555555;
+}
+.more-links-wrapper .more-links .more-link:active > svg{
+  filter: grayscale(0%);
+}
 
 /* all hover styles works only in hoverable devices */
 @media(hover: hover) and (pointer: fine){
+  .more-btn:hover{
+    color:white;
+  }
+  .more-btn:hover > i{
+    color: white;
+  }
+  .more-links-wrapper .more-links .more-link:hover{
+    color:#555555;
+  }
+  .more-links-wrapper .more-links .more-link:hover > svg{
+    filter: grayscale(0%);
+  }
   .steam-quick-links a:hover{
     color: #000000
   }

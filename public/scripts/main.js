@@ -129,13 +129,18 @@ $(".clear-input").click(function(event){
 
 
 // close the my profile view more dropdown when clicked else where on the document
-const dropDown = $(".view-more-links")
+const dropDown = $(".view-more-links");
+const moreDropDown = $(".more-links");
 $(document).click(function(event){
 		dropDown.hide();
+		if(!$(event.target).hasClass("more-btn")){
+			moreDropDown.slideUp();
+		}
 	  if(!$(event.target).hasClass("mobile-navbar-toggler") && !$(event.target).hasClass("nav-searchbar-toggler")){
 			$(".mobile-nav").removeClass("mobile-nav-active");
 			$(".mobile-navbar-toggler").removeClass("toggle");
 		}
+
 })
 
 dropDown.click(function(e){
@@ -214,6 +219,14 @@ function checkWidth(){
 		$(".main-nav").removeClass("sticky-top");
 	}
 }
+
+$(".more-btn").click(function(e){
+	$(this).siblings(".more-links").slideToggle();
+})
+
+$(".more-link").click(function(e){
+	e.stopPropagation();
+})
 
 // function rippleEffect(element,x,y){
 // 	let ripples = document.createElement("span");

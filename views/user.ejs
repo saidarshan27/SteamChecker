@@ -1,386 +1,363 @@
 <%- include("partials/headerWithSearch.ejs"); %>
-  <div class="container userpage-container"> 
-   <section class="name-level-wrapper">
-    <div class="image">
-       <img src="<%= dataObj.persondata.avatarfull %>" class="avatar" alt="avatar"/>
+
+<div class="container userpage-container"> 
+  <section class="mobile-profilepic-wrapper">
+      <div class="mobile-image">
+        <img src="<%= dataObj.persondata.avatarfull %>" class="mobile-avatar" alt="avatar"/>
+     </div>
+  </section>
+ <section class="name-level-wrapper">
+  <div class="image">
+     <img src="<%= dataObj.persondata.avatarfull %>" class="avatar" alt="avatar"/>
+  </div>
+  <div class="name-flex-wrapper" style="width: 60%;">
+    <div class="name-level">
+      <a href="<%= dataObj.persondata.profileurl %>" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" target="_blank" rel="no-follow">
+        <h5>
+          <%= dataObj.persondata.personaname %>
+        </h5>
+      </a>
+      <% if(dataObj.steamLvl){ %>
+        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
+      <% }else{ %>
+        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
+      <% } %>
+  </div>
+  <% if(dataObj.faceitInfo){ %>
+  <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
+    <div class="faceit-level">
+      <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.skillLevel}.svg`) %>
     </div>
-    <div class="name-flex-wrapper" style="width: 100%;">
-      <div class="name-level">
-        <a href="<%= dataObj.persondata.profileurl %>" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" target="_blank" rel="no-follow">
-          <h5>
-            <%= dataObj.persondata.personaname %>
-          </h5>
-        </a>
-        <% if(dataObj.steamLvl){ %>
-          <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
-        <% }else{ %>
-          <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
-        <% } %>
+    <div>
+      <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
     </div>
-    <% if(dataObj.faceitInfo){ %>
-    <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
-      <div class="faceit-level">
-        <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.skillLevel}.svg`) %>
-      </div>
-      <div>
-        <span style="font-weight:800;font-size:10px;color: #9A9A9A;margin-left: .5rem;">SKILL LEVEL</span>
-      </div>
+  </div>
+  <% }else{ %>
+    <div class="alert alert-danger" role="alert">
+      This profile not found in <a href="https://www.faceit.com/en" target="_blank" rel="no_follow">FACEIT</a>
     </div>
-    <% }else{ %>
-      <div class="alert alert-danger" role="alert">
-        This profile not found in <a href="https://www.faceit.com/en" target="_blank" rel="no_follow">FACEIT</a>
-      </div>
-    <% }%>
-  <!-- <div class="icon-links">
-    <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>" target="_blank" rel="no-follow">
-      <img src="/images/steamrep-logo.png" alt="steamrep-logo">
+  <% }%>
+<!-- <div class="icon-links">
+  <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>" target="_blank" rel="no-follow">
+    <img src="/images/steamrep-logo.png" alt="steamrep-logo">
+  </a>
+</div> -->
+  </div>
+  <div class="more-links-wrapper">
+   <button class="more-btn">More<i class="fas fa-chevron-down ml-1"></i></button>
+   <ul class="more-links">
+    <a href="<%= dataObj.persondata.profileurl %>">
+     <li class="more-link">
+        <svg viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.53125 1.38672C3.53125 1.65078 3.28571 1.86328 2.98661 1.86328C2.68482 1.86328 2.44196 1.65 2.44196 1.38672C2.44196 1.12344 2.68571 0.910156 2.98661 0.910156C3.28571 0.910156 3.53125 1.12266 3.53125 1.38672ZM4 1.38828C4 1.88047 3.54464 2.27734 2.98482 2.27734L2.00893 2.90078C1.97321 3.23672 1.64732 3.50078 1.25446 3.50078C0.892857 3.50078 0.5875 3.27578 0.513393 2.97734L0 2.79688V1.95859L0.867857 2.26562C1.00268 2.19375 1.15536 2.16172 1.33214 2.17578L1.96607 1.38125C1.97054 0.894531 2.42589 0.5 2.98393 0.5C3.54464 0.5 4 0.898437 4 1.38828ZM1.8125 2.83594C1.8125 2.56484 1.56429 2.34766 1.25446 2.34766C1.21429 2.34766 1.17411 2.35156 1.13393 2.35938L1.36607 2.44141C1.59375 2.52109 1.70536 2.74609 1.61339 2.94531C1.52232 3.14453 1.26339 3.24219 1.03571 3.16016C0.944643 3.12891 0.852679 3.09531 0.761607 3.06484C0.855357 3.21875 1.04018 3.32422 1.25446 3.32422C1.56429 3.32422 1.8125 3.10703 1.8125 2.83594ZM3.66518 1.38828C3.66518 1.06016 3.35893 0.792969 2.98482 0.792969C2.60714 0.792969 2.30179 1.06016 2.30179 1.38828C2.30179 1.71797 2.60804 1.98359 2.98482 1.98359C3.35893 1.98437 3.66518 1.71875 3.66518 1.38828Z" fill="#7683F9"/>
+          </svg>
+         View Profile on Steam
+        </li>
+      </a>
+      <% if(dataObj.faceitInfo) { %>
+    <a href="<%= dataObj.faceitInfo.faceitURL %>">
+     <li class="more-link">
+      <svg viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.0015 0.0315337C4.0015 0.0157669 3.98484 0 3.98484 0C3.96817 0 3.96817 -1.52714e-08 3.9515 0.0157668C3.61817 0.504539 3.26817 0.993312 2.93484 1.49785H0.0348362C0.00150283 1.49785 -0.0151638 1.54515 0.0181695 1.56092C1.21817 1.98662 2.96817 2.63307 3.93484 2.9957C3.96817 3.01147 4.0015 2.97994 4.0015 2.96417V0.0315337Z" fill="#F86300"/>
+      </svg>
+       View Profile on FACEIT
+      </li>
     </a>
- </div> -->
-    </div>
-    </section>
-    <section class="about-wrapper">
-      <div class="about">
-        <p class="section-title">ABOUT</p>
-        <hr>
-        <table class="table">
-          <tbody>
-            <% if(dataObj.steamLvl){ %>
-              <tr>
-                <td class="name-label">Steam Level</td>
-                <td class="data-label">
-                  <span class="data">
-                    <%= dataObj.steamLvl %>
-                  </span>
-                </td>
-              </tr>
-            <% }else{ %>
-              <tr>
-                <td class="name-label">Steam Level</td>
-                <td class="data-label">
-                  <span class="data private">
-                    private
-                  </span>
-                </td>
-              </tr>
-            <% } %>
+      <% } %>
+      <a href="<%= dataObj.steamrepReputation.steamrepurl %>">
+     <li class="more-link">
+        <svg viewBox="0 0 4 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0.573066 0.249246V0.751759H1.43037V1.00503H1.7192V1.74874H1.43037V1.99799H0V1.74874H1.15072V1.25427H0.288825V1.00101H0V0.249246H0.288825V0H1.7192V0.249246H0.573066Z" fill="black"/>
+        <path d="M3.71809 1.75075V1.50352H3.43384V1.00503H3.72267V0.249246H3.43384V0H2.00806V1.99799H2.56737V1.25427H2.86536V1.50352H3.1496V1.75276H3.43155V2H4.00003V1.75075H3.71809ZM2.56737 1.00503V0.249246H3.1496V1.00503H2.56737Z" fill="#ED3833"/>
+        </svg>             
+       View Profile on SteamRep
+      </li>
+    </a>
+   </ul>
+  </div>
+  </section>
+  <section class="about-wrapper test">
+    <div class="about">
+      <p class="section-title">ABOUT</p>
+      <hr>
+      <table class="table">
+        <tbody>
+          <% if(dataObj.steamLvl){ %>
             <tr>
-              <td class="name-label">Friendship</td>
-              <td class="data-label friendship">
-                <span class="data mute">
-                  <em>
-                    <a href="/auth/steam">Sign In to check </a>
-                  </em>
+              <td class="name-label">Steam Level</td>
+              <td class="data-label">
+                <span class="data">
+                  <%= dataObj.steamLvl %>
                 </span>
               </td>
             </tr>
-            <% if(dataObj.persondata.timecreated){ %>
-              <tr>
-                <td class="name-label">Joined Steam</td>
-                <td class="data-label">
-                  <span class="data">
-                    <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-                    <%= humanDate %>
-                  </span>
-                </td>
-              </tr>
-            <% }else{ %>
-              <tr>
-                <td class="name-label">Joined Steam</td>
-                <td class="data-label">
-                  <span class="data private">
-                    private
-                  </span>
-                </td>
-              </tr>
-            <% } %>
+          <% }else{ %>
             <tr>
-              <td class="name-label">
-                Online Status
-              </td>
+              <td class="name-label">Steam Level</td>
               <td class="data-label">
-                <span class="data" id="online-status"></span>
+                <span class="data private">
+                  private
+                </span>
               </td>
             </tr>
-          </tbody>
-        </table>
-        <hr style="margin-top: 0;"> 
-        <p class="reputation-title section-title">
-          REPUTATION
-        </p>
-        <div class="reputation">
-          <span class="data" style="color: #7A7D7F;font-weight: 750;">
-          <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
-            <use href="#empty-shield"></use>
-          </svg>                           
-            <%= dataObj.steamrepReputation.fullReputation %>
-          </span>
-          <span class="by-steamrep" style="font-size: .6rem;text-align: end;">
-             By <a href="https://steamrep.com" style="color:inherit;" target="_blank" rel="no-follow">SteamRep.com</a>
-          </span>
-        </div>
+          <% } %>
+          <tr>
+            <td class="name-label">Friendship</td>
+            <td class="data-label friendship">
+              <span class="data mute">
+                <em>
+                  <a href="/auth/steam">Sign In to check </a>
+                </em>
+              </span>
+            </td>
+          </tr>
+          <% if(dataObj.persondata.timecreated){ %>
+            <tr>
+              <td class="name-label">Joined Steam</td>
+              <td class="data-label">
+                <span class="data">
+                  <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
+                  <%= humanDate %>
+                </span>
+              </td>
+            </tr>
+          <% }else{ %>
+            <tr>
+              <td class="name-label">Joined Steam</td>
+              <td class="data-label">
+                <span class="data private">
+                  private
+                </span>
+              </td>
+            </tr>
+          <% } %>
+          <tr>
+            <td class="name-label">
+              Online Status
+            </td>
+            <td class="data-label">
+              <span class="data" id="online-status"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr style="margin-top: 0;"> 
+      <p class="reputation-title section-title">
+        REPUTATION
+      </p>
+      <div class="reputation">
+        <span class="data" style="color: #7A7D7F;font-weight: 750;">
+        <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
+          <use href="#empty-shield"></use>
+        </svg>                           
+          <%= dataObj.steamrepReputation.fullReputation %>
+        </span>
+        <span class="by-steamrep" style="font-size: .6rem;text-align: end;">
+           By <a href="https://steamrep.com" style="color:inherit;" target="_blank" rel="no-follow">SteamRep.com</a>
+        </span>
       </div>
-    </section>
-    <section class="steam-ids-wrapper">
-      <div class="steam-ids">
-         <p class="section-title">STEAM ID'S</p>
-         <hr>
-         <table class="table">
-           <tbody>
-             <tr>
-               <td class="name-label">
-                 SteamID64
-               </td>
-               <td class="data-label">
-                  <span class="data" data-full-URL = "<%= dataObj.objSteamIds.steam64 %>">
-                    <%= dataObj.objSteamIds.steam64 %>
-                  </span>
-                  <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-                    <i class="far fa-clone"></i>
-                  </span>
-               </td>
-             </tr>
-             <tr>
-              <td class="name-label">
-                SteamID2
-              </td>
-              <td class="data-label">
-                 <span class="data" data-full-URL="<%= dataObj.objSteamIds.steam2id %>">
-                   <%= dataObj.objSteamIds.steam2id %>
-                 </span>
-                 <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-                  <i class="far fa-clone"></i>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                SteamID3
-              </td>
-              <td class="data-label">
-                 <span class="data" data-full-URL="<%= dataObj.objSteamIds.steam3id %>">
-                   <%= dataObj.objSteamIds.steam3id %>
-                 </span>
-                 <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-                  <i class="far fa-clone"></i>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">FiveMID</td>
-              <td class="data-label">
-                <span class="data" data-full-URL="<%= dataObj.objSteamIds.fiveMID %>">
-                  <%= dataObj.objSteamIds.fiveMID %>
+    </div>
+  </section>
+  <section class="steam-ids-wrapper test">
+    <div class="steam-ids">
+       <p class="section-title">STEAM ID'S</p>
+       <hr>
+       <table class="table">
+         <tbody>
+           <tr>
+             <td class="name-label">
+               SteamID64
+             </td>
+             <td class="data-label">
+                <span class="data" data-full-URL = "<%= dataObj.objSteamIds.steam64 %>">
+                  <%= dataObj.objSteamIds.steam64 %>
                 </span>
                 <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
                   <i class="far fa-clone"></i>
                 </span>
-              </td>
-            </tr>
-            <% if(dataObj.objSteamIds.customURL){ %>
-              <tr>
-                <td class="name-label">
-                  Vanity URL 
-                </td>
-                <td class="data-label">
-                   <span class="data" data-full-URL="<%= dataObj.objSteamIds.customURL %>">
-                     <%= dataObj.objSteamIds.customURL %>
-                   </span>
-                   <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
-                    <i class="far fa-clone"></i>
-                  </span>
-                </td>
-              </tr>
-            <% }else{ %>
-              <tr>
-                <td class="name-label">
-                  Vanity URL 
-                </td>
-                <td class="data-label">
-                   <span class="data mute">
-                     Not Set
-                   </span>
-                </td>
-              </tr>
-            <% } %>
-           </tbody>
-         </table>
-      </div>
-    </section>
-    <section class="profile-privacy-wrapper">
-      <div class="profile-privacy">
-        <p class="section-title">PROFILE PRIVACY</p>
-        <hr>
-        <table class="table">
-          <tbody>
+             </td>
+           </tr>
+           <tr>
+            <td class="name-label">
+              SteamID2
+            </td>
+            <td class="data-label">
+               <span class="data" data-full-URL="<%= dataObj.objSteamIds.steam2id %>">
+                 <%= dataObj.objSteamIds.steam2id %>
+               </span>
+               <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                <i class="far fa-clone"></i>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              SteamID3
+            </td>
+            <td class="data-label">
+               <span class="data" data-full-URL="<%= dataObj.objSteamIds.steam3id %>">
+                 <%= dataObj.objSteamIds.steam3id %>
+               </span>
+               <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                <i class="far fa-clone"></i>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">FiveMID</td>
+            <td class="data-label">
+              <span class="data" data-full-URL="<%= dataObj.objSteamIds.fiveMID %>">
+                <%= dataObj.objSteamIds.fiveMID %>
+              </span>
+              <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                <i class="far fa-clone"></i>
+              </span>
+            </td>
+          </tr>
+          <% if(dataObj.objSteamIds.customURL){ %>
             <tr>
               <td class="name-label">
-                Privacy State
+                Vanity URL 
               </td>
               <td class="data-label">
-                <span class="data" id="privacy-state"></span>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                VAC Ban
-              </td>
-              <td class="data-label">
-                <span class="data" id="vac-ban">
-                  <%= dataObj.banObj.vacBan %>
+                 <span class="data" data-full-URL="<%= dataObj.objSteamIds.customURL %>">
+                   <%= dataObj.objSteamIds.customURL %>
+                 </span>
+                 <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
+                  <i class="far fa-clone"></i>
                 </span>
               </td>
             </tr>
+          <% }else{ %>
             <tr>
               <td class="name-label">
-                Game Ban
+                Vanity URL 
               </td>
               <td class="data-label">
-                <span class="data" id="game-ban">
-                  <%= dataObj.banObj.gameBan %>
-                </span>
+                 <span class="data mute">
+                   Not Set
+                 </span>
               </td>
             </tr>
-            <tr>
-              <td class="name-label">
-                Trade Ban
-              </td>
-              <td class="data-label">
-                <span class="data">
-                  <%= dataObj.banObj.tradeBan %>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                Community Ban
-              </td>
-              <td class="data-label">
-                <span class="data" id="community-ban">
-                  <%= dataObj.banObj.communityBan %>
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-    <section class="steam-quick-links-wrapper">
-      <div class="steam-quick-links">
-        <p class="section-title">
-          STEAM QUICK LINK'S 
-          <span style="color: #989898;margin-left:.2rem"><i class="fas fa-link"></i></span>
-        </p>
-        <hr>
-        <table class="table">
-          <tbody>
-            <tr >
-              <td class="name-label">
-                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/inventory" target="_blank" rel="no-follow">
-                  Inventory
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/allcomments" target="_blank" rel="no-follow">
-                  Profile Comments
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/friends/common" target="_blank" rel="no-follow">
-                  Common Friends
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/namehistory" target="_blank" rel="no-follow">
-                  Name History
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="name-label">
-                <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/groups" target="_blank" rel="no-follow">
-                  Groups
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
+          <% } %>
+         </tbody>
+       </table>
+    </div>
+  </section>
+  <section class="profile-privacy-wrapper test">
+    <div class="profile-privacy">
+      <p class="section-title">PROFILE PRIVACY</p>
+      <hr>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="name-label">
+              Privacy State
+            </td>
+            <td class="data-label">
+              <span class="data" id="privacy-state"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              VAC Ban
+            </td>
+            <td class="data-label">
+              <span class="data" id="vac-ban">
+                <%= dataObj.banObj.vacBan %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              Game Ban
+            </td>
+            <td class="data-label">
+              <span class="data" id="game-ban">
+                <%= dataObj.banObj.gameBan %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              Trade Ban
+            </td>
+            <td class="data-label">
+              <span class="data">
+                <%= dataObj.banObj.tradeBan %>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              Community Ban
+            </td>
+            <td class="data-label">
+              <span class="data" id="community-ban">
+                <%= dataObj.banObj.communityBan %>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="steam-quick-links-wrapper test">
+    <div class="steam-quick-links">
+      <p class="section-title">
+        STEAM QUICK LINK'S 
+        <span style="color: #989898;margin-left:.2rem"><i class="fas fa-link"></i></span>
+      </p>
+      <hr>
+      <table class="table">
+        <tbody>
+          <tr >
+            <td class="name-label">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/inventory" target="_blank" rel="no-follow">
+                Inventory
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/allcomments" target="_blank" rel="no-follow">
+                Profile Comments
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/friends/common" target="_blank" rel="no-follow">
+                Common Friends
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/namehistory" target="_blank" rel="no-follow">
+                Name History
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">
+              <a href="http://steamcommunity.com/profiles/<%= dataObj.persondata.steamid %>/groups" target="_blank" rel="no-follow">
+                Groups
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+<%- include("partials/footer.ejs"); %>
 
 <!-- SVGS -->
 <%- include("partials/svgs/empty-shield.ejs"); %>
 <%- include("partials/svgs/tick-shield.ejs"); %>
 <%- include("partials/svgs/wrong-shield.ejs"); %>
-
-
-
-<!-- MODALS -->
-
-<div class="modal fade" id="send-message-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title section-title id="exampleModalLongTitle">NOTE</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Send message only works for a friend of yours.
-        <div class="dont-show-again mt-3">
-          <input type="checkbox" name="dont-show-again-checkbox" class="dont-show-again-checkbox">
-          <label for="dont-show-again-checkbox">Don't show this again</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="send-message-close" data-dismiss="modal">Close</button>
-        <a href="steam://friends/message/<%= dataObj.persondata.steamid %>" rel="no-follow">
-        <button type="button" class="send-message-ok">OK</button>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="add-friend-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title section-title id="exampleModalLongTitle">
-          REQUEST SENT
-        </h5>
-      </div>
-      <div class="modal-body">
-       Added to friends.
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-<%- include("partials/footer.ejs"); %>
-
 <script>
   const dataObj = <%- JSON.stringify(dataObj) %>
   const visibilityState = dataObj.persondata.communityvisibilitystate;
@@ -392,7 +369,6 @@
     loggedUserId = user.loggedUserId;
   }
 </script>
-
 <script src="/scripts/steamLevelColor.js"></script>
 <script src="/scripts/updateOnlineStatus.js"></script>
 <script src="/scripts/updatePrivacy.js"></script>
@@ -401,14 +377,3 @@
 <script src="/scripts/updateReputation.js"></script>
 <script src="/scripts/updateBackground.js"></script>
 <script src="/scripts/checkOwnerShip.js"></script>
-
-
-
-<!-- <script>
-  const DoNotShowMessageAgainCheckBox = document.querySelector(".dont-show-again-checkbox");
-	DoNotShowMessageAgainCheckBox.checked = false;
-</script>
-
-
-
- -->

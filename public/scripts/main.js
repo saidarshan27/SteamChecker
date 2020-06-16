@@ -133,9 +133,9 @@ const dropDown = $(".view-more-links");
 const moreDropDown = $(".more-links");
 $(document).click(function(event){
 		dropDown.hide();
-		// if(!$(event.target).hasClass("more-btn")){
-		// 	moreDropDown.slideUp();
-		// }
+		if(!$(event.target).hasClass("more-btn")){
+			moreDropDown.slideUp();
+		}
 	  if(!$(event.target).hasClass("mobile-navbar-toggler") && !$(event.target).hasClass("nav-searchbar-toggler")){
 			$(".mobile-nav").removeClass("mobile-nav-active");
 			$(".mobile-navbar-toggler").removeClass("toggle");

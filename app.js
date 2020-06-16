@@ -302,6 +302,7 @@ async function getPlayerFaceitInfo(steam64){
       json:true
     }
     const response = await rp(options);
+    console.log(response);
     const faceitInfo={
         skillLevel:response.games.csgo.skill_level,
         nickname:response.nickname,

@@ -27,18 +27,74 @@
   <div class="more-links-wrapper">
    <button class="more-btn">More<i class="fas fa-chevron-down ml-1"></i></button>
    <ul class="more-links">
-    <a href="">
+    <a href="steam://friends/add/76561198364464404" rel="nofollow">
      <li class="more-link">
         Add as Friend 
       </li>
     </a>
-    <a href="">
+    <a href="steam://friends/message/76561198364464404" rel="nofollow">
      <li class="more-link">
        Send a Message
       </li>
     </a>
    </ul>
   </div>
+  </section>
+  <section class="mobile-about-wrapper">
+    <div class="about">
+      <p class="section-title">ABOUT</p>
+      <hr>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="name-label">Joined Steam</td>
+            <td class="data-label">
+        <% if(dataObj.persondata.timecreated){ %>
+              <span class="data">
+                <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
+                <%= humanDate %>
+              </span>
+        <% }else{ %>
+              <span class="data private">
+                private
+              </span>
+        <% } %>
+            </td>
+          </tr>
+            <tr>
+              <td class="name-label">Steam Level</td>
+              <td class="data-label">
+          <% if(dataObj.steamLvl){ %>
+                <span class="data">
+                  <%= dataObj.steamLvl %>
+                </span>
+          <% }else{ %>
+              <span class="data private">
+                  private
+                </span>
+          <% } %>
+              </td>
+            </tr>
+          <tr>
+            <td class="name-label">
+              Online Status
+            </td>
+            <td class="data-label">
+              <span class="data" id="mobile-online-status"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="name-label">Friendship</td>
+            <td class="data-label friendship">
+              <span class="data mute">
+                <em>
+                  <a href="/auth/steam">Sign In to check </a>
+                </em>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
   </section>
   <section class="about-wrapper">
     <div class="about">

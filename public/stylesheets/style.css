@@ -489,13 +489,17 @@ body{
   font-weight: bold;
   font-size: 12px;
   outline: none;
-  color: #cecece;
+  color: #ffffff;
   border: none;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
   transition: transform .3s ease-in-out;
 }
+.more-btn:hover{
+  background: linear-gradient(90deg, #4e51af 3.91%, #6772d6 100%); 
+}
+
 .more-btn i{
-  color: #cecece;
+  color: #ffffff;
 }
 
 .more-btn:active{
@@ -576,14 +580,14 @@ body{
 
 /* about wrapper styles */
 .about-wrapper{
-  grid-row: 3/5;
+  grid-row: 3/4;
   grid-column: 1/-1;
 }
 
 
 .faceit-info-wrapper{
   grid-column: 1/5;
-  grid-row: 5/8;
+  grid-row: 4/7;
 }
 .about-wrapper .about a{
   color: inherit;
@@ -650,8 +654,8 @@ body{
   margin-bottom: .5rem;
 }
 .faceit-info .faceit-skill-levels .showmore-faceit-skills,.faceit-info .faceit-skill-levels .showless-faceit-skills{
-  text-decoration:underline;
   cursor: pointer;
+  font-size: .7rem;
 }
 .faceit-info .faceit-skill-levels .faceit-skill-level img{
  border-top-right-radius: 1rem;
@@ -660,7 +664,7 @@ body{
 
 /* links */
 .links svg{
-  margin-right: .2rem;
+  margin-right: .5rem;
 }
 .links a{
  text-decoration: none;
@@ -669,17 +673,17 @@ body{
 /* steam-ids wrapper */
 .steam-ids-wrapper{
   grid-column: 5/13;
-  grid-row: 5/8;
+  grid-row: 4/7;
 }
 /* profile privacy wrapper */
 .profile-privacy-wrapper{
   grid-column: 5/13;
-  grid-row: 8/11;
+  grid-row: 7/10;
 }
 /* steam-quick-link wrapper */
 .steam-quick-links-wrapper{
   grid-column: 1/5;
-  grid-row: 8/11;
+  grid-row: 7/10;
 }
 .steam-quick-links a{
   color:inherit;
@@ -946,13 +950,17 @@ font-size: 12px;
  .steam-quick-links-wrapper{
   display: none;
  }
- .about-wrapper {
+ .about-wrapper{
   grid-column: 1/-1;
-  grid-row: 3/6;
+  grid-row: 3/4;
+}
+.faceit-info-wrapper {
+  grid-column: 1/-1;
+  grid-row: 4/7;
 }
 .steam-ids-wrapper {
   grid-column: 1/13;
-  grid-row: 6/9;
+  grid-row: 7/9;
 }
 .profile-privacy-wrapper {
   grid-column: 1/13;
@@ -1071,10 +1079,13 @@ font-size: 12px;
   border-bottom-left-radius: 0;
 }
 .about-wrapper{
-  grid-row: 4/7;
+  grid-row: 4/5;
 }
 .steam-ids-wrapper{
   grid-row: 7/10;
+}
+.faceit-info-wrapper{
+  grid-row: 5/7;
 }
 .profile-privacy-wrapper{
   grid-row: 10/13;
@@ -1227,12 +1238,6 @@ font-size: 12px;
 
 /* all hover styles works only in hoverable devices */
 @media(hover: hover) and (pointer: fine){
-  .more-btn:hover{
-    color:white;
-  }
-  .more-btn:hover > i{
-    color: white;
-  }
   .more-links-wrapper .more-links .more-link:hover{
     color:#555555;
   }

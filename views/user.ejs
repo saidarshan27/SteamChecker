@@ -27,24 +27,16 @@
   <div class="more-links-wrapper">
    <button class="more-btn">More<i class="fas fa-chevron-down ml-1"></i></button>
    <ul class="more-links">
-    <a href="<%= dataObj.persondata.profileurl %>">
+    <a href="">
      <li class="more-link">
-        <svg viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3.53125 1.38672C3.53125 1.65078 3.28571 1.86328 2.98661 1.86328C2.68482 1.86328 2.44196 1.65 2.44196 1.38672C2.44196 1.12344 2.68571 0.910156 2.98661 0.910156C3.28571 0.910156 3.53125 1.12266 3.53125 1.38672ZM4 1.38828C4 1.88047 3.54464 2.27734 2.98482 2.27734L2.00893 2.90078C1.97321 3.23672 1.64732 3.50078 1.25446 3.50078C0.892857 3.50078 0.5875 3.27578 0.513393 2.97734L0 2.79688V1.95859L0.867857 2.26562C1.00268 2.19375 1.15536 2.16172 1.33214 2.17578L1.96607 1.38125C1.97054 0.894531 2.42589 0.5 2.98393 0.5C3.54464 0.5 4 0.898437 4 1.38828ZM1.8125 2.83594C1.8125 2.56484 1.56429 2.34766 1.25446 2.34766C1.21429 2.34766 1.17411 2.35156 1.13393 2.35938L1.36607 2.44141C1.59375 2.52109 1.70536 2.74609 1.61339 2.94531C1.52232 3.14453 1.26339 3.24219 1.03571 3.16016C0.944643 3.12891 0.852679 3.09531 0.761607 3.06484C0.855357 3.21875 1.04018 3.32422 1.25446 3.32422C1.56429 3.32422 1.8125 3.10703 1.8125 2.83594ZM3.66518 1.38828C3.66518 1.06016 3.35893 0.792969 2.98482 0.792969C2.60714 0.792969 2.30179 1.06016 2.30179 1.38828C2.30179 1.71797 2.60804 1.98359 2.98482 1.98359C3.35893 1.98437 3.66518 1.71875 3.66518 1.38828Z" fill="#7683F9"/>
-          </svg>
-         View Profile on Steam
-        </li>
-      </a>
-      <% if(dataObj.faceitInfo) { %>
-    <a href="<%= dataObj.faceitInfo.faceitURL %>">
-     <li class="more-link">
-      <svg viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4.0015 0.0315337C4.0015 0.0157669 3.98484 0 3.98484 0C3.96817 0 3.96817 -1.52714e-08 3.9515 0.0157668C3.61817 0.504539 3.26817 0.993312 2.93484 1.49785H0.0348362C0.00150283 1.49785 -0.0151638 1.54515 0.0181695 1.56092C1.21817 1.98662 2.96817 2.63307 3.93484 2.9957C3.96817 3.01147 4.0015 2.97994 4.0015 2.96417V0.0315337Z" fill="#F86300"/>
-      </svg>
-       View Profile on FACEIT
+        Add as Friend 
       </li>
     </a>
-      <% } %>
+    <a href="">
+     <li class="more-link">
+       Send a Message
+      </li>
+    </a>
    </ul>
   </div>
   </section>
@@ -152,19 +144,6 @@
           <span class="showless-faceit-skills name-label faceit-show">SHOW LESS</span>
         </ul>
         <% } %>
-        <!-- <% if(dataObj.faceitInfo.games.pubg){ %>
-        <li class="faceit-skill-level" style="display: none;">
-          <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
-            <div class="faceit-level">
-              <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.games.pubg.skillLevel}.svg`) %>
-            </div>
-            <div>
-              <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
-            </div>
-          </div>
-          <img src="/images/pubg-icon.png" alt="">
-        </li>
-        <% } %> -->
         <% }else{ %>
           <li>
             <div class="alert alert-danger" role="alert">
@@ -173,89 +152,20 @@
           </li>
         <% } %>
       </ul>
-      <!-- <table class="table">
-        <tbody>
-          <% if(dataObj.steamLvl){ %>
-            <tr>
-              <td class="name-label">Steam Level</td>
-              <td class="data-label">
-                <span class="data">
-                  <%= dataObj.steamLvl %>
-                </span>
-              </td>
-            </tr>
-          <% }else{ %>
-            <tr>
-              <td class="name-label">Steam Level</td>
-              <td class="data-label">
-                <span class="data private">
-                  private
-                </span>
-              </td>
-            </tr>
-          <% } %>
-          <tr>
-            <td class="name-label">Friendship</td>
-            <td class="data-label friendship">
-              <span class="data mute">
-                <em>
-                  <a href="/auth/steam">Sign In to check </a>
-                </em>
-              </span>
-            </td>
-          </tr>
-          <% if(dataObj.persondata.timecreated){ %>
-            <tr>
-              <td class="name-label">Joined Steam</td>
-              <td class="data-label">
-                <span class="data">
-                  <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
-                  <%= humanDate %>
-                </span>
-              </td>
-            </tr>
-          <% }else{ %>
-            <tr>
-              <td class="name-label">Joined Steam</td>
-              <td class="data-label">
-                <span class="data private">
-                  private
-                </span>
-              </td>
-            </tr>
-          <% } %>
-          <tr>
-            <td class="name-label">
-              Online Status
-            </td>
-            <td class="data-label">
-              <span class="data" id="online-status"></span>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
       <hr style="margin-top: 0;">
       <p class="links-title section-title">
         LINKS
       </p>
       <div class="links" style="margin-bottom: 1rem;">
         <a href="<%= dataObj.persondata.profileurl %>" title="Steam Community | <%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" style="text-decoration: none;">
-        <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M25.1533 13.2382C25.2391 20.1474 19.6955 25.807 12.7902 25.8928C7.06149 25.9639 2.17228 22.1782 0.641086 16.9419L5.46867 18.8722C5.81657 20.4781 7.2592 21.6901 8.97589 21.6688C10.9433 21.6443 12.5819 19.9915 12.4596 17.9132L16.6846 14.8194C19.3087 14.8539 21.4812 12.7024 21.4482 10.0416C21.416 7.4479 19.2679 5.35008 16.6639 5.38242C14.0599 5.41476 11.9646 7.56528 11.9968 10.159L11.9976 10.2261L9.06146 14.5786C8.28936 14.5435 7.52059 14.7767 6.87005 15.2096L0.142739 12.5425C0.583554 6.09649 5.90232 0.976377 12.4797 0.894686C19.3851 0.808924 25.0675 6.32912 25.1533 13.2382ZM8.08624 19.9355L6.53538 19.3286C6.83193 19.9064 7.31998 20.3699 7.92098 20.6085C9.27812 21.1507 10.8325 20.4828 11.3752 19.1343C11.6371 18.4825 11.628 17.7447 11.3499 17.0996C11.0718 16.4545 10.5639 15.9465 9.90448 15.6639C9.24533 15.4038 8.55094 15.4124 7.93676 15.666L9.52648 16.2948C10.5345 16.6848 11.0119 17.8418 10.619 18.8306C10.2264 19.8418 9.09425 20.3255 8.08624 19.9355ZM16.7619 13.2754C15.0259 13.2969 13.6004 11.9058 13.5787 10.1617C13.5571 8.41767 14.9476 6.99152 16.6836 6.96996C18.4196 6.9484 19.8451 8.33957 19.8668 10.0836C19.8885 11.8277 18.4979 13.2538 16.7619 13.2754ZM16.7519 12.4704C18.0635 12.4541 19.1114 11.3901 19.095 10.0708C19.0789 8.77398 18.0047 7.7139 16.693 7.73019C15.3814 7.74648 14.3336 8.81056 14.35 10.1298C14.3857 11.4488 15.4596 12.4865 16.7519 12.4704Z" fill="url(#paint0_linear)"/>
-          <defs>
-          <linearGradient id="paint0_linear" x1="6.25" y1="3.86417" x2="12.5" y2="28.8642" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#0A0E30"/>
-          <stop offset="1" stop-color="#21ADD9" stop-opacity="0.72"/>
-          </linearGradient>
-          </defs>
-        </svg>
+          <svg width="26" height="27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.153 13.238c.086 6.91-5.457 12.569-12.363 12.655A12.491 12.491 0 01.641 16.942l4.828 1.93a3.554 3.554 0 003.507 2.797 3.535 3.535 0 003.484-3.756l4.225-3.094c2.624.035 4.796-2.117 4.763-4.777-.032-2.594-2.18-4.692-4.784-4.66-2.604.033-4.7 2.183-4.667 4.777v.067L9.062 14.58a3.677 3.677 0 00-2.191.63L.143 12.544A12.512 12.512 0 0112.48.895c6.905-.086 12.587 5.434 12.673 12.343zM8.086 19.936l-1.55-.607a2.688 2.688 0 001.385 1.28 2.67 2.67 0 003.454-1.475 2.657 2.657 0 00-.025-2.034 2.73 2.73 0 00-1.446-1.436 2.608 2.608 0 00-1.967.002l1.59.629c1.008.39 1.485 1.547 1.092 2.536a1.95 1.95 0 01-2.533 1.105zm8.676-6.66a3.147 3.147 0 01-3.183-3.114 3.147 3.147 0 013.105-3.192 3.147 3.147 0 013.183 3.114 3.147 3.147 0 01-3.105 3.191zm-.01-.806a2.364 2.364 0 002.343-2.4 2.378 2.378 0 00-2.402-2.34 2.364 2.364 0 00-2.343 2.4c.036 1.319 1.11 2.356 2.402 2.34z" fill="url(#paint0_linear)"/><defs><linearGradient id="paint0_linear" x1="6.25" y1="3.864" x2="12.5" y2="28.864" gradientUnits="userSpaceOnUse"><stop stop-color="#0A0E30"/><stop offset="1" stop-color="#21ADD9" stop-opacity=".72"/></linearGradient></defs></svg>
+       </a>
+       <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>">
+        <svg width="29" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="29" height="28" rx="14" fill="#fff"/><path d="M8.293 9.692v2.814h4.064v1.418h1.37v4.165h-1.37v1.396h-6.78v-1.396h5.455V15.32H6.946v-1.418h-1.37v-4.21h1.37V8.296h6.78v1.396H8.294z" fill="#000"/><path d="M23.202 18.1v-1.384h-1.348v-2.792h1.37V9.692h-1.37V8.296h-6.758v11.189h2.651V15.32h1.413v1.396h1.347v1.396h1.337v1.384h2.694v-1.395h-1.336zm-5.455-4.176V9.692h2.76v4.232h-2.76z" fill="red"/></svg>
       </a>
         <% if(dataObj.faceitInfo){ %>
           <a href="<%= dataObj.faceitInfo.faceitURL %>" title="FACEIT | <%= dataObj.faceitInfo.nickname %> | <%= dataObj.faceitInfo.faceitURL %>">
-          <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="27" height="26" rx="13" fill="black"/>
-            <path d="M21 7.11562C21 7.05781 20.925 7 20.925 7C20.8501 7 20.8501 7 20.7751 7.05781C19.2756 8.84998 17.7012 10.6421 16.2018 12.4921H3.1567C3.00676 12.4921 2.93179 12.6656 3.08173 12.7234C8.4797 14.2843 16.3517 16.6546 20.7001 17.9842C20.8501 18.0421 21 17.9264 21 17.8686V7.11562Z" fill="#F86300"/>
-          </svg>  
+            <svg width="27" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="27" height="26" rx="13" fill="#000"/><path d="M21 7.116c0-.058-.075-.116-.075-.116-.075 0-.075 0-.15.058-1.5 1.792-3.074 3.584-4.573 5.434H3.157c-.15 0-.225.174-.075.231 5.398 1.561 13.27 3.932 17.618 5.261.15.058.3-.058.3-.115V7.116z" fill="#F86300"/></svg> 
         </a>
           <% } %>                          
       </div>
@@ -263,6 +173,17 @@
       <p class="reputation-title section-title">
         REPUTATION
       </p>
+      <div class="reputation">
+        <span class="data" style="color: #7A7D7F;font-weight: 750;">
+        <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
+          <use href="#empty-shield"></use>
+        </svg>                           
+          <%= dataObj.steamrepReputation.fullReputation %>
+        </span>
+        <span class="by-steamrep" style="font-size: .6rem;text-align: end;">
+           By <a href="https://steamrep.com" style="color:inherit;" target="_blank" rel="no-follow">SteamRep.com</a>
+        </span>
+      </div>
     </div>
   </section>
   <section class="steam-ids-wrapper test">

@@ -576,15 +576,35 @@ body{
 
 /* about wrapper styles */
 .about-wrapper{
+  grid-row: 3/5;
+  grid-column: 1/-1;
+}
+
+
+.faceit-info-wrapper{
   grid-column: 1/5;
-  grid-row: 3/6;
+  grid-row: 5/8;
 }
 .about-wrapper .about a{
   color: inherit;
   text-decoration: underline;
 }
+.about-wrapper .about{
+  display: flex;
+  flex-direction: column;
+}
 .about-wrapper .about a:active{
   color: #5f5f5f;
+}
+.about .about-lists{
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+.about .about-lists li{
+  display: flex;
+  flex-direction: column;
 }
 /* reputation inside about section */
 .reputation{
@@ -600,29 +620,66 @@ body{
   color: red;
 }
 /* collective style for all userpage containers */
-.about-wrapper,.steam-ids-wrapper,.profile-privacy-wrapper,.steam-quick-links-wrapper{
+.about-wrapper,.steam-ids-wrapper,.profile-privacy-wrapper,.steam-quick-links-wrapper,.faceit-info-wrapper{
   background: var(--section-transperant-background);
   background: var(--section-background);
   border-radius: 1rem;
   /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
-.about,.steam-ids,.profile-privacy,.steam-quick-links{
+.about,.steam-ids,.profile-privacy,.steam-quick-links,.faceit-info{
   padding: 1rem 1.5rem;
 }
+/* faceit-levels */
+ .faceit-info .faceit-skill-levels{
+   position: relative;
+ }
+ .faceit-info .faceit-skill-levels .faceit-skills-fullist{
+   position: absolute;
+   top: 0px;
+   width: 100%;
+   background: var(--section-background);
+   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+   padding: 1rem;
+   display: none;
+ }
+.faceit-info .faceit-skill-levels .faceit-skill-level{
+  display: flex;
+  justify-content: space-between;
+  background: #dde7ee;
+  border-radius: 1rem;
+  margin-bottom: .5rem;
+}
+.faceit-info .faceit-skill-levels .showmore-faceit-skills,.faceit-info .faceit-skill-levels .showless-faceit-skills{
+  text-decoration:underline;
+  cursor: pointer;
+}
+.faceit-info .faceit-skill-levels .faceit-skill-level img{
+ border-top-right-radius: 1rem;
+ border-bottom-right-radius: 1rem;
+}
+
+/* links */
+.links svg{
+  margin-right: .2rem;
+}
+.links a{
+ text-decoration: none;
+}
+
 /* steam-ids wrapper */
 .steam-ids-wrapper{
   grid-column: 5/13;
-  grid-row: 3/6;
+  grid-row: 5/8;
 }
 /* profile privacy wrapper */
 .profile-privacy-wrapper{
   grid-column: 5/13;
-  grid-row: 6/9;
+  grid-row: 8/11;
 }
 /* steam-quick-link wrapper */
 .steam-quick-links-wrapper{
   grid-column: 1/5;
-  grid-row: 6/9;
+  grid-row: 8/11;
 }
 .steam-quick-links a{
   color:inherit;

@@ -85,11 +85,11 @@ app.get("/user", (req, res) => {
   req.session.redirectUrl = req.originalUrl;
   let user={};
   const requrl = req.query.url;
+  console.log(typeof requrl);
  //check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
- const checkValidInput = requrl.match(/(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi);
-if(checkValidInput != null){
-  isInputValid = true;
-}else{
+ const regex = /(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi;
+ const checkValidInput = regex.test(requrl);
+if(!checkValidInput){
   try{
     const sid = new SteamID(requrl);
     isInputValid = sid.isValid();
@@ -97,6 +97,8 @@ if(checkValidInput != null){
   catch(err){
     res.redirect("/");
   }
+}else{
+   isInputValid = true;
 }
 if(isInputValid === true){
     extractprofile(requrl).then(steam64 =>{
@@ -132,22 +134,19 @@ async function main(steam64){
   }else{
   const objSteamIds  = playerSteamIds(steam64);
   const banObj = await playerBans(steam64);
-  const backgroundFull = await playerBackground(steam64);
   const steamLvl = await playerLevel(steam64);
   const steamrepReputation = await getSteamRep(steam64);
   const faceitInfo = await getPlayerFaceitInfo(steam64);
-  console.log("faceitInfo from main",faceitInfo);
-  const dataObj = {persondata,objSteamIds,banObj,backgroundFull,steamLvl,steamrepReputation,faceitInfo};
+  const dataObj = {persondata,objSteamIds,banObj,steamLvl,faceitInfo,steamrepReputation};
   return dataObj;
   }
 }
 
 async function extractprofile(url) {
-    if(url.includes("/id") || url.includes("/profiles")){
+    if(/\/id/gi.test(url) || /\/profiles/gi.test(url)){
       // Regex for extracting the words or numbers occuring after `/profiles` or `/id` in a steam64ID
       const found=url.match(/.*(?:profiles|id)\/([a-z0-9]+)[\/?]?/i);
       const vanityOrSteamid = found[1];
-      console.log(vanityOrSteamid);
       const vanity = await getVanity(vanityOrSteamid);
        if(vanity.response.success===1){
           const steam64 = vanity.response.steamid;
@@ -156,20 +155,14 @@ async function extractprofile(url) {
           const steam64 = vanityOrSteamid;
           return steam64;
         }
-    }else if(url.includes("STEAM_") || url.includes("[U:")){
-        var sid = new SteamID(url);
-        const steam64 = sid.getSteamID64();
-        return steam64;
-    }else {
-    const check = url.match(/^[0-9]*$/);
-    if(check != null){
-      const steam64 = url;
-      return steam64;
+    }else if(/(^(\w+){4}$)/gi.test(url)){
+       const vanity = await getVanity(url);
+       const steam64 = vanity.response.steamid;
+       return steam64;
     }else{
-        const vanity = await getVanity(url);
-        const ResolvedSteam64 = vanity.response.steamid;
-        return ResolvedSteam64;
-    }
+      const sid = new SteamID(url);
+      const steam64 = sid.getSteamID64();
+      return steam64;
     }
 }
 
@@ -186,7 +179,7 @@ async function getVanity(extractedUrl) {
   };
  try {
     const vanity = await rp(options);
-    console.log("vanity")
+    console.log("vanity",vanity);
       return vanity;
   }
   catch (err) {
@@ -201,6 +194,7 @@ function playerInfo(steam64) {
         console.log("error", err);
         reject(err);
       } else {
+        console.log("playerinfo",data);
         resolve(data);
       }
     })
@@ -217,13 +211,14 @@ function playerSteamIds(steam64){
       steam64:steam64,
       fiveMID
     }
+    console.log("objSteamIds",objSteamIds);
     return objSteamIds;
   }else{
     console.log("Pass a steamid as string");
   }
 }
-function playerBans(steam64){
 
+function playerBans(steam64){
   let banObj={
     communityBan:"None",
     vacBan:"None",
@@ -263,6 +258,7 @@ function playerBans(steam64){
             }
          }
        }
+       console.log("banObj",banObj);
        resolve(banObj);
       }
     })
@@ -281,6 +277,7 @@ async function playerLevel(steam64){
   try {
     const steamLevel = await rp(options);
     const steamLevelNumber = steamLevel.response.player_level;
+    console.log("steamLevel",steamLevelNumber);
     return steamLevelNumber;
   }
   catch (err) {
@@ -302,44 +299,31 @@ async function getPlayerFaceitInfo(steam64){
       json:true
     }
     const response = await rp(options);
-    console.log(response);
     const faceitInfo={
+      nickname:response.nickname,
+      faceitURL:response.faceit_url,
+      games:{}
+    }
+    if(response.games.csgo){
+      faceitInfo.games.csgo = {
         skillLevel:response.games.csgo.skill_level,
-        nickname:response.nickname,
-        faceitURL:response.faceit_url,
-        elo:response.games.csgo.faceit_elo
       }
+    }
+    if(response.games.pubg){
+        faceitInfo.games.pubg = {
+          skillLevel:response.games.pubg.skill_level
+        }
+    }
       // regex for extracting the '{lang}' in faceit profile url 
       const regex = /{lang}/gi;
       faceitInfo.faceitURL = faceitInfo.faceitURL.replace(regex,'en');
+      console.log("faceitInfo",faceitInfo)
       return faceitInfo
   }
   catch(err){
     return false
   }
 }
-
-
-async function playerBackground(steam64){
-  const options =  {
-    uri:`https://api.steampowered.com/IPlayerService/GetProfileBackground/v1/`,
-    qs:{
-      key:"D295314B96B79961B1AB2A2457BA5B10",
-      steamid:steam64
-    },
-    json:true
-  }
-  try{
-    let backgroundImgUrl;
-    const background = await rp(options);
-     backgroundImgUrl = `https://steamcdn-a.akamaihd.net/steamcommunity/public/images/${background.response.profile_background.image_large}`;
-    return backgroundImgUrl;
-  }
-  catch (err){
-    console.log(err);
-  }
-}
-
 
 async function getSteamRep(steam64){
   const options={
@@ -352,18 +336,17 @@ async function getSteamRep(steam64){
    const xml = await rp(options);
    const json = await xml2js.parseStringPromise(xml);
    const steamrepurl=json.steamrep.steamrepurl[0];
+   const jsonFullrep = json.steamrep.reputation[0].full[0];
    let  fullReputation;
-
-   if(json.steamrep.reputation[0].full[0] === ""){
+   if(jsonFullrep === ""){
       fullReputation = "no special reputation";
-   }else if(json.steamrep.reputation[0].full[0] != "" && json.steamrep.reputation[0].full[0].includes("SR ADMIN")){
+   }else if(jsonFullrep != "" && /SR ADMIN/gi.test(jsonFullrep)){
      fullReputation = "SteamRep Admin";
-   }else if(json.steamrep.reputation[0].full[0] != "" && json.steamrep.reputation[0].full[0].includes("VALVE ADMIN")){
+   }else if(jsonFullrep != "" && /VALVE ADMIN/gi.test(jsonFullrep)){
      fullReputation = "VALVE EMPLOYEE"
-   }else if(json.steamrep.reputation[0].full[0] != "" && json.steamrep.reputation[0].full[0].includes("SCAMMER")){
+   }else if(jsonFullrep != "" && /SCAMMER/gi.test(jsonFullrep)){
     fullReputation = "SCAMMER"
    }
-
    const steamRepReputationObj = {
     steamrepurl,
     fullReputation,

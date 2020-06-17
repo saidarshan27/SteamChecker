@@ -188,7 +188,13 @@ $(".steam-quicklinks-viewmore").click(function(event){
 	}
 })
 
-
+$(".faceit-show").click(function(event){
+	if($(this).hasClass("showmore-faceit-skills")){
+		$(this).siblings(".faceit-skills-fullist").slideToggle();
+	}else if($(this).has("showless-faceit-skills")){
+		$(this).parent(".faceit-skills-fullist").slideToggle();
+	}
+})
 
 
 

@@ -23,25 +23,6 @@
         <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
       <% } %>
   </div>
-  <% if(dataObj.faceitInfo){ %>
-  <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
-    <div class="faceit-level">
-      <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.skillLevel}.svg`) %>
-    </div>
-    <div>
-      <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
-    </div>
-  </div>
-  <% }else{ %>
-    <div class="alert alert-danger" role="alert">
-      This profile not found in <a href="https://www.faceit.com/en" target="_blank" rel="no_follow">FACEIT</a>
-    </div>
-  <% }%>
-<!-- <div class="icon-links">
-  <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>" target="_blank" rel="no-follow">
-    <img src="/images/steamrep-logo.png" alt="steamrep-logo">
-  </a>
-</div> -->
   </div>
   <div class="more-links-wrapper">
    <button class="more-btn">More<i class="fas fa-chevron-down ml-1"></i></button>
@@ -64,23 +45,135 @@
       </li>
     </a>
       <% } %>
-      <a href="<%= dataObj.steamrepReputation.steamrepurl %>">
-     <li class="more-link">
-        <svg viewBox="0 0 4 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0.573066 0.249246V0.751759H1.43037V1.00503H1.7192V1.74874H1.43037V1.99799H0V1.74874H1.15072V1.25427H0.288825V1.00101H0V0.249246H0.288825V0H1.7192V0.249246H0.573066Z" fill="black"/>
-        <path d="M3.71809 1.75075V1.50352H3.43384V1.00503H3.72267V0.249246H3.43384V0H2.00806V1.99799H2.56737V1.25427H2.86536V1.50352H3.1496V1.75276H3.43155V2H4.00003V1.75075H3.71809ZM2.56737 1.00503V0.249246H3.1496V1.00503H2.56737Z" fill="#ED3833"/>
-        </svg>             
-       View Profile on SteamRep
-      </li>
-    </a>
    </ul>
   </div>
   </section>
-  <section class="about-wrapper test">
+  <section class="about-wrapper">
     <div class="about">
-      <p class="section-title">ABOUT</p>
+       <ul class="about-lists" >
+         <li>
+            <span class="name-label mb-2">
+              Joined Steam
+            </span>
+            <% if(dataObj.persondata.timecreated){ %>
+              <span class="data-label">
+                <span class="data">
+                  <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
+                  <%= humanDate %>
+                </span>
+              </span>
+            <% }else{ %>
+              <span class="data-label">
+                <span class="data private">
+                  Private
+                </span>
+              </span>
+            <% } %>
+         </li>
+         <li>
+          <span class="name-label mb-2">
+            Steam Level
+          </span>
+          <% if(dataObj.steamLvl){ %>
+            <span class="data-label">
+              <span class="data">
+                <%= dataObj.steamLvl %>
+              </span>
+            </span>
+          <% }else{ %>
+            <span class="data-label">
+              <span class="data private">
+                Private
+              </span>
+            </span>
+         <% } %>
+         </li>
+         <li>
+          <span class="name-label mb-2">
+            Online Status
+          </span>
+          <span class="data-label">
+            <span class="data" id="online-status">
+            </span>
+          </span>
+         </li>
+         <li>
+          <span class="name-label mb-2">
+            Friendship
+          </span>
+          <span class="data-label friendship">
+            <span class="data mute">
+              <em>
+                <a href="/auth/steam">Sign In to check </a>
+              </em>
+            </span>
+          </span>
+         </li>
+       </ul>
+    </div>
+  </section>
+  <section class="faceit-info-wrapper test">
+    <div class="faceit-info">
+      <p class="section-title">FACEIT INFO</p>
       <hr>
-      <table class="table">
+      <ul class="faceit-skill-levels" style="list-style: none;">
+        <% if(dataObj.faceitInfo){ %>
+          <% const objKeys = Object.keys(dataObj.faceitInfo.games); %>
+          <% const objLength = objKeys.length %>
+          <% if(dataObj.faceitInfo.games.csgo){ %>
+          <li class="faceit-skill-level">
+            <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
+              <div class="faceit-level">
+                <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.games[objKeys[0]].skillLevel}.svg`) %>
+              </div>
+              <div>
+                <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
+              </div>
+            </div>
+            <img src="/images/<%= objKeys[0] %>-icon.png" alt="">
+          </li>
+          <% } %>
+        <% if(objLength > 1){ %>
+        <span class="showmore-faceit-skills name-label faceit-show">SHOW MORE +<%= objLength - 1 %></span>
+        <ul class="faceit-skills-fullist">
+          <% for(const prop in dataObj.faceitInfo.games){ %>
+            <li class="faceit-skill-level">
+              <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
+                <div class="faceit-level">
+                  <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.games[prop].skillLevel}.svg`) %>
+                </div>
+                <div>
+                  <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
+                </div>
+              </div>
+              <img src="/images/<%= prop %>-icon.png" alt="">
+            </li>
+          <% } %>
+          <span class="showless-faceit-skills name-label faceit-show">SHOW LESS</span>
+        </ul>
+        <% } %>
+        <!-- <% if(dataObj.faceitInfo.games.pubg){ %>
+        <li class="faceit-skill-level" style="display: none;">
+          <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
+            <div class="faceit-level">
+              <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.games.pubg.skillLevel}.svg`) %>
+            </div>
+            <div>
+              <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
+            </div>
+          </div>
+          <img src="/images/pubg-icon.png" alt="">
+        </li>
+        <% } %> -->
+        <% }else{ %>
+          <li>
+            <div class="alert alert-danger" role="alert">
+              This Profile was not found in <a href="https://faceit.com/en">FACEIT</a>
+            </div>
+          </li>
+        <% } %>
+      </ul>
+      <!-- <table class="table">
         <tbody>
           <% if(dataObj.steamLvl){ %>
             <tr>
@@ -140,22 +233,36 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+      <hr style="margin-top: 0;">
+      <p class="links-title section-title">
+        LINKS
+      </p>
+      <div class="links" style="margin-bottom: 1rem;">
+        <a href="<%= dataObj.persondata.profileurl %>" title="Steam Community | <%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" style="text-decoration: none;">
+        <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25.1533 13.2382C25.2391 20.1474 19.6955 25.807 12.7902 25.8928C7.06149 25.9639 2.17228 22.1782 0.641086 16.9419L5.46867 18.8722C5.81657 20.4781 7.2592 21.6901 8.97589 21.6688C10.9433 21.6443 12.5819 19.9915 12.4596 17.9132L16.6846 14.8194C19.3087 14.8539 21.4812 12.7024 21.4482 10.0416C21.416 7.4479 19.2679 5.35008 16.6639 5.38242C14.0599 5.41476 11.9646 7.56528 11.9968 10.159L11.9976 10.2261L9.06146 14.5786C8.28936 14.5435 7.52059 14.7767 6.87005 15.2096L0.142739 12.5425C0.583554 6.09649 5.90232 0.976377 12.4797 0.894686C19.3851 0.808924 25.0675 6.32912 25.1533 13.2382ZM8.08624 19.9355L6.53538 19.3286C6.83193 19.9064 7.31998 20.3699 7.92098 20.6085C9.27812 21.1507 10.8325 20.4828 11.3752 19.1343C11.6371 18.4825 11.628 17.7447 11.3499 17.0996C11.0718 16.4545 10.5639 15.9465 9.90448 15.6639C9.24533 15.4038 8.55094 15.4124 7.93676 15.666L9.52648 16.2948C10.5345 16.6848 11.0119 17.8418 10.619 18.8306C10.2264 19.8418 9.09425 20.3255 8.08624 19.9355ZM16.7619 13.2754C15.0259 13.2969 13.6004 11.9058 13.5787 10.1617C13.5571 8.41767 14.9476 6.99152 16.6836 6.96996C18.4196 6.9484 19.8451 8.33957 19.8668 10.0836C19.8885 11.8277 18.4979 13.2538 16.7619 13.2754ZM16.7519 12.4704C18.0635 12.4541 19.1114 11.3901 19.095 10.0708C19.0789 8.77398 18.0047 7.7139 16.693 7.73019C15.3814 7.74648 14.3336 8.81056 14.35 10.1298C14.3857 11.4488 15.4596 12.4865 16.7519 12.4704Z" fill="url(#paint0_linear)"/>
+          <defs>
+          <linearGradient id="paint0_linear" x1="6.25" y1="3.86417" x2="12.5" y2="28.8642" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0A0E30"/>
+          <stop offset="1" stop-color="#21ADD9" stop-opacity="0.72"/>
+          </linearGradient>
+          </defs>
+        </svg>
+      </a>
+        <% if(dataObj.faceitInfo){ %>
+          <a href="<%= dataObj.faceitInfo.faceitURL %>" title="FACEIT | <%= dataObj.faceitInfo.nickname %> | <%= dataObj.faceitInfo.faceitURL %>">
+          <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="27" height="26" rx="13" fill="black"/>
+            <path d="M21 7.11562C21 7.05781 20.925 7 20.925 7C20.8501 7 20.8501 7 20.7751 7.05781C19.2756 8.84998 17.7012 10.6421 16.2018 12.4921H3.1567C3.00676 12.4921 2.93179 12.6656 3.08173 12.7234C8.4797 14.2843 16.3517 16.6546 20.7001 17.9842C20.8501 18.0421 21 17.9264 21 17.8686V7.11562Z" fill="#F86300"/>
+          </svg>  
+        </a>
+          <% } %>                          
+      </div>
       <hr style="margin-top: 0;"> 
       <p class="reputation-title section-title">
         REPUTATION
       </p>
-      <div class="reputation">
-        <span class="data" style="color: #7A7D7F;font-weight: 750;">
-        <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
-          <use href="#empty-shield"></use>
-        </svg>                           
-          <%= dataObj.steamrepReputation.fullReputation %>
-        </span>
-        <span class="by-steamrep" style="font-size: .6rem;text-align: end;">
-           By <a href="https://steamrep.com" style="color:inherit;" target="_blank" rel="no-follow">SteamRep.com</a>
-        </span>
-      </div>
     </div>
   </section>
   <section class="steam-ids-wrapper test">

@@ -27,12 +27,12 @@
   <div class="more-links-wrapper">
    <button class="more-btn">More<i class="fas fa-chevron-down ml-1"></i></button>
    <ul class="more-links">
-    <a href="steam://friends/add/76561198364464404" rel="nofollow">
+    <a href="steam://friends/add/<%= dataObj.persondata.steamid %>" rel="nofollow">
      <li class="more-link">
         Add as Friend 
       </li>
     </a>
-    <a href="steam://friends/message/76561198364464404" rel="nofollow">
+    <a href="steam://friends/message/<%= dataObj.persondata.steamid %>" rel="nofollow">
      <li class="more-link">
        Send a Message
       </li>
@@ -85,7 +85,7 @@
           </tr>
           <tr>
             <td class="name-label">Friendship</td>
-            <td class="data-label friendship">
+            <td class="data-label mobile-friendship">
               <span class="data mute">
                 <em>
                   <a href="/auth/steam">Sign In to check </a>
@@ -187,7 +187,7 @@
           <% for(const prop in dataObj.faceitInfo.games){ %>
             <li class="faceit-skill-level">
               <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
-                <div class="faceit-level">
+                <div class="faceit-level" title="Skill Level <%= dataObj.faceitInfo.games[prop].skillLevel %> | <%= prop %>">
                   <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.games[prop].skillLevel}.svg`) %>
                 </div>
                 <div>

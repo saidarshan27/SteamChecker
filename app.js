@@ -70,7 +70,7 @@ app.get("/", (req, res) => {
     user.loggedUserId = req.user.id,
     user.avatar = req.user.photos[2].value,
     user.profileurl = req.user._json.profileurl,
-    user.myProfileQueryString = encodeURIComponent(req.user.id);
+    user.myProfileQueryString = `/user?url=${encodeURIComponent(req.user.id)}`;
   }
   res.render("landing",{user});
 })
@@ -95,6 +95,7 @@ if(!checkValidInput){
     isInputValid = sid.isValid();
   }
   catch(err){
+    console.log(err);
     res.redirect("/");
   }
 }else{
@@ -114,11 +115,12 @@ if(isInputValid === true){
           user.loggedUserId = req.user.id,
           user.avatar = req.user.photos[2].value,
           user.profileurl = req.user._json.profileurl,
-          user.myProfileQueryString = encodeURIComponent(req.user.id);
+          user.myProfileQueryString = `/user?url=${encodeURIComponent(req.user.id)}`;
         }
         res.render("user",{dataObj,user});
       })
       .catch(err =>{
+        console.log(err);
         res.redirect("/");
       })
     });
@@ -155,7 +157,8 @@ async function extractprofile(url) {
           const steam64 = vanityOrSteamid;
           return steam64;
         }
-    }else if(/(^(\w+){4}$)/gi.test(url)){
+    }else if(/^(?![0-9]*$)(^(\w+){4}$)/gi.test(url)){
+      console.log("getting vanity");
        const vanity = await getVanity(url);
        const steam64 = vanity.response.steamid;
        return steam64;
@@ -313,6 +316,11 @@ async function getPlayerFaceitInfo(steam64){
         faceitInfo.games.pubg = {
           skillLevel:response.games.pubg.skill_level
         }
+    }
+    if(response.games.dota2){
+      faceitInfo.games.dota2={
+        skillLevel:response.games.dota2.skill_level
+      }
     }
       // regex for extracting the '{lang}' in faceit profile url 
       const regex = /{lang}/gi;

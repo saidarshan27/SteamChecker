@@ -39,7 +39,7 @@
               </div>
             <% }else{ %>
               <div class="login">
-                <a href="/user?url=<%= user.myProfileQueryString %>">
+                <a href="<%= user.myProfileQueryString %>">
                   <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
                 </a>
                 <span class="view-more">
@@ -47,7 +47,7 @@
                 </span>
                 <ul class="view-more-links">
                   <li class="view-more-link view-more-btn">
-                  <a href="/user?url=<%= user.myProfileQueryString %>" class="view-more-btn"></a>
+                  <a href="<%= user.myProfileQueryString %>" class="view-more-btn"></a>
                    MY PROFILE
                   </a>
                   </li>
@@ -73,7 +73,7 @@
         </li>
         <li class="myprofile-btn" style="display:none;position: relative;">
           <img src="<%= user.avatar %>" alt="avatar" class="mobile-nav-avatar">
-          <a href="/user?url=<%= user.myProfileQueryString %>" class="stretched-link">
+          <a href="<%= user.myProfileQueryString %>" class="stretched-link">
             My Profile
           </a>
         </li>

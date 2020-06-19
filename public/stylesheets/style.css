@@ -614,6 +614,9 @@ body{
   flex-direction: column;
   text-transform: capitalize;
 }
+.reputation a{
+  text-decoration: underline;
+} 
 .steamrep-steam{
   color: black;
 }
@@ -635,6 +638,7 @@ body{
   grid-column: 1/5;
   grid-row: 4/7;
 }
+
  .faceit-info .faceit-skill-levels{
    position: relative;
  }

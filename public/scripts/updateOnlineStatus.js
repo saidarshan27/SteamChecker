@@ -3,66 +3,49 @@ const dataSpan = document.getElementById("online-status");
 const mobiledataSpan = document.getElementById("mobile-online-status");
 switch(status){
   case 0:{
-    dataSpan.innerHTML = 
-    `Offline`;
-    mobiledataSpan.innerHTML = 
-    `Offline`;
-    dataSpan.classList.add("offline");
-    mobiledataSpan.classList.add("offline");
+    innerhtml([dataSpan,mobiledataSpan],`Offline`);
+    addClass([dataSpan,mobiledataSpan],`offline`); 
     break;
   }
   case 1:{
-    dataSpan.innerHTML = 
-    `Online`;
-    mobiledataSpan.innerHTML = 
-    `Online`;
-    dataSpan.classList.add("online");
-    mobiledataSpan.classList.add("online");
+    innerhtml([dataSpan,mobiledataSpan],`Online`);
+    addClass([dataSpan,mobiledataSpan],`online`); 
     break;
   }
   case 2:{
-    dataSpan.innerHTML = 
-    `Busy`;
-    mobiledataSpan.innerHTML = 
-    `Busy`;
-    dataSpan.classList.add("busy");
-    mobiledataSpan.classList.add("busy");
+    innerhtml([dataSpan,mobiledataSpan],`Busy`);
+    addClass([dataSpan,mobiledataSpan],`busy`); 
     break;
   }
   case 3:{
-   dataSpan.innerHTML = 
-   `Away`;
-   mobiledataSpan.innerHTML = 
-   `Away`;
-   dataSpan.classList.add("away");
-   mobiledataSpan.classList.add("away");
+    innerhtml([dataSpan,mobiledataSpan],`Away`);
+    addClass([dataSpan,mobiledataSpan],`away`); 
     break;
   }
   case 4:{
-    dataSpan.innerHTML = 
-   `Snooze`;
-   mobiledataSpan.innerHTML = 
-   `Snooze`;
-   dataSpan.classList.add("snooze");
-   mobiledataSpan.classList.add("snooze");
+    innerhtml([dataSpan,mobiledataSpan],`Snooze`);
+    addClass([dataSpan,mobiledataSpan],`snooze`); 
     break;
   }
   case 5:{
-    dataSpan.innerHTML = 
-   `Looking to trade`;
-   mobiledataSpan.innerHTML = 
-   `Looking to trade`;
-   dataSpan.classList.add("trade");
-   mobiledataSpan.classList.add("trade");
+    innerhtml([dataSpan,mobiledataSpan],`Looking to Trade`);
+    addClass([dataSpan,mobiledataSpan],`trade`); 
     break;
   }
   case 6:{
-    dataSpan.innerHTML = 
-   `Looking to play`;
-   mobiledataSpan.innerHTML = 
-   `Looking to play`;
-   dataSpan.classList.add("play");
-   mobiledataSpan.classList.add("play");
+    innerhtml([dataSpan,mobiledataSpan],`Looking to Play`);
+    addClass([dataSpan,mobiledataSpan],`play`);
     break;
   }
+}
+
+function addClass(elementsArr,className){
+  elementsArr.forEach((element)=>{
+    element.classList.add(className);
+  })
+}
+function innerhtml(elementsArr,html){
+  elementsArr.forEach((element)=>{
+    element.innerHTML = html;
+  })
 }

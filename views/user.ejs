@@ -178,7 +178,7 @@
                 <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
               </div>
             </div>
-            <img src="/images/<%= objKeys[0] %>-icon.png" alt="">
+            <img src="/images/<%= objKeys[0] %>-icon.svg" alt="">
           </li>
           <% }else{ %>
             <li class="faceit-skill-level">
@@ -190,7 +190,7 @@
                   <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
                 </div>
               </div>
-              <img src="/images/csgo-icon.png" alt="">
+              <img src="/images/csgo-icon.svg" alt="">
             </li>
           <% } %>
         <% if(objLength > 1){ %>
@@ -206,7 +206,7 @@
                   <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
                 </div>
               </div>
-              <img src="/images/csgo-icon.png" alt="">
+              <img src="/images/csgo-icon.svg" alt="">
             </li>
           <% } %> 
           <% for(const prop in dataObj.faceitInfo.games){ %>
@@ -222,7 +222,7 @@
                   <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
                 </div>
               </div>
-              <img src="/images/<%= prop %>-icon.png" alt="">
+              <img src="/images/<%= prop %>-icon.svg" alt="">
             </li>
           <% } %>
           <span class="showless-faceit-skills name-label faceit-show">SHOW LESS</span>

@@ -85,7 +85,6 @@ app.get("/user", (req, res) => {
   req.session.redirectUrl = req.originalUrl;
   let user={};
   const requrl = req.query.url;
-  console.log(typeof requrl);
  //check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
  const regex = /(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi;
  const checkValidInput = regex.test(requrl);
@@ -104,6 +103,7 @@ if(!checkValidInput){
 if(isInputValid === true){
     extractprofile(requrl).then(steam64 =>{
       main(steam64).then(dataObj =>{
+        console.log("kyabre",dataObj);
         if(dataObj.persondata.profileurl.includes("/id")){
           const url = dataObj.persondata.profileurl;
           const found=url.match(/.*(?:id)\/([a-z0-9_]+)[\/?]?/i);
@@ -129,17 +129,44 @@ if(isInputValid === true){
 }
 })
 
+app.get("/user/getFriends",(req,res)=>{
+  getFriends(req.query.steam64).then((data)=>{
+    const forLoop = async() =>{
+      const arrLength = data.friendslist.friends.length;
+      for(let index=0;index<arrLength;index++){
+        const steam64 = data.friendslist.friends[index].steamid;
+        await playerInfo(steam64).then((data1)=>{
+          data.friendslist.friends[index].personaname = data1.personaname;
+          data.friendslist.friends[index].profileurl = data1.profileurl;
+          data.friendslist.friends[index].avatar = data1.avatarfull;
+        });
+      }
+      console.log(data.friendslist.friends);
+    }
+    forLoop();
+})
+.catch((err)=>{
+  console.log(err);
+})
+})
+
+
 async function main(steam64){
   const persondata = await playerInfo(steam64);
   if(persondata === undefined){
     throw new Error ("steam id not found");
   }else{
   const objSteamIds  = playerSteamIds(steam64);
-  const banObj = await playerBans(steam64);
-  const steamLvl = await playerLevel(steam64);
-  const steamrepReputation = await getSteamRep(steam64);
-  const faceitInfo = await getPlayerFaceitInfo(steam64);
-  const dataObj = {persondata,objSteamIds,banObj,steamLvl,faceitInfo,steamrepReputation};
+  const banObj = playerBans(steam64);
+  const steamLvl = playerLevel(steam64);
+  const steamrepReputation = getSteamRep(steam64);
+  const faceitInfo =getPlayerFaceitInfo(steam64);
+  const dataObj = await Promise.all([banObj,steamLvl,steamrepReputation,faceitInfo]).then((data)=>{
+      return new Promise((resolve,reject)=>{
+      const dataObj = {persondata,objSteamIds,banObj:data[0],steamLvl:data[1],steamrepReputation:data[2],faceitInfo:data[3]};
+      resolve(dataObj);
+    })
+  })
   return dataObj;
   }
 }
@@ -147,18 +174,19 @@ async function main(steam64){
 async function extractprofile(url) {
     if(/\/id/gi.test(url) || /\/profiles/gi.test(url)){
       // Regex for extracting the words or numbers occuring after `/profiles` or `/id` in a steam64ID
-      const found=url.match(/.*(?:profiles|id)\/([a-z0-9]+)[\/?]?/i);
+      const found=url.match(/.*(?:profiles|id)\/([A-Za-z0-9_]+)[\/?]?/i);
       const vanityOrSteamid = found[1];
-      const vanity = await getVanity(vanityOrSteamid);
-       if(vanity.response.success===1){
-          const steam64 = vanity.response.steamid;
+      console.log("foundOne",found[1]);
+      const isNum = /^\d+$/.test(found[1]);
+      if(isNum){
+        const steam64 = found[1];
+        return steam64;
+      }else{
+        const vanity = await getVanity(vanityOrSteamid);
+        const steam64 = vanity.response.steamid;
           return steam64;
-        }else{
-          const steam64 = vanityOrSteamid;
-          return steam64;
-        }
+      }
     }else if(/^(?![0-9]*$)(^(\w+){4}$)/gi.test(url)){
-      console.log("getting vanity");
        const vanity = await getVanity(url);
        const steam64 = vanity.response.steamid;
        return steam64;
@@ -182,7 +210,6 @@ async function getVanity(extractedUrl) {
   };
  try {
     const vanity = await rp(options);
-    console.log("vanity",vanity);
       return vanity;
   }
   catch (err) {
@@ -197,7 +224,6 @@ function playerInfo(steam64) {
         console.log("error", err);
         reject(err);
       } else {
-        console.log("playerinfo",data);
         resolve(data);
       }
     })
@@ -230,7 +256,6 @@ function playerBans(steam64){
   }
   return new Promise((resolve,reject)=>{
     SteamApi.getPlayerBans(steam64,"D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
-      console.log(data);
       if (err) {
         console.log("error", err);
         reject(err);
@@ -261,7 +286,6 @@ function playerBans(steam64){
             }
          }
        }
-       console.log("banObj",banObj);
        resolve(banObj);
       }
     })
@@ -280,7 +304,6 @@ async function playerLevel(steam64){
   try {
     const steamLevel = await rp(options);
     const steamLevelNumber = steamLevel.response.player_level;
-    console.log("steamLevel",steamLevelNumber);
     return steamLevelNumber;
   }
   catch (err) {
@@ -307,29 +330,23 @@ async function getPlayerFaceitInfo(steam64){
       faceitURL:response.faceit_url,
       games:{}
     }
-    if(response.games.csgo){
-      faceitInfo.games.csgo = {
-        skillLevel:response.games.csgo.skill_level,
-      }
-    }
-    if(response.games.pubg){
-        faceitInfo.games.pubg = {
-          skillLevel:response.games.pubg.skill_level
+    for(const prop in response.games){
+      if(prop === "csgo" || prop ==="dota2" || prop ==="pubg"){
+        const skillLevelObj = {
+          skillLevel: response.games[prop].skill_level
         }
-    }
-    if(response.games.dota2){
-      faceitInfo.games.dota2={
-        skillLevel:response.games.dota2.skill_level
+        faceitInfo.games[prop] = skillLevelObj;
+      }else{
+        continue;
       }
     }
-      // regex for extracting the '{lang}' in faceit profile url 
-      const regex = /{lang}/gi;
-      faceitInfo.faceitURL = faceitInfo.faceitURL.replace(regex,'en');
-      console.log("faceitInfo",faceitInfo)
-      return faceitInfo
+    // regex for extracting the '{lang}' in faceit profile url 
+    const regex = /{lang}/gi;
+    faceitInfo.faceitURL = faceitInfo.faceitURL.replace(regex,'en');
+    return faceitInfo
   }
   catch(err){
-    return false
+    return false;
   }
 }
 
@@ -345,14 +362,15 @@ async function getSteamRep(steam64){
    const json = await xml2js.parseStringPromise(xml);
    const steamrepurl=json.steamrep.steamrepurl[0];
    const jsonFullrep = json.steamrep.reputation[0].full[0];
+   console.log(jsonFullrep);
    let  fullReputation;
    if(jsonFullrep === ""){
       fullReputation = "no special reputation";
-   }else if(jsonFullrep != "" && /SR ADMIN/gi.test(jsonFullrep)){
+   }else if(/SR ADMIN/gi.test(jsonFullrep)){
      fullReputation = "SteamRep Admin";
-   }else if(jsonFullrep != "" && /VALVE ADMIN/gi.test(jsonFullrep)){
+   }else if(/VALVE ADMIN/gi.test(jsonFullrep)){
      fullReputation = "VALVE EMPLOYEE"
-   }else if(jsonFullrep != "" && /SCAMMER/gi.test(jsonFullrep)){
+   }else if(/SCAMMER/gi.test(jsonFullrep)){
     fullReputation = "SCAMMER"
    }
    const steamRepReputationObj = {
@@ -367,20 +385,39 @@ async function getSteamRep(steam64){
   }
 }
 
-
-
-function playerGames(steam64){
-  return new Promise((resolve,reject)=>{
-    SteamApi.getFriendList(steam64, "D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
-      if (err) {
-        console.log("error", err);
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    })
-  })
+async function getFriends(steam64){
+  console.log(steam64);
+  const options = {
+    uri:`https://api.steampowered.com/ISteamUser/GetFriendList/v1/`,
+    qs:{
+      key : "D295314B96B79961B1AB2A2457BA5B10",
+      steamid:steam64,
+      relationship:"friend"
+    },
+    json:true
+  }
+  try{
+    const response= await rp(options);
+    return response;
+  }
+  catch(err){
+    throw new Error ("friends list private");
+  }
 }
+
+// function playerGames(steam64){
+//   return new Promise((resolve,reject)=>{
+//     SteamApi.getFriendList(steam64, "D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
+//       if (err) {
+//         console.log("error", err);
+//         reject(err);
+//       } else {
+//         resolve(data);
+//       }
+//     })
+//   })
+// }
+
 app.listen(process.env.PORT || 3001, process.env.IP, function () {
   console.log("Steam Checker Started");
 })

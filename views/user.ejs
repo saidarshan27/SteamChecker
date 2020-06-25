@@ -168,7 +168,7 @@
         <% if(dataObj.faceitInfo){ %>
           <% const objKeys = Object.keys(dataObj.faceitInfo.games); %>
           <% const objLength = objKeys.length %>
-          <% if(dataObj.faceitInfo.games.csgo){ %>
+          <% if(!dataObj.faceitInfo.games.csgo){ %>
           <li class="faceit-skill-level">
             <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
               <div class="faceit-level">
@@ -180,11 +180,39 @@
             </div>
             <img src="/images/<%= objKeys[0] %>-icon.png" alt="">
           </li>
+          <% }else{ %>
+            <li class="faceit-skill-level">
+              <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
+                <div class="faceit-level">
+                  <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.games.csgo.skillLevel}.svg`) %>
+                </div>
+                <div>
+                  <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
+                </div>
+              </div>
+              <img src="/images/csgo-icon.png" alt="">
+            </li>
           <% } %>
         <% if(objLength > 1){ %>
-        <span class="showmore-faceit-skills name-label faceit-show">SHOW MORE +<%= objLength - 1 %></span>
+        <span class="showmore-faceit-skills name-label faceit-show">SHOW ALL +<%= objLength - 1 %></span> 
         <ul class="faceit-skills-fullist">
+          <% if(dataObj.faceitInfo.games.csgo){ %>
+            <li class="faceit-skill-level">
+              <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
+                <div class="faceit-level">
+                  <%- include(`partials/svgs/faceit-levels/level-${dataObj.faceitInfo.games.csgo.skillLevel}.svg`) %>
+                </div>
+                <div>
+                  <span style="font-weight:800;font-size:10px;color:#6d6d6d;margin-left: .5rem;">SKILL LEVEL</span>
+                </div>
+              </div>
+              <img src="/images/csgo-icon.png" alt="">
+            </li>
+          <% } %> 
           <% for(const prop in dataObj.faceitInfo.games){ %>
+               <% if(prop === "csgo") { %>
+                 <% continue %>
+               <% } %>
             <li class="faceit-skill-level">
               <div class="faceit-level-wrapper" style="display: flex;align-items: center;">
                 <div class="faceit-level" title="Skill Level <%= dataObj.faceitInfo.games[prop].skillLevel %> | <%= prop %>">
@@ -462,3 +490,4 @@
 <script src="/scripts/updateReputation.js"></script>
 <script src="/scripts/updateBackground.js"></script>
 <script src="/scripts/checkOwnerShip.js"></script>
+<script src="/scripts/loadFriends.js"></script>

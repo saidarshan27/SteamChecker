@@ -7,6 +7,6 @@ $(function(){
   })
    .then(res=> res.json())
    .then((data)=>{
-     console.log(data.friendslist.friends);
+     console.log(data);
    });
 })

@@ -10,13 +10,28 @@ const passport = require('passport')
 const session = require('express-session');
 const fiveMConverter = require("fivemid-converter");
 const SteamStrategy = require('passport-steam').Strategy;
-
-
+const mongoose = require("mongoose");
+const SteamUser = require("./models/steamUser");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 var jsonParser = bodyParser.json()
 app.use(express.static(__dirname + "/public"));
+
+// mongodb setup
+mongoose
+	.connect('mongodb+srv://saidarshan:R@mb02501@cluster0-wjhf4.mongodb.net/SteamChecker?retryWrites=true&w=majority', {
+		useNewUrlParser: true,
+		useCreateIndex: true,
+		useFindAndModify: false,
+		useUnifiedTopology: true
+	})
+	.then(() => {
+		console.log('Connected to DB');
+	})
+	.catch((err) => {
+		console.log('ERROR', err.message);
+	});
 
 // Passport setup
 passport.serializeUser(function(user, done) {
@@ -102,26 +117,57 @@ if(!checkValidInput){
 }
 if(isInputValid === true){
     extractprofile(requrl).then(steam64 =>{
-      main(steam64).then(dataObj =>{
-        console.log("kyabre",dataObj);
-        if(dataObj.persondata.profileurl.includes("/id")){
-          const url = dataObj.persondata.profileurl;
-          const found=url.match(/.*(?:id)\/([a-z0-9_]+)[\/?]?/i);
-          const vanity = found[1];
-          dataObj.objSteamIds.customURL = vanity;
+      SteamUser.findOne({
+        'persondata.steamid':steam64
+      },function(err,foundData){
+        if(err){
+          console.log(err);
+        }else{
+          if(foundData == null){
+            main(steam64).then(dataObj =>{
+              if(dataObj.persondata.profileurl.includes("/id")){
+                const url = dataObj.persondata.profileurl;
+                const found=url.match(/.*(?:id)\/([a-z0-9_]+)[\/?]?/i);
+                const vanity = found[1];
+                dataObj.objSteamIds.customURL = vanity;
+              }
+              SteamUser.create({
+                persondata:dataObj.persondata,
+                objSteamIds:dataObj.objSteamIds,
+                banObj:dataObj.banObj,
+                steamLvl:dataObj.steamLvl,
+                steamrepReputation:dataObj.steamrepReputation,
+                faceitInfo:dataObj.faceitInfo
+              },function(err,data){
+                if(err){
+                  console.log(err);
+                }else{
+                  console.log("database data",data);
+                  if(req.user != undefined){
+                    user.loggedUserId = req.user.id,
+                    user.avatar = req.user.photos[2].value,
+                    user.profileurl = req.user._json.profileurl,
+                    user.myProfileQueryString = `/user?url=${encodeURIComponent(req.user.id)}`;
+                  }
+                  res.render("user",{dataObj:data,user});
+                }
+              })
+              // console.log(dataObj);
+            })
+            .catch(err =>{
+              console.log(err);
+              res.redirect("/");
+            })
+          }else{
+            if(req.user != undefined){
+                user.loggedUserId = req.user.id;
+                user.avatar = req.user.photos[2].value;
+                user.profileurl = req.user._json.profileurl;
+                user.myProfileQueryString = `/user?url=${encodeURIComponent(req.user.id)}`;
+            }
+            res.render("user",{dataObj:foundData,user});
+          }
         }
-        console.log(dataObj);
-        if(req.user != undefined){
-          user.loggedUserId = req.user.id,
-          user.avatar = req.user.photos[2].value,
-          user.profileurl = req.user._json.profileurl,
-          user.myProfileQueryString = `/user?url=${encodeURIComponent(req.user.id)}`;
-        }
-        res.render("user",{dataObj,user});
-      })
-      .catch(err =>{
-        console.log(err);
-        res.redirect("/");
       })
     });
 }else{
@@ -130,24 +176,45 @@ if(isInputValid === true){
 })
 
 app.get("/user/getFriends",(req,res)=>{
-  getFriends(req.query.steam64).then((data)=>{
-    const forLoop = async() =>{
-      const arrLength = data.friendslist.friends.length;
-      for(let index=0;index<arrLength;index++){
-        const steam64 = data.friendslist.friends[index].steamid;
-        await playerInfo(steam64).then((data1)=>{
-          data.friendslist.friends[index].personaname = data1.personaname;
-          data.friendslist.friends[index].profileurl = data1.profileurl;
-          data.friendslist.friends[index].avatar = data1.avatarfull;
-        });
+  SteamUser.findOne({
+    "persondata.steamid":req.query.steam64
+  },function(err,data){
+    if(err){
+      console.log(err);
+    }else{
+      const numberofFriends = data.friends.length;
+      if(numberofFriends){
+        res.json(data.friends);
+      }else{
+        getFriends(req.query.steam64).then((friendsData)=>{
+          const forLoop = async() =>{
+            const arrLength = friendsData.friendslist.friends.length;
+            for(let index=0;index<arrLength;index++){
+              const steam64 = friendsData.friendslist.friends[index].steamid;
+              await playerInfo(steam64).then((data1)=>{
+                friendsData.friendslist.friends[index].personaname = data1.personaname;
+                friendsData.friendslist.friends[index].profileurl = data1.profileurl;
+                friendsData.friendslist.friends[index].avatar = data1.avatarfull;
+              });
+            }
+            SteamUser.updateOne({"persondata.steamid":req.query.steam64},{"friends":friendsData.friendslist.friends},{new: true},function(err,updatedFriends){
+              if(err){
+                console.log(err);
+              }else{
+                res.json(updatedFriends);
+              }
+            })
+            // console.log(data.friendslist.friends);
+          }
+          forLoop();
+      })
+      .catch((err)=>{
+        res.json("Friends List Private");
+        console.log(err);
+      })
       }
-      console.log(data.friendslist.friends);
     }
-    forLoop();
-})
-.catch((err)=>{
-  console.log(err);
-})
+  })
 })
 
 

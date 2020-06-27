@@ -20,7 +20,7 @@ app.use(express.static(__dirname + "/public"));
 
 // mongodb setup
 mongoose
-	.connect('mongodb+srv://saidarshan:R@mb02501@cluster0-wjhf4.mongodb.net/SteamChecker?retryWrites=true&w=majority', {
+	.connect(process.env.MONGOURL, {
 		useNewUrlParser: true,
 		useCreateIndex: true,
 		useFindAndModify: false,
@@ -45,7 +45,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new SteamStrategy({
   returnURL: 'https://mighty-citadel-31453.herokuapp.com/auth/steam/return',
   realm: 'https://mighty-citadel-31453.herokuapp.com/',
-  apiKey: 'D295314B96B79961B1AB2A2457BA5B10'
+  apiKey: process.env.KEY
 },
 function(identifier, profile, done) {
   process.nextTick(function () {
@@ -280,7 +280,7 @@ async function getVanity(extractedUrl) {
   const options = {
     uri:`https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/`,
     qs:{
-      key : "D295314B96B79961B1AB2A2457BA5B10",
+      key : process.env.KEY,
       vanityurl : extractedUrl,
       url_type : 1
     },
@@ -297,7 +297,7 @@ async function getVanity(extractedUrl) {
 
 function playerInfo(steam64) {
   return new Promise((resolve, reject) => {
-    SteamApi.getPlayerInfo(steam64, "D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
+    SteamApi.getPlayerInfo(steam64, process.env.KEY, function (err, data) {
       if (err) {
         console.log("error", err);
         reject(err);
@@ -333,7 +333,7 @@ function playerBans(steam64){
     gameBan:"None"
   }
   return new Promise((resolve,reject)=>{
-    SteamApi.getPlayerBans(steam64,"D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
+    SteamApi.getPlayerBans(steam64,process.env.KEY, function (err, data) {
       if (err) {
         console.log("error", err);
         reject(err);
@@ -374,7 +374,7 @@ async function playerLevel(steam64){
   const options={
     uri:`https://api.steampowered.com/IPlayerService/GetSteamLevel/v1/`,
     qs:{
-      key:"D295314B96B79961B1AB2A2457BA5B10",
+      key:process.env.KEY,
       steamid:steam64
     },
     json:true
@@ -398,7 +398,7 @@ async function getPlayerFaceitInfo(steam64){
         game_player_id:steam64
       },
       headers:{
-        'Authorization':`Bearer 6e687cc3-223a-4f96-8d11-8ab39a1ed1e4`
+        'Authorization':`Bearer ${process.env.FACEITKEY}`
       },
       json:true
     }
@@ -468,7 +468,7 @@ async function getFriends(steam64){
   const options = {
     uri:`https://api.steampowered.com/ISteamUser/GetFriendList/v1/`,
     qs:{
-      key : "D295314B96B79961B1AB2A2457BA5B10",
+      key : process.env.KEY,
       steamid:steam64,
       relationship:"friend"
     },

@@ -241,16 +241,16 @@
         LINKS
       </p>
       <div class="links" style="margin-bottom: 1rem;">
-        <a href="<%= dataObj.persondata.profileurl %>" title="Steam Community | <%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" style="text-decoration: none;">
+        <a class="steam-icon-link" href="<%= dataObj.persondata.profileurl %>" title="Steam Community | <%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" style="text-decoration: none;">
           <svg width="26" height="27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.153 13.238c.086 6.91-5.457 12.569-12.363 12.655A12.491 12.491 0 01.641 16.942l4.828 1.93a3.554 3.554 0 003.507 2.797 3.535 3.535 0 003.484-3.756l4.225-3.094c2.624.035 4.796-2.117 4.763-4.777-.032-2.594-2.18-4.692-4.784-4.66-2.604.033-4.7 2.183-4.667 4.777v.067L9.062 14.58a3.677 3.677 0 00-2.191.63L.143 12.544A12.512 12.512 0 0112.48.895c6.905-.086 12.587 5.434 12.673 12.343zM8.086 19.936l-1.55-.607a2.688 2.688 0 001.385 1.28 2.67 2.67 0 003.454-1.475 2.657 2.657 0 00-.025-2.034 2.73 2.73 0 00-1.446-1.436 2.608 2.608 0 00-1.967.002l1.59.629c1.008.39 1.485 1.547 1.092 2.536a1.95 1.95 0 01-2.533 1.105zm8.676-6.66a3.147 3.147 0 01-3.183-3.114 3.147 3.147 0 013.105-3.192 3.147 3.147 0 013.183 3.114 3.147 3.147 0 01-3.105 3.191zm-.01-.806a2.364 2.364 0 002.343-2.4 2.378 2.378 0 00-2.402-2.34 2.364 2.364 0 00-2.343 2.4c.036 1.319 1.11 2.356 2.402 2.34z" fill="url(#paint0_linear)"/><defs><linearGradient id="paint0_linear" x1="6.25" y1="3.864" x2="12.5" y2="28.864" gradientUnits="userSpaceOnUse"><stop stop-color="#0A0E30"/><stop offset="1" stop-color="#21ADD9" stop-opacity=".72"/></linearGradient></defs></svg>
        </a>
-       <a href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>">
+       <a class="steamrep-icon-link" href="<%= dataObj.steamrepReputation.steamrepurl %>" title="SteamRep | <%= dataObj.persondata.personaname %> | <%= dataObj.steamrepReputation.steamrepurl %>">
         <svg width="29" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="29" height="28" rx="14" fill="#fff"/><path d="M8.293 9.692v2.814h4.064v1.418h1.37v4.165h-1.37v1.396h-6.78v-1.396h5.455V15.32H6.946v-1.418h-1.37v-4.21h1.37V8.296h6.78v1.396H8.294z" fill="#000"/><path d="M23.202 18.1v-1.384h-1.348v-2.792h1.37V9.692h-1.37V8.296h-6.758v11.189h2.651V15.32h1.413v1.396h1.347v1.396h1.337v1.384h2.694v-1.395h-1.336zm-5.455-4.176V9.692h2.76v4.232h-2.76z" fill="red"/></svg>
       </a>
         <% if(dataObj.faceitInfo){ %>
-          <a href="<%= dataObj.faceitInfo.faceitURL %>" title="FACEIT | <%= dataObj.faceitInfo.nickname %> | <%= dataObj.faceitInfo.faceitURL %>">
+          <a class="faceit-icon-link" href="<%= dataObj.faceitInfo.faceitURL %>" title="FACEIT | <%= dataObj.faceitInfo.nickname %> | <%= dataObj.faceitInfo.faceitURL %>">
             <svg width="27" height="26" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="27" height="26" rx="13" fill="#000"/><path d="M21 7.116c0-.058-.075-.116-.075-.116-.075 0-.075 0-.15.058-1.5 1.792-3.074 3.584-4.573 5.434H3.157c-.15 0-.225.174-.075.231 5.398 1.561 13.27 3.932 17.618 5.261.15.058.3-.058.3-.115V7.116z" fill="#F86300"/></svg> 
-        </a>
+          </a>
           <% } %>                          
       </div>
       <hr style="margin-top: 0;"> 
@@ -486,3 +486,4 @@
 <script src="/scripts/checkFriendship.js"></script>
 <script src="/scripts/checkOwnerShip.js"></script>
 <script src="/scripts/loadFriends.js"></script>
+<script src="/scripts/linksTitle.js"></script>

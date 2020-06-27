@@ -1,5 +1,6 @@
 const ownership = document.querySelector(".friendship .data");
 const mobileOwnership = document.querySelector(".mobile-friendship .data");
+const loggedUserId = user.loggedUserId;
 
 if(loggedUserId === dataObj.persondata.steamid){
    ownership.classList.remove("mute");

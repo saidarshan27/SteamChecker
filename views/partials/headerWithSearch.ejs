@@ -45,8 +45,7 @@
         </div>
       </div>
         <div class="login-wrapper d-none d-lg-block">
-          <% const userKeys = Object.keys(user).length %>
-          <% if(userKeys === 0) { %>
+          <% if(currentUser == " ") { %>
             <div class="login">
               <a href="/auth/steam">
                 <img src="/images/steamloginbutton.jpg" alt="login-btn" >
@@ -54,14 +53,14 @@
             </div>
           <% }else{ %>
             <div class="login">
-              <a href="<%= user.myProfileQueryString %>">
-                <img src="<%= user.avatar %>" alt="avatar"  class="login-avatar">
+              <a href="<%= currentUser.myProfileQueryString %>">
+                <img src="<%= currentUser.avatar %>" alt="avatar"  class="login-avatar">
               </a>
               <span class="view-more">
                 <i class="fas fa-chevron-down ml-2 view-more-btn"></i>
               </span>
               <ul class="view-more-links" style="z-index: 2;">
-                <a href="<%= user.myProfileQueryString %>" class="view-more-btn">
+                <a href="<%= currentUser.myProfileQueryString %>" class="view-more-btn">
                 <li class="view-more-link view-more-btn">
                  MY PROFILE
                 </li>
@@ -117,8 +116,8 @@
       </li>
     </a>
         <li class="myprofile-btn" style="display:none;position: relative;" class="nav-link">
-          <img src="<%= user.avatar %>" alt="avatar" class="mobile-nav-avatar">
-          <a href="<%= user.myProfileQueryString %>" class="stretched-link">
+          <img src="<%= currentUser.avatar %>" alt="avatar" class="mobile-nav-avatar">
+          <a href="<%= currentUser.myProfileQueryString %>" class="stretched-link">
             My Profile
           </a>
         </li>
@@ -177,12 +176,11 @@
   </nav>
 
   <script>
-    const navUser = <%- JSON.stringify(user) %>
-    const NavUserKeys = Object.keys(navUser).length;
+    const navUser = <%- JSON.stringify(currentUser) %>
     const myProfileBtn = document.querySelector(".myprofile-btn");
     const siginBtn =  document.querySelector(".signin-btn");
     const logoutBtn = document.querySelector(".logout-btn");
-   if(!NavUserKeys){
+   if(navUser == false){
      myProfileBtn.style.display = "none";
      logoutBtn.style.display = "none";
      siginBtn.style.visibility = "visibile";

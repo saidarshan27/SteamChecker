@@ -62,6 +62,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -77,17 +79,39 @@ app.get('/auth/steam',
     res.redirect(req.session.redirectUrl);
   });
 
+  app.use(function(req,res,next){
+    if(req.user != undefined){
+      async function user(){
+        let user = {
+          loggedUserId : req.user.id,
+          avatar : req.user.photos[2].value,
+          profileurl : req.user._json.profileurl,
+          myProfileQueryString : `/user?url=${encodeURIComponent(req.user.id)}`
+        }
+        try{
+          const friendsArr = [];
+          const friends = await getFriends(req.user.id); 
+          friends.friendslist.friends.forEach((friend,index)=>{
+            friendsArr[index] = friend.steamid;
+          })
+          user.friendsArr = friendsArr;
+        }
+        catch(err){
+          console.log(err);
+        }
+        res.locals.currentUser = user;
+        next();
+      }
+      user();
+    }else{
+      res.locals.currentUser = " ";
+      next();
+    }
+  })
 
 app.get("/", (req, res) => {
-  let user={};
   req.session.redirectUrl = req.originalUrl;
-  if(req.user != undefined){
-    user.loggedUserId = req.user.id,
-    user.avatar = req.user.photos[2].value,
-    user.profileurl = req.user._json.profileurl,
-    user.myProfileQueryString = `/user?url=${encodeURIComponent(req.user.id)}`;
-  }
-  res.render("landing",{user});
+  res.render("landing");
 })
 
 app.get('/logout', function(req, res){
@@ -98,7 +122,6 @@ app.get('/logout', function(req, res){
 app.get("/user", (req, res) => {
   let isInputValid = false;
   req.session.redirectUrl = req.originalUrl;
-  let user={};
   const requrl = req.query.url;
  //check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
  const regex = /(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi;
@@ -143,13 +166,7 @@ if(isInputValid === true){
                   console.log(err);
                 }else{
                   console.log("database data",data);
-                  if(req.user != undefined){
-                    user.loggedUserId = req.user.id,
-                    user.avatar = req.user.photos[2].value,
-                    user.profileurl = req.user._json.profileurl,
-                    user.myProfileQueryString = `/user?url=${encodeURIComponent(req.user.id)}`;
-                  }
-                  res.render("user",{dataObj:data,user});
+                  res.render("user",{dataObj:data});
                 }
               })
               // console.log(dataObj);
@@ -159,13 +176,7 @@ if(isInputValid === true){
               res.redirect("/");
             })
           }else{
-            if(req.user != undefined){
-                user.loggedUserId = req.user.id;
-                user.avatar = req.user.photos[2].value;
-                user.profileurl = req.user._json.profileurl;
-                user.myProfileQueryString = `/user?url=${encodeURIComponent(req.user.id)}`;
-            }
-            res.render("user",{dataObj:foundData,user});
+            res.render("user",{dataObj:foundData});
           }
         }
       })

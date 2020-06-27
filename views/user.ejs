@@ -472,15 +472,10 @@
 <%- include("partials/svgs/tick-shield.ejs"); %>
 <%- include("partials/svgs/wrong-shield.ejs"); %>
 <script>
+  const user = <%- JSON.stringify(currentUser) %>
   const dataObj = <%- JSON.stringify(dataObj) %>
   const visibilityState = dataObj.persondata.communityvisibilitystate;
   const banObj =  dataObj.banObj;
-  let loggedUserId;
-  const user = <%- JSON.stringify(user) %>
-  const userKeys = Object.keys(user).length;
-  if(userKeys != 0){
-    loggedUserId = user.loggedUserId;
-  }
 </script>
 <script src="/scripts/steamLevelColor.js"></script>
 <script src="/scripts/updateOnlineStatus.js"></script>
@@ -488,7 +483,6 @@
 <script src="/scripts/updateBans.js"></script>
 <script src="/scripts/updateNavInputField.js"></script>
 <script src="/scripts/updateReputation.js"></script>
-<script src="/scripts/updateBackground.js"></script>
+<script src="/scripts/checkFriendship.js"></script>
 <script src="/scripts/checkOwnerShip.js"></script>
 <script src="/scripts/loadFriends.js"></script>
-<script src="/scripts/checkFriendship.js"></script>

@@ -218,7 +218,6 @@ function localStorageAvailable(){
 
 function checkWidth(){
 	const width = document.body.clientWidth;
-	console.log(width);
 	if(width < 991){
 		$(".main-nav").addClass("sticky-top");
 	}else{

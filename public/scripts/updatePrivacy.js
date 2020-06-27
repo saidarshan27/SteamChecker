@@ -2,7 +2,6 @@
 
    window.addEventListener("DOMContentLoaded",(event)=>{
     if(visibilityState === 3){
-      console.log(true);
         const newspan = document.createElement("span");
         privacyState.classList.add("public");
         newspan.innerText="Public"

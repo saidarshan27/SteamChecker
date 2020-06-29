@@ -17,11 +17,13 @@
           <%= dataObj.persondata.personaname %>
         </h5>
       </a>
-      <% if(dataObj.steamLvl){ %>
-        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span></div>
-      <% }else{ %>
-        <div class="friendPlayerLevel"><span class="friendPlayerLevelNum">?</span></div>
-      <% } %>
+        <div class="friendPlayerLevel">
+          <% if(dataObj.steamLvl){ %>
+          <span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span>
+          <% }else{ %>
+            <span class="friendPlayerLevelNum">?</span>
+        <% } %>
+        </div>
   </div>
   </div>
   <div class="more-links-wrapper">
@@ -98,43 +100,39 @@
   </section>
   <section class="about-wrapper">
     <div class="about">
-       <ul class="about-lists" >
+       <ul class="about-lists">
          <li>
             <span class="name-label mb-2">
               Joined Steam
             </span>
-            <% if(dataObj.persondata.timecreated){ %>
               <span class="data-label">
+                <% if(dataObj.persondata.timecreated){ %>
                 <span class="data">
                   <% const humanDate = new Date(dataObj.persondata.timecreated*1000).toLocaleDateString("en-IN") %>
                   <%= humanDate %>
                 </span>
+                <% }else{ %>
+                  <span class="data private">
+                    Private
+                  </span>
+                  <% } %>
               </span>
-            <% }else{ %>
-              <span class="data-label">
-                <span class="data private">
-                  Private
-                </span>
-              </span>
-            <% } %>
          </li>
          <li>
           <span class="name-label mb-2">
             Steam Level
           </span>
-          <% if(dataObj.steamLvl){ %>
             <span class="data-label">
+              <% if(dataObj.steamLvl){ %>
               <span class="data">
                 <%= dataObj.steamLvl %>
               </span>
+              <% }else{ %>
+                <span class="data private">
+                  Private
+                </span>
+              <% } %>
             </span>
-          <% }else{ %>
-            <span class="data-label">
-              <span class="data private">
-                Private
-              </span>
-            </span>
-         <% } %>
          </li>
          <li>
           <span class="name-label mb-2">
@@ -163,7 +161,7 @@
   <section class="faceit-info-wrapper test">
     <div class="faceit-info">
       <p class="section-title">FACEIT INFO</p>
-      <hr>
+      <hr style="margin-top: 0;">
       <ul class="faceit-skill-levels" style="list-style: none;">
         <% if(dataObj.faceitInfo){ %>
           <% const objKeys = Object.keys(dataObj.faceitInfo.games); %>
@@ -237,10 +235,10 @@
         <% } %>
       </ul>
       <hr style="margin-top: 0;">
-      <p class="links-title section-title">
-        LINKS
-      </p>
       <div class="links" style="margin-bottom: 1rem;">
+        <p class="links-title section-title">
+          LINKS
+        </p>
         <a class="steam-icon-link" href="<%= dataObj.persondata.profileurl %>" title="Steam Community | <%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" style="text-decoration: none;">
           <svg width="26" height="27" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M25.153 13.238c.086 6.91-5.457 12.569-12.363 12.655A12.491 12.491 0 01.641 16.942l4.828 1.93a3.554 3.554 0 003.507 2.797 3.535 3.535 0 003.484-3.756l4.225-3.094c2.624.035 4.796-2.117 4.763-4.777-.032-2.594-2.18-4.692-4.784-4.66-2.604.033-4.7 2.183-4.667 4.777v.067L9.062 14.58a3.677 3.677 0 00-2.191.63L.143 12.544A12.512 12.512 0 0112.48.895c6.905-.086 12.587 5.434 12.673 12.343zM8.086 19.936l-1.55-.607a2.688 2.688 0 001.385 1.28 2.67 2.67 0 003.454-1.475 2.657 2.657 0 00-.025-2.034 2.73 2.73 0 00-1.446-1.436 2.608 2.608 0 00-1.967.002l1.59.629c1.008.39 1.485 1.547 1.092 2.536a1.95 1.95 0 01-2.533 1.105zm8.676-6.66a3.147 3.147 0 01-3.183-3.114 3.147 3.147 0 013.105-3.192 3.147 3.147 0 013.183 3.114 3.147 3.147 0 01-3.105 3.191zm-.01-.806a2.364 2.364 0 002.343-2.4 2.378 2.378 0 00-2.402-2.34 2.364 2.364 0 00-2.343 2.4c.036 1.319 1.11 2.356 2.402 2.34z" fill="url(#paint0_linear)"/><defs><linearGradient id="paint0_linear" x1="6.25" y1="3.864" x2="12.5" y2="28.864" gradientUnits="userSpaceOnUse"><stop stop-color="#0A0E30"/><stop offset="1" stop-color="#21ADD9" stop-opacity=".72"/></linearGradient></defs></svg>
        </a>
@@ -254,10 +252,10 @@
           <% } %>                          
       </div>
       <hr style="margin-top: 0;"> 
-      <p class="reputation-title section-title">
-        REPUTATION
-      </p>
       <div class="reputation">
+        <p class="reputation-title section-title">
+          REPUTATION
+        </p>
         <span class="data" style="color: #7A7D7F;font-weight: 750;">
         <svg class="parent-svg" width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:.4rem">
           <use href="#empty-shield"></use>
@@ -326,32 +324,25 @@
               </span>
             </td>
           </tr>
-          <% if(dataObj.objSteamIds.customURL){ %>
             <tr>
               <td class="name-label">
                 Vanity URL 
               </td>
               <td class="data-label">
+                <% if(dataObj.objSteamIds.customURL){ %>
                  <span class="data" data-full-URL="<%= dataObj.objSteamIds.customURL %>">
                    <%= dataObj.objSteamIds.customURL %>
                  </span>
                  <span class="vanityURL-copy copy" data-toggle="tooltip" data-placement="right" data-original-title="Copy To Clipboard">
                   <i class="far fa-clone"></i>
                 </span>
+                <% }else{ %>
+                  <span class="data mute">
+                    Not Set
+                  </span>
+                  <% } %>
               </td>
             </tr>
-          <% }else{ %>
-            <tr>
-              <td class="name-label">
-                Vanity URL 
-              </td>
-              <td class="data-label">
-                 <span class="data mute">
-                   Not Set
-                 </span>
-              </td>
-            </tr>
-          <% } %>
          </tbody>
        </table>
     </div>
@@ -460,6 +451,19 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </section>
+  <section class="friends-wrapper">
+    <p class="section-title">
+      FRIENDS
+      <?xml version="1.0" encoding="utf-8"?>
+<svg class="loading-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: rgb(234, 241, 246);shape-rendering: auto;" width="18px" height="18px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<circle cx="50" cy="50" fill="none" stroke="#404bb8" stroke-width="7" r="37" stroke-dasharray="174.35839227423352 60.119464091411174" transform="rotate(313.879 50 50)">
+  <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1.6393442622950818s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+</circle>
+<!-- [ldio] generated by https://loading.io/ --></svg>
+    </p>
+    <div class="friends">
     </div>
   </section>
 </div>

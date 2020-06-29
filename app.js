@@ -202,12 +202,14 @@ app.get("/user/getFriends",(req,res)=>{
             const arrLength = friendsData.friendslist.friends.length;
             for(let index=0;index<arrLength;index++){
               const steam64 = friendsData.friendslist.friends[index].steamid;
+              console.log(typeof steam64);
               await playerInfo(steam64).then((data1)=>{
                 friendsData.friendslist.friends[index].personaname = data1.personaname;
                 friendsData.friendslist.friends[index].profileurl = data1.profileurl;
                 friendsData.friendslist.friends[index].avatar = data1.avatarfull;
               });
             }
+            console.log("friends",friendsData.friendslist.friends);
             SteamUser.updateOne({"persondata.steamid":req.query.steam64},{"friends":friendsData.friendslist.friends},{new: true},function(err,updatedFriends){
               if(err){
                 console.log(err);

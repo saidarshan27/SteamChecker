@@ -138,6 +138,7 @@ if(!checkValidInput){
 }else{
    isInputValid = true;
 }
+// if valid input go-ahead
 if(isInputValid === true){
     extractprofile(requrl).then(steam64 =>{
       SteamUser.findOne({
@@ -172,6 +173,7 @@ if(isInputValid === true){
               // console.log(dataObj);
             })
             .catch(err =>{
+              // steamid not found redirect
               console.log(err);
               res.redirect("/");
             })
@@ -182,11 +184,13 @@ if(isInputValid === true){
       })
     });
 }else{
+  // invalid input
   res.redirect("/");
 }
 })
 
 app.get("/user/getFriends",(req,res)=>{
+  // check if user present
   SteamUser.findOne({
     "persondata.steamid":req.query.steam64
   },function(err,data){
@@ -194,42 +198,66 @@ app.get("/user/getFriends",(req,res)=>{
       console.log(err);
     }else{
       const numberofFriends = data.friends.length;
+      // if present send the available data
       if(numberofFriends){
         res.json(data.friends);
       }else{
-        getFriends(req.query.steam64).then((friendsData)=>{
-          const forLoop = async() =>{
-            const arrLength = friendsData.friendslist.friends.length;
-            for(let index=0;index<arrLength;index++){
-              const steam64 = friendsData.friendslist.friends[index].steamid;
-              console.log(typeof steam64);
-              await playerInfo(steam64).then((data1)=>{
-                friendsData.friendslist.friends[index].personaname = data1.personaname;
-                friendsData.friendslist.friends[index].profileurl = data1.profileurl;
-                friendsData.friendslist.friends[index].avatar = data1.avatarfull;
-              });
+        // else request data from steam
+        getFriends(req.query.steam64).then((data)=>{
+          const fullFriends = [];
+          data.friendslist.friends.forEach((friend,index)=>{
+            fullFriends[index] = friend.steamid;
+          })
+          async function additionalInfotoFrineds(){
+          let length = fullFriends.length;
+          let temp = 0;
+            while(length){
+                const limit = (length>=100) ? 100 : length;
+                // if 100 available splice 100 or splice howmuch ever available
+                const splicedFriends = fullFriends.splice(0,limit);
+                length = fullFriends.length;
+                const splicedFriendsString = splicedFriends.join();
+                const playersData = await getPlayersInfo(splicedFriendsString);
+                for(let i=0;i<=splicedFriends.length-1;i++){
+                  const found = playersData.response.players.findIndex(x=> x.steamid == splicedFriends[i]);
+                  data.friendslist.friends[i+temp].personaname = playersData.response.players[found].personaname;
+                  data.friendslist.friends[i+temp].profileurl = playersData.response.players[found].profileurl;
+                  data.friendslist.friends[i+temp].avatar = playersData.response.players[found].avatarfull;
+                }
+                temp = temp+100;
             }
-            console.log("friends",friendsData.friendslist.friends);
-            SteamUser.updateOne({"persondata.steamid":req.query.steam64},{"friends":friendsData.friendslist.friends},{new: true},function(err,updatedFriends){
-              if(err){
-                console.log(err);
-              }else{
-                res.json(updatedFriends);
-              }
+            SteamUser.updateOne({"persondata.steamid":req.query.steam64},{"friends":data.friendslist.friends},{new: true},function(err,updatedFriends){
+                if(err){
+                  console.log(err);
+                }else{
+                  res.json(data.friendslist.friends);
+                }
             })
-            // console.log(data.friendslist.friends);
-          }
-          forLoop();
-      })
-      .catch((err)=>{
-        res.json("Friends List Private");
-        console.log(err);
-      })
+            }
+            additionalInfotoFrineds();
+        })
       }
     }
   })
 })
 
+async function getPlayersInfo(steamids){
+  const options = {
+    uri:`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/`,
+    qs:{
+      key : "D295314B96B79961B1AB2A2457BA5B10",
+      steamids:steamids
+    },
+    json:true
+  }
+  try{
+    const response= await rp(options)
+    return response
+  }
+  catch(err){
+   console.log(err.message);
+  } 
+}
 
 async function main(steam64){
   const persondata = await playerInfo(steam64);

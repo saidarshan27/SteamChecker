@@ -19,13 +19,13 @@ new ScrollMagic.Scene({
   triggerElement:".userpage-container",
   triggerHook:"0.15"
 })
-.addIndicators({colorStart:"black",colorTrigger:"black"})
+// .addIndicators({colorStart:"black",colorTrigger:"black"})
 .setClassToggle(".profile-nav-item","active")
 .addTo(controller);
 new ScrollMagic.Scene({
     triggerElement:".friends-wrapper",
     triggerHook:"0.15"
   })
-  .addIndicators({colorStart:"black",colorTrigger:"black"})
+  // .addIndicators({colorStart:"black",colorTrigger:"black"})
   .setClassToggle(".friends-nav-item","active")
   .addTo(controller);

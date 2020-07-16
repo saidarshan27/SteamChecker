@@ -1421,6 +1421,9 @@ font-size: 12px;
   .mobile-nav-avatar{
     left:20%
   }
+  .friends-table .data-label{
+    font-size: .6rem;
+  }
 }
 @media(max-width:490px){
   .mobile-nav-avatar{
@@ -1472,6 +1475,9 @@ font-size: 12px;
   }
  .friends-wrapper .friends .friends-controls .friends-controls-list li .select-sort select, .friends-wrapper .friends .friends-controls .friends-controls-list li .select-show-entries select{
   width: 3rem;
+  }
+  .friends-wrapper .friends .friends-controls .friends-controls-list li .select-sort select{
+    width: 4rem;
   }
   .pagination{
     transform: scale(.9);

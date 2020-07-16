@@ -75,10 +75,9 @@ $(function(){
       `<table class="table friends-table">
       <thead>
         <tr>
-          <th scope="col" class="name-label">Name</th>
-          <th scope="col" class="name-label">SteamID64</th>
-          <th scope="col" class="name-label">Friends Since</th>
-          <th scope="col" class="name-label"></th>
+          <th scope="col" class="name-label no-border">Name</th>
+          <th scope="col" class="name-label no-border">SteamID64</th>
+          <th scope="col" class="name-label no-border">Friends Since</th>
         </tr>
       </thead>
       <tbody></tbody>

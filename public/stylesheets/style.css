@@ -727,7 +727,7 @@ body{
 }
 .friends-wrapper .friends .friends-controls .friends-controls-list{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-end;
     list-style: none;
     font-size: .75rem;
@@ -748,6 +748,7 @@ body{
   border-radius: 1rem;
   width: 7rem;
   cursor: pointer;
+  background-color: white;
 }
 
 .select-sort,.select-show-entries{
@@ -775,6 +776,18 @@ body{
 }
 .friends-table-wrapper td a.name-label{
   color: #007bff;
+}
+.friends-table .no-border{
+  border: none;
+}
+.friends-table .no-border-top{
+  border-top: none;
+}
+.friends-table th,.friends-table td{
+  padding-left:0;
+}
+.friends-table tbody:first-child td{
+  border-top: none;
 }
 
 .friends-table-wrapper .friend-avatar-name{

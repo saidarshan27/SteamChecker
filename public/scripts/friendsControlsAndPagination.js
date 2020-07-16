@@ -49,9 +49,9 @@ $(".prev").on("click",function(e){
 $(".select-show-entries select").change(function(e){
   const newLimit = $(this).val();
   limit = newLimit;
-  const newNumberOfPages = Math.ceil(total/ limit);
+  numberOfPages = Math.ceil(total/ limit);
   paginate(friendsArray,1,newLimit);
-  createPageButtons(newNumberOfPages);
+  createPageButtons(numberOfPages);
 })
 // sort(recent or oldest).
 $(".select-sort select").change(function(e){

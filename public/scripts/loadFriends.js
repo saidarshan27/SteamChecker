@@ -60,8 +60,11 @@ $(function(){
          </div>
          </li>
        </ul>
+       <div class="friends-mobile-search-wrapper">
        <div class="friends-mobile-search">
+       <button class="search-submit mobile-search-toggle" type="submit"><i class="fas fa-search"></i></button>
        <input type="text" name="url" class="url-input user-url-input friends-search" placeholder="Search" autocomplete="off">
+       </div>
        </div>
        `
       const controls = document.createElement("div");
@@ -77,7 +80,7 @@ $(function(){
         <tr>
           <th scope="col" class="name-label no-border">Name</th>
           <th scope="col" class="name-label no-border">SteamID64</th>
-          <th scope="col" class="name-label no-border">Friends Since</th>
+          <th scope="col" class="name-label no-border" style="white-space:nowrap">Friends Since</th>
         </tr>
       </thead>
       <tbody></tbody>

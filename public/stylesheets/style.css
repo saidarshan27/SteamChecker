@@ -776,6 +776,7 @@ body{
 }
 .friends-table-wrapper td a.name-label{
   color: #007bff;
+  text-decoration: none;
 }
 .friends-table .no-border{
   border: none;
@@ -877,18 +878,28 @@ body{
 }
 .friends-mobile-search .url-input{
   border-radius: 1rem;
-  margin-bottom: .5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
-.friends-mobile-search{
+.friends-mobile-search-wrapper{
   display: none;
 }
-.friends-search .search-submit{
+.friends-mobile-search{
+  display: flex;
+  margin-bottom: .5rem;
+}
+.friends-search .search-submit,.friends-mobile-search .search-submit{
   padding: .5rem;
   background: white;
   color: var(--primary);
   pointer-events: none;
 }
-.friends-search .search-submit i{
+.friends-mobile-search .search-submit{
+  border-radius: 0;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+.friends-search .search-submit i,.friends-mobile-search .search-submit i{
   font-size: .8rem;
 }
 
@@ -1225,6 +1236,7 @@ font-size: 12px;
   .friends .friends-search .search-submit{
     border-radius: 1rem;
     pointer-events: all;
+    background: transparent;
   }
   .table thead th.name-label{
     font-size: .5rem;
@@ -1239,7 +1251,7 @@ font-size: 12px;
   .select-sort::after, .select-show-entries::after{
     top: -2px;
   }
-  .friends-search .search-submit i{
+  .friends-search .search-submit i,.friends-mobile-search .search-submit i{
     font-size: .5rem;
   }
   .friends-mobile-search .url-input{
@@ -1254,7 +1266,7 @@ font-size: 12px;
   .friend-avatar-name a{
     display: inline-block;
     white-space: nowrap;
-    width: 80px;
+    width: 120px;
     overflow: hidden;
     text-overflow: ellipsis;
   }

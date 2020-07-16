@@ -264,8 +264,16 @@ $(".more-link").click(function(e){
 })
 
 $(".friends-wrapper").on("click",".mobile-search-toggle",function(e){
-	$(".friends-mobile-search").slideToggle();
+	$(".friends-mobile-search-wrapper").slideToggle();
+	if($(this).hasClass("active")){
+		$(this).removeClass("active");
+		$(this).html(`<i class="fas fa-search"></i>`);
+	}else{
+	$(this).addClass("active");
+	$(this).html(`<i class="fas fa-times"></i>`);
+	}
 })
+
 
 // function rippleEffect(element,x,y){
 // 	let ripples = document.createElement("span");

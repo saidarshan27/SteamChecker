@@ -1,5 +1,6 @@
+
 //Ready
-$(function () {
+$(function (){
 	$('[data-toggle="tooltip"]').tooltip();
 	if(localStorageAvailable()){
 		if(localStorage.DoNotShowMessageAgain && localStorage.DoNotShowMessageAgain === "true"){
@@ -143,6 +144,12 @@ $(document).click(function(event){
 
 })
 
+$(".nav-item").click(function(e){
+	$(this).siblings(".active").removeClass("active");
+	$(this).addClass("active");
+})
+
+
 dropDown.click(function(e){
    e.stopPropagation();
 })
@@ -196,6 +203,29 @@ $(".faceit-show").click(function(event){
 	}
 })
 
+$(".friends-wrapper").on("mouseover",".friend-avatar",function(event){
+	if($(".friends-hoverable").hasClass("active")){
+		$(".friends-hoverable").removeClass("active");
+	}
+	$(this).parents("tr").prev().addClass("active");
+})
+
+
+
+$(document).mouseover(function(e){
+	const activeFriends = $(".friends-hoverable.active");
+	const condition = ($(e.target).parent().hasClass("dont-close-friends-hoverable") || $(e.target).hasClass("dont-close-friends-hoverable"));
+	if($(e.target).hasClass("name-link")){
+		if($(".friends-hoverable").hasClass("active")){
+			$(".friends-hoverable").removeClass("active");
+		}
+	}
+	if(!condition){
+		if($(".friends-hoverable").hasClass("active")){
+			$(".friends-hoverable").removeClass("active");
+		}
+	}
+});
 
 
 function copyToClipboard(data) {
@@ -231,6 +261,10 @@ $(".more-btn").click(function(e){
 
 $(".more-link").click(function(e){
 	e.stopPropagation();
+})
+
+$(".friends-wrapper").on("click",".mobile-search-toggle",function(e){
+	$(".friends-mobile-search").slideToggle();
 })
 
 // function rippleEffect(element,x,y){

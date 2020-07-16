@@ -176,8 +176,6 @@ body{
   font-size: 90%;
 }
 
-
-
 .mobile-nav-steam-quick-links{
   display: none;
 }
@@ -218,7 +216,7 @@ body{
 }
 .fa-info-circle{
   margin-left: 0.5rem;
-  font-size: 0.9rem;
+  font-size: inherit;
   color: var(--mute);
 }
 .fa-info-circle:hover{
@@ -364,14 +362,15 @@ body{
   padding: 0;
   display: flex;
   align-items: center;
+  transition: all 0.5s ease;
 }
+
 .sub-nav li a{
   padding: 16px;
 }
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
   color: var(--primary);
-  border-bottom: 3px solid var(--primary);
 }
 
 /* title */
@@ -385,7 +384,7 @@ body{
 
 /* user page container */
 .userpage-container{
-  max-width: 57rem;
+  max-width: 60rem;
   min-height: 80vh;
   display: grid;
   grid-template-columns: repeat(12,1fr);
@@ -697,11 +696,25 @@ body{
   grid-column: 1/5;
   grid-row: 7/10;
 }
-.steam-quick-links a{
+/* .steam-quick-links a{
   color:inherit;
 }
 .steam-quick-links a:active{
   color: #3a3a3a;
+} */
+
+/* friends psuedo style */
+.friends .private{
+  text-transform: capitalize;
+  color: red;
+  font-size: .8rem;
+  font-weight: 510;
+}
+.friends .no-friends-found{
+  padding: 1rem .5rem;
+  font-weight: 600;
+  font-size: .9rem;
+  color: #b6b3b3;
 }
 /* friends wrapper */
 .friends-wrapper{
@@ -710,10 +723,186 @@ body{
 .friends-wrapper .section-title{
   padding: 1rem 1.5rem;
   display: flex;
+  margin-bottom: 0;
 }
+.friends-wrapper .friends .friends-controls .friends-controls-list{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    list-style: none;
+    font-size: .75rem;
+    font-weight: 600;
+}
+.friends-wrapper .friends .friends-controls .friends-controls-list li{
+  display: flex;
+  align-items: center;
+}
+.friends-wrapper .friends .friends-controls .friends-controls-list li .select-sort select,
+.friends-wrapper .friends .friends-controls .friends-controls-list li .select-show-entries select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+  padding: .3rem;
+  border-radius: 1rem;
+  width: 7rem;
+  cursor: pointer;
+}
+
+.select-sort,.select-show-entries{
+  margin-left: .7rem;
+  position: relative;
+  overflow: hidden;
+}
+.select-sort::after,.select-show-entries::after{
+  content: "\25BC";
+  position: absolute;
+  color: var(--primary);
+  top: 0;
+  right: 0;
+  pointer-events: none;
+  padding: .3rem;
+}
+
 .loading-svg{
   margin: 0;
   margin-left: .8rem;
+}
+.friends-table-wrapper td{
+  font-size: .8rem;
+  cursor: pointer;
+}
+.friends-table-wrapper td a.name-label{
+  color: #007bff;
+}
+
+.friends-table-wrapper .friend-avatar-name{
+  font-weight: 510;
+  width: 50%;
+}
+.friend-avatar{
+  height: 40px;
+  border-radius: 50%;
+  margin-right: .3rem;
+}
+.total-friends-capsule{
+  display: none;
+  background:var(--primary);
+  border-radius: 20%;
+  padding-left: .3rem;
+  padding-right: .3rem;
+  color: white;
+  margin-left: .5rem;
+  font-size: .7rem;
+  font-weight: 500;
+  align-items: center;
+}
+.friends-hoverable{
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  height:6rem;
+  width:15rem;
+  flex-direction:column;
+  position: absolute;
+  left: 14.8%;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  transition: visibility .1s ease-out, opacity .6s ease-in-out;
+}
+.friends-hoverable.active{
+  visibility: visible;
+  opacity: 1;
+}
+.friends-hoverable .upper-section{
+  background:#EAF1F6;
+ flex-basis:2.5rem;
+ max-height:2.5rem;
+ position:relative;
+ display: flex;
+ align-items: flex-end;
+ justify-content: center;
+}
+.friends-hoverable .upper-section .name-span{
+  margin-left: 5rem;
+  font-size: .8rem;
+  font-weight: 600;
+  width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.friends-hoverable .lower-section{
+  background:#DFE8EF;
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.friends-hoverable .lower-section .more-btn{
+  font-size: .7rem;
+  padding: .5rem 2rem;
+  margin-left: 4rem;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+.friends-hoverable .avatar{
+  position:absolute;
+  width:4rem;
+  height:4rem;
+  top:18%;
+  left:3%;
+  border-radius:.5rem;
+}
+.friends-search .url-input,.friends-mobile-search .url-input{
+  padding: .5rem;
+  font-size: .7rem;
+  width: 100%;
+  border-top-right-radius: 0rem;
+  border-bottom-right-radius: 0rem;
+}
+.friends-mobile-search .url-input{
+  border-radius: 1rem;
+  margin-bottom: .5rem;
+}
+.friends-mobile-search{
+  display: none;
+}
+.friends-search .search-submit{
+  padding: .5rem;
+  background: white;
+  color: var(--primary);
+  pointer-events: none;
+}
+.friends-search .search-submit i{
+  font-size: .8rem;
+}
+
+/* pagination buttons */
+.pagination{
+  font-size: .75rem;
+  cursor: pointer;
+}
+.pagination .page-link{
+  color: black;
+  user-select: none;
+  transition: all .3s ease;
+}
+
+.page-link.active{
+  background:var(--primary);
+  color:white;
+}
+.page-link.disabled{
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
+.page-link.disabled:hover{
+  background-color:white;
+}
+.page-link.active:hover{
+  color:white;
 }
 /* label styles */
 .name-label{
@@ -726,7 +915,7 @@ body{
   font-weight: normal;
 }
 .steam-ids .data-label,.about .data-label,.profile-privacy .data-label{
-  font-weight: 450;
+  font-weight: 500;
 }
 .steam-ids .data{
   display: inline-block;
@@ -752,7 +941,7 @@ body{
   background-size: 100% 100%;
 }
 
-.table td{
+.about .table td,.steam-ids .table td,.profile-privacy .table td,.steam-quick-links .table td{
   border-top: none;
   padding-left: 0;
 }
@@ -1017,6 +1206,51 @@ font-size: 12px;
 
 
 @media (max-width:768px){
+  .friends .friends-search input{
+    display: none;
+  }
+  .friends .friends-search .search-submit{
+    border-radius: 1rem;
+    pointer-events: all;
+  }
+  .table thead th.name-label{
+    font-size: .5rem;
+  }
+  .friends-wrapper .friends .friends-controls .friends-controls-list li .select-sort select, .friends-wrapper .friends .friends-controls .friends-controls-list li .select-show-entries select{
+    width: 5rem;
+    font-size: .5rem;
+  }
+  .friends-controls-list .name-label{
+    font-size: .5rem;
+  }
+  .select-sort::after, .select-show-entries::after{
+    top: -2px;
+  }
+  .friends-search .search-submit i{
+    font-size: .5rem;
+  }
+  .friends-mobile-search .url-input{
+    font-size: .5rem;
+  }
+  .friend-avatar{
+    height: 20px;
+  }
+  .friend-avatar-name{
+    white-space: nowrap;
+  }
+  .friend-avatar-name a{
+    display: inline-block;
+    white-space: nowrap;
+    width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .friends-wrapper{
+    overflow: scroll;
+  }
+  .pagination{
+    font-size: .5rem;
+  }
   .fa-info-circle{
     font-size: 0.5rem;
   }
@@ -1220,6 +1454,15 @@ font-size: 12px;
   .more-links-wrapper .more-links .more-link svg{
     width: 20%;
   }
+  .friends-controls-list{
+    justify-content: space-between;
+  }
+ .friends-wrapper .friends .friends-controls .friends-controls-list li .select-sort select, .friends-wrapper .friends .friends-controls .friends-controls-list li .select-show-entries select{
+  width: 3rem;
+  }
+  .pagination{
+    transform: scale(.9);
+  }
 }
 @media (max-width:360px){
   .name-label{
@@ -1264,9 +1507,15 @@ font-size: 12px;
 .more-links-wrapper .more-links .more-link:active > svg{
   filter: grayscale(0%);
 }
+.friends-table-wrapper td a.name-label:active{
+  color: #0056b3;
+}
 
 /* all hover styles works only in hoverable devices */
 @media(hover: hover) and (pointer: fine){
+  .friends-table-wrapper td a.name-label:hover{
+    color: #0056b3;
+  }
   .more-btn:hover{
     background: linear-gradient(90deg, #4e51af 3.91%, #6772d6 100%); 
   }
@@ -1277,7 +1526,10 @@ font-size: 12px;
     filter: grayscale(0%);
   }
   .steam-quick-links a:hover{
-    color: #000000
+    text-decoration: none;
+  }
+  .friends-table tr td a:hover{
+    text-decoration: none;
   }
   .about-wrapper .about a:hover{
     color: #5f5f5f;

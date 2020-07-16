@@ -13,7 +13,7 @@
   <title>Steam Checker</title>
 </head>
 
-<body>
+<body id="profile-overview">
   <nav class="navbar navbar-light bg-light main-nav nav-with-search navbar-expand-lg">
       <a class="navbar-brand" href="/" title = "SteamChecker Home">
         <div style="display: flex;align-items: center;">
@@ -79,13 +79,13 @@
     <div class="container">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="width: 100%;justify-content: space-around;">
         <li class="nav-item section-title" style="margin-bottom: 0;">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="/">Home</a>
         </li>
-        <li class="nav-item section-title" style="margin-bottom: 0;">
-          <a class="nav-link active" href="#">Profile Overview<span class="sr-only">(current)</span></a>
+        <li class="nav-item section-title profile-nav-item" style="margin-bottom: 0;">
+          <a class="nav-link" href="#profile-overview">Profile Overview<span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item section-title" style="margin-bottom: 0;">
-          <a class="nav-link" href="#">Friends</a>
+        <li class="nav-item section-title friends-nav-item" style="margin-bottom: 0;">
+          <a class="nav-link" href="#friends">Friends</a>
         </li>
         <li class="nav-item section-title" style="margin-bottom: 0;">
           <a class="nav-link" href="#">Games Owned</a>
@@ -158,12 +158,16 @@
             </ul>
           </div>  
         </li>
+      <a href="#profile-overview">
       <li class="nav-link-active profile-overview nav-link">
-        Profile Overview
+          Profile Overview
       </li>
+    </a>
+    <a href="#friends">
       <li class="nav-link">
-        Friends
+          Friends
       </li>
+    </a>
       <li class="nav-link">
         Games Owned
       </li>

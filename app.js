@@ -80,17 +80,21 @@ app.get('/auth/steam',
   });
 
   app.use(function(req,res,next){
+    // if there is a user then send the user object and the friends of the user
     if(req.user != undefined){
       async function user(){
+        // creating user obj
         let user = {
           loggedUserId : req.user.id,
           avatar : req.user.photos[2].value,
           profileurl : req.user._json.profileurl,
           myProfileQueryString : `/user?url=${encodeURIComponent(req.user.id)}`
         }
+        // requesting for users friend
         try{
           const friendsArr = [];
           const friends = await getFriends(req.user.id); 
+          // extracting only steamid's of friends
           friends.friendslist.friends.forEach((friend,index)=>{
             friendsArr[index] = friend.steamid;
           })
@@ -109,6 +113,8 @@ app.get('/auth/steam',
     }
   })
 
+
+
 app.get("/", (req, res) => {
   req.session.redirectUrl = req.originalUrl;
   res.render("landing");
@@ -119,7 +125,7 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-app.get("/user", (req, res) => {
+app.get("/user",(req, res) => {
   let isInputValid = false;
   req.session.redirectUrl = req.originalUrl;
   const requrl = req.query.url;
@@ -226,17 +232,31 @@ app.get("/user/getFriends",(req,res)=>{
                 }
                 temp = temp+100;
             }
-            SteamUser.updateOne({"persondata.steamid":req.query.steam64},{"friends":data.friendslist.friends},{new: true},function(err,updatedFriends){
+            SteamUser.findOneAndUpdate({"persondata.steamid":req.query.steam64},{"friends":data.friendslist.friends},{new: true},function(err,updatedFriends){
                 if(err){
                   console.log(err);
                 }else{
-                  res.json(data.friendslist.friends);
+                  res.json(updatedFriends.friends);
                 }
             })
             }
             additionalInfotoFrineds();
         })
+        .catch(err=>{
+          res.status(500).json(err.message);
+        })
       }
+    }
+  })
+})
+
+app.get("/user/refresh",(req,res)=>{
+  const steamid = req.query.url;
+  SteamUser.findOneAndDelete({'persondata.steamid':steamid},function(err,data){
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect(`/user?url=${steamid}`);
     }
   })
 })

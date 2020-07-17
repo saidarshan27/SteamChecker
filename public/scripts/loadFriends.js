@@ -76,7 +76,6 @@ $(function(){
       friendsTableWrapper.classList.add("friends-table-wrapper");
       friendsTableWrapper.innerHTML = 
       `<table class="table friends-table">
-      <caption>List of users</caption>
       <thead>
         <tr>
           <th scope="col" class="name-label no-border">Name</th>

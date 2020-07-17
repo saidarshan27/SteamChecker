@@ -147,7 +147,7 @@ body{
   color: inherit;
 }
 
-.mobile-navlinks .nav-link-active{
+.mobile-navlinks a.active > li{
   color: white;
   font-weight: 800;
 }
@@ -777,6 +777,9 @@ body{
 .friends-table-wrapper td a.name-label{
   color: #007bff;
   text-decoration: none;
+}
+.friends-table-wrapper td.friend-steam64,.friends-table-wrapper td.friend-since{
+  padding-top: 2.5%;
 }
 .friends-table .no-border{
   border: none;

@@ -55,7 +55,7 @@ $(function(){
          </li>
          <li>
          <div class="friends-search d-flex">
-         <input type="text" name="url" class="url-input user-url-input friends-search" placeholder="Search" autocomplete="off">
+         <input type="text" name="url" class="url-input user-url-input friends-search" placeholder="Search" autocomplete="off" aria-label="search">
          <button class="search-submit mobile-search-toggle" type="submit"><i class="fas fa-search"></i></button>
          </div>
          </li>
@@ -76,6 +76,7 @@ $(function(){
       friendsTableWrapper.classList.add("friends-table-wrapper");
       friendsTableWrapper.innerHTML = 
       `<table class="table friends-table">
+      <caption>List of users</caption>
       <thead>
         <tr>
           <th scope="col" class="name-label no-border">Name</th>

@@ -1,16 +1,18 @@
 const vacBan = document.querySelector("#vac-ban");
 const communityBan = document.querySelector("#community-ban");
 const gameBan = document.querySelector("#game-ban");
+const vacBanText = toString(vacBan.innerText);
+const communityBanText = toString(communityBan.innerText);
+const gameBanText = toString(gameBan.innerText);
 
-if(vacBan.innerText != "None"){
+
+if(banObj.vacBan === "BANNED"){
   sinceBanned(banObj,vacBan,"vac ban");
   addBannedClass(vacBan);
-}
-if(communityBan.innerText != "None"){
+}else if(banObj.communityBan === "BANNED"){
   sinceBanned(banObj,communityBan,"community ban");
   addBannedClass(communityBan);
-}
-if(gameBan.innerText != "None"){
+}else if(banObj.gameBan === "BANNED"){
   sinceBanned(banObj,gameBan,"game ban");
   addBannedClass(gameBan);
 }
@@ -26,6 +28,7 @@ function sinceBanned(banObj,banElement,tooltipText){
   </i>`;
   banElement.parentNode.appendChild(sinceBanned);
 }
+
 function addBannedClass(banElement){
   banElement.classList.add("banned");
 }

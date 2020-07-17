@@ -11,11 +11,11 @@
     </div>
     <div class="name-flex-wrapper" style="width: 60%;">
       <div class="name-level">
-        <a href="<%= dataObj.persondata.profileurl %>" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" target="_blank" rel="no-follow">
           <h5>
+            <a href="<%= dataObj.persondata.profileurl %>" title="<%= dataObj.persondata.personaname %> | <%= dataObj.persondata.profileurl %>" target="_blank" rel="no-follow">
             <%= dataObj.persondata.personaname %>
+          </a>
           </h5>
-        </a>
           <div class="friendPlayerLevel">
             <% if(dataObj.steamLvl >= 0){ %>
             <span class="friendPlayerLevelNum"><%= dataObj.steamLvl %></span>

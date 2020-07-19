@@ -149,7 +149,7 @@ if(isInputValid === true){
     extractprofile(requrl).then(steam64 =>{
       SteamUser.findOne({
         'persondata.steamid':steam64
-      },function(err,foundData){
+      },async function(err,foundData){
         if(err){
           console.log(err);
         }else{
@@ -184,6 +184,9 @@ if(isInputValid === true){
               res.redirect("/");
             })
           }else{
+            const updateOnlineStatus = await playerInfo(foundData.persondata.steamid);
+            const {personastate:onlineStatus} = updateOnlineStatus;
+            foundData.persondata.personastate = onlineStatus;
             res.render("user",{dataObj:foundData});
           }
         }

@@ -26,8 +26,7 @@ $(".page-buttons").on("click",".page-button",function(e){
   kyabre($(this),numberOfPages);
   const upperBoundNumber = (parseInt($(this).html())*limit) > total ? total : parseInt($(this).html())*limit;
   const lowerBoundNumber = upperBoundNumber - paginatedResults.length;
-  showingFriendsLowerBound.html(lowerBoundNumber+1);
-  showingFriendsUpperBound.html(upperBoundNumber);
+  updateTableCaption(upperBoundNumber,lowerBoundNumber);
   // remove disabled from previous btn if page number is not 1
   if(parseInt($(this).html())>1){
     $(".prev").parents(".page-item").removeClass("disabled");
@@ -58,8 +57,9 @@ $(".select-show-entries select").change(function(e){
   numberOfPages = Math.ceil(total/ limit);
   paginate(friendsArray,1,newLimit);
   createPageButtons(numberOfPages);
-  showingFriendsLowerBound.html(1);
-  showingFriendsUpperBound.html(limit);
+  updateTableCaption(limit,0);
+  $(".next").parent().removeClass("disabled");
+  $(".prev").parent().addClass("disabled");
 })
 // sort(recent or oldest).
 $(".select-sort select").change(function(e){
@@ -70,6 +70,10 @@ $(".select-sort select").change(function(e){
   $(".page-button").removeClass("active");
   $(".page-button").first().addClass("active");
   appendFriendsToTable(slicedSortedArray);
+  createPageButtons(numberOfPages);
+  updateTableCaption(limit,0);
+  $(".next").parent().removeClass("disabled");
+  $(".prev").parent().addClass("disabled");
 })
 
 // search friends
@@ -162,6 +166,9 @@ paginationNav.children[0].classList.remove("disabled");
  const element = $(".page-buttons").children(".active");
  kyabre(element,numberOfPages);
  paginate(friendsArray,activeBtnNumber,limit);
+ const upperBoundNumber = (parseInt(activeBtnNumber)*limit) > total ? total : parseInt(activeBtnNumber)*limit;
+ const lowerBoundNumber = upperBoundNumber - paginatedResults.length;
+ updateTableCaption(upperBoundNumber,lowerBoundNumber);
 }
 
 function prevBtn(numberOfPages){
@@ -176,6 +183,9 @@ function prevBtn(numberOfPages){
  const element = $(".page-buttons").children(".active");
  kyabre(element,numberOfPages);
  paginate(friendsArray,activeBtnNumber,limit);
+ const upperBoundNumber = (parseInt(activeBtnNumber)*limit) > total ? total : parseInt(activeBtnNumber)*limit;
+ const lowerBoundNumber = upperBoundNumber - paginatedResults.length;
+ updateTableCaption(upperBoundNumber,lowerBoundNumber);
 }
 
 function kyabre(element,numberOfPages){
@@ -284,6 +294,11 @@ function appendFriendsToTable(array){
      `
      friendsTableBody.append(tr);
 })
+}
+
+function updateTableCaption(upperBoundNumber,lowerBoundNumber){
+  showingFriendsLowerBound.html(lowerBoundNumber+1);
+  showingFriendsUpperBound.html(upperBoundNumber);
 }
 
 function htmlEntities(str) {

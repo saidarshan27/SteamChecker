@@ -798,6 +798,9 @@ body{
   font-weight: 510;
   width: 50%;
 }
+.friends-table-wrapper .table .name-label.tabel-caption{
+  font-size: .65rem;
+}
 .friend-avatar{
   height: 40px;
   border-radius: 50%;
@@ -1236,6 +1239,9 @@ font-size: 12px;
   .friends .friends-search input{
     display: none;
   }
+  .friends-table-wrapper td.friend-steam64, .friends-table-wrapper td.friend-since{
+    padding-top: 12px;
+  }
   .friends .friends-search .search-submit{
     border-radius: 1rem;
     pointer-events: all;
@@ -1438,6 +1444,9 @@ font-size: 12px;
   }
   .friends-table .data-label{
     font-size: .6rem;
+  }
+  .friends-table-wrapper .table .name-label.tabel-caption{
+    font-size: .45rem;
   }
 }
 @media(max-width:490px){

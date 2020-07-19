@@ -2,9 +2,11 @@ import {totalFriends,friendsArr} from "./loadFriends.js";
 let friendsTableBody = $(".friends-table tbody");
 let total = totalFriends;
 let friendsArray = friendsArr;
-let paginatedResults;
+let paginatedResults = friendsArray.slice(0,10);
 let limit = 10;
 let numberOfPages = Math.ceil(total/limit);
+let showingFriendsUpperBound = $(".showing-friends-upperbound");
+let showingFriendsLowerBound = $(".showing-friends-lowerbound");
 
 
 
@@ -22,6 +24,10 @@ $(".page-buttons").on("click",".page-button",function(e){
   // paginating the array.
   paginate(friendsArray,parseInt($(this).html()),limit);
   kyabre($(this),numberOfPages);
+  const upperBoundNumber = (parseInt($(this).html())*limit) > total ? total : parseInt($(this).html())*limit;
+  const lowerBoundNumber = upperBoundNumber - paginatedResults.length;
+  showingFriendsLowerBound.html(lowerBoundNumber+1);
+  showingFriendsUpperBound.html(upperBoundNumber);
   // remove disabled from previous btn if page number is not 1
   if(parseInt($(this).html())>1){
     $(".prev").parents(".page-item").removeClass("disabled");
@@ -52,6 +58,8 @@ $(".select-show-entries select").change(function(e){
   numberOfPages = Math.ceil(total/ limit);
   paginate(friendsArray,1,newLimit);
   createPageButtons(numberOfPages);
+  showingFriendsLowerBound.html(1);
+  showingFriendsUpperBound.html(limit);
 })
 // sort(recent or oldest).
 $(".select-sort select").change(function(e){

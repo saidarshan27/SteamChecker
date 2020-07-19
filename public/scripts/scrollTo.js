@@ -18,14 +18,14 @@ var controller = new ScrollMagic.Controller();
 // build scenes
 const userpageScene = new ScrollMagic.Scene({
   triggerElement:".userpage-container",
-  triggerHook:"0.15"
+  triggerHook:".8"
 })
 // .addIndicators({colorStart:"black",colorTrigger:"black"})
 .setClassToggle(".profile-nav-item","active")
 .addTo(controller);
 const friendsScene=new ScrollMagic.Scene({
     triggerElement:".friends-wrapper",
-    triggerHook:"0.15"
+    triggerHook:".8"
   })
   // .addIndicators({colorStart:"black",colorTrigger:"black"})
   .setClassToggle(".friends-nav-item","active")

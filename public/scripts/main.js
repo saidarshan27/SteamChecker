@@ -274,6 +274,13 @@ $(".friends-wrapper").on("click",".mobile-search-toggle",function(e){
 	}
 })
 
+const mobileScrollAndClose = [$(".mobile-navlinks .profile-nav-item"),$(".mobile-navlinks .friends-nav-item")];
+mobileScrollAndClose.forEach(function(element){
+	element.click(function(e){
+		$(".mobile-nav").removeClass("mobile-nav-active");
+		$(".main-nav .navbar-toggler").removeClass("toggle");
+	})
+})
 
 // function rippleEffect(element,x,y){
 // 	let ripples = document.createElement("span");

@@ -1,5 +1,4 @@
 const gamesDiv = document.querySelector(".games");
-const sectionTitle = document.querySelector(".games-wrapper .section-title");
 let totalGames = 0;
 let gamesArr = [];
 $(function(){
@@ -12,13 +11,14 @@ $(function(){
   })
    .then(res=> res.json())
    .then((data)=>{
-     console.log(data);
     $(".gamesloading-svg").css("display","none");
     if(Array.isArray(data)){
       totalGames = data.length;
       gamesArr = data;
       // if there are more than or equal to 10 show 10 or show how many available
       const defaultLimit = (totalGames>=10)?10:totalGames;
+      $(".total-games-capsule").text(totalGames);
+      $(".total-games-capsule").css("display","flex");
       if(data.length===0){
         const noGames = document.createElement("p");
         noFriends.innerText = "No games to show";

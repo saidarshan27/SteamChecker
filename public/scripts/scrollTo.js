@@ -23,6 +23,8 @@ const userpageScene = new ScrollMagic.Scene({
 // .addIndicators({colorStart:"black",colorTrigger:"black"})
 .setClassToggle(".profile-nav-item","active")
 .addTo(controller);
+
+
 const friendsScene=new ScrollMagic.Scene({
     triggerElement:".friends-wrapper",
     triggerHook:".8"
@@ -36,4 +38,19 @@ const friendsScene=new ScrollMagic.Scene({
   })
   friendsScene.on("leave",function(event){
     $(".profile-nav-item").addClass("active");
+  })
+
+  const gamesScene = new ScrollMagic.Scene({
+    triggerElement:".games-wrapper",
+    triggerHook:".8"
+  })
+  // .addIndicators({colorStart:"black",colorTrigger:"black"})
+  .setClassToggle(".games-nav-item","active")
+  .addTo(controller);
+
+  gamesScene.on("enter",function(event){
+    $(".friends-nav-item").removeClass("active");
+  })
+  gamesScene.on("leave",function(event){
+    $(".friends-nav-item").addClass("active");
   })

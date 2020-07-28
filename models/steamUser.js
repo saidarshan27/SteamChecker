@@ -11,6 +11,10 @@ const steamUserSchema = new mongoose.Schema({
     type:Array,
     default:[]
   },
+  games:{
+    type:Array,
+    default:[]
+  },
   updated:{
     type:Date,
     default:Date.now

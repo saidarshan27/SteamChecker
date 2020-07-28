@@ -25,6 +25,8 @@ $(function(){
           friendsDiv.appendChild(noFriends);
        }else{
       //  show total friends capsule
+      totalFriends = data.length;
+      const defaultLimit = (totalFriends>=10)?10:totalFriends;
       $(".total-friends-capsule").text(totalFriends);
       $(".total-friends-capsule").css("display","flex");
        friendsArr = data;
@@ -45,11 +47,11 @@ $(function(){
            <span class="name-label">Show entries</span>
            <div class="select-show-entries">
              <select>
-               <option selected value="10">10</option>
-               <option value="20">20</option>
-               <option value="30">30</option>
-               <option value="40">40</option>
-               <option value="100">100</option>
+               <option selected value="10" class="option-20">10</option>
+               <option value="20" class="option-20">20</option>
+               <option value="30" class="option-30">30</option>
+               <option value="40" class="option-40">40</option>
+               <option value="100" class="option-100">100</option>
              </select>
            </div>
          </li>
@@ -77,7 +79,7 @@ $(function(){
       friendsTableWrapper.innerHTML = 
       `<table class="table friends-table">
       <caption class="name-label tabel-caption">
-      Showing <span class="showing-friends-lowerbound">1</span> to <span class="showing-friends-upperbound">10</span> friends of ${totalFriends} friends
+      Showing <span class="showing-friends-lowerbound">1</span> to <span class="showing-friends-upperbound">${defaultLimit}</span> friends of ${totalFriends} friends
       </caption>
       <thead>
         <tr>
@@ -90,10 +92,9 @@ $(function(){
     </table>`
     // append friends table to friends div
     friendsDiv.appendChild(friendsTableWrapper);
+    disableOptions(totalFriends);
       const tbody = document.querySelector(".friends-table tbody");
-      totalFriends = data.length;
       // if there are more than or equal to 10 show 10 or show how many available
-      const defaultLimit = (totalFriends>=10)?10:totalFriends;
       for(let i=0;i<defaultLimit;i++){
         const tr = document.createElement("tr");
         // converting 'friends_since' unix timestamp to humantime.
@@ -103,7 +104,7 @@ $(function(){
         tr.innerHTML = `
         <td class="friend-avatar-name dont-close-friends-hoverable" data-friend-index=${i}>
         <a class="name-link name-label" href = "/user?url=${encodeURIComponent(data[i].profileurl)}" title = "SteamChecker | ${santizedName}">
-        <img class="friend-avatar" src="${data[i].avatar}">
+        <img class="friend-avatar" src="${data[i].avatar}" onerror=this.src="/images/avatar-placeholder.jpg">
         ${santizedName}
         </a>
         </td>
@@ -141,13 +142,38 @@ $(function(){
     }
      }else{
       //  if friends list private.
-       const errorMessage = document.createElement("p");
-       errorMessage.innerText = data;
-       errorMessage.classList.add("private");
-       friendsDiv.appendChild(errorMessage);
+       const errorDiv = document.createElement("div");
+       errorDiv.innerHTML =  `
+       <div class="alert alert-danger friends-private-alert" role="alert">
+       <h4 class="alert-heading">${data}</h4>
+       <hr>
+       <p>Friends list private by default.You can make it public by changing <a href="https://steamcommunity.com/my/edit/settings" target="_blank">your Steam profile privacy settings</a></p>
+       <ul>
+       <li>
+         1.Going to your steam profile.Click on "Edit Profile".
+       </li>
+       <li>  
+         2.Click on "My Privacy",in the left side-bar.
+       </li>
+       <li>  
+         3.Navigate to "Friends List" and make it "Public".
+       </li>
+       <li>  
+         4.Scroll up to "Profile Overview" in SteamChecker.Click on "More" and click "Refresh Information".
+       </li>
+       <ul>
+       </div>`
+       friendsDiv.appendChild(errorDiv);
      }
    });
 })
+
+function disableOptions(totalFriends){
+  if(totalFriends<100) document.querySelector(".option-100").setAttribute("disabled","true");
+  if(totalFriends<40)  document.querySelector(".option-40").setAttribute("disabled","true");
+  if(totalFriends<30)  document.querySelector(".option-30").setAttribute("disabled","true");
+  if(totalFriends<20)  document.querySelector(".option-20").setAttribute("disabled","true");
+}
 
 // sanitize the friends name if any friends has a html tag has the personaname.
 function htmlEntities(str) {

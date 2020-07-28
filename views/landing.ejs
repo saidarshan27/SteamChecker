@@ -1,5 +1,12 @@
 <%- include("partials/header.ejs"); %>
-
+<% if(error && error.length > 0){ %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert" style="position: absolute;width: 100%;text-align: center;font-size: .7rem;font-family: Montserrat;font-weight: 550;">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <%= error %>
+  </div>
+  <% } %>
 <div class="home-container">
   <div class="label ml-3">
     <h5 class="dekstop-h5">

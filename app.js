@@ -12,9 +12,11 @@ const fiveMConverter = require("fivemid-converter");
 const SteamStrategy = require('passport-steam').Strategy;
 const mongoose = require("mongoose");
 const SteamUser = require("./models/steamUser");
+const flash = require("connect-flash");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
 var jsonParser = bodyParser.json()
 app.use(express.static(__dirname + "/public"));
 
@@ -113,6 +115,11 @@ app.get('/auth/steam',
     }
   })
 
+  app.use(function(req,res,next){
+    res.locals.error=req.flash("error");
+    next();
+  });
+
 
 
 app.get("/", (req, res) => {
@@ -129,9 +136,11 @@ app.get("/user",(req, res) => {
   let isInputValid = false;
   req.session.redirectUrl = req.originalUrl;
   const requrl = req.query.url;
+  console.log(requrl);
  //check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
  const regex = /(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi;
  const checkValidInput = regex.test(requrl);
+ console.log(checkValidInput);
 if(!checkValidInput){
   try{
     const sid = new SteamID(requrl);
@@ -139,7 +148,8 @@ if(!checkValidInput){
   }
   catch(err){
     console.log(err);
-    res.redirect("/");
+    req.flash("error","Please enter a valid input");
+    return res.redirect("/");
   }
 }else{
    isInputValid = true;
@@ -161,6 +171,7 @@ if(isInputValid === true){
                 const vanity = found[1];
                 dataObj.objSteamIds.customURL = vanity;
               }
+              res.render("user",{dataObj});
               SteamUser.create({
                 persondata:dataObj.persondata,
                 objSteamIds:dataObj.objSteamIds,
@@ -173,7 +184,6 @@ if(isInputValid === true){
                   console.log(err);
                 }else{
                   console.log("database data",data);
-                  res.render("user",{dataObj:data});
                 }
               })
               // console.log(dataObj);
@@ -181,6 +191,7 @@ if(isInputValid === true){
             .catch(err =>{
               // steamid not found redirect
               console.log(err);
+              req.flash("error","Steam profile not found");
               res.redirect("/");
             })
           }else{
@@ -194,6 +205,7 @@ if(isInputValid === true){
     });
 }else{
   // invalid input
+  req.flash("error","Please enter a valid input");
   res.redirect("/");
 }
 })
@@ -208,23 +220,23 @@ app.get("/user/getFriends",(req,res)=>{
     }else{
       const numberofFriends = data.friends.length;
       // if present send the available data
-      if(numberofFriends){
+      if(numberofFriends>0){
         res.json(data.friends);
       }else{
         // else request data from steam
         getFriends(req.query.steam64).then((data)=>{
-          const fullFriends = [];
+          const fullFriendsSteamids = [];
           data.friendslist.friends.forEach((friend,index)=>{
-            fullFriends[index] = friend.steamid;
+            fullFriendsSteamids[index] = friend.steamid;
           })
           async function additionalInfotoFrineds(){
-          let length = fullFriends.length;
+          let length = fullFriendsSteamids.length;
           let temp = 0;
             while(length){
                 const limit = (length>=100) ? 100 : length;
                 // if 100 available splice 100 or splice howmuch ever available
-                const splicedFriends = fullFriends.splice(0,limit);
-                length = fullFriends.length;
+                const splicedFriends = fullFriendsSteamids.splice(0,limit);
+                length = fullFriendsSteamids.length;
                 const splicedFriendsString = splicedFriends.join();
                 const playersData = await getPlayersInfo(splicedFriendsString);
                 for(let i=0;i<=splicedFriends.length-1;i++){
@@ -235,13 +247,14 @@ app.get("/user/getFriends",(req,res)=>{
                 }
                 temp = temp+100;
             }
-            SteamUser.findOneAndUpdate({"persondata.steamid":req.query.steam64},{"friends":data.friendslist.friends},{new: true},function(err,updatedFriends){
-                if(err){
-                  console.log(err);
-                }else{
-                  res.json(updatedFriends.friends);
-                }
-            })
+            res.json(data.friendslist.friends);
+            SteamUser.findOneAndUpdate({"persondata.steamid":req.query.steam64},{"friends":data.friendslist.friends},function(err,done){
+              if(err){
+                console.log(err);
+              }else{
+                console.log("done");
+              }
+            });
             }
             additionalInfotoFrineds();
         })
@@ -264,23 +277,16 @@ app.get("/user/refresh",(req,res)=>{
   })
 })
 
-async function getPlayersInfo(steamids){
-  const options = {
-    uri:`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/`,
-    qs:{
-      key : "D295314B96B79961B1AB2A2457BA5B10",
-      steamids:steamids
-    },
-    json:true
-  }
-  try{
-    const response= await rp(options)
-    return response
-  }
-  catch(err){
-   console.log(err.message);
-  } 
-}
+app.get("/user/getGames",(req,res)=>{
+  const steamid = req.query.steam64;
+  getGames(steamid).then((data)=>{
+    if(Array.isArray(data.response.games))res.json(data.response.games);
+    else throw new Error("Games list private");
+  })
+  .catch(err=>{
+    res.status(500).json(err.message);
+  })
+})
 
 async function main(steam64){
   const persondata = await playerInfo(steam64);
@@ -536,18 +542,44 @@ async function getFriends(steam64){
   }
 }
 
-// function playerGames(steam64){
-//   return new Promise((resolve,reject)=>{
-//     SteamApi.getFriendList(steam64, "D295314B96B79961B1AB2A2457BA5B10", function (err, data) {
-//       if (err) {
-//         console.log("error", err);
-//         reject(err);
-//       } else {
-//         resolve(data);
-//       }
-//     })
-//   })
-// }
+async function getPlayersInfo(steamids){
+  const options = {
+    uri:`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/`,
+    qs:{
+      key : "D295314B96B79961B1AB2A2457BA5B10",
+      steamids:steamids
+    },
+    json:true
+  }
+  try{
+    const response= await rp(options)
+    return response
+  }
+  catch(err){
+   console.log(err.message);
+  } 
+}
+
+async function getGames(steam64){
+  const options = {
+  uri:`https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/`,
+  qs:{
+    key : "D295314B96B79961B1AB2A2457BA5B10",
+    steamid:steam64,
+    include_appinfo:1,
+    include_played_free_games:1
+  },
+  json:true
+  }
+  try{
+    const response = await rp(options);
+    return response;
+  }
+  catch(err){
+    throw new Error("Games list private");
+   } 
+}
+
 
 app.listen(process.env.PORT || 3001, process.env.IP, function () {
   console.log("Steam Checker Started");

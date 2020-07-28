@@ -282,7 +282,7 @@ body{
   font-size: 2rem;
 }
 .controls{
-  min-width: 50%;
+  min-width: 56%;
   border-radius: 1rem;
   border: 1px solid  rgba(124, 124, 124, 0.31);
   background: white;
@@ -296,7 +296,7 @@ body{
 .label{
   display:flex;
   justify-content:flex-start;
-  width:50%;
+  width:56%;
   margin-bottom: 1rem;
 }
 /* input types supported modal styles */
@@ -547,7 +547,7 @@ body{
   text-decoration: none;
 }
 
-.alert{
+.faceit-info .alert{
   font-size: .7rem;
   padding: .4rem .4rem;
   margin-bottom: 0;
@@ -625,13 +625,13 @@ body{
   color: red;
 }
 /* collective style for all userpage containers */
-.about-wrapper,.steam-ids-wrapper,.profile-privacy-wrapper,.steam-quick-links-wrapper,.faceit-info-wrapper,.mobile-about-wrapper,.friends-wrapper{
+.about-wrapper,.steam-ids-wrapper,.profile-privacy-wrapper,.steam-quick-links-wrapper,.faceit-info-wrapper,.mobile-about-wrapper,.friends-wrapper,.games-wrapper{
   background: var(--section-transperant-background);
   background: var(--section-background);
   border-radius: 1rem;
   /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
-.about,.steam-ids,.profile-privacy,.steam-quick-links,.faceit-info,.friends{
+.about,.steam-ids,.profile-privacy,.steam-quick-links,.faceit-info,.friends,.games{
   padding: 1rem 1.5rem;
 }
 /* faceit-levels */
@@ -720,12 +720,12 @@ body{
 .friends-wrapper{
   grid-column: 1/-1;
 }
-.friends-wrapper .section-title{
+.friends-wrapper .section-title,.games-wrapper .section-title{
   padding: 1rem 1.5rem;
   display: flex;
   margin-bottom: 0;
 }
-.friends-wrapper .friends .friends-controls .friends-controls-list{
+.friends-wrapper .friends .friends-controls .friends-controls-list,.games-controls-list{
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -733,12 +733,12 @@ body{
     font-size: .75rem;
     font-weight: 600;
 }
-.friends-wrapper .friends .friends-controls .friends-controls-list li{
+.friends-wrapper .friends .friends-controls .friends-controls-list li,.games-controls-list li{
   display: flex;
   align-items: center;
 }
-.friends-wrapper .friends .friends-controls .friends-controls-list li .select-sort select,
-.friends-wrapper .friends .friends-controls .friends-controls-list li .select-show-entries select{
+.select-sort select,
+.select-show-entries select{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -749,6 +749,7 @@ body{
   width: 7rem;
   cursor: pointer;
   background-color: white;
+  font-size: .8rem;
 }
 
 .select-sort,.select-show-entries{
@@ -766,7 +767,7 @@ body{
   padding: .3rem;
 }
 
-.loading-svg{
+.loading-svg,.gamesloading-svg{
   margin: 0;
   margin-left: .8rem;
 }
@@ -787,7 +788,7 @@ body{
 .friends-table .no-border-top{
   border-top: none;
 }
-.friends-table th,.friends-table td{
+.friends-table th,.friends-table td,.games-table th,.games-table td{
   padding-left:0;
 }
 .friends-table tbody:first-child td{
@@ -806,7 +807,7 @@ body{
   border-radius: 50%;
   margin-right: .3rem;
 }
-.total-friends-capsule{
+.total-friends-capsule,.total-games-capsule{
   display: none;
   background:var(--primary);
   border-radius: 20%;
@@ -908,6 +909,18 @@ body{
 .friends-search .search-submit i,.friends-mobile-search .search-submit i{
   font-size: .8rem;
 }
+.friends-private-alert h4{
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+.friends-private-alert p{
+  font-size: .8rem;
+}
+.friends-private-alert ul{
+  font-size: .8rem;
+  list-style: none;
+  line-height: 1.6rem;
+}
 
 /* pagination buttons */
 .pagination{
@@ -934,6 +947,39 @@ body{
 .page-link.active:hover{
   color:white;
 }
+/* games wrapper */
+.games-wrapper{
+  grid-column: 1/-1;
+}
+.games-wrapper .section-title{
+  justify-content: space-between;
+}
+.games-wrapper .section-title span{
+  display: flex;
+  align-items: center;
+}
+.games-wrapper .games-controls{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.games .private{
+  text-transform: capitalize;
+  color: red;
+  font-size: .8rem;
+  font-weight: 510;
+}
+.game-icon{
+  margin-right: .5rem;
+  border-radius: .5rem;
+  width: 184px;
+  height: 69px;
+}
+.games a:hover{
+  text-decoration: none;
+  color: inherit;
+}
+
 /* label styles */
 .name-label{
   font-size: .75rem;
@@ -1250,11 +1296,11 @@ font-size: 12px;
   .table thead th.name-label{
     font-size: .5rem;
   }
-  .friends-wrapper .friends .friends-controls .friends-controls-list li .select-sort select, .friends-wrapper .friends .friends-controls .friends-controls-list li .select-show-entries select{
+ .select-sort select,.select-show-entries select{
     width: 5rem;
     font-size: .5rem;
   }
-  .friends-controls-list .name-label{
+  .friends-controls-list .name-label,.games-controls-list .name-label{
     font-size: .5rem;
   }
   .select-sort::after, .select-show-entries::after{
@@ -1276,6 +1322,17 @@ font-size: 12px;
     display: inline-block;
     white-space: nowrap;
     width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .games .game-icon{
+    width: 84px;
+    height: 29px;
+  }
+  .game-icon-name a{
+    display: inline-block;
+    white-space: nowrap;
+    width: 220px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -1524,6 +1581,9 @@ font-size: 12px;
   }
   .data-label{
     font-size: .6rem;
+  }
+  .friends-controls-list select,.games-controls-list select{
+    margin-left: .2rem;
   }
 }
 

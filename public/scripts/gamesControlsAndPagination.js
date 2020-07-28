@@ -1,12 +1,12 @@
-import {totalFriends,friendsArr} from "./loadFriends.js";
-let friendsTableBody = $(".friends-table tbody");
-let total = totalFriends;
-let friendsArray = friendsArr;
-let paginatedResults = friendsArray.slice(0,10);
+import {totalGames,gamesArr} from "./loadGames.js";
+let gamesTableBody = $(".games-table tbody");
+let total = totalGames;
+let gamesArray = gamesArr;
+let paginatedResults = gamesArray.slice(0,10);
 let limit = 10;
 let numberOfPages = Math.ceil(total/limit);
-let showingFriendsUpperBound = $(".showing-friends-upperbound");
-let showingFriendsLowerBound = $(".showing-friends-lowerbound");
+let showingFriendsUpperBound = $(".showing-games-upperbound");
+let showingFriendsLowerBound = $(".showing-games-lowerbound");
 
 
 
@@ -15,97 +15,70 @@ createPageButtons(numberOfPages);
 // Event Listeners
 
 // page buttons
-$(".friends .page-buttons").on("click",".page-button",function(e){
+$(".games .page-buttons").on("click",".page-button",function(e){
   if($(this).hasClass("disabled")){
     return;
   }
   $(this).addClass("active");
   $(this).siblings(".active").removeClass("active");
   // paginating the array.
-  paginate(friendsArray,parseInt($(this).html()),limit);
+  paginate(gamesArray,parseInt($(this).html()),limit);
   kyabre($(this),numberOfPages);
   const upperBoundNumber = (parseInt($(this).html())*limit) > total ? total : parseInt($(this).html())*limit;
   const lowerBoundNumber = upperBoundNumber - paginatedResults.length;
   updateTableCaption(upperBoundNumber,lowerBoundNumber);
   // remove disabled from previous btn if page number is not 1
   if(parseInt($(this).html())>1){
-    $(".prev").parents(".page-item").removeClass("disabled");
+    $(".games .prev").parents(".page-item").removeClass("disabled");
   }else{
-    $(".prev").parents(".page-item").addClass("disabled");
+    $(".games .prev").parents(".page-item").addClass("disabled");
   }
     // add disabled to next btn if page number is at the max
   if(parseInt($(this).html()) == numberOfPages){
-    $(".next").parents(".page-item").addClass("disabled");
+    $(".games .next").parents(".page-item").addClass("disabled");
   }else{
-    $(".next").parents(".page-item").removeClass("disabled");
+    $(".games .next").parents(".page-item").removeClass("disabled");
   }
 })
 
 // next btn
-$(".next").on("click",function(e){
+$(".games .next").on("click",function(e){
   nextBtn(numberOfPages);
 });
 // prev btn
-$(".prev").on("click",function(e){
+$(".games .prev").on("click",function(e){
   prevBtn(numberOfPages);
 })
 
 // show entries
-$(".friends .select-show-entries select").change(function(e){
+$(".games .select-show-entries select").change(function(e){
   const newLimit = $(this).val();
   limit = newLimit;
   numberOfPages = Math.ceil(total/ limit);
-  paginate(friendsArray,1,newLimit);
+  paginate(gamesArray,1,newLimit);
   createPageButtons(numberOfPages);
   updateTableCaption(limit,0);
-  $(".next").parent().removeClass("disabled");
-  $(".prev").parent().addClass("disabled");
+  $(".games .next").parent().removeClass("disabled");
+  $(".games .prev").parent().addClass("disabled");
 })
 // sort(recent or oldest).
-$(".friends .select-sort select").change(function(e){
+$(".games .select-sort select").change(function(e){
   const sortType = $(this).val(); // recent or oldest frnz
-  const sortedArray = friendsArray.sort(sortFriends(sortType));
-  friendsArray = sortedArray;
+  const sortedArray = gamesArray.sort(sortGames(sortType));
+  gamesArray = sortedArray;
   const slicedSortedArray = sortedArray.slice(0,limit);
-  $(".friends .page-button").removeClass("active");
-  $(".friends .page-button").first().addClass("active");
-  appendFriendsToTable(slicedSortedArray);
+  $(".page-button").removeClass("active");
+  $(".page-button").first().addClass("active");
+  appendGamesToTable(slicedSortedArray);
   createPageButtons(numberOfPages);
   updateTableCaption(limit,0);
-  $(".next").parent().removeClass("disabled");
-  $(".prev").parent().addClass("disabled");
-})
-
-// search friends
-document.addEventListener("keyup",function(e){
-  let friendsSearchValue
-	if(e.target.classList.contains("friends-search")){
-      friendsSearchValue = e.target.value;
-  }
-  const regex = new RegExp(friendsSearchValue,"gi");
-  const searchResults = friendsArray.filter((x)=>{
-    const personaname = x.personaname;
-    if(regex.test(personaname)){
-      return x;
-    }
-  })
-  if(searchResults.length>=1){
-    const total = searchResults.length;
-    const newNumberOfPages = Math.ceil(total / limit);
-    paginate(searchResults,1,limit);
-    createPageButtons(newNumberOfPages);
-  }else{
-    friendsTableBody.html(" ");
-    const noFriendsFound = document.createElement("p");
-    noFriendsFound.classList.add("no-friends-found");
-    noFriendsFound.innerText = "No Friends Found";
-    friendsTableBody.append(noFriendsFound);
-  }
+  $(".games .next").parent().removeClass("disabled");
+  $(".games .prev").parent().addClass("disabled");
 })
 
 // functions
 function createPageButtons(numberOfPages){
-  const pageButtonWrapper = document.querySelector(".friends .page-buttons");
+  const pageButtonWrapper = document.querySelector(".games .page-buttons");
   pageButtonWrapper.innerHTML = " ";
   if(numberOfPages>=8){
     for(let i=1;i<=7;i++){
@@ -152,37 +125,38 @@ function createPageButtons(numberOfPages){
 
 // next button functionality
 function nextBtn(numberOfPages){
-const paginationNav = document.querySelector(".friends .pagination");
+const paginationNav = document.querySelector(".games .pagination");
+console.log(paginationNav);
 // enable previous button
 paginationNav.children[0].classList.remove("disabled");
 // adding active to next page number
- $(".friends .page-buttons").children(".active").next().addClass("active");
+ $(".games .page-buttons").children(".active").next().addClass("active");
  // removing active to prev page number
- $(".friends .page-buttons").children(".active").prev().removeClass("active");
- const activeBtnNumber = $(".page-buttons").children(".active").html();
+ $(".games .page-buttons").children(".active").prev().removeClass("active");
+ const activeBtnNumber = $(".games .page-buttons").children(".active").html();
  if(activeBtnNumber == numberOfPages){
-   $(".friends .next").parents(".page-item").addClass("disabled");
+   $(".games .next").parents(".page-item").addClass("disabled");
  }
- const element = $(".friends .page-buttons").children(".active");
+ const element = $(".games .page-buttons").children(".active");
  kyabre(element,numberOfPages);
- paginate(friendsArray,activeBtnNumber,limit);
+ paginate(gamesArray,activeBtnNumber,limit);
  const upperBoundNumber = (parseInt(activeBtnNumber)*limit) > total ? total : parseInt(activeBtnNumber)*limit;
  const lowerBoundNumber = upperBoundNumber - paginatedResults.length;
  updateTableCaption(upperBoundNumber,lowerBoundNumber);
 }
 
 function prevBtn(numberOfPages){
- $(".friends .page-buttons").children(".active").prev().addClass("active");
- $(".friends .page-buttons").children(".active").next().removeClass("active");
- const activeBtnNumber = $(".page-buttons").children(".active").html();
+ $(".page-buttons").children(".active").prev().addClass("active");
+ $(".page-buttons").children(".active").next().removeClass("active");
+ const activeBtnNumber = $(".games .page-buttons").children(".active").html();
  if(activeBtnNumber == 1){
-   $(".friends .prev").parents(".page-item").addClass("disabled");
+   $(".games .prev").parents(".page-item").addClass("disabled");
  }else{
-   $(".friends .next").parents(".page-item").removeClass("disabled");
+   $(".games .next").parents(".page-item").removeClass("disabled");
  }
- const element = $(".friends .page-buttons").children(".active");
+ const element = $(".games .page-buttons").children(".active");
  kyabre(element,numberOfPages);
- paginate(friendsArray,activeBtnNumber,limit);
+ paginate(gamesArray,activeBtnNumber,limit);
  const upperBoundNumber = (parseInt(activeBtnNumber)*limit) > total ? total : parseInt(activeBtnNumber)*limit;
  const lowerBoundNumber = upperBoundNumber - paginatedResults.length;
  updateTableCaption(upperBoundNumber,lowerBoundNumber);
@@ -242,27 +216,27 @@ function paginate(array,pageNumber,limit){
   const start = (pageNumber - 1)*limit;
   const end = pageNumber * limit;
   paginatedResults = array.slice(start,end);
-  appendFriendsToTable(paginatedResults);
+ appendGamesToTable(paginatedResults);
 }
 
-function sortFriends(sortType){
+function sortGames(sortType){
   return function compare(a, b) {
-    const friend1 = a.friend_since;
-    const friend2 = b.friend_since;
+    const game1 = a.playtime_forever;
+    const game2 = b.playtime_forever;
 
    if(sortType == "asc"){
     let comparison = 0;
-    if (friend1 < friend2) {
+    if (game1 < game2) {
       comparison = 1;
-    } else if (friend1 > friend2) {
+    } else if (game1 > game2) {
       comparison = -1;
     }
     return comparison;
   }else{
     let comparison = 0;
-    if (friend1 > friend2) {
+    if (game1 > game2) {
       comparison = 1;
-    } else if (friend1 < friend2) {
+    } else if (game1 < game2) {
       comparison = -1;
     }
     return comparison;
@@ -271,28 +245,25 @@ function sortFriends(sortType){
 }
 
 
-function appendFriendsToTable(array){
-  friendsTableBody.html(" ");
-  array.forEach((friend)=>{
-     const tr = document.createElement("tr");
-     const humanDate = new Date(friend.friend_since*1000).toLocaleDateString("en-IN");
-     const name = friend.personaname;
-     const santizedName = htmlEntities(name);
-     tr.innerHTML = `
-     <td class="friend-avatar-name dont-close-friends-hoverable">
-     <a class="name-link name-label" href = "/user?url=${encodeURIComponent(friend.profileurl)}" title = "SteamChecker | ${santizedName}">
-     <img class="friend-avatar" src="${friend.avatar}">
-     ${santizedName}
-     </a>
-     </td>
-     <td class="friend-steam64">
-     <span class="data-label">${friend.steamid}</span>
-     </td>
-     <td class="friend-since">
-     <span class="data-label">${humanDate}</span>
-     </td>
-     `
-     friendsTableBody.append(tr);
+function appendGamesToTable(array){
+  gamesTableBody.html(" ");
+  array.forEach((game)=>{
+    const tr = document.createElement("tr");
+    // converting 'played_time' unix timestamp to humantime.
+    const humanTime = (Math.round(game.playtime_forever/60)<0) ? 0 : Math.round(game.playtime_forever/60);
+    const gameName = game.name;
+    tr.innerHTML = `
+    <td class="game-icon-name">
+    <a class="name-link name-label" href = "">
+    <img class="game-icon" src="https://steamcdn-a.akamaihd.net/steam/apps/${game.appid}/capsule_184x69.jpg" onerror=this.src="/images/games-placeholder.png">
+    ${gameName}
+    </a>
+    </td>
+    <td class="hours-played">
+    <span class="data-label">${humanTime} hours</span>
+    </td>
+    `
+    gamesTableBody.append(tr);
 })
 }
 
@@ -301,6 +272,4 @@ function updateTableCaption(upperBoundNumber,lowerBoundNumber){
   showingFriendsUpperBound.html(upperBoundNumber);
 }
 
-function htmlEntities(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
+

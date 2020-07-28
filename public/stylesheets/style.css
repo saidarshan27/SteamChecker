@@ -1511,7 +1511,7 @@ font-size: 12px;
   .friends-table .data-label{
     font-size: .6rem;
   }
-  .friends-table-wrapper .table .name-label.tabel-caption{
+  .friends-table-wrapper .table .name-label.tabel-caption,.games-table-wrapper .table .name-label.tabel-caption{
     font-size: .45rem;
   }
 }

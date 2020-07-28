@@ -82,10 +82,10 @@ $(function(){
         const gameName = data[i].name;
         tr.innerHTML = `
         <td class="game-icon-name">
-        <a class="name-link name-label">
+        <span class="name-link name-label">
         <img class="game-icon" src="https://steamcdn-a.akamaihd.net/steam/apps/${data[i].appid}/capsule_184x69.jpg" onerror=this.src="/images/games-placeholder.png">
         ${gameName}
-        </a>
+        </span>
         </td>
         <td class="hours-played">
         <span class="data-label">${humanTime} hours</span>

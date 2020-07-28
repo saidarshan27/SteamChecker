@@ -40,7 +40,7 @@ const friendsScene=new ScrollMagic.Scene({
     $(".profile-nav-item").addClass("active");
   })
 
-  const gamesScene = new ScrollMagic.Scene({
+  const gamesScene=new ScrollMagic.Scene({
     triggerElement:".games-wrapper",
     triggerHook:".8"
   })
@@ -54,3 +54,4 @@ const friendsScene=new ScrollMagic.Scene({
   gamesScene.on("leave",function(event){
     $(".friends-nav-item").addClass("active");
   })
+

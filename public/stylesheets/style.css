@@ -1329,7 +1329,7 @@ font-size: 12px;
     width: 84px;
     height: 29px;
   }
-  .game-icon-name a{
+  .game-icon-name span{
     display: inline-block;
     white-space: nowrap;
     width: 220px;
@@ -1488,6 +1488,15 @@ font-size: 12px;
   }
   .image{
     width: 60%;
+  }
+  .friends-private-alert h4{
+    font-size: .8rem;
+  }
+  .friends-private-alert p{
+    font-size: .7rem;
+  }
+  .friends-private-alert ul{
+    font-size: .6rem;
   }
 }
 @media(max-width:730px){

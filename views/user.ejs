@@ -41,14 +41,11 @@
           </span>
          </span>
         </li>
-      <a href="steam://friends/message/<%= dataObj.persondata.steamid %>" rel="nofollow">
-       <li class="more-link">
-         <!-- <span class="send-message-icon">
-          <i class="far fa-comment mr-2"></i>
-         </span> -->
-         Send a Message
+      <div class="send-message d-none d-lg-block">
+        <li class="more-link send-message-btn">
+          Send a Message
         </li>
-      </a>
+      </div>
      </ul>
     </div>
     </section>
@@ -495,6 +492,33 @@
     </section>
   </div>
 
+
+<!-- MODALS -->
+<div class="modal fade" id="send-message-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title section-title id="exampleModalLongTitle">NOTE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Send message only works for a friend of yours.
+        <div class="dont-show-again mt-3">
+          <input type="checkbox" name="dont-show-again-checkbox" class="dont-show-again-checkbox">
+          <label for="dont-show-again-checkbox">Don't show this again</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="send-message-close" data-dismiss="modal">Close</button>
+        <a href="steam://friends/message/<%= dataObj.persondata.steamid %>" rel="nofollow">
+        <button type="button" class="send-message-ok">OK</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <%- include("partials/footer.ejs"); %>

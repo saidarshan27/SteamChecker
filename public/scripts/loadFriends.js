@@ -147,13 +147,13 @@ $(function(){
        <div class="alert alert-danger friends-private-alert" role="alert">
        <h4 class="alert-heading">${data}</h4>
        <hr>
-       <p>Friends list private by default.You can make it public by changing <a href="https://steamcommunity.com/my/edit/settings" target="_blank">your Steam profile privacy settings</a></p>
+       <p>Friends list is private by default.You can make it public by changing <a href="https://steamcommunity.com/my/edit/settings" target="_blank">your Steam profile privacy settings</a></p>
        <ul>
        <li>
          1.Going to your steam profile.Click on "Edit Profile".
        </li>
        <li>  
-         2.Click on "My Privacy",in the left side-bar.
+         2.Click on "Privacy Settings",in the left side-bar.
        </li>
        <li>  
          3.Navigate to "Friends List" and make it "Public".

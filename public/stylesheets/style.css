@@ -909,14 +909,14 @@ body{
 .friends-search .search-submit i,.friends-mobile-search .search-submit i{
   font-size: .8rem;
 }
-.friends-private-alert h4{
+.friends-private-alert h4,.games-private-alert h4{
   text-transform: capitalize;
   font-size: 1rem;
 }
-.friends-private-alert p{
+.friends-private-alert p,.games-private-alert p{
   font-size: .8rem;
 }
-.friends-private-alert ul{
+.friends-private-alert ul,.games-private-alert ul{
   font-size: .8rem;
   list-style: none;
   line-height: 1.6rem;
@@ -950,6 +950,9 @@ body{
 /* games wrapper */
 .games-wrapper{
   grid-column: 1/-1;
+}
+.games-table-wrapper td.hours-played{
+  padding-top: 30px;
 }
 .games-wrapper .section-title{
   justify-content: space-between;
@@ -1135,7 +1138,7 @@ body{
   font-weight: 500;
   font-size: 0.9rem;
 }
-.send-message-close{
+.send-message-close,.send-message-ok{
 text-transform: uppercase;
 outline: none;
 border-radius: 20px;
@@ -1147,6 +1150,10 @@ font-weight: 600;
 margin-bottom: 25px;
 margin-right: 5px;
 font-size: 12px;
+}
+.send-message-ok{
+  color: white;
+  background-color: var(--primary);
 }
 .modal-body{
   overflow: overlay;
@@ -1285,7 +1292,7 @@ font-size: 12px;
   .friends .friends-search input{
     display: none;
   }
-  .friends-table-wrapper td.friend-steam64, .friends-table-wrapper td.friend-since{
+  .friends-table-wrapper td.friend-steam64, .friends-table-wrapper td.friend-since,.games-table-wrapper td.hours-played{
     padding-top: 12px;
   }
   .friends .friends-search .search-submit{
@@ -1489,13 +1496,13 @@ font-size: 12px;
   .image{
     width: 60%;
   }
-  .friends-private-alert h4{
+  .friends-private-alert h4,.games-private-alert h4{
     font-size: .8rem;
   }
-  .friends-private-alert p{
+  .friends-private-alert p,.games-private-alert p{
     font-size: .7rem;
   }
-  .friends-private-alert ul{
+  .friends-private-alert ul,.games-private-alert ul{
     font-size: .6rem;
   }
 }
@@ -1508,7 +1515,7 @@ font-size: 12px;
   .mobile-nav-avatar{
     left:20%
   }
-  .friends-table .data-label{
+  .friends-table .data-label,.games-table .data-label{
     font-size: .6rem;
   }
   .friends-table-wrapper .table .name-label.tabel-caption,.games-table-wrapper .table .name-label.tabel-caption{

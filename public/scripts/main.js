@@ -3,16 +3,15 @@
 $(function (){
 	$('[data-toggle="tooltip"]').tooltip();
 	if(localStorageAvailable()){
-		if(localStorage.DoNotShowMessageAgain && localStorage.DoNotShowMessageAgain === "true"){
+		if(localStorage.DoNotShowMessageAgain === "true"){
 			$(".send-message").html(`
-			<a href="steam://friends/message/${dataObj.persondata.steamid}" rel="no-follow">
-			<button class="send-message-btn">
-			<i class="far fa-comment-dots mr-1" style="font-size:15.5px;"></i>
-			SEND A MESSAGE
-		  </button>
-			</a>
-			`)
-		}
+			 <a href="steam://friends/message/${dataObj.persondata.steamid}" rel="nofollow"> 
+        <li class="more-link send-message-btn">
+         Send a Message
+        </li>
+       </a>
+			`);
+ 	}
 	}
 	checkWidth();
 }) 
@@ -46,8 +45,9 @@ $(".view-more").click(function(event){
 	event.stopPropagation();
 })
 
+
 // dont show again local storage 
-if(localStorageAvailable() && localStorage.DoNotShowMessageAgain != "true"){
+if(localStorage.DoNotShowMessageAgain != "true"){
 	$(".send-message-btn").click(function(){
 		$("#send-message-modal").modal("show");
 	})
@@ -57,12 +57,11 @@ if(localStorageAvailable() && localStorage.DoNotShowMessageAgain != "true"){
 $(".dont-show-again-checkbox").change(function(event){
 	if($(this).is(":checked")){
 		$(".send-message").html(`
-		<a href="steam://friends/message/${dataObj.persondata.steamid}" rel="no-follow">
-		<button class="send-message-btn">
-		<i class="far fa-comment-dots mr-1" style="font-size:15.5px;"></i>
-		SEND A MESSAGE
-		</button>
-		</a>
+		<a href="steam://friends/message/${dataObj.persondata.steamid}" rel="nofollow">
+		<li class="more-link send-message-btn">
+			Send a Message
+		</li>
+	  </a>
 		`)
 		if(localStorageAvailable()){
 			localStorage.DoNotShowMessageAgain = "true";
@@ -274,7 +273,7 @@ $(".friends-wrapper").on("click",".mobile-search-toggle",function(e){
 	}
 })
 
-const mobileScrollAndClose = [$(".mobile-navlinks .profile-nav-item"),$(".mobile-navlinks .friends-nav-item")];
+const mobileScrollAndClose = [$(".mobile-navlinks .profile-nav-item"),$(".mobile-navlinks .friends-nav-item"),$(".mobile-navlinks .games-nav-item")];
 mobileScrollAndClose.forEach(function(element){
 	element.click(function(e){
 		$(".mobile-nav").removeClass("mobile-nav-active");

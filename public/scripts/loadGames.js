@@ -117,10 +117,28 @@ $(function(){
       body.appendChild(paginationButtonsScript);
     }else{
       //  if games list private.
-       const errorMessage = document.createElement("p");
-       errorMessage.innerText = data;
-       errorMessage.classList.add("private");
-       gamesDiv.appendChild(errorMessage);
+      const errorDiv = document.createElement("div");
+      errorDiv.innerHTML =  `
+      <div class="alert alert-danger games-private-alert" role="alert">
+      <h4 class="alert-heading">${data}</h4>
+      <hr>
+      <p>Games list is private by default.You can make it public by changing <a href="https://steamcommunity.com/my/edit/settings" target="_blank">your Steam profile privacy settings</a></p>
+      <ul>
+      <li>
+        1.Going to your steam profile.Click on "Edit Profile".
+      </li>
+      <li>  
+        2.Click on "Privacy Settings",in the left side-bar.
+      </li>
+      <li>  
+        3.Navigate to "Game details" and make it "Public".
+      </li>
+      <li>  
+        4.Scroll up to "Profile Overview" in SteamChecker.Click on "More" and click "Refresh Information".
+      </li>
+      <ul>
+      </div>`
+      gamesDiv.appendChild(errorDiv);
      }
    })
 })

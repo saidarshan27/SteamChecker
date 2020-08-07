@@ -762,7 +762,7 @@ body{
   position: absolute;
   color: var(--primary);
   top: 0;
-  right: 5px;
+  right: 2px;
   background-color: white;
   border-radius: 1rem;
   pointer-events: none;
@@ -1313,7 +1313,8 @@ font-size: 12px;
     font-size: .5rem;
   }
   .select-sort::after, .select-show-entries::after{
-    top: -2px;
+    top: 2px;
+    right: 2px;
   }
   .friends-search .search-submit i,.friends-mobile-search .search-submit i{
     font-size: .5rem;

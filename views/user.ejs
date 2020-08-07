@@ -520,6 +520,42 @@
   </div>
 </div>
 
+<!-- Steamrep banned modal -->
+<div class="modal fade steamrep-banned-modal" id="steamrep-banned-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title section-title id="exampleModalLongTitle">NOTE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="line-height: 1.8rem;">
+        <div class="mb-4">
+          <h4>
+            This user is banned by <a href="https://steamrep.com" target="_blank" rel="noopener noreferrer">SteamRep</a>
+          </h4>
+          <p class="mb-3">
+            <span class="private" style="color: red;font-weight: 550;">Do not trade with this person</span>
+          </p>
+        </div>
+        <p class="mb-3">
+          Players should'nt be encouraged to steal from other players.
+        </p>
+        <p>
+          To know more <a href="<%= dataObj.steamrepReputation.steamrepurl %>" target="_blank" rel="noopener noreferrer">click here</a>
+        </p>
+        <p>
+          Or click the SteamRep icon in the 'LINKS' section.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="send-message-ok" data-dismiss="modal" aria-label="I UNDERSTAND">I UNDERSTAND</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <%- include("partials/footer.ejs"); %>
 
@@ -532,6 +568,9 @@
   const dataObj = <%- JSON.stringify(dataObj) %>
   const visibilityState = dataObj.persondata.communityvisibilitystate;
   const banObj =  dataObj.banObj;
+  if(dataObj.steamrepReputation.fullReputation === "SCAMMER"){
+    $("#steamrep-banned-modal").modal("show");
+  };
 </script>
 <script src="/scripts/steamLevelColor.js"></script>
 <script src="/scripts/updateOnlineStatus.js"></script>

@@ -762,7 +762,9 @@ body{
   position: absolute;
   color: var(--primary);
   top: 0;
-  right: 0;
+  right: 2px;
+  background-color: white;
+  border-radius: 1rem;
   pointer-events: none;
   padding: .3rem;
 }
@@ -1529,6 +1531,12 @@ font-size: 12px;
   .more-links-wrapper .more-links{
     font-size: .5rem;
     width: 140px;
+  }
+  .steamrep-banned-modal .modal-body h4{
+    font-size: 1rem;
+  }
+  .steamrep-banned-modal .modal-body p{
+    font-size: .8rem;
   }
 }
 @media (max-width:450px){

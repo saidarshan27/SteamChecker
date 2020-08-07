@@ -1314,7 +1314,7 @@ font-size: 12px;
   }
   .select-sort::after, .select-show-entries::after{
     top: 2px;
-    right: 2px;
+    font-size: .4rem;
   }
   .friends-search .search-submit i,.friends-mobile-search .search-submit i{
     font-size: .5rem;

@@ -762,7 +762,7 @@ body{
   position: absolute;
   color: var(--primary);
   top: 0;
-  right: 2px;
+  right: 5px;
   background-color: white;
   border-radius: 1rem;
   pointer-events: none;

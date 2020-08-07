@@ -35,7 +35,7 @@ $(function(){
        `<ul class="friends-controls-list">
          <li>
            <span class="name-label">Sort</span>
-           <div class="select-sort">
+           <div class="select-sort" data-content="">
              <select>
                <option selected>Choose...</option>
                <option value="asc">Recent Friends</option>
@@ -45,7 +45,7 @@ $(function(){
          </li>
          <li>
            <span class="name-label">Show entries</span>
-           <div class="select-show-entries">
+           <div class="select-show-entries" data-content="">
              <select>
                <option selected value="10" class="option-20">10</option>
                <option value="20" class="option-20">20</option>

@@ -39,7 +39,7 @@ $(function(){
     </li>
     <li>
     <span class="name-label">Show entries</span>
-      <div class="select-show-entries">
+      <div class="select-show-entries" data-content="">
         <select>
           <option selected value="10">10</option>
             <option value="20" class="option-20">20</option>

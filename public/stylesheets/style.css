@@ -25,11 +25,14 @@ select:-webkit-autofill:focus {
 }
 
 /* tooltip and defualt styles */
-.logo{
+/* .logo{
   width: 3rem;
   height: 1.4rem;
   background-image: url("/logo/logo.svg");
   background-repeat: no-repeat;
+} */
+.icon-logo{
+  font-size: 1.5rem;
 }
 
 .tooltip{
@@ -66,11 +69,13 @@ body{
   font-family: 'Rockwell',Montserrat;
   font-size:2rem;
   color: white;
-  /* display: flex;
-  align-items: flex-end; */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 .navbar-light .nav-bar-brand:hover{
   color: white;
+  text-decoration: none;
 }
 .main-nav{
   background: linear-gradient(90deg, #161730 0%, #7683F9 100%);
@@ -1549,11 +1554,11 @@ font-size: 12px;
   .nav-with-search .collapse-controls{
     width: 100%;
   }
-.navbar-light .nav-bar-brand{
+ .navbar-light .nav-bar-brand{
     font-size: 1.5rem;
   }
-  .fa-steam-symbol{
-    font-size: 1.5rem;
+  .navbar-light .nav-bar-brand .icon-logo{
+    font-size: 1.2rem;
   }
   .label h5{
     font-size: 0.6rem;

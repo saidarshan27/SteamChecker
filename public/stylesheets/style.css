@@ -66,8 +66,8 @@ body{
   font-family: 'Rockwell',Montserrat;
   font-size:2rem;
   color: white;
-  display: flex;
-  align-items: flex-end;
+  /* display: flex;
+  align-items: flex-end; */
 }
 .navbar-light .nav-bar-brand:hover{
   color: white;

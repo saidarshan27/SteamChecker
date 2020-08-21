@@ -62,14 +62,14 @@ body{
 }
 
 /* nav styles */
-.navbar-light .navbar-brand{
+.navbar-light .nav-bar-brand{
   font-family: 'Rockwell',Montserrat;
   font-size:2rem;
   color: white;
   display: flex;
   align-items: flex-end;
 }
-.navbar-light .navbar-brand:hover{
+.navbar-light .nav-bar-brand:hover{
   color: white;
 }
 .main-nav{
@@ -1549,7 +1549,7 @@ font-size: 12px;
   .nav-with-search .collapse-controls{
     width: 100%;
   }
-.navbar-light .navbar-brand{
+.navbar-light .nav-bar-brand{
     font-size: 1.5rem;
   }
   .fa-steam-symbol{

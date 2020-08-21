@@ -28,6 +28,8 @@ select:-webkit-autofill:focus {
 .logo{
   width: 3rem;
   height: 1.4rem;
+  background-image: url("/logo/logo.svg");
+  background-repeat: no-repeat;
 }
 
 .tooltip{

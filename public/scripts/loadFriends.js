@@ -10,7 +10,7 @@ $(function(){
     mode:"cors",
     credentials:"same-origin",
     headers:{
-      credentials:"same-origin"
+      credentials:"include"
     }
   })
    .then(res=> res.json())

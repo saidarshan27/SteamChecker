@@ -7,9 +7,8 @@ $(function(){
   // fetch friends 
   fetch(`/user/getFriends?steam64=${dataObj.persondata.steamid}`,{
     method:"GET",
-    headers:{
-    'Content-Type':"application/json"
-    }
+    mode:"cors",
+    credentials:"same-origin"
   })
    .then(res=> res.json())
    .then((data)=>{

@@ -5,9 +5,8 @@ $(function(){
   $(".gamesloading-svg").css("display","block");
   fetch(`/user/getGames?steam64=${dataObj.persondata.steamid}`,{
     method:"GET",
-    headers:{
-    'Content-Type':"application/json"
-    }
+    mode:"cors",
+    credentials:"same-origin"
   })
    .then(res=> res.json())
    .then((data)=>{

@@ -1,36 +1,4 @@
-let totalFriends;
-let friendsArr;
-const friendsDiv = document.querySelector(".friends");
-$(function(){
-  // show the loading animation
-  $(".loading-svg").css("display","block");
-  // fetch friends 
-  fetch(`/user/getFriends?steam64=${dataObj.persondata.steamid}`,{
-    method:"GET",
-    mode:"same-origin"
-  })
-   .then(res=> res.json())
-   .then((data)=>{
-    totalFriends = data.length;
-    // hiding the loading animation
-    $(".loading-svg").css("display","none");
-    // if friends list exist
-     if(Array.isArray(data)){
-       if(!data.length){
-          const noFriends = document.createElement("p");
-          noFriends.innerText = "No friends to show";
-          noFriends.classList.add("no-friends-found");
-          friendsDiv.appendChild(noFriends);
-       }else{
-      //  show total friends capsule
-      totalFriends = data.length;
-      const defaultLimit = (totalFriends>=10)?10:totalFriends;
-      $(".total-friends-capsule").text(totalFriends);
-      $(".total-friends-capsule").css("display","flex");
-       friendsArr = data;
-      //  friends controls(sort,show-entries,search)
-       const controlsHTML = 
-       `<ul class="friends-controls-list">
+let totalFriends;let friendsArr;const friendsDiv=document.querySelector(".friends");$(function(){$(".loading-svg").css("display","block");fetch(`/user/getFriends?steam64=${dataObj.persondata.steamid}`,{method:"GET",mode:"same-origin"}).then(res=>res.json()).then((data)=>{totalFriends=data.length;$(".loading-svg").css("display","none");if(Array.isArray(data)){if(!data.length){const noFriends=document.createElement("p");noFriends.innerText="No friends to show";noFriends.classList.add("no-friends-found");friendsDiv.appendChild(noFriends)}else{totalFriends=data.length;const defaultLimit=(totalFriends>=10)?10:totalFriends;$(".total-friends-capsule").text(totalFriends);$(".total-friends-capsule").css("display","flex");friendsArr=data;const controlsHTML=`<ul class="friends-controls-list">
          <li>
            <span class="name-label">Sort</span>
            <div class="select-sort" data-content="">
@@ -67,15 +35,7 @@ $(function(){
        </div>
        </div>
        `
-      const controls = document.createElement("div");
-      controls.classList.add("friends-controls");
-      controls.innerHTML = controlsHTML;
-      // append controls to friends div
-      friendsDiv.appendChild(controls);
-      const friendsTableWrapper = document.createElement("div");
-      friendsTableWrapper.classList.add("friends-table-wrapper");
-      friendsTableWrapper.innerHTML = 
-      `<table class="table friends-table">
+const controls=document.createElement("div");controls.classList.add("friends-controls");controls.innerHTML=controlsHTML;friendsDiv.appendChild(controls);const friendsTableWrapper=document.createElement("div");friendsTableWrapper.classList.add("friends-table-wrapper");friendsTableWrapper.innerHTML=`<table class="table friends-table">
       <caption class="name-label tabel-caption">
       Showing <span class="showing-friends-lowerbound">1</span> to <span class="showing-friends-upperbound">${defaultLimit}</span> friends of ${totalFriends} friends
       </caption>
@@ -88,18 +48,7 @@ $(function(){
       </thead>
       <tbody></tbody>
     </table>`
-    // append friends table to friends div
-    friendsDiv.appendChild(friendsTableWrapper);
-    disableOptions(totalFriends);
-      const tbody = document.querySelector(".friends-table tbody");
-      // if there are more than or equal to 10 show 10 or show how many available
-      for(let i=0;i<defaultLimit;i++){
-        const tr = document.createElement("tr");
-        // converting 'friends_since' unix timestamp to humantime.
-        const humanDate = new Date(data[i].friend_since*1000).toLocaleDateString("en-IN");
-        const name = data[i].personaname;
-        const santizedName = htmlEntities(name);
-        tr.innerHTML = `
+friendsDiv.appendChild(friendsTableWrapper);disableOptions(totalFriends);const tbody=document.querySelector(".friends-table tbody");for(let i=0;i<defaultLimit;i++){const tr=document.createElement("tr");const humanDate=new Date(data[i].friend_since*1000).toLocaleDateString("en-IN");const name=data[i].personaname;const santizedName=htmlEntities(name);tr.innerHTML=`
         <td class="friend-avatar-name dont-close-friends-hoverable" data-friend-index=${i}>
         <a class="name-link name-label" href = "/user?url=${encodeURIComponent(data[i].profileurl)}" title = "SteamChecker | ${santizedName}">
         <img class="friend-avatar" src="${data[i].avatar}" onerror=this.src="/images/avatar-placeholder.jpg">
@@ -113,12 +62,8 @@ $(function(){
         <span class="data-label">${humanDate}</span>
         </td>
         `
-        tbody.appendChild(tr);
-      }
-      // creating pagination nav
-      const paginationNav = document.createElement("nav"); 
-      const paginationNavHTML = 
-      `<ul class="pagination justify-content-center">
+tbody.appendChild(tr)}
+const paginationNav=document.createElement("nav");const paginationNavHTML=`<ul class="pagination justify-content-center">
         <li class="page-item disabled">
           <a class="page-link prev" tabindex="-1" aria-disabled="true">Previous</a>
         </li>
@@ -129,19 +74,7 @@ $(function(){
         </li>
       </ul>
       `
-      paginationNav.innerHTML = paginationNavHTML;
-      friendsDiv.appendChild(paginationNav);
-      const body = document.querySelector("body");
-      const paginationButtonsScript = document.createElement("script");
-      // append pagination script(because this script is a dependency for it).
-      paginationButtonsScript.setAttribute("src","/scripts/friendsControlsAndPagination.js");
-      paginationButtonsScript.setAttribute("type","module");
-      body.appendChild(paginationButtonsScript);
-    }
-     }else{
-      //  if friends list private.
-       const errorDiv = document.createElement("div");
-       errorDiv.innerHTML =  `
+paginationNav.innerHTML=paginationNavHTML;friendsDiv.appendChild(paginationNav);const body=document.querySelector("body");const paginationButtonsScript=document.createElement("script");paginationButtonsScript.setAttribute("src","/scripts/friendsControlsAndPagination.js");paginationButtonsScript.setAttribute("type","module");body.appendChild(paginationButtonsScript)}}else{const errorDiv=document.createElement("div");errorDiv.innerHTML=`
        <div class="alert alert-danger friends-private-alert" role="alert">
        <h4 class="alert-heading">${data}</h4>
        <hr>
@@ -161,22 +94,7 @@ $(function(){
        </li>
        <ul>
        </div>`
-       friendsDiv.appendChild(errorDiv);
-     }
-   });
-})
-
-function disableOptions(totalFriends){
-  if(totalFriends<100) document.querySelector(".option-100").setAttribute("disabled","true");
-  if(totalFriends<40)  document.querySelector(".option-40").setAttribute("disabled","true");
-  if(totalFriends<30)  document.querySelector(".option-30").setAttribute("disabled","true");
-  if(totalFriends<20)  document.querySelector(".option-20").setAttribute("disabled","true");
-}
-
-// sanitize the friends name if any friends has a html tag has the personaname.
-function htmlEntities(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
-
-export {totalFriends,friendsArr}
+friendsDiv.appendChild(errorDiv)}})})
+function disableOptions(totalFriends){if(totalFriends<100)document.querySelector(".option-100").setAttribute("disabled","true");if(totalFriends<40)document.querySelector(".option-40").setAttribute("disabled","true");if(totalFriends<30)document.querySelector(".option-30").setAttribute("disabled","true");if(totalFriends<20)document.querySelector(".option-20").setAttribute("disabled","true")}
+function htmlEntities(str){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+export{totalFriends,friendsArr}

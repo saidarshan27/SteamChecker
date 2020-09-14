@@ -99,7 +99,7 @@ document.addEventListener("keyup",function(e){
     const noFriendsFound = document.createElement("p");
     noFriendsFound.classList.add("no-friends-found");
     noFriendsFound.innerText = "No Friends Found";
-    friendsTableBody.append(noFriendsFound);
+    // friendsTableBody.append(noFriendsFound);
   }
 })
 

@@ -1,6 +1,7 @@
 const vacBan = document.querySelector("#vac-ban");
 const communityBan = document.querySelector("#community-ban");
 const gameBan = document.querySelector("#game-ban");
+const tradeBan = document.querySelector("#trade-ban");
 const vacBanText = toString(vacBan.innerText);
 const communityBanText = toString(communityBan.innerText);
 const gameBanText = toString(gameBan.innerText);
@@ -15,6 +16,8 @@ if(banObj.vacBan === "BANNED"){
 }else if(banObj.gameBan === "BANNED"){
   sinceBanned(banObj,gameBan,"game ban");
   addBannedClass(gameBan);
+}else if(banObj.tradeBan === "BANNED"){
+  addBannedClass(tradeBan);
 }
 
 function sinceBanned(banObj,banElement,tooltipText){

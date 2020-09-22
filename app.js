@@ -45,8 +45,8 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new SteamStrategy({
-  returnURL: 'https://mighty-citadel-31453.herokuapp.com/auth/steam/return',
-  realm: 'https://mighty-citadel-31453.herokuapp.com/',
+  returnURL: 'http://steamchecker-env.eba-fpmum2ks.ap-southeast-1.elasticbeanstalk.com/auth/steam/return',
+  realm: 'http://steamchecker-env.eba-fpmum2ks.ap-southeast-1.elasticbeanstalk.com/',
   apiKey: process.env.KEY
 },
 function(identifier, profile, done) {

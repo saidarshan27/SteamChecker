@@ -138,7 +138,7 @@ app.get("/user",(req, res) => {
   const requrl = req.query.url;
   console.log(requrl);
  //check input contains "/id/alphanumber" and "/profiles/digits only which are of max 17" and "only alphanumeric"
- const regex = /(^(\w+){4}$)|(id\/(\w+){4})|(profiles\/[0-9]{17})/gi;
+ const regex = /(^(\w+){3}$)|(id\/(\w+){3})|(profiles\/[0-9]{17})/gi;
  const checkValidInput = regex.test(requrl);
  console.log(checkValidInput);
 if(!checkValidInput){

@@ -501,7 +501,7 @@ async function getSteamRep(steam64){
    const jsonFullrep = json.steamrep.reputation[0].full[0];
    console.log(jsonFullrep);
    let  fullReputation;
-   if(jsonFullrep === ""){
+   if(jsonFullrep === "" || /SR DONATOR/gi.test(jsonFullrep)){
       fullReputation = "no special reputation";
    }else if(/SR ADMIN/gi.test(jsonFullrep)){
      fullReputation = "SteamRep Admin";

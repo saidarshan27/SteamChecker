@@ -323,7 +323,7 @@ async function extractprofile(url) {
         const steam64 = vanity.response.steamid;
           return steam64;
       }
-    }else if(/^(?![0-9]*$)(^(\w+){4}$)/gi.test(url)){
+    }else if(/^(?![0-9]*$)(^(\w+){3}$)/gi.test(url)){
        const vanity = await getVanity(url);
        const steam64 = vanity.response.steamid;
        return steam64;

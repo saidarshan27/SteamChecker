@@ -18,6 +18,11 @@ A steam public profile searcher which is built with the help of Steam’s Web AP
 - CSS
 - Javascript 
 - jQuery
+- Express.js
+- Passport.js
+- Mongoose
+- MongoDB
+- Steam Web API
 
 ## Installation
 

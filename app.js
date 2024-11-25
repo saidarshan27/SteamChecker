@@ -45,8 +45,8 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new SteamStrategy({
-  returnURL: 'http://steamchecker-env.eba-fpmum2ks.ap-southeast-1.elasticbeanstalk.com/auth/steam/return',
-  realm: 'http://steamchecker-env.eba-fpmum2ks.ap-southeast-1.elasticbeanstalk.com/',
+  returnURL: 'https://steamchecker-rsyq.onrender.com/auth/steam/return',
+  realm: 'https://steamchecker-rsyq.onrender.com/',
   apiKey: process.env.KEY
 },
 function(identifier, profile, done) {
